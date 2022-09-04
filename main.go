@@ -7,6 +7,7 @@ import (
 	"go-api-grapqhl/controller"
 	_ "go-api-grapqhl/docs"
 	"go-api-grapqhl/graph"
+	"go-api-grapqhl/scheduler"
 	"go-api-grapqhl/graph/generated"
 	"go-api-grapqhl/httputil"
 
@@ -86,6 +87,8 @@ func main() {
 
 	r.POST("/query", graphqlHandler())
     r.GET("/", playgroundHandler())
+
+	go scheduler.TestFunction(1000000000)
 
 	c := controller.NewController()
 
