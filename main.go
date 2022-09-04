@@ -4,10 +4,15 @@ import (
 	"errors"
 	"net/http"
 
+	"go-api-grapqhl/controller"
+	_ "go-api-grapqhl/docs"
+	"go-api-grapqhl/graph"
+	"go-api-grapqhl/graph/generated"
+	"go-api-grapqhl/httputil"
+
+	"github.com/99designs/gqlgen/graphql/handler"
+	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/gin-gonic/gin"
-	"github.com/swaggo/swag/example/celler/controller"
-	_ "github.com/swaggo/swag/example/celler/docs"
-	"github.com/swaggo/swag/example/celler/httputil"
 
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -56,8 +61,31 @@ import (
 // @authorizationUrl                       https://example.com/oauth/authorize
 // @scope.admin                            Grants read and write access to administrative information
 
+func graphqlHandler() gin.HandlerFunc {
+    // NewExecutableSchema and Config are in the generated.go file
+    // Resolver is in the resolver.go file    
+	h := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
+
+    return func(c *gin.Context) {
+        h.ServeHTTP(c.Writer, c.Request)
+    }
+}
+
+// Defining the Playground handler
+func playgroundHandler() gin.HandlerFunc {
+    h := playground.Handler("GraphQL", "/query")
+
+    return func(c *gin.Context) {
+        h.ServeHTTP(c.Writer, c.Request)
+	}
+}
+
+
 func main() {
 	r := gin.Default()
+
+	r.POST("/query", graphqlHandler())
+    r.GET("/", playgroundHandler())
 
 	c := controller.NewController()
 
@@ -99,7 +127,7 @@ func main() {
 func auth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if len(c.GetHeader("Authorization")) == 0 {
-			httputil.NewError(c, http.StatusUnauthorized, errors.New("Authorization is required Header"))
+			httputil.NewError(c, http.StatusUnauthorized, errors.New(" Authorization is required Header"))
 			c.Abort()
 		}
 		c.Next()

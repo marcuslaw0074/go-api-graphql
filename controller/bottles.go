@@ -6,8 +6,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/swaggo/swag/example/celler/httputil"
-	"github.com/swaggo/swag/example/celler/model"
+	"go-api-grapqhl/httputil"
+	"go-api-grapqhl/model"
 )
 
 // ShowBottle godoc

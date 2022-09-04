@@ -5,9 +5,10 @@ import (
 	"net/http"
 	"strconv"
 
+	"go-api-grapqhl/httputil"
+	"go-api-grapqhl/model"
+
 	"github.com/gin-gonic/gin"
-	"github.com/swaggo/swag/example/celler/httputil"
-	"github.com/swaggo/swag/example/celler/model"
 )
 
 // ShowAccount godoc
