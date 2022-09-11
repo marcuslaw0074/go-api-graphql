@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net/http"
 
+	"go-api-grapqhl/airflow"
 	"go-api-grapqhl/controller"
 	_ "go-api-grapqhl/docs"
 	"go-api-grapqhl/graph"
@@ -13,6 +14,7 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/gin-gonic/gin"
+	"github.com/robfig/cron/v3"
 
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -83,6 +85,10 @@ func playgroundHandler() gin.HandlerFunc {
 
 func main() {
 	r := gin.Default()
+
+	cr := cron.New()
+	cr.Start()
+	cr.AddFunc("*/1 * * * *", func() {airflow.Complexunction()})
 
 	r.POST("/query", graphqlHandler())
     r.GET("/", playgroundHandler())
