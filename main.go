@@ -99,7 +99,7 @@ func main() {
 	session := driver.NewSession(neo4j.SessionConfig{})
 	defer session.Close()
 	defer driver.Close()
-	query := `MATCH (n)-[p]->(r) where n.database=$database and n.measurement=$measurement and n.name=$name return n.name as n, r, p`
+	query := `MATCH (n)-[p]->(r) where n.database=$database and n.measurement=$measurement and n.name=$name return n.name as n, r, p limit 1`
 	result, err := session.ReadTransaction(client.QueryNew(query, map[string]interface{}{
 		"database":    database,
 		"measurement": measurement,
@@ -151,9 +151,10 @@ func main() {
 			examples.GET("securities", c.SecuritiesExample)
 			examples.GET("attribute", c.AttributeExample)
 		}
-		nodes := v1.Group("/neo4j")
+		neo4j := v1.Group("/neo4j")
 		{
-			nodes.GET(":database/:measurement/:label/:name", c.ShowNodeByName)
+			neo4j.GET("/findnode/:database/:measurement/:label/:name", c.ShowNodeByName)
+			neo4j.GET("/findadjnodes/:database/:measurement/:label/:name", c.ShowAdjNodesByName)
 		}
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

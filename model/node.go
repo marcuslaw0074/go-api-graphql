@@ -51,3 +51,22 @@ func FindNodeByName(name, database, measurement, label string) ([][]interface{},
 
 	return result.([][]interface{}), nil
 }
+
+func FindAdjNodesByName(name, database, measurement, label string) ([][]interface{}, error){
+	dbUri := "neo4j://192.168.100.214:27687"
+	driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
+	if err != nil {
+		panic(err)
+	}
+	session := driver.NewSession(neo4j.SessionConfig{})
+	defer session.Close()
+	defer driver.Close()
+	query := fmt.Sprintf(`MATCH (n: %s)-[r]-(p) where n.database=$database and n.measurement=$measurement and n.name=$name return n, r, p`, label)
+	fmt.Println(query)
+	result, err := session.ReadTransaction(client.QueryNew(query, map[string]interface{}{
+		"database":    database,
+		"measurement": measurement,
+		"name":      name,
+	}))
+	return result.([][]interface{}), nil
+}

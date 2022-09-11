@@ -649,6 +649,110 @@ paths:
       summary: custome header example
       tags:
       - example
+  /neo4j/findadjnodes/{database}/{measurement}/{label}/{name}:
+    get:
+      consumes:
+      - application/json
+      description: Find adj node given name and label
+      parameters:
+      - description: Database
+        in: path
+        name: database
+        required: true
+        type: string
+      - description: Measurement
+        in: path
+        name: measurement
+        required: true
+        type: string
+      - description: Label
+        in: path
+        name: label
+        required: true
+        type: string
+      - description: Name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              items:
+                type: object
+              type: array
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Find adj node given name and label
+      tags:
+      - neo4j
+  /neo4j/findnode/{database}/{measurement}/{label}/{name}:
+    get:
+      consumes:
+      - application/json
+      description: Find node given name and label
+      parameters:
+      - description: Database
+        in: path
+        name: database
+        required: true
+        type: string
+      - description: Measurement
+        in: path
+        name: measurement
+        required: true
+        type: string
+      - description: Label
+        in: path
+        name: label
+        required: true
+        type: string
+      - description: Name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              items:
+                type: object
+              type: array
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Find node given name and label
+      tags:
+      - neo4j
 securityDefinitions:
   ApiKeyAuth:
     in: header
