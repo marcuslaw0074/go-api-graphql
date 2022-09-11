@@ -13,13 +13,10 @@ func Query(query string, params map[string]interface{}) func (neo4j.Transaction)
 			return nil, err
 		}
 		s2 := make([][]string, 0)
-		s := make([]interface{}, 0)
 		for records.Next() {
-			s = append(s, records.Record())
 			res, _ := records.Record().Get("o")
 			res2, _ := records.Record().Get("s")
 			s2 = append(s2, []string{res.(string), res2.(string)})
-			fmt.Printf("The current record is: %v, %v \n", res.(string), res2.(string))
 		}
 		if err != nil {
 			return nil, err
@@ -35,9 +32,7 @@ func QueryLabel(query string, params map[string]interface{}) func (neo4j.Transac
 			return nil, err
 		}
 		s2 := make([]string, 0)
-		s := make([]interface{}, 0)
 		for records.Next() {
-			s = append(s, records.Record())
 			res, _ := records.Record().Get("name")
 			s2 = append(s2, res.(string))
 			fmt.Printf("The current record is: %v\n", res.(string))
