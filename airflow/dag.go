@@ -1,18 +1,30 @@
-package scheduler
+package airflow
 
-import "github.com/ef-ds/deque"
+import (
+	"github.com/ef-ds/deque"
+)
 
+// Credit: The DAG implementation here is roughly a port of the
+// one from this Python project: https://github.com/thieman/dagobah
+
+// A DAG is a directed acyclic graph represented by a simple map
+// where a key is a node in the graph, and a value is a slice of
+// immediately downstream dependent nodes.
 type dag map[string][]string
 
+// A node has a name and 0 or more dependent nodes
 func (d dag) addNode(name string) {
 	deps := make([]string, 0)
 	d[name] = deps
 }
 
+// Create an edge between an independent and dependent node
 func (d dag) setDownstream(ind, dep string) {
 	d[ind] = append(d[ind], dep)
 }
 
+// Returns true if a node is a downstream node, false if it
+// is independent.
 func (d dag) isDownstream(nodeName string) bool {
 	ind := d.independentNodes()
 
@@ -25,6 +37,7 @@ func (d dag) isDownstream(nodeName string) bool {
 	return true
 }
 
+// Ensure the DAG is acyclic
 func (d dag) validate() bool {
 	degree := make(map[string]int)
 
@@ -68,6 +81,7 @@ func (d dag) validate() bool {
 	return len(l) == len(d)
 }
 
+// Return the immediately upstream nodes for a given node
 func (d dag) dependencies(node string) []string {
 
 	dependencies := make([]string, 0)
@@ -83,6 +97,7 @@ func (d dag) dependencies(node string) []string {
 	return dependencies
 }
 
+// Return all the independent nodes in the graph
 func (d dag) independentNodes() []string {
 
 	downstream := make([]string, 0)
@@ -106,4 +121,5 @@ func (d dag) independentNodes() []string {
 	}
 
 	return ind
+
 }
