@@ -5,8 +5,9 @@ import (
 	"net/http"
 	"strconv"
 
+	"go-api-grapqhl/httputil"
+
 	"github.com/gin-gonic/gin"
-	"github.com/swaggo/swag/example/celler/httputil"
 )
 
 // PingExample godoc
