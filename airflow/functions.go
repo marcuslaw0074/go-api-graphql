@@ -6,22 +6,56 @@ import (
 	"fmt"
 	"go-api-grapqhl/graph/client"
 	"math"
-	"time"
+	"sort"
+	// "strings"
 	"github.com/go-gota/gota/dataframe"
+	"github.com/go-gota/gota/series"
+	"time"
 )
 
 type BaseFunction struct{}
 
 type Timeseries struct {
-	Time string `json:"time"`
+	Time  string  `json:"time"`
 	Value float64 `json:"value" format:"float64"`
 }
 
 type AllDataframe struct {
 	EquipmentName string
-	FunctionType string
-	Id string
-	Dataframe dataframe.DataFrame
+	FunctionType  string
+	Id            string
+	Dataframe     dataframe.DataFrame
+}
+
+func IntContains(list []int, str int) (int, bool) {
+	for index, a := range list {
+		if a == str {
+			return index, true
+		}
+	}
+	return -1, false
+}
+
+func sliceFilledWithString(size int, str string) []string {
+	data := make([]string, size)
+	for i := 0; i < size; i++ {
+		data[i] = str
+	}
+	return data
+}
+
+func ApplyFunction(function func(...float64) float64, indCol ...int) func(series.Series) series.Series {
+	return func(s series.Series) series.Series {
+		floats := s.Float()
+		list := make([]float64, 0)
+		for index, value := range floats {
+			_, contains := IntContains(indCol, index)
+			if contains {
+				list = append(list, value)
+			}
+		}
+		return series.Floats(function(list...))
+	}
 }
 
 func findElementByEquip(s []AllDataframe, equipment string) (int, error) {
@@ -44,34 +78,32 @@ func findEleByEquip(s []GroupDataframe, equipment string) (int, error) {
 
 type GroupDataframe struct {
 	EquipmentName string
-	Dataframe dataframe.DataFrame
+	Dataframe     dataframe.DataFrame
 }
 
 func stringInSlice(a string, list []string) bool {
-    for _, b := range list {
-        if b == a {
-            return true
-        }
-    }
-    return false
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
 }
 
 func (f BaseFunction) Test() (string, error) {
-	fmt.Println("hk")
-	res, _ := client.InfluxdbQuery(`SELECT MEAN(value) FROM Utility_3 
-					WHERE "FunctionType"='Chiller_Chilled_Water_Return_Temperature_Sensor' OR
-					 "FunctionType"='Chiller_Chilled_Water_Supply_Temperature_Sensor' AND 
-					 time>now()-40m GROUP BY EquipmentName, FunctionType, id, time(20m) `, 
-					 "WIIOT")
-	// store := make([]AllDataframe, 0)
+	newFunctionType := "Chiller_Delta_T"
+	measurement := "Utility_3"
+	database := "WIIOT"
+	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
+			WHERE "FunctionType"='Chiller_Chilled_Water_Return_Temperature_Sensor' OR
+			"FunctionType"='Chiller_Chilled_Water_Supply_Temperature_Sensor' AND 
+			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, measurement)
+	res, _ := client.InfluxdbQuery(query, database)
+	fmt.Println(query)
 	dfGroup := make([]GroupDataframe, 0)
-	fmt.Println(res)
 	equipmentList := make([]string, 0)
 	for _, series := range res.Series {
-		fmt.Println(series)
 		timeseries := make([]Timeseries, 0)
-		var id string = series.Tags["id"]
-		fmt.Println(id)
 		var equipmentName string = series.Tags["EquipmentName"]
 		var functionType string = series.Tags["FunctionType"]
 		for _, row := range series.Values {
@@ -79,18 +111,18 @@ func (f BaseFunction) Test() (string, error) {
 				value, err := row[1].(json.Number).Float64()
 				if err == nil {
 					timeseries = append(timeseries, Timeseries{
-						Time: row[0].(string),
+						Time:  row[0].(string),
 						Value: value,
 					})
 				} else {
 					timeseries = append(timeseries, Timeseries{
-						Time: row[0].(string),
+						Time:  row[0].(string),
 						Value: math.NaN(),
 					})
 				}
 			} else {
 				timeseries = append(timeseries, Timeseries{
-					Time: row[0].(string),
+					Time:  row[0].(string),
 					Value: math.NaN(),
 				})
 			}
@@ -100,30 +132,58 @@ func (f BaseFunction) Test() (string, error) {
 			ind, err := findEleByEquip(dfGroup, equipmentName)
 			if err == nil {
 				df := dfGroup[ind].Dataframe
-				df = df.InnerJoin(dfNew.Rename(functionType, "Value"), "Time")
-				dfGroup[ind].Dataframe = df
+				name := df.Names()
+				strs := []string{name[len(name)-1], functionType}
+				sort.Strings(strs)
+				if strs[len(strs)-1] == functionType {
+					dfGroup[ind].Dataframe = df.InnerJoin(dfNew.Rename(functionType, "Value"), "Time")
+				} else {
+					dfGroup[ind].Dataframe = dfNew.Rename(functionType, "Value").InnerJoin(df, "Time")
+				}
 			}
 		} else {
 			dfGroup = append(dfGroup, GroupDataframe{
 				EquipmentName: equipmentName,
-				Dataframe: dfNew.Rename(functionType, "Value"),
+				Dataframe:     dfNew.Rename(functionType, "Value"),
 			})
 		}
 		equipmentList = append(equipmentList, equipmentName)
-		// store = append(store, AllDataframe{
-		// 	EquipmentName: equipmentName,
-		// 	FunctionType: functionType,
-		// 	Id: id,
-		// 	Dataframe: dfNew,
-		// })
 	}
-	// for _, equip := range equipmentList {
-	// 	for _, ele := range store {
-
-	// 	}
-	// }
-	fmt.Println(dfGroup)
-	// fmt.Println(store)
+	lss := []int{1, 2}
+	for ind, ele := range dfGroup {
+		dfGroup[ind].Dataframe = ele.Dataframe.Rapply(ApplyFunction(func(f ...float64) float64 {
+			return f[0] - f[1]
+		}, lss...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
+		lsss := make([]client.InfluxWriteSchema, 0)
+		serValue := dfGroup[ind].Dataframe.Col("Value")
+		serTime := dfGroup[ind].Dataframe.Col("Time").Records()
+		for ind2, ele2 := range serValue.Float() {
+			t, err := time.Parse("2006-01-02T15:04:05Z", serTime[ind2])
+			if err != nil {
+				t = time.Now()
+			}
+			if !math.IsNaN(ele2) {
+				lsss = append(lsss, client.InfluxWriteSchema{
+					Name: measurement,
+					Tags: map[string]string{
+						"EquipmentName": ele.EquipmentName,
+						"FunctionType":  newFunctionType,
+						"id":            fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType),
+						"prefername":    fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType),
+						"BuildingName":  database,
+						"Block":         measurement,
+					},
+					Fields: map[string]interface{}{"value": ele2},
+					T:      t,
+				})
+			}
+		}
+		fmt.Println(lsss)
+		t := client.InfluxdbWritePoints(lsss, "WIIOT")
+		fmt.Println(t)
+	}
+	dfDict := dfGroup[0].Dataframe.Maps()
+	fmt.Println(dfDict)
 	return "ok", nil
 }
 
