@@ -13,6 +13,14 @@ require (
 )
 
 require (
+	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
+	github.com/ghodss/yaml v1.0.0 // indirect
+	github.com/russross/blackfriday/v2 v2.1.0 // indirect
+	github.com/urfave/cli/v2 v2.16.0 // indirect
+	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
+)
+
+require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/agnivade/levenshtein v1.1.1 // indirect
 	github.com/ef-ds/deque v1.0.4
@@ -42,7 +50,7 @@ require (
 	go.etcd.io/bbolt v1.3.6
 	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4 // indirect
 	golang.org/x/net v0.0.0-20220826154423-83b083e8dc8b // indirect
-	golang.org/x/sys v0.0.0-20220829200755-d48e67d00261 // indirect
+	golang.org/x/sys v0.0.0-20220909162455-aba9fc2a8ff2 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/tools v0.1.12 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect

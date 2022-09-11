@@ -1,19 +1,23 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 
 	"go-api-grapqhl/airflow"
 	"go-api-grapqhl/controller"
 	_ "go-api-grapqhl/docs"
 	"go-api-grapqhl/graph"
+	"go-api-grapqhl/graph/client"
 	"go-api-grapqhl/graph/generated"
 	"go-api-grapqhl/httputil"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/gin-gonic/gin"
+	"github.com/neo4j/neo4j-go-driver/v4/neo4j"
 	"github.com/robfig/cron/v3"
 
 	swaggerFiles "github.com/swaggo/files"
@@ -84,6 +88,28 @@ func playgroundHandler() gin.HandlerFunc {
 
 
 func main() {
+
+	database := "WIIOT"
+	measurement := "Utility_3"
+	dbUri := "neo4j://localhost:7687"
+	driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
+	if err != nil {
+		panic(err)
+	}
+	session := driver.NewSession(neo4j.SessionConfig{})
+	defer session.Close()
+	defer driver.Close()
+	query := `MATCH (n)-[p]->(r) where n.database=$database and n.measurement=$measurement and n.name=$name return n.name as n, r, p`
+	result, err := session.ReadTransaction(client.QueryNew(query, map[string]interface{}{
+		"database":    database,
+		"measurement": measurement,
+		"name":      "Chiller",
+	}))
+	ress, _ := json.Marshal(result.([][]interface{}))
+	fmt.Printf("%v\n\n\n\n", string(ress))
+
+
+
 	r := gin.Default()
 
 	cr := cron.New()
@@ -124,6 +150,10 @@ func main() {
 			examples.GET("header", c.HeaderExample)
 			examples.GET("securities", c.SecuritiesExample)
 			examples.GET("attribute", c.AttributeExample)
+		}
+		nodes := v1.Group("/neo4j")
+		{
+			nodes.GET(":database/:measurement/:label/:name", c.ShowNodeByName)
 		}
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

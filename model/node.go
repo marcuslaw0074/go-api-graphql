@@ -1,7 +1,10 @@
 package model
 
 import (
+	// "encoding/json"
 	"errors"
+	"fmt"
+	// "fmt"
 	"go-api-grapqhl/graph/client"
 
 	"github.com/neo4j/neo4j-go-driver/v4/neo4j"
@@ -29,11 +32,8 @@ var (
 	ErrNodeNameInvalid = errors.New("node name is empty")
 )
 
-func FindNodeByName(name string) (interface{}, error){
-	database := "WIIOT"
-	measurement := "Utility_3"
+func FindNodeByName(name, database, measurement, label string) ([][]interface{}, error){
 	dbUri := "neo4j://192.168.100.214:27687"
-	// dbUri := "neo4j://192.168.100.214:27687"
 	driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
 	if err != nil {
 		panic(err)
@@ -41,11 +41,13 @@ func FindNodeByName(name string) (interface{}, error){
 	session := driver.NewSession(neo4j.SessionConfig{})
 	defer session.Close()
 	defer driver.Close()
-	query := `MATCH (n) where n.database=$database and n.measurement=$measurement and n.name=$name`
-	result, err := session.ReadTransaction(client.QueryLabel(query, map[string]interface{}{
+	query := fmt.Sprintf(`MATCH (n: %s) where n.database=$database and n.measurement=$measurement and n.name=$name return n`, label)
+	fmt.Println(query)
+	result, err := session.ReadTransaction(client.QueryNew(query, map[string]interface{}{
 		"database":    database,
 		"measurement": measurement,
 		"name":      name,
 	}))
-	fmt.Println(result)
+
+	return result.([][]interface{}), nil
 }

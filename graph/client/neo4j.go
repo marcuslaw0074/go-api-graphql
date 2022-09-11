@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/neo4j/neo4j-go-driver/v4/neo4j"
+	// "github.com/neo4j/neo4j-go-driver/v4/neo4j/db"
 )
 
 func Query(query string, params map[string]interface{}) func (neo4j.Transaction) (interface{}, error) {
@@ -18,6 +19,28 @@ func Query(query string, params map[string]interface{}) func (neo4j.Transaction)
 			res2, _ := records.Record().Get("s")
 			s2 = append(s2, []string{res.(string), res2.(string)})
 		}
+		if err != nil {
+			return nil, err
+		}
+		return s2, nil
+	}
+}
+
+func QueryNew(query string, params map[string]interface{}) func (neo4j.Transaction) (interface{}, error) {
+	return func(tx neo4j.Transaction) (interface{}, error) {
+		records, err := tx.Run(query, params)
+		if err != nil {
+			return nil, err
+		}
+		s := make([]interface{}, 0)
+		s2 := make([][]interface{}, 0)
+		for records.Next() {
+			res := records.Record().Values
+			s2 = append(s2, res)
+			s = append(s, res[0])
+		}
+		// fmt.Printf("%v \n", s)
+
 		if err != nil {
 			return nil, err
 		}
