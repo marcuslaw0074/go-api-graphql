@@ -33,7 +33,7 @@ func ComplexFunction() *Job {
 
 	j.Add(&Task{
 		BaseFunction: k,
-		FunctionName: "GetChillerPlantEnergy1Day",
+		FunctionName: "GetChillerPlantChillerRunning",
 		Name:         "haha4",
 	})
 

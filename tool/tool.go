@@ -190,3 +190,13 @@ func ConcatDataframe(s []GroupDataframe) (dataframe.DataFrame, error) {
 		return dataframe.New(), err
 	}
 }
+
+// return true if f contains NaN
+func ContainNaN(f []float64) bool {
+	for _, ele := range f {
+		if math.IsNaN(ele) {
+			return true
+		}
+	}
+	return false
+}
