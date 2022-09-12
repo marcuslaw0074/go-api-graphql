@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"fmt"
+	// "fmt"
 	"net/http"
 	// "strconv"
 
@@ -31,7 +31,6 @@ func (c *Controller) ShowNodeByName(ctx *gin.Context) {
 	database := ctx.Param("database")
 	measurement := ctx.Param("measurement")
 	label := ctx.Param("label")
-	fmt.Println(name)
 	node, err := model.FindNodeByName(name, database, measurement, label)
 	if err != nil {
 		httputil.NewError(ctx, http.StatusNotFound, err)
@@ -60,7 +59,6 @@ func (c *Controller) ShowAdjNodesByName(ctx *gin.Context) {
 	database := ctx.Param("database")
 	measurement := ctx.Param("measurement")
 	label := ctx.Param("label")
-	fmt.Println(name)
 	node, err := model.FindAdjNodesByName(name, database, measurement, label)
 	if err != nil {
 		httputil.NewError(ctx, http.StatusNotFound, err)

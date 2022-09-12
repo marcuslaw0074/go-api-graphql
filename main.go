@@ -114,7 +114,7 @@ func main() {
 
 	cr := cron.New()
 	cr.Start()
-	cr.AddFunc("*/1 * * * *", func() {airflow.Complexunction()})
+	cr.AddFunc("*/1 * * * *", func() {airflow.ComplexFunction()})
 
 	r.POST("/query", graphqlHandler())
     r.GET("/", playgroundHandler())

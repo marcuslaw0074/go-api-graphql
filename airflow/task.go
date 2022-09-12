@@ -39,20 +39,20 @@ func (t *Task) run(writes chan writeOp) error {
 	res := result.Call(nil)
 	logMsg := "task %v reached state %v - %v attempt(s) remaining - result %v"
 
-	if !res[1].IsNil() && t.attemptsRemaining > 0 {
-		log.Printf(logMsg, t.Name, upForRetry, t.attemptsRemaining, res[1])
+	if !res[0].IsNil() && t.attemptsRemaining > 0 {
+		log.Printf(logMsg, t.Name, upForRetry, t.attemptsRemaining, res[0])
 		write := writeOp{t.Name, upForRetry, make(chan bool)}
 		writes <- write
 		<-write.resp
 		return nil
 	}
 
-	if !res[1].IsNil() && t.attemptsRemaining <= 0 {
-		log.Printf(logMsg, t.Name, failed, t.attemptsRemaining, res[1])
+	if !res[0].IsNil() && t.attemptsRemaining <= 0 {
+		log.Printf(logMsg, t.Name, failed, t.attemptsRemaining, res[0])
 		write := writeOp{t.Name, failed, make(chan bool)}
 		writes <- write
 		<-write.resp
-		return errors.New(res[1].String())
+		return errors.New(res[0].String())
 	}
 
 	log.Printf(logMsg, t.Name, successful, t.attemptsRemaining, res)

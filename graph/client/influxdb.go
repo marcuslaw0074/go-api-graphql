@@ -2,13 +2,14 @@ package client
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
-	"github.com/go-gota/gota/dataframe"
-	influx "github.com/influxdata/influxdb1-client/v2"
+	"go-api-grapqhl/tool"
 	"math"
 	"sort"
 	"time"
+
+	"github.com/go-gota/gota/dataframe"
+	influx "github.com/influxdata/influxdb1-client/v2"
 )
 
 type InfluxWriteSchema struct {
@@ -18,32 +19,9 @@ type InfluxWriteSchema struct {
 	T      time.Time
 }
 
-type GroupDataframe struct {
-	EquipmentName string
-	Dataframe     dataframe.DataFrame
-}
-
 type Timeseries struct {
 	Time  string  `json:"time"`
 	Value float64 `json:"value" format:"float64"`
-}
-
-func stringInSlice(a string, list []string) bool {
-	for _, b := range list {
-		if b == a {
-			return true
-		}
-	}
-	return false
-}
-
-func findEleByEquip(s []GroupDataframe, equipment string) (int, error) {
-	for ind, ele := range s {
-		if ele.EquipmentName == equipment {
-			return ind, nil
-		}
-	}
-	return -1, errors.New("cannot find dataframe")
 }
 
 func InfluxdbQuery(query, database string) (influx.Result, error) {
@@ -85,9 +63,9 @@ func InfluxdbWritePoints(points []InfluxWriteSchema, database string) error {
 	return c.Write(bp)
 }
 
-func QueryDfGroup(query, database string) []GroupDataframe {
+func QueryDfGroup(query, database string) []tool.GroupDataframe {
 	res, _ := InfluxdbQuery(query, database)
-	dfGroup := make([]GroupDataframe, 0)
+	dfGroup := make([]tool.GroupDataframe, 0)
 	equipmentList := make([]string, 0)
 	for _, series := range res.Series {
 		timeseries := make([]Timeseries, 0)
@@ -115,8 +93,8 @@ func QueryDfGroup(query, database string) []GroupDataframe {
 			}
 		}
 		dfNew := dataframe.LoadStructs(timeseries)
-		if stringInSlice(equipmentName, equipmentList) {
-			ind, err := findEleByEquip(dfGroup, equipmentName)
+		if tool.StringInSlice(equipmentName, equipmentList) {
+			ind, err := tool.FindEleByEquip(dfGroup, equipmentName)
 			if err == nil {
 				df := dfGroup[ind].Dataframe
 				name := df.Names()
@@ -129,7 +107,7 @@ func QueryDfGroup(query, database string) []GroupDataframe {
 				}
 			}
 		} else {
-			dfGroup = append(dfGroup, GroupDataframe{
+			dfGroup = append(dfGroup, tool.GroupDataframe{
 				EquipmentName: equipmentName,
 				Dataframe:     dfNew.Rename(functionType, "Value"),
 			})
@@ -139,29 +117,32 @@ func QueryDfGroup(query, database string) []GroupDataframe {
 	return dfGroup
 }
 
-func WriteDfGroup(query, database, measurement, EquipmentName, FunctionType string, df dataframe.DataFrame) []InfluxWriteSchema {
+func WriteDfGroup(query, database, measurement, EquipmentName, FunctionType string, df dataframe.DataFrame, startIndex int) []InfluxWriteSchema {
 	lsss := make([]InfluxWriteSchema, 0)
 	serValue := df.Col("Value")
 	serTime := df.Col("Time").Records()
 	for ind2, ele2 := range serValue.Float() {
-		t, err := time.Parse("2006-01-02T15:04:05Z", serTime[ind2])
-		if err == nil {
-			if !math.IsNaN(ele2) {
-				lsss = append(lsss, InfluxWriteSchema{
-					Name: measurement,
-					Tags: map[string]string{
-						"EquipmentName": EquipmentName,
-						"FunctionType":  FunctionType,
-						"id":            fmt.Sprintf("%s_%s", EquipmentName, FunctionType),
-						"prefername":    fmt.Sprintf("%s_%s", EquipmentName, FunctionType),
-						"BuildingName":  database,
-						"Block":         measurement,
-					},
-					Fields: map[string]interface{}{"value": ele2},
-					T:      t,
-				})
+		if ind2 > startIndex-1 {
+			t, err := time.Parse("2006-01-02T15:04:05Z", serTime[ind2])
+			if err == nil {
+				if !math.IsNaN(ele2) {
+					lsss = append(lsss, InfluxWriteSchema{
+						Name: measurement,
+						Tags: map[string]string{
+							"EquipmentName": EquipmentName,
+							"FunctionType":  FunctionType,
+							"id":            fmt.Sprintf("%s_%s", EquipmentName, FunctionType),
+							"prefername":    fmt.Sprintf("%s_%s", EquipmentName, FunctionType),
+							"BuildingName":  database,
+							"Block":         measurement,
+						},
+						Fields: map[string]interface{}{"value": ele2},
+						T:      t,
+					})
+				}
 			}
 		}
+
 	}
 	return lsss
 }

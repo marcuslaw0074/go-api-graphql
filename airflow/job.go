@@ -161,7 +161,6 @@ func (j *Job) run() error {
 		taskState.Store(write.key, write.val)
 
 		// Acknowledge the update
-		fmt.Println("Send true to task")
 		write.resp <- true
 
 		if j.allDone() {
@@ -219,37 +218,4 @@ func (j *Job) anyFailed() bool {
 		return out
 	})
 	return out
-}
-
-func Complexunction() *Job {
-	var k = BaseFunction{}
-
-	j := &Job{
-		Name:     "test",
-		Schedule: "* * * * *",
-	}
-
-	j.Add(&Task{
-		BaseFunction: k,
-		FunctionName: "Test",
-		Name:         "haha",
-	})
-
-	j.Add(&Task{
-		BaseFunction: k,
-		FunctionName: "Test2",
-		Name:         "haha2",
-	})
-
-	j.Add(&Task{
-		BaseFunction: k,
-		FunctionName: "Test3",
-		Name:         "haha3",
-	})
-
-	j.SetDownstream(j.Task("haha"), j.Task("haha2"))
-	j.SetDownstream(j.Task("haha3"), j.Task("haha2"))
-	j.run()
-	return j
-
 }
