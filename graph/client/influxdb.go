@@ -1,17 +1,49 @@
 package client
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
-	"time"
-
+	"github.com/go-gota/gota/dataframe"
 	influx "github.com/influxdata/influxdb1-client/v2"
+	"math"
+	"sort"
+	"time"
 )
 
 type InfluxWriteSchema struct {
-	Name string
-	Tags map[string]string
+	Name   string
+	Tags   map[string]string
 	Fields map[string]interface{}
-	T time.Time
+	T      time.Time
+}
+
+type GroupDataframe struct {
+	EquipmentName string
+	Dataframe     dataframe.DataFrame
+}
+
+type Timeseries struct {
+	Time  string  `json:"time"`
+	Value float64 `json:"value" format:"float64"`
+}
+
+func stringInSlice(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
+}
+
+func findEleByEquip(s []GroupDataframe, equipment string) (int, error) {
+	for ind, ele := range s {
+		if ele.EquipmentName == equipment {
+			return ind, nil
+		}
+	}
+	return -1, errors.New("cannot find dataframe")
 }
 
 func InfluxdbQuery(query, database string) (influx.Result, error) {
@@ -28,7 +60,6 @@ func InfluxdbQuery(query, database string) (influx.Result, error) {
 	}
 	return influx.Result{}, err
 }
-
 
 func InfluxdbWritePoints(points []InfluxWriteSchema, database string) error {
 	c, err := influx.NewHTTPClient(influx.HTTPConfig{
@@ -52,4 +83,85 @@ func InfluxdbWritePoints(points []InfluxWriteSchema, database string) error {
 		}
 	}
 	return c.Write(bp)
+}
+
+func QueryDfGroup(query, database string) []GroupDataframe {
+	res, _ := InfluxdbQuery(query, database)
+	dfGroup := make([]GroupDataframe, 0)
+	equipmentList := make([]string, 0)
+	for _, series := range res.Series {
+		timeseries := make([]Timeseries, 0)
+		var equipmentName string = series.Tags["EquipmentName"]
+		var functionType string = series.Tags["FunctionType"]
+		for _, row := range series.Values {
+			if row[1] != nil {
+				value, err := row[1].(json.Number).Float64()
+				if err == nil {
+					timeseries = append(timeseries, Timeseries{
+						Time:  row[0].(string),
+						Value: value,
+					})
+				} else {
+					timeseries = append(timeseries, Timeseries{
+						Time:  row[0].(string),
+						Value: math.NaN(),
+					})
+				}
+			} else {
+				timeseries = append(timeseries, Timeseries{
+					Time:  row[0].(string),
+					Value: math.NaN(),
+				})
+			}
+		}
+		dfNew := dataframe.LoadStructs(timeseries)
+		if stringInSlice(equipmentName, equipmentList) {
+			ind, err := findEleByEquip(dfGroup, equipmentName)
+			if err == nil {
+				df := dfGroup[ind].Dataframe
+				name := df.Names()
+				strs := []string{name[len(name)-1], functionType}
+				sort.Strings(strs)
+				if strs[len(strs)-1] == functionType {
+					dfGroup[ind].Dataframe = df.InnerJoin(dfNew.Rename(functionType, "Value"), "Time")
+				} else {
+					dfGroup[ind].Dataframe = dfNew.Rename(functionType, "Value").InnerJoin(df, "Time")
+				}
+			}
+		} else {
+			dfGroup = append(dfGroup, GroupDataframe{
+				EquipmentName: equipmentName,
+				Dataframe:     dfNew.Rename(functionType, "Value"),
+			})
+		}
+		equipmentList = append(equipmentList, equipmentName)
+	}
+	return dfGroup
+}
+
+func WriteDfGroup(query, database, measurement, EquipmentName, FunctionType string, df dataframe.DataFrame) []InfluxWriteSchema {
+	lsss := make([]InfluxWriteSchema, 0)
+	serValue := df.Col("Value")
+	serTime := df.Col("Time").Records()
+	for ind2, ele2 := range serValue.Float() {
+		t, err := time.Parse("2006-01-02T15:04:05Z", serTime[ind2])
+		if err == nil {
+			if !math.IsNaN(ele2) {
+				lsss = append(lsss, InfluxWriteSchema{
+					Name: measurement,
+					Tags: map[string]string{
+						"EquipmentName": EquipmentName,
+						"FunctionType":  FunctionType,
+						"id":            fmt.Sprintf("%s_%s", EquipmentName, FunctionType),
+						"prefername":    fmt.Sprintf("%s_%s", EquipmentName, FunctionType),
+						"BuildingName":  database,
+						"Block":         measurement,
+					},
+					Fields: map[string]interface{}{"value": ele2},
+					T:      t,
+				})
+			}
+		}
+	}
+	return lsss
 }
