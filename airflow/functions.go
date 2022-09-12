@@ -71,7 +71,68 @@ func (f BaseFunction) GetChillerPlantEnergy() error {
 	return nil
 }
 
+func (f BaseFunction) GetChillerPlantCoolingLoad() error {
+	newFunctionType := "Chiller_Plant_Cooling_Load"
+	newEquipmentName := "Chiller_Plant"
+	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
+			WHERE ("FunctionType"='Chiller_Chilled_Water_Return_Temperature_Sensor' OR
+			"FunctionType"='Chiller_Chilled_Water_Supply_Temperature_Sensor' OR 
+			"FunctionType"='Chiller_Water_Flowrate') AND
+			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
+	dfGroup := client.QueryDfGroup(query, f.Database)
+	dfGroup = client.ApplyFunctionDfGroup(dfGroup, func(f ...float64) float64 {
+		if f[2] > 500 && (f[0]-f[1]) > 0 {
+			return (f[0] - f[1]) * 4.2 * 0.0631 * f[2]
+		} else if tool.ContainNaN(f) {
+			return math.NaN()
+		} else {
+			return 0
+		}
+	}, "Chiller_Cooling_Load", []int{1, 2, 3}...)
+	df, err := tool.ConcatDataframe(dfGroup)
+	if err != nil {
+		return err
+	} else {
+		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			return (f[0] + f[1] + f[2] + f[3])
+		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+		fmt.Println(df)
+		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newFunctionType, df, 0)
+		err := client.InfluxdbWritePoints(lsss, "WIIOT")
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
 
+func (f BaseFunction) GetChillerPlantCoP() error {
+	newFunctionType := "Chiller_Plant_CoP"
+	// newEquipmentName := "Chiller_Plant"
+	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
+			WHERE ("FunctionType"='Chiller_Plant_Cooling_Load' OR
+			"FunctionType"='Chiller_Plant_Energy') AND
+			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
+	dfGroup := client.QueryDfGroup(query, f.Database)
+	for _, ele := range dfGroup {
+		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if f[0] > 1000 && f[1] > 50 {
+				return f[0] / f[1]
+			} else if tool.ContainNaN(f) {
+				return math.NaN()
+			} else {
+				return 0
+			}
+		}, []int{1, 2}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
+		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, "", df, 0)
+		err := client.InfluxdbWritePoints(lsss, "WIIOT")
+		if err != nil {
+			return err
+		}
+		fmt.Println(df)
+	}
+	return nil
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -141,7 +202,7 @@ func (f BaseFunction) GetChillerCL() error {
 			} else {
 				return 0
 			}
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
+		}, []int{1, 2, 3}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, "", df, 0)
 		err := client.InfluxdbWritePoints(lsss, "WIIOT")
 		if err != nil {
@@ -234,38 +295,31 @@ func (f BaseFunction) GetChillerPlantEnergy1Day() error {
 	return nil
 }
 
-
-
-func (f BaseFunction) GetChillerPlantCoolingLoad() error {
-	newFunctionType := "Chiller_Plant_Cooling_Load"
-	newEquipmentName := "Chiller_Plant"
+func (f BaseFunction) GetChillerPlantWetBulb() error {
+	newFunctionType := "Chiller_Plant_Wet_Bulb"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
-			WHERE ("FunctionType"='Chiller_Chilled_Water_Return_Temperature_Sensor' OR
-			"FunctionType"='Chiller_Chilled_Water_Supply_Temperature_Sensor' OR 
-			"FunctionType"='Chiller_Water_Flowrate') AND
+			WHERE ("FunctionType"='Chiller_Plant_Outdoor_Dry_Bulb' OR
+			"FunctionType"='Chiller_Plant_Outdoor_Humidity') AND
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
-	dfGroup = client.ApplyFunctionDfGroup(dfGroup, func(f ...float64) float64 {
-		if f[2] > 500 && (f[0]-f[1]) > 0 {
-			return (f[0] - f[1]) * 4.2 * 0.0631 * f[2]
-		} else if tool.ContainNaN(f) {
-			return math.NaN()
-		} else {
-			return 0
-		}
-	}, "Chiller_Cooling_Load", []int{1, 2, 3}...)
-	df, err := tool.ConcatDataframe(dfGroup)
-	if err != nil {
-		return err
-	} else {
-		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			return (f[0] + f[1] + f[2] + f[3]) 
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newFunctionType, df, 0)
+	for _, ele := range dfGroup {
+		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.ContainNaN(f) {
+				return math.NaN()
+			} else {
+				return (f[0]*math.Atan(0.151977*math.Sqrt(f[1]+8.313659)) +
+					math.Atan(f[0]+f[1]) - math.Atan(f[1]-1.676331) +
+					0.00391838*math.Pow(f[1], 3/2)*math.Atan(0.023101*f[1]) -
+					4.686035)
+			}
+		}, []int{1, 2}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
+		fmt.Println(df)
+		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, "", df, 0)
 		err := client.InfluxdbWritePoints(lsss, "WIIOT")
 		if err != nil {
 			return err
 		}
+		fmt.Println(df)
 	}
 	return nil
 }
