@@ -117,7 +117,17 @@ func QueryDfGroup(query, database string) []tool.GroupDataframe {
 	return dfGroup
 }
 
-func WriteDfGroup(query, database, measurement, EquipmentName, FunctionType string, df dataframe.DataFrame, startIndex int) []InfluxWriteSchema {
+func ApplyFunctionDfGroup(dfGroup []tool.GroupDataframe, function func (...float64) float64, newFunctionType string, indCol ...int) []tool.GroupDataframe {
+	for ind, ele := range dfGroup {
+		dfGroup[ind] = tool.GroupDataframe{
+			EquipmentName: ele.EquipmentName,
+			Dataframe: ele.Dataframe.Rapply(tool.ApplyFunction(function, indCol...)).Rename(fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), "X0").Mutate(ele.Dataframe.Col("Time")),
+		}
+	}
+	return dfGroup
+}
+
+func WriteDfGroup(query, database, measurement, EquipmentName, FunctionType, id string, df dataframe.DataFrame, startIndex int) []InfluxWriteSchema {
 	lsss := make([]InfluxWriteSchema, 0)
 	serValue := df.Col("Value")
 	serTime := df.Col("Time").Records()
@@ -126,13 +136,19 @@ func WriteDfGroup(query, database, measurement, EquipmentName, FunctionType stri
 			t, err := time.Parse("2006-01-02T15:04:05Z", serTime[ind2])
 			if err == nil {
 				if !math.IsNaN(ele2) {
+					var newId string
+					if len(id) > 0 {
+						newId = id
+					} else {
+						newId = fmt.Sprintf("%s_%s", EquipmentName, FunctionType)
+					}
 					lsss = append(lsss, InfluxWriteSchema{
 						Name: measurement,
 						Tags: map[string]string{
 							"EquipmentName": EquipmentName,
 							"FunctionType":  FunctionType,
-							"id":            fmt.Sprintf("%s_%s", EquipmentName, FunctionType),
-							"prefername":    fmt.Sprintf("%s_%s", EquipmentName, FunctionType),
+							"id":            newId,
+							"prefername":    newId,
 							"BuildingName":  database,
 							"Block":         measurement,
 						},
