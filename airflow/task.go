@@ -21,10 +21,6 @@ type Task struct {
 	attemptsRemaining int
 }
 
-type Cc struct {
-	Name string
-}
-
 type triggerRule string
 
 const (
@@ -34,7 +30,6 @@ const (
 
 func (t *Task) run(writes chan writeOp) error {
 	log.Printf("starting task %v", t.Name)
-	// res, err := t.FunctionName.Run()
 	result := reflect.ValueOf(t.BaseFunction).MethodByName(t.FunctionName)
 	res := result.Call(nil)
 	logMsg := "task %v reached state %v - %v attempt(s) remaining - result %v"

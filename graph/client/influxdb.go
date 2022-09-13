@@ -10,6 +10,7 @@ import (
 
 	"github.com/go-gota/gota/dataframe"
 	influx "github.com/influxdata/influxdb1-client/v2"
+	"github.com/influxdata/influxdb1-client/models"
 )
 
 type InfluxWriteSchema struct {
@@ -37,6 +38,21 @@ func InfluxdbQuery(query, database string) (influx.Result, error) {
 		return response.Results[0], nil
 	}
 	return influx.Result{}, err
+}
+
+func InfluxdbQuerySeries(host string, port int, database, query string) (models.Row, error) {
+	c, err := influx.NewHTTPClient(influx.HTTPConfig{
+		Addr: fmt.Sprintf("http://%s:%v", host, port),
+	})
+	if err != nil {
+		fmt.Println("Error creating InfluxDB Client: ", err.Error())
+	}
+	defer c.Close()
+	q := influx.NewQuery(query, database, "")
+	if response, err := c.Query(q); err == nil && response.Error() == nil {
+		return response.Results[0].Series[0], nil
+	}
+	return influx.Result{}.Series[0], err
 }
 
 func InfluxdbWritePoints(points []InfluxWriteSchema, database string) error {

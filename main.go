@@ -3,13 +3,15 @@ package main
 import (
 	"errors"
 	"fmt"
-	"net/http"
 	"go-api-grapqhl/airflow"
 	"go-api-grapqhl/controller"
 	_ "go-api-grapqhl/docs"
 	"go-api-grapqhl/graph"
+	// "go-api-grapqhl/graph/client"
 	"go-api-grapqhl/graph/generated"
 	"go-api-grapqhl/httputil"
+	"net/http"
+
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/gin-gonic/gin"
@@ -82,7 +84,7 @@ func playgroundHandler() gin.HandlerFunc {
 
 
 func main() {
-	
+
 	fmt.Println("Start API server!")
 	r := gin.Default()
 
@@ -129,6 +131,10 @@ func main() {
 		{
 			neo4j.GET("/findnode/:database/:measurement/:label/:name", c.ShowNodeByName)
 			neo4j.GET("/findadjnodes/:database/:measurement/:label/:name", c.ShowAdjNodesByName)
+		}
+		influxdb := v1.Group("/influxdb")
+		{
+			influxdb.POST("/query", c.QueryInfluxDB)
 		}
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

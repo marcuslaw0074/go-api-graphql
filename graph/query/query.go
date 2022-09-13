@@ -64,7 +64,6 @@ QueryAlllocbysys string = `match (b:brick {database:$database,
 	with collect (qq) as x
 	match (c)-[:subClassOf]->(s) where c in x and s in x return s.name as o,c.name as s`
 
-
 QueryAllequipbysyslocEnergy string = `match (m:elecbldg)-[:isLocationOf]->(p)
 	-[:isPointOf]->(j:elecbrick)-[:isPartOf]->(g:elecbrick) 
 	where m.name=$location and g.name=$system

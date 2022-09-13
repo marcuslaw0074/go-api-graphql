@@ -1,12 +1,9 @@
 package model
 
 import (
-	// "encoding/json"
 	"errors"
 	"fmt"
-	// "fmt"
 	"go-api-grapqhl/graph/client"
-
 	"github.com/neo4j/neo4j-go-driver/v4/neo4j"
 )
 
@@ -23,6 +20,12 @@ type ClientPoint struct {
 
 type ClientEquipment struct {
 	Level string `json:"Level"`
+	Database string `json:"database"`
+	Measurement string `json:"measurement"`
+	Name string `json:"name"`
+}
+
+type BrickPoint struct {
 	Database string `json:"database"`
 	Measurement string `json:"measurement"`
 	Name string `json:"name"`
