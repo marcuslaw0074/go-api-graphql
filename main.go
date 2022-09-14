@@ -3,10 +3,10 @@ package main
 import (
 	"errors"
 	"fmt"
-	"go-api-grapqhl/airflow"
 	"go-api-grapqhl/controller"
 	_ "go-api-grapqhl/docs"
 	"go-api-grapqhl/graph"
+	"go-api-grapqhl/scheduler"
 	// "go-api-grapqhl/graph/client"
 	"go-api-grapqhl/graph/generated"
 	"go-api-grapqhl/httputil"
@@ -90,7 +90,7 @@ func main() {
 
 	cr := cron.New()
 	cr.Start()
-	cr.AddFunc("*/1 * * * *", func() {airflow.ComplexFunction()})
+	cr.AddFunc("*/1 * * * *", func() {scheduler.Analytics()})
 
 	r.POST("/query", graphqlHandler())
     r.GET("/", playgroundHandler())

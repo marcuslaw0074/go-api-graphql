@@ -7,13 +7,14 @@ import (
 	"math"
 	"reflect"
 	"time"
+	"go-api-grapqhl/functions"
 )
 
 // A Task is the unit of work that makes up a job. Whenever a task is executed, it
 // calls its associated operator.
 type Task struct {
 	Name              string
-	BaseFunction      BaseFunction
+	BaseFunction      functions.BaseFunction
 	FunctionName      string
 	TriggerRule       triggerRule
 	Retries           int

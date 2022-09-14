@@ -171,6 +171,80 @@ func (j *Job) run() error {
 	return nil
 }
 
+func (j *Job) Run() error {
+	if !j.Dag.validate() {
+		return fmt.Errorf("invalid Dag for job %s", j.Name)
+	}
+
+	log.Printf("starting job %v", j.Name)
+
+	writes := make(chan writeOp)
+	taskState := j.jobState.TaskState
+
+	for {
+		for t, task := range j.Tasks {
+			// Start the independent tasks
+			v, _ := taskState.Load(t)
+			if v == none && !j.Dag.isDownstream(t) {
+				taskState.Store(t, running)
+				go task.run(writes)
+			}
+
+			// Start the tasks that need to be re-tried
+			if v == upForRetry {
+				task.RetryDelay.wait(task.Name, task.Retries-task.attemptsRemaining)
+				task.attemptsRemaining = task.attemptsRemaining - 1
+				taskState.Store(t, running)
+				go task.run(writes)
+			}
+
+			// If dependencies are done, start the dependent tasks
+			if v == none && j.Dag.isDownstream(t) {
+				upstreamDone := true
+				upstreamSuccessful := true
+				for _, us := range j.Dag.dependencies(t) {
+					w, _ := taskState.Load(us)
+					if w == none || w == running || w == upForRetry {
+						upstreamDone = false
+					}
+					if w != successful {
+						upstreamSuccessful = false
+					}
+				}
+
+				if upstreamDone && task.TriggerRule == allDone {
+					taskState.Store(t, running)
+					go task.run(writes)
+				}
+
+				if upstreamSuccessful && task.TriggerRule == allSuccessful {
+					taskState.Store(t, running)
+					go task.run(writes)
+				}
+
+				if upstreamDone && !upstreamSuccessful && task.TriggerRule == allSuccessful {
+					taskState.Store(t, skipped)
+					go task.skip(writes)
+				}
+
+			}
+		}
+
+		// Receive updates on task state
+		write := <-writes
+		taskState.Store(write.key, write.val)
+
+		// Acknowledge the update
+		write.resp <- true
+
+		if j.allDone() {
+			break
+		}
+	}
+
+	return nil
+}
+
 func (j *Job) getJobState() *jobState {
 	out := j.jobState
 	out.Lock()

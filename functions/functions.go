@@ -1,4 +1,4 @@
-package airflow
+package functions
 
 import (
 	"fmt"
