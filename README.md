@@ -15,3 +15,4 @@ $ go run main.go
 
 [open swagger](http://localhost:8080/swagger/index.html)
 
+docker run -p 8080:8080 gin
