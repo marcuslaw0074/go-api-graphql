@@ -56,6 +56,11 @@ func InfluxdbQuerySeries(host string, port int, database, query string) (models.
 }
 
 func InfluxdbWritePoints(points []InfluxWriteSchema, database string) error {
+	lenn := len(points)
+	fmt.Printf("Start Writing %v into influxDB", lenn)
+	if lenn == 0 {
+		return nil
+	}
 	c, err := influx.NewHTTPClient(influx.HTTPConfig{
 		// Addr: "http://192.168.100.216:18086",
 		Addr: "http://localhost:8086",
@@ -176,5 +181,6 @@ func WriteDfGroup(query, database, measurement, EquipmentName, FunctionType, id 
 		}
 
 	}
+	fmt.Println(lsss)
 	return lsss
 }

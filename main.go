@@ -90,7 +90,10 @@ func main() {
 
 	cr := cron.New()
 	cr.Start()
-	cr.AddFunc("*/1 * * * *", func() {scheduler.Analytics()})
+	// cr.AddFunc("*/1 * * * *", func() {scheduler.Analytics()})
+	// cr.AddFunc("every 1s", func() {scheduler.Analytics()})
+
+	go func() {scheduler.Analytics()}()
 
 	r.POST("/query", graphqlHandler())
     r.GET("/", playgroundHandler())

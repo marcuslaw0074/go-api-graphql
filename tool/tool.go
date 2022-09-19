@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"sort"
+	"time"
 
 	"github.com/go-gota/gota/dataframe"
 	"github.com/go-gota/gota/series"
@@ -159,6 +160,9 @@ func FindEleByEquip(s []GroupDataframe, equipment string) (int, error) {
 }
 
 func ConcatDataframe(s []GroupDataframe) (dataframe.DataFrame, error) {
+	if len(s) == 0{
+		return dataframe.New(), nil
+	}
 	df := s[0].Dataframe
 	equip := s[0].EquipmentName
 	ls := df.Names()
@@ -199,4 +203,12 @@ func ContainNaN(f []float64) bool {
 		}
 	}
 	return false
+}
+
+func GetCurrenttimeString() string {
+	now := time.Now()
+	currentYear, currentMonth, _ := now.Date()
+	currentLocation := now.Location()
+	firstOfMonth := time.Date(currentYear, currentMonth, 1, 0, 0, 0, 0, currentLocation)
+	return firstOfMonth.Format("2006-01-02T15:04:05Z")
 }
