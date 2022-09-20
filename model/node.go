@@ -45,7 +45,6 @@ func FindNodeByName(name, database, measurement, label string) ([][]interface{},
 	defer session.Close()
 	defer driver.Close()
 	query := fmt.Sprintf(`MATCH (n: %s) where n.database=$database and n.measurement=$measurement and n.name=$name return n`, label)
-	fmt.Println(query)
 	result, err := session.ReadTransaction(client.QueryNew(query, map[string]interface{}{
 		"database":    database,
 		"measurement": measurement,
@@ -65,7 +64,6 @@ func FindAdjNodesByName(name, database, measurement, label string) ([][]interfac
 	defer session.Close()
 	defer driver.Close()
 	query := fmt.Sprintf(`MATCH (n: %s)-[r]-(p) where n.database=$database and n.measurement=$measurement and n.name=$name return n, r, p`, label)
-	fmt.Println(query)
 	result, err := session.ReadTransaction(client.QueryNew(query, map[string]interface{}{
 		"database":    database,
 		"measurement": measurement,

@@ -1,8 +1,7 @@
 package client
 
 import (
-	"fmt"
-
+	"log"
 	"github.com/neo4j/neo4j-go-driver/v4/neo4j"
 	// "github.com/neo4j/neo4j-go-driver/v4/neo4j/db"
 )
@@ -56,7 +55,7 @@ func QueryLabel(query string, params map[string]interface{}) func (neo4j.Transac
 		for records.Next() {
 			res, _ := records.Record().Get("name")
 			s2 = append(s2, res.(string))
-			fmt.Printf("The current record is: %v\n", res.(string))
+			log.Printf("The current record is: %v\n", res.(string))
 		}
 		if err != nil {
 			return nil, err
@@ -78,7 +77,7 @@ func QueryLabelValue(query string, params map[string]interface{}) func (neo4j.Tr
 			res, _ := records.Record().Get("label")
 			res2, _ := records.Record().Get("value")
 			s2 = append(s2, []string{res.(string), res2.(string)})
-			fmt.Printf("The current record is: %v\n", res.(string))
+			log.Printf("The current record is: %v\n", res.(string))
 		}
 		if err != nil {
 			return nil, err

@@ -1,8 +1,7 @@
 package model
 
 import (
-	"fmt"
-
+	"log"
 	"github.com/neo4j/neo4j-go-driver/v4/neo4j"
 )
 
@@ -33,7 +32,7 @@ func (a PredefinedPoint) Write_Points() error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("%v\n", item)
+	log.Printf("%v\n", item)
 	return nil
 }
 

@@ -114,3 +114,102 @@ func Analytics() *airflow.Job {
 	j.Run()
 	return j
 }
+
+func IndividualAnalytics() *airflow.Job {
+
+	k := functions.BaseFunction{
+		Database:    "WIIOT",
+		Measurement: "Utility_3",
+		Host:        "192.168.100.216",
+		Port:        18086,
+	}
+
+	j := &airflow.Job{
+		Name:     "test2",
+		Schedule: "* * * * *",
+	}
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerEnergy1Hour",
+		Name:         "GetChillerEnergy1Hour",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerEnergy1Day",
+		Name:         "GetChillerEnergy1Day",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerEnergy1Month",
+		Name:         "GetChillerEnergy1Month",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerDeltaT",
+		Name:         "GetChillerDeltaT",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerCL",
+		Name:         "GetChillerCL",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerCoP",
+		Name:         "GetChillerCoP",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantEnergy1Hour",
+		Name:         "GetChillerPlantEnergy1Hour",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantEnergy1Day",
+		Name:         "GetChillerPlantEnergy1Day",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantEnergy1Month",
+		Name:         "GetChillerPlantEnergy1Month",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerCoPkWPerTon",
+		Name:         "GetChillerCoPkWPerTon",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetCTStatus",
+		Name:         "GetCTStatus",
+	})
+
+	j.SetDownstream(j.Task("GetChillerEnergy1Hour"), j.Task("GetChillerEnergy1Day"))
+	j.SetDownstream(j.Task("GetChillerEnergy1Day"), j.Task("GetChillerEnergy1Month"))
+	j.SetDownstream(j.Task("GetChillerEnergy1Month"), j.Task("GetChillerCoPkWPerTon"))
+
+	j.SetDownstream(j.Task("GetChillerDeltaT"), j.Task("GetChillerCL"))
+	j.SetDownstream(j.Task("GetChillerCL"), j.Task("GetChillerCoP"))
+	j.SetDownstream(j.Task("GetChillerCoP"), j.Task("GetChillerCoPkWPerTon"))
+
+	j.SetDownstream(j.Task("GetChillerPlantEnergy1Hour"), j.Task("GetChillerPlantEnergy1Day"))
+	j.SetDownstream(j.Task("GetChillerPlantEnergy1Day"), j.Task("GetChillerPlantEnergy1Month"))
+	j.SetDownstream(j.Task("GetChillerPlantEnergy1Month"), j.Task("GetChillerCoPkWPerTon"))
+
+	j.SetDownstream(j.Task("GetCTStatus"), j.Task("GetChillerCoPkWPerTon"))
+
+	j.Run()
+	return j
+}
+

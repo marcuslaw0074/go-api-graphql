@@ -4,13 +4,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"go-api-grapqhl/tool"
+	"log"
 	"math"
 	"sort"
 	"time"
 
 	"github.com/go-gota/gota/dataframe"
-	influx "github.com/influxdata/influxdb1-client/v2"
 	"github.com/influxdata/influxdb1-client/models"
+	influx "github.com/influxdata/influxdb1-client/v2"
 )
 
 type InfluxWriteSchema struct {
@@ -31,6 +32,7 @@ func InfluxdbQuery(query, database string) (influx.Result, error) {
 	})
 	if err != nil {
 		fmt.Println("Error creating InfluxDB Client: ", err.Error())
+		return influx.Result{}, err
 	}
 	defer c.Close()
 	q := influx.NewQuery(query, database, "")
@@ -46,6 +48,7 @@ func InfluxdbQuerySeries(host string, port int, database, query string) (models.
 	})
 	if err != nil {
 		fmt.Println("Error creating InfluxDB Client: ", err.Error())
+		return models.Row{}, err
 	}
 	defer c.Close()
 	q := influx.NewQuery(query, database, "")
@@ -57,7 +60,7 @@ func InfluxdbQuerySeries(host string, port int, database, query string) (models.
 
 func InfluxdbWritePoints(points []InfluxWriteSchema, database string) error {
 	lenn := len(points)
-	fmt.Printf("Start Writing %v into influxDB", lenn)
+	log.Printf("Start Writing %v into influxDB \n", lenn)
 	if lenn == 0 {
 		return nil
 	}
@@ -67,6 +70,7 @@ func InfluxdbWritePoints(points []InfluxWriteSchema, database string) error {
 	})
 	if err != nil {
 		fmt.Println("Error creating InfluxDB Client: ", err.Error())
+		return err
 	}
 	defer c.Close()
 	bp, _ := influx.NewBatchPoints(influx.BatchPointsConfig{
@@ -181,7 +185,6 @@ func WriteDfGroup(query, database, measurement, EquipmentName, FunctionType, id 
 		}
 
 	}
-	fmt.Println(lsss)
 	return lsss
 }
 
