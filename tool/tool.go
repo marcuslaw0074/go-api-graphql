@@ -141,6 +141,16 @@ type GroupDataframe struct {
 	Dataframe     dataframe.DataFrame
 }
 
+type AllGroupDataframe struct {
+	Block         string
+	BuildingName  string
+	EquipmentName string
+	FunctionType  string
+	Id            string
+	Prefername    string
+	Dataframe     dataframe.DataFrame
+}
+
 func StringInSlice(a string, list []string) bool {
 	for _, b := range list {
 		if b == a {
@@ -159,8 +169,30 @@ func FindEleByEquip(s []GroupDataframe, equipment string) (int, error) {
 	return -1, errors.New("cannot find dataframe")
 }
 
+func FindGroupByList(groupBy ...string) []string {
+	originLs := []string{"Block", "BuildingName", "EquipmentName", "FunctionType", "id", "prefername"}
+	ls := []string{"", "", "", "", "", ""}
+	for ind, ele := range originLs {
+		for _, el := range groupBy{
+			if ele == el {
+				ls[ind] = ele
+			}
+		}
+	}
+	return ls
+}
+
+func FindEleByEquipAll(s []AllGroupDataframe, equipment string) (int, error) {
+	for ind, ele := range s {
+		if ele.EquipmentName == equipment {
+			return ind, nil
+		}
+	}
+	return -1, errors.New("cannot find dataframe")
+}
+
 func ConcatDataframe(s []GroupDataframe) (dataframe.DataFrame, error) {
-	if len(s) == 0{
+	if len(s) == 0 {
 		return dataframe.New(), nil
 	}
 	df := s[0].Dataframe

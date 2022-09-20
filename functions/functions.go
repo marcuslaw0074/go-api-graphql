@@ -2,12 +2,12 @@ package functions
 
 import (
 	"fmt"
+	"github.com/go-gota/gota/dataframe"
 	"go-api-grapqhl/graph/client"
 	"go-api-grapqhl/tool"
 	"log"
 	"math"
 	"sync"
-	"github.com/go-gota/gota/dataframe"
 )
 
 type BaseFunction struct {
@@ -56,6 +56,24 @@ func (f BaseFunction) GetChillerPlantChillerRunning() error {
 		if err != nil {
 			return err
 		}
+		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			f.Database, f.Measurement, false, client.TaggingPoint{
+				BMS_id:     newId,
+				PointName:  newId,
+				System:     "HVAC_System",
+				SubSystem:  "Water_System",
+				DeviceType: "Chiller_Plant",
+				DeviceName: newEquipmentName,
+				PointType:  newFunctionType,
+				Location:   "Building",
+				Level:      "UT3",
+				ClassType:  "Class",
+				Interval:   "20T",
+				Unit:       "None",
+			}, []string{"bldg", "Calculated"}...)
+		if err != nil {
+			return err
+		}
 	}
 	log.Printf("END function :%s", name)
 	return nil
@@ -84,6 +102,24 @@ func (f BaseFunction) GetChillerPlantChillerEnergy() error {
 		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		err := client.InfluxdbWritePoints(lsss, "WIIOT")
+		if err != nil {
+			return err
+		}
+		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			f.Database, f.Measurement, false, client.TaggingPoint{
+				BMS_id:     newId,
+				PointName:  newId,
+				System:     "HVAC_System",
+				SubSystem:  "Water_System",
+				DeviceType: "Chiller_Plant",
+				DeviceName: newEquipmentName,
+				PointType:  newFunctionType,
+				Location:   "Building",
+				Level:      "UT3",
+				ClassType:  "Electrical_Class",
+				Interval:   "20T",
+				Unit:       "kW",
+			}, []string{"bldg", "Calculated"}...)
 		if err != nil {
 			return err
 		}
@@ -136,6 +172,24 @@ func (f BaseFunction) GetChillerPlantCoolingLoad() error {
 		if err != nil {
 			return err
 		}
+		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			f.Database, f.Measurement, false, client.TaggingPoint{
+				BMS_id:     newId,
+				PointName:  newId,
+				System:     "HVAC_System",
+				SubSystem:  "Water_System",
+				DeviceType: "Chiller_Plant",
+				DeviceName: newEquipmentName,
+				PointType:  newFunctionType,
+				Location:   "Building",
+				Level:      "UT3",
+				ClassType:  "Class",
+				Interval:   "20T",
+				Unit:       "kW",
+			}, []string{"bldg", "Calculated"}...)
+		if err != nil {
+			return err
+		}
 	}
 	log.Printf("END function :%s", name)
 	return nil
@@ -178,6 +232,21 @@ func (f BaseFunction) GetChillerPlantCoP() error {
 			if err != nil {
 				fmt.Println(err)
 			}
+			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+				f.Database, f.Measurement, false, client.TaggingPoint{
+					BMS_id:     id,
+					PointName:  id,
+					System:     "HVAC_System",
+					SubSystem:  "Water_System",
+					DeviceType: "Chiller_Plant",
+					DeviceName: EquipmentName,
+					PointType:  FunctionType,
+					Location:   "Building",
+					Level:      "UT3",
+					ClassType:  "Class",
+					Interval:   "20T",
+					Unit:       "None",
+				}, []string{"bldg", "Calculated"}...)
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
 	}
@@ -217,6 +286,24 @@ func (f BaseFunction) GetChillerPlantDeltaT() error {
 			if err != nil {
 				fmt.Println(err)
 			}
+			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+				f.Database, f.Measurement, false, client.TaggingPoint{
+					BMS_id:     id,
+					PointName:  id,
+					System:     "HVAC_System",
+					SubSystem:  "Water_System",
+					DeviceType: "Chiller_Plant",
+					DeviceName: EquipmentName,
+					PointType:  FunctionType,
+					Location:   "Building",
+					Level:      "UT3",
+					ClassType:  "Class",
+					Interval:   "20T",
+					Unit:       "°C",
+				}, []string{"bldg", "Calculated"}...)
+			if err != nil {
+				fmt.Println(err)
+			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
 	}
@@ -229,6 +316,7 @@ func (f BaseFunction) GetChillerPlantDeltaT() error {
 func (f BaseFunction) GetChillerPlantWetBulb() error {
 	name := "GetChillerPlantWetBulb"
 	log.Printf("START function :%s", name)
+	newEquipmentName := "Chiller_Plant"
 	newFunctionType := "Chiller_Plant_Outdoor_Wet_Bulb"
 	newId := "Chiller_Plant_Outdoor_Wet_Bulb"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
@@ -259,6 +347,24 @@ func (f BaseFunction) GetChillerPlantWetBulb() error {
 		if err != nil {
 			return err
 		}
+		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			f.Database, f.Measurement, false, client.TaggingPoint{
+				BMS_id:     newId,
+				PointName:  newId,
+				System:     "HVAC_System",
+				SubSystem:  "Water_System",
+				DeviceType: "Chiller_Plant",
+				DeviceName: newEquipmentName,
+				PointType:  newFunctionType,
+				Location:   "Building",
+				Level:      "UT3",
+				ClassType:  "Class",
+				Interval:   "20T",
+				Unit:       "°C",
+			}, []string{"bldg", "Calculated"}...)
+		if err != nil {
+			return err
+		}
 	}
 	log.Printf("END function :%s", name)
 	return nil
@@ -270,7 +376,7 @@ func (f BaseFunction) GetChillerPlantCoP_kWPerTon() error {
 	log.Printf("START function :%s", name)
 	newFunctionType := "Chiller_Plant_CoP(kW/Ton)"
 	newId := "Overall_Chiller_Plant_CoP(kW/Ton)"
-	// newEquipmentName := "Chiller_Plant"
+	newEquipmentName := "Chiller_Plant"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE ("FunctionType"='Chiller_Plant_Cooling_Load' OR
 			"FunctionType"='Chiller_Plant_Total_Chiller_Energy') AND
@@ -295,6 +401,24 @@ func (f BaseFunction) GetChillerPlantCoP_kWPerTon() error {
 		}, []int{1, 2}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
 		err := client.InfluxdbWritePoints(lsss, "WIIOT")
+		if err != nil {
+			return err
+		}
+		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			f.Database, f.Measurement, false, client.TaggingPoint{
+				BMS_id:     newId,
+				PointName:  newId,
+				System:     "HVAC_System",
+				SubSystem:  "Water_System",
+				DeviceType: "Chiller_Plant",
+				DeviceName: newEquipmentName,
+				PointType:  newFunctionType,
+				Location:   "Building",
+				Level:      "UT3",
+				ClassType:  "Class",
+				Interval:   "20T",
+				Unit:       "kW/Ton",
+			}, []string{"bldg", "Calculated"}...)
 		if err != nil {
 			return err
 		}
@@ -336,6 +460,24 @@ func (f BaseFunction) GetChillerPlantCTRunning() error {
 		if err != nil {
 			return err
 		}
+		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			f.Database, f.Measurement, false, client.TaggingPoint{
+				BMS_id:     newId,
+				PointName:  newId,
+				System:     "HVAC_System",
+				SubSystem:  "Water_System",
+				DeviceType: "Chiller_Plant",
+				DeviceName: newEquipmentName,
+				PointType:  newFunctionType,
+				Location:   "Building",
+				Level:      "UT3",
+				ClassType:  "Class",
+				Interval:   "20T",
+				Unit:       "None",
+			}, []string{"bldg", "Calculated"}...)
+		if err != nil {
+			return err
+		}
 	}
 	log.Printf("END function :%s", name)
 	return nil
@@ -371,6 +513,24 @@ func (f BaseFunction) GetChillerPlantPCHWPRunning() error {
 		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		err := client.InfluxdbWritePoints(lsss, "WIIOT")
+		if err != nil {
+			return err
+		}
+		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			f.Database, f.Measurement, false, client.TaggingPoint{
+				BMS_id:     newId,
+				PointName:  newId,
+				System:     "HVAC_System",
+				SubSystem:  "Water_System",
+				DeviceType: "Chiller_Plant",
+				DeviceName: newEquipmentName,
+				PointType:  newFunctionType,
+				Location:   "Building",
+				Level:      "UT3",
+				ClassType:  "Class",
+				Interval:   "20T",
+				Unit:       "None",
+			}, []string{"bldg", "Calculated"}...)
 		if err != nil {
 			return err
 		}
@@ -412,6 +572,24 @@ func (f BaseFunction) GetChillerPlantSCHWPRunning() error {
 		if err != nil {
 			return err
 		}
+		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			f.Database, f.Measurement, false, client.TaggingPoint{
+				BMS_id:     newId,
+				PointName:  newId,
+				System:     "HVAC_System",
+				SubSystem:  "Water_System",
+				DeviceType: "Chiller_Plant",
+				DeviceName: newEquipmentName,
+				PointType:  newFunctionType,
+				Location:   "Building",
+				Level:      "UT3",
+				ClassType:  "Class",
+				Interval:   "20T",
+				Unit:       "None",
+			}, []string{"bldg", "Calculated"}...)
+		if err != nil {
+			return err
+		}
 	}
 	log.Printf("END function :%s", name)
 	return nil
@@ -444,6 +622,24 @@ func (f BaseFunction) GetChillerPlantCTEnergy() error {
 		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		err := client.InfluxdbWritePoints(lsss, "WIIOT")
+		if err != nil {
+			return err
+		}
+		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			f.Database, f.Measurement, false, client.TaggingPoint{
+				BMS_id:     newId,
+				PointName:  newId,
+				System:     "HVAC_System",
+				SubSystem:  "Water_System",
+				DeviceType: "Chiller_Plant",
+				DeviceName: newEquipmentName,
+				PointType:  newFunctionType,
+				Location:   "Building",
+				Level:      "UT3",
+				ClassType:  "Class",
+				Interval:   "20T",
+				Unit:       "kW",
+			}, []string{"bldg", "Calculated"}...)
 		if err != nil {
 			return err
 		}
@@ -483,6 +679,24 @@ func (f BaseFunction) GetChillerPlantTotalEnergy() error {
 			if err != nil {
 				fmt.Println(err)
 			}
+			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+				f.Database, f.Measurement, false, client.TaggingPoint{
+					BMS_id:     id,
+					PointName:  id,
+					System:     "HVAC_System",
+					SubSystem:  "Water_System",
+					DeviceType: "Chiller_Plant",
+					DeviceName: EquipmentName,
+					PointType:  FunctionType,
+					Location:   "Building",
+					Level:      "UT3",
+					ClassType:  "Class",
+					Interval:   "20T",
+					Unit:       "kW",
+				}, []string{"bldg", "Calculated"}...)
+			if err != nil {
+				fmt.Println(err)
+			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
 	}
@@ -495,6 +709,7 @@ func (f BaseFunction) GetChillerPlantTotalEnergy() error {
 func (f BaseFunction) GetChillerPlantCoolingLoadTon() error {
 	name := "GetChillerPlantCoolingLoadTon"
 	log.Printf("START function :%s", name)
+	newEquipmentName := "Chiller_Plant"
 	newFunctionType := "Chiller_Plant_Cooling_Load_Ton"
 	newId := "Total_Chiller_Plant_Cooling_Load(Ton)"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
@@ -518,6 +733,24 @@ func (f BaseFunction) GetChillerPlantCoolingLoadTon() error {
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
+			if err != nil {
+				fmt.Println(err)
+			}
+			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+				f.Database, f.Measurement, false, client.TaggingPoint{
+					BMS_id:     newId,
+					PointName:  newId,
+					System:     "HVAC_System",
+					SubSystem:  "Water_System",
+					DeviceType: "Chiller_Plant",
+					DeviceName: newEquipmentName,
+					PointType:  newFunctionType,
+					Location:   "Building",
+					Level:      "UT3",
+					ClassType:  "Class",
+					Interval:   "20T",
+					Unit:       "Ton",
+				}, []string{"bldg", "Calculated"}...)
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -548,7 +781,7 @@ func (f BaseFunction) GetChillerEnergy1Hour() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			if len(f) < 1{
+			if len(f) < 1 {
 				return math.NaN()
 			}
 			return f[0] / 1000
@@ -585,7 +818,7 @@ func (f BaseFunction) GetChillerEnergy1Day() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			if len(f) < 1{
+			if len(f) < 1 {
 				return math.NaN()
 			}
 			return f[0] / 1000 / 3
@@ -624,7 +857,7 @@ func (f BaseFunction) GetChillerEnergy1Month() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			if len(f) < 1{
+			if len(f) < 1 {
 				return math.NaN()
 			}
 			return f[0] / 1000 / 3
@@ -663,7 +896,7 @@ func (f BaseFunction) GetChillerCL() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			if len(f) < 3{
+			if len(f) < 3 {
 				return math.NaN()
 			}
 			if f[2] > 500 && (f[0]-f[1]) > 0 {
@@ -709,7 +942,7 @@ func (f BaseFunction) GetChillerCoP() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			if len(f) < 4{
+			if len(f) < 4 {
 				return math.NaN()
 			}
 			if f[2]/1000 > 50 && f[3] > 100 && (f[0]-f[1]) > 0 {
@@ -753,7 +986,7 @@ func (f BaseFunction) GetChillerDeltaT() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			if len(f) < 2{
+			if len(f) < 2 {
 				return math.NaN()
 			}
 			return f[0] - f[1]
@@ -793,7 +1026,7 @@ func (f BaseFunction) GetChillerPlantEnergy1Hour() error {
 		return err
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			if len(f) < 4{
+			if len(f) < 4 {
 				return math.NaN()
 			}
 			return (f[0] + f[1] + f[2] + f[3]) / 1000
@@ -828,7 +1061,7 @@ func (f BaseFunction) GetChillerPlantEnergy1Day() error {
 		return err
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			if len(f) < 4{
+			if len(f) < 4 {
 				return math.NaN()
 			}
 			return (f[0] + f[1] + f[2] + f[3]) / 1000 / 3
@@ -864,7 +1097,7 @@ func (f BaseFunction) GetChillerPlantEnergy1Month() error {
 		return err
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			if len(f) < 4{
+			if len(f) < 4 {
 				return math.NaN()
 			}
 			return (f[0] + f[1] + f[2] + f[3]) / 1000 / 3
@@ -899,7 +1132,7 @@ func (f BaseFunction) GetChillerCoPkWPerTon() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			if len(f) < 4{
+			if len(f) < 4 {
 				return math.NaN()
 			}
 			if f[2]/1000 > 50 && f[3] > 100 && (f[0]-f[1]) > 0 {
@@ -945,12 +1178,12 @@ func (f BaseFunction) GetCTStatus() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			if len(f) < 4{
+			if len(f) < 4 {
 				return math.NaN()
 			} else if tool.ContainNaN(f) {
 				return math.NaN()
 			} else {
-				return f[0]+f[1]+f[2]+f[3]
+				return f[0] + f[1] + f[2] + f[3]
 			}
 		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		go func(query string, database string, measurement string,
@@ -967,4 +1200,3 @@ func (f BaseFunction) GetCTStatus() error {
 	log.Printf("END function :%s", name)
 	return nil
 }
-

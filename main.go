@@ -7,7 +7,9 @@ import (
 	_ "go-api-grapqhl/docs"
 	"go-api-grapqhl/graph"
 	"go-api-grapqhl/scheduler"
+
 	// "go-api-grapqhl/graph/client"
+	"go-api-grapqhl/graph/client"
 	"go-api-grapqhl/graph/generated"
 	"go-api-grapqhl/httputil"
 	"net/http"
@@ -86,12 +88,29 @@ func playgroundHandler() gin.HandlerFunc {
 func main() {
 
 	fmt.Println("Start API server!!!!!")
+
+	client.AddClientPoint("neo4j://localhost:7687", "neo4j", "test", 
+	"WIIOT", "Utility_3", false, client.TaggingPoint{
+		BMS_id: "UT3_CH01_Indi_Flow",
+		PointName: "UT3_CH01_Indi_Flow",
+		System: "HVAC_System",
+		SubSystem: "Water_System",
+		DeviceType: "Chiller",
+		DeviceName: "CH01",
+		PointType: "Chiller_Water_Flowrate",
+		Location: "Building",
+		Level: "UT3",
+		ClassType: "Class",
+		Interval: "20T",
+		Unit: "°C",
+
+	}, []string{"bldg"}...)
 	r := gin.Default()
 
 	cr := cron.New()
 	cr.Start()
-	cr.AddFunc("*/1 * * * *", func() {scheduler.Analytics()})
-	cr.AddFunc("*/1 * * * *", func() {scheduler.IndividualAnalytics()})
+	cr.AddFunc("*/5 * * * *", func() {scheduler.Analytics()})
+	cr.AddFunc("*/5 * * * *", func() {scheduler.IndividualAnalytics()})
 
 
 	r.POST("/query", graphqlHandler())

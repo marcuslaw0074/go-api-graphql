@@ -142,6 +142,75 @@ func QueryDfGroup(query, database string) []tool.GroupDataframe {
 	return dfGroup
 }
 
+func QueryDfGroupBy(query, database string, groupBy ...string) []tool.AllGroupDataframe {
+	groupBy = tool.FindGroupByList(groupBy...)
+	res, _ := InfluxdbQuery(query, database)
+	dfGroup := make([]tool.AllGroupDataframe, 0)
+	equipmentList := make([]string, 0)
+	for _, series := range res.Series {
+		timeseries := make([]Timeseries, 0)
+		newGroupBy := make([]string, 0)
+		for _, ele := range groupBy {
+			st, err := series.Tags[ele]
+			if err {
+				newGroupBy = append(newGroupBy, st)
+			} else {
+				newGroupBy = append(newGroupBy, "")
+			}
+		}
+		var equipmentName string = series.Tags["EquipmentName"]
+		var functionType string = series.Tags["FunctionType"]
+		for _, row := range series.Values {
+			if row[1] != nil {
+				value, err := row[1].(json.Number).Float64()
+				if err == nil {
+					timeseries = append(timeseries, Timeseries{
+						Time:  row[0].(string),
+						Value: value,
+					})
+				} else {
+					timeseries = append(timeseries, Timeseries{
+						Time:  row[0].(string),
+						Value: math.NaN(),
+					})
+				}
+			} else {
+				timeseries = append(timeseries, Timeseries{
+					Time:  row[0].(string),
+					Value: math.NaN(),
+				})
+			}
+		}
+		dfNew := dataframe.LoadStructs(timeseries)
+		if tool.StringInSlice(equipmentName, equipmentList) {
+			ind, err := tool.FindEleByEquipAll(dfGroup, equipmentName)
+			if err == nil {
+				df := dfGroup[ind].Dataframe
+				name := df.Names()
+				strs := []string{name[len(name)-1], functionType}
+				sort.Strings(strs)
+				if strs[len(strs)-1] == functionType {
+					dfGroup[ind].Dataframe = df.InnerJoin(dfNew.Rename(functionType, "Value"), "Time")
+				} else {
+					dfGroup[ind].Dataframe = dfNew.Rename(functionType, "Value").InnerJoin(df, "Time")
+				}
+			}
+		} else {
+			dfGroup = append(dfGroup, tool.AllGroupDataframe{
+				Block: newGroupBy[0],
+				BuildingName: newGroupBy[1],
+				EquipmentName: newGroupBy[2],
+				FunctionType: newGroupBy[3],
+				Id: newGroupBy[4],
+				Prefername: newGroupBy[5],
+				Dataframe:     dfNew.Rename(functionType, "Value"),
+			})
+		}
+		equipmentList = append(equipmentList, equipmentName)
+	}
+	return dfGroup
+}
+
 func ApplyFunctionDfGroup(dfGroup []tool.GroupDataframe, function func (...float64) float64, newFunctionType string, indCol ...int) []tool.GroupDataframe {
 	for ind, ele := range dfGroup {
 		dfGroup[ind] = tool.GroupDataframe{
