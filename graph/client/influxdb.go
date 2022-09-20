@@ -184,3 +184,10 @@ func WriteDfGroup(query, database, measurement, EquipmentName, FunctionType, id 
 	fmt.Println(lsss)
 	return lsss
 }
+
+
+func UploadDfGroup(query, database, measurement, EquipmentName, FunctionType, id string, df dataframe.DataFrame, startIndex int) error {
+	lsss := WriteDfGroup(query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
+	err := InfluxdbWritePoints(lsss, database)
+	return err
+}
