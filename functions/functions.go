@@ -495,8 +495,8 @@ func (f BaseFunction) GetChillerPlantTotalEnergy() error {
 func (f BaseFunction) GetChillerPlantCoolingLoadTon() error {
 	name := "GetChillerPlantCoolingLoadTon"
 	log.Printf("START function :%s", name)
-	newFunctionType := "Total_Chiller_Plant_Cooling_Load(Ton)"
-	newId := "Chiller_Plant_Cooling_Load_Ton"
+	newFunctionType := "Chiller_Plant_Cooling_Load_Ton"
+	newId := "Total_Chiller_Plant_Cooling_Load(Ton)"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE ("FunctionType"='Chiller_Plant_Cooling_Load') AND 
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
@@ -535,7 +535,7 @@ func (f BaseFunction) GetChillerPlantCoolingLoadTon() error {
 func (f BaseFunction) GetChillerEnergy1Hour() error {
 	name := "GetChillerEnergy1Hour"
 	log.Printf("START function :%s", name)
-	newFunctionType := "Chiller_Power_Sensor(Calculated)(60m)_(60T)"
+	newFunctionType := "Chiller_Power_Sensor(Calculated)(60m)"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE "FunctionType"='Chiller_Power_Sensor' AND 
 			time>now()-360m GROUP BY EquipmentName, FunctionType, id, time(60m)`, f.Measurement)
@@ -561,7 +561,7 @@ func (f BaseFunction) GetChillerEnergy1Hour() error {
 				fmt.Println(err)
 			}
 			wg.Done()
-		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, "", df, 1)
+		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s_%s", ele.EquipmentName, newFunctionType, "(60T)"), df, 1)
 	}
 	wg.Wait()
 	log.Printf("END function :%s", name)
@@ -572,7 +572,7 @@ func (f BaseFunction) GetChillerEnergy1Hour() error {
 func (f BaseFunction) GetChillerEnergy1Day() error {
 	name := "GetChillerEnergy1Day"
 	log.Printf("START function :%s", name)
-	newFunctionType := "Chiller_Power_Sensor(Calculated)(1d)_(1d)"
+	newFunctionType := "Chiller_Power_Sensor(Calculated)(1d)"
 	query := fmt.Sprintf(`SELECT SUM(value) FROM %s 
 			WHERE "FunctionType"='Chiller_Power_Sensor' AND 
 			time>now()-4d GROUP BY EquipmentName, FunctionType, id, time(1d)`, f.Measurement)
@@ -598,7 +598,7 @@ func (f BaseFunction) GetChillerEnergy1Day() error {
 				fmt.Println(err)
 			}
 			wg.Done()
-		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, "", df, 1)
+		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s_%s", ele.EquipmentName, newFunctionType, "(1d)"), df, 1)
 	}
 	wg.Wait()
 	log.Printf("END function :%s", name)
@@ -609,12 +609,13 @@ func (f BaseFunction) GetChillerEnergy1Day() error {
 func (f BaseFunction) GetChillerEnergy1Month() error {
 	name := "GetChillerEnergy1Month"
 	log.Printf("START function :%s", name)
-	newFunctionType := "Chiller_Power_Sensor(Calculated)(1M)_(1M)"
+	newFunctionType := "Chiller_Power_Sensor(Calculated)(1M)"
 	query := fmt.Sprintf(`SELECT SUM(value) FROM %s 
 			WHERE "FunctionType"='Chiller_Power_Sensor' AND 
 			( time>'%s' AND time<now() ) 
 			GROUP BY EquipmentName, FunctionType, id`, f.Measurement, tool.GetCurrenttimeString())
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	fmt.Println(dfGroup)
 	if len(dfGroup) == 0 {
 		log.Printf("function %s: No data", name)
 		return nil
@@ -636,7 +637,7 @@ func (f BaseFunction) GetChillerEnergy1Month() error {
 				fmt.Println(err)
 			}
 			wg.Done()
-		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, "", df, 1)
+		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s_%s", ele.EquipmentName, newFunctionType, "(1M)"), df, 0)
 	}
 	wg.Wait()
 	log.Printf("END function :%s", name)
