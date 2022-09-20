@@ -66,7 +66,7 @@ func InfluxdbWritePoints(points []InfluxWriteSchema, database string) error {
 	}
 	c, err := influx.NewHTTPClient(influx.HTTPConfig{
 		// Addr: "http://192.168.100.216:18086",
-		Addr: "http://localhost:8086",
+		Addr: "http://192.168.100.214:8086",
 	})
 	if err != nil {
 		fmt.Println("Error creating InfluxDB Client: ", err.Error())
