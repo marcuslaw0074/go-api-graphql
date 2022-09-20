@@ -78,11 +78,6 @@ func (j *Job) Add(t *Task) *Job {
 	return j
 }
 
-// addddd
-func (j *Job) Taskss(s string) (bool, error) {
-	return true, nil
-}
-
 // Task getter
 func (j *Job) Task(name string) *Task {
 	return j.Tasks[name]
