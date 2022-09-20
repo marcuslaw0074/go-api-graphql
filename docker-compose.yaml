@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+
+  neuron-go-scheduler:
+    container_name: neuron_go_scheduler
+    image: gin
+    networks:
+      - neruon-go-scheduler
+    volumes:
+      - ./:/app/
+    restart: on-failure
+    ports:
+      - 8080:8080
+
+
+networks:
+  neruon-go-scheduler:

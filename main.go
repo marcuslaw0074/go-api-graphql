@@ -85,14 +85,13 @@ func playgroundHandler() gin.HandlerFunc {
 
 func main() {
 
-	fmt.Println("Start API server!")
+	fmt.Println("Start API server!!!!!")
 	r := gin.Default()
 
 	cr := cron.New()
 	cr.Start()
-	// cr.AddFunc("*/1 * * * *", func() {scheduler.Analytics()})
-	cr.AddFunc("*/1 * * * *", func() {scheduler.Analytics()})
-	cr.AddFunc("*/1 * * * *", func() {scheduler.IndividualAnalytics()})
+	cr.AddFunc("*/5 * * * *", func() {scheduler.Analytics()})
+	cr.AddFunc("*/5 * * * *", func() {scheduler.IndividualAnalytics()})
 
 
 	r.POST("/query", graphqlHandler())
