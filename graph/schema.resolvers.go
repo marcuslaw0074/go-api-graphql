@@ -55,7 +55,6 @@ func (r *queryResolver) Allsys(ctx context.Context, host string, port int, datab
 		"database":    database,
 		"measurement": measurement,
 	}))
-	fmt.Println(result)
 	if err != nil {
 		panic(err)
 	}
@@ -87,7 +86,6 @@ func (r *queryResolver) Alllocbysys(ctx context.Context, host string, port int, 
 		"measurement": measurement,
 		"system":      system,
 	}))
-	fmt.Println(result)
 	if err != nil {
 		panic(err)
 	}
@@ -118,7 +116,6 @@ func (r *queryResolver) Allequipbysysloc(ctx context.Context, host string, port 
 		"system":      system,
 		"location":    location,
 	}))
-	fmt.Println(result)
 	if err != nil {
 		panic(err)
 	}
@@ -152,7 +149,6 @@ func (r *queryResolver) Allparambyequip(ctx context.Context, host string, port i
 		"measurement": measurement,
 		"equips":      equips,
 	}))
-	fmt.Println(result)
 	if err != nil {
 		panic(err)
 	}
@@ -178,7 +174,6 @@ func (r *queryResolver) Timeseriesbyid(ctx context.Context, aggrnum *int, limit 
 
 	}
 	fmt.Print(query)
-
 	ss := make([]*model.Timeseries, 0)
 	return ss, nil
 }

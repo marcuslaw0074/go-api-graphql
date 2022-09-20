@@ -125,7 +125,6 @@ func (f BaseFunction) GetChillerPlantCoolingLoad() error {
 			}
 
 		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		fmt.Println(df)
 		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		err := client.InfluxdbWritePoints(lsss, "WIIOT")
 		if err != nil {
@@ -145,7 +144,6 @@ func (f BaseFunction) GetChillerPlantCoP() error {
 			"FunctionType"='Chiller_Plant_Total_Chiller_Energy') AND
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
-	fmt.Println(dfGroup)
 	if len(dfGroup) == 0 {
 		fmt.Printf("function %s: No data", name)
 		return nil
@@ -174,7 +172,6 @@ func (f BaseFunction) GetChillerPlantCoP() error {
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
-		fmt.Println(df)
 	}
 	wg.Wait()
 	return nil
@@ -190,7 +187,6 @@ func (f BaseFunction) GetChillerPlantDeltaT() error {
 			"FunctionType"='Chiller_Plant_Chilled_Water_Supply_Temperature_Sensor') AND 
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
-	fmt.Println(dfGroup)
 	if len(dfGroup) == 0 {
 		fmt.Printf("function %s: No data", name)
 		return nil
@@ -215,7 +211,6 @@ func (f BaseFunction) GetChillerPlantDeltaT() error {
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, "", df, 1)
 		wg.Wait()
-		fmt.Println(df)
 	}
 	return nil
 }
@@ -230,7 +225,6 @@ func (f BaseFunction) GetChillerPlantWetBulb() error {
 			"FunctionType"='Chiller_Plant_Outdoor_Humidity') AND
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
-	fmt.Println(dfGroup)
 	if len(dfGroup) == 0 {
 		fmt.Printf("function %s: No data", name)
 		return nil
@@ -249,13 +243,11 @@ func (f BaseFunction) GetChillerPlantWetBulb() error {
 					4.686035)
 			}
 		}, []int{1, 2}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		fmt.Println(df)
 		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
 		err := client.InfluxdbWritePoints(lsss, "WIIOT")
 		if err != nil {
 			return err
 		}
-		fmt.Println(df)
 	}
 	return nil
 }
@@ -293,7 +285,6 @@ func (f BaseFunction) GetChillerPlantCoP_kWPerTon() error {
 		if err != nil {
 			return err
 		}
-		fmt.Println(df)
 	}
 	return nil
 }
@@ -325,7 +316,6 @@ func (f BaseFunction) GetChillerPlantCTRunning() error {
 			}
 			return float64(val)
 		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		fmt.Println(df)
 		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		err := client.InfluxdbWritePoints(lsss, "WIIOT")
 		if err != nil {
@@ -362,7 +352,6 @@ func (f BaseFunction) GetChillerPlantPCHWPRunning() error {
 			}
 			return float64(val)
 		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		fmt.Println(df)
 		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		err := client.InfluxdbWritePoints(lsss, "WIIOT")
 		if err != nil {
@@ -399,7 +388,6 @@ func (f BaseFunction) GetChillerPlantSCHWPRunning() error {
 			}
 			return float64(val)
 		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		fmt.Println(df)
 		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		err := client.InfluxdbWritePoints(lsss, "WIIOT")
 		if err != nil {
@@ -425,7 +413,7 @@ func (f BaseFunction) GetChillerPlantCTEnergy() error {
 	}
 	df, err := tool.ConcatDataframe(dfGroup)
 	if df.Nrow() == 0 {
-		fmt.Println("No data")
+		fmt.Printf("function %s: No data", name)
 		return nil
 	} else if err != nil {
 		return err
@@ -433,7 +421,6 @@ func (f BaseFunction) GetChillerPlantCTEnergy() error {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return (f[0] + f[1] + f[2] + f[3]) * 11
 		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		fmt.Println(df)
 		lsss := client.WriteDfGroup(query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		err := client.InfluxdbWritePoints(lsss, "WIIOT")
 		if err != nil {
@@ -477,7 +464,6 @@ func (f BaseFunction) GetChillerPlantTotalEnergy() error {
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, "", df, 1)
-		fmt.Println(df)
 	}
 	wg.Wait()
 	return nil
@@ -496,7 +482,6 @@ func (f BaseFunction) GetChillerPlantCoolingLoadTon() error {
 		fmt.Printf("function %s: No data", name)
 		return nil
 	}
-	fmt.Println(dfGroup)
 	wg := sync.WaitGroup{}
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
@@ -517,7 +502,6 @@ func (f BaseFunction) GetChillerPlantCoolingLoadTon() error {
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, "", df, 1)
 		wg.Wait()
-		fmt.Println(df)
 	}
 	return nil
 }
@@ -545,8 +529,6 @@ func (f BaseFunction) GetChillerEnergy1Hour() error {
 			}
 			return f[0] / 1000
 		}, []int{1}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		fmt.Println(df)
-		
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
@@ -582,7 +564,6 @@ func (f BaseFunction) GetChillerEnergy1Day() error {
 			}
 			return f[0] / 1000 / 3
 		}, []int{1}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		fmt.Println(df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
@@ -619,7 +600,6 @@ func (f BaseFunction) GetChillerEnergy1Month() error {
 			}
 			return f[0] / 1000 / 3
 		}, []int{1}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		fmt.Println(df)
 		go func (query string, database string, measurement string,
 				EquipmentName string, FunctionType string, id string,
 				df dataframe.DataFrame, startIndex int)  {
@@ -677,7 +657,6 @@ func (f BaseFunction) GetChillerCL() error {
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, "", df, 1)
-		fmt.Println(df)
 	}
 	wg.Wait()
 	return nil
@@ -722,7 +701,6 @@ func (f BaseFunction) GetChillerCoP() error {
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, "", df, 1)
-		fmt.Println(df)
 	}
 	wg.Wait()
 	return nil
@@ -750,7 +728,6 @@ func (f BaseFunction) GetChillerDeltaT() error {
 			}
 			return f[0] - f[1]
 		}, []int{1, 2}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		fmt.Println(df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
@@ -904,10 +881,8 @@ func (f BaseFunction) GetChillerCoPkWPerTon() error {
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, "", df, 1)
-		fmt.Println(df)
 	}
 	wg.Wait()
-	fmt.Println("")
 	return nil
 }
 

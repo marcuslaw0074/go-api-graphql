@@ -39,8 +39,6 @@ func QueryNew(query string, params map[string]interface{}) func (neo4j.Transacti
 			s2 = append(s2, res)
 			s = append(s, res[0])
 		}
-		// fmt.Printf("%v \n", s)
-
 		if err != nil {
 			return nil, err
 		}
