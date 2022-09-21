@@ -173,7 +173,7 @@ func FindGroupByList(groupBy ...string) []string {
 	originLs := []string{"Block", "BuildingName", "EquipmentName", "FunctionType", "id", "prefername"}
 	ls := []string{"", "", "", "", "", ""}
 	for ind, ele := range originLs {
-		for _, el := range groupBy{
+		for _, el := range groupBy {
 			if ele == el {
 				ls[ind] = ele
 			}
@@ -235,6 +235,35 @@ func ContainNaN(f []float64) bool {
 		}
 	}
 	return false
+}
+
+// return true if f contains NaN
+func GetNonNan(f []float64) []float64 {
+	ls := make([]float64, 0)
+	for _, ele := range f {
+		if !math.IsNaN(ele) {
+			ls = append(ls, ele)
+		}
+	}
+	return ls
+}
+
+func SumListStatus(f []float64) float64 {
+	ls := 0.0
+	for _, ele := range f {
+		if ele >= 0.5 {
+			ls ++
+		}
+	}
+	return ls
+}
+
+func SumList(f []float64) float64 {
+	ls := 0.0
+	for _, ele := range f {
+		ls = ls + ele
+	}
+	return ls
 }
 
 func GetCurrenttimeString() string {

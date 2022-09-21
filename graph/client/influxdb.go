@@ -89,6 +89,7 @@ func InfluxdbWritePoints(url, database string, points []InfluxWriteSchema) error
 }
 
 func QueryDfGroup(query, database string) []tool.GroupDataframe {
+	fmt.Println(query)
 	res, _ := InfluxdbQuery(query, database)
 	dfGroup := make([]tool.GroupDataframe, 0)
 	equipmentList := make([]string, 0)

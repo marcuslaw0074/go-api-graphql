@@ -604,7 +604,7 @@ func Test_Analytics() *airflow.Job {
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
-		FunctionName: "GetChillerEnergy",
+		FunctionName: "Utility1_GetChillerCoP",
 		Name:         fmt.Sprintf("%s_GetChillerEnergy", k.Measurement),
 	})
 
