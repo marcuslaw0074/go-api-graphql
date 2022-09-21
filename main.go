@@ -9,7 +9,7 @@ import (
 	"go-api-grapqhl/scheduler"
 
 	// "go-api-grapqhl/graph/client"
-	"go-api-grapqhl/graph/client"
+	// "go-api-grapqhl/graph/client"
 	"go-api-grapqhl/graph/generated"
 	"go-api-grapqhl/httputil"
 	"net/http"
@@ -66,55 +66,54 @@ import (
 // @scope.admin                            Grants read and write access to administrative information
 
 func graphqlHandler() gin.HandlerFunc {
-    // NewExecutableSchema and Config are in the generated.go file
-    // Resolver is in the resolver.go file    
+	// NewExecutableSchema and Config are in the generated.go file
+	// Resolver is in the resolver.go file
 	h := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
 
-    return func(c *gin.Context) {
-        h.ServeHTTP(c.Writer, c.Request)
-    }
+	return func(c *gin.Context) {
+		h.ServeHTTP(c.Writer, c.Request)
+	}
 }
 
 // Defining the Playground handler
 func playgroundHandler() gin.HandlerFunc {
-    h := playground.Handler("GraphQL", "/query")
+	h := playground.Handler("GraphQL", "/query")
 
-    return func(c *gin.Context) {
-        h.ServeHTTP(c.Writer, c.Request)
+	return func(c *gin.Context) {
+		h.ServeHTTP(c.Writer, c.Request)
 	}
 }
-
 
 func main() {
 
 	fmt.Println("Start API server!!!!!")
 
-	client.AddClientPoint("neo4j://localhost:7687", "neo4j", "test", 
-	"WIIOT", "Utility_3", false, client.TaggingPoint{
-		BMS_id: "UT3_CH01_Indi_Flow",
-		PointName: "UT3_CH01_Indi_Flow",
-		System: "HVAC_System",
-		SubSystem: "Water_System",
-		DeviceType: "Chiller",
-		DeviceName: "CH01",
-		PointType: "Chiller_Water_Flowrate",
-		Location: "Building",
-		Level: "UT3",
-		ClassType: "Class",
-		Interval: "20T",
-		Unit: "°C",
-
-	}, []string{"bldg"}...)
+	// client.AddClientPoint("neo4j://localhost:7687", "neo4j", "test",
+	// 	"WIIOT", "Utility_3", client.TaggingPoint{
+	// 		BMS_id:     "UT3_CH01_Indi_Flow",
+	// 		PointName:  "UT3_CH01_Indi_Flow",
+	// 		System:     "HVAC_System",
+	// 		SubSystem:  "Water_System",
+	// 		DeviceType: "Chiller",
+	// 		DeviceName: "CH01",
+	// 		PointType:  "Chiller_Water_Flowrate",
+	// 		Location:   "Building",
+	// 		Level:      "UT3",
+	// 		ClassType:  "Class",
+	// 		Interval:   "20T",
+	// 		Unit:       "°C",
+	// 	}, []string{}...)
 	r := gin.Default()
+
+	scheduler.Test_Analytics()
 
 	cr := cron.New()
 	cr.Start()
-	cr.AddFunc("*/5 * * * *", func() {scheduler.Analytics()})
-	cr.AddFunc("*/5 * * * *", func() {scheduler.IndividualAnalytics()})
-
+	// cr.AddFunc("*/1 * * * *", func() { scheduler.Analytics_Utility_3() })
+	// cr.AddFunc("*/1 * * * *", func() { scheduler.Analytics_Utility_2() })
 
 	r.POST("/query", graphqlHandler())
-    r.GET("/", playgroundHandler())
+	r.GET("/", playgroundHandler())
 
 	c := controller.NewController()
 

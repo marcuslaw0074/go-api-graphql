@@ -6,7 +6,7 @@ import (
 
 func TestClientPoints(t *testing.T) {
     err := AddClientPoint("neo4j://localhost:7687", "neo4j", "test",
-	 "WIIOT", "Utility_3", false, TaggingPoint{
+	 "WIIOT", "Utility_3", TaggingPoint{
 		BMS_id: "UT3_CH01_Indi_Flow",
 		PointName: "UT3_CH01_Indi_Flow",
 		System: "HVAC_System",

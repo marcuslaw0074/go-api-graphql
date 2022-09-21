@@ -58,7 +58,7 @@ func InfluxdbQuerySeries(host string, port int, database, query string) (models.
 	return influx.Result{}.Series[0], err
 }
 
-func InfluxdbWritePoints(points []InfluxWriteSchema, database string) error {
+func InfluxdbWritePoints(url, database string, points []InfluxWriteSchema) error {
 	lenn := len(points)
 	log.Printf("Start Writing %v into influxDB \n", lenn)
 	if lenn == 0 {
@@ -66,7 +66,7 @@ func InfluxdbWritePoints(points []InfluxWriteSchema, database string) error {
 	}
 	c, err := influx.NewHTTPClient(influx.HTTPConfig{
 		// Addr: "http://192.168.100.216:18086",
-		Addr: "http://192.168.100.214:8086",
+		Addr: url,
 	})
 	if err != nil {
 		fmt.Println("Error creating InfluxDB Client: ", err.Error())
@@ -258,8 +258,8 @@ func WriteDfGroup(query, database, measurement, EquipmentName, FunctionType, id 
 }
 
 
-func UploadDfGroup(query, database, measurement, EquipmentName, FunctionType, id string, df dataframe.DataFrame, startIndex int) error {
+func UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id string, df dataframe.DataFrame, startIndex int) error {
 	lsss := WriteDfGroup(query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
-	err := InfluxdbWritePoints(lsss, database)
+	err := InfluxdbWritePoints(url, database, lsss)
 	return err
 }

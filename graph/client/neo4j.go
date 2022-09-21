@@ -105,7 +105,7 @@ func GeneratePredefineModel(filePath string) ([]string, []string) {
 	return []string{}, []string{}
 }
 
-func AddClientPoint(uri, username, password, database, measurement string, isEnergy bool, point TaggingPoint, labels ...string) error {
+func AddClientPoint(uri, username, password, database, measurement string, point TaggingPoint, labels ...string) error {
 	driver, err := neo4j.NewDriver(uri, neo4j.BasicAuth(username, password, ""))
 	if err != nil {
 		return err
@@ -115,7 +115,7 @@ func AddClientPoint(uri, username, password, database, measurement string, isEne
 	defer session.Close()
 
 
-	return WriteClientPoint(session, point, database, measurement, isEnergy, labels...)
+	return WriteClientPoint(session, point, database, measurement, labels...)
 }
 
 func labelToString(label ...string) string {
@@ -126,11 +126,11 @@ func labelToString(label ...string) string {
 	return a
 }
 
-func WriteClientPoint(session neo4j.Session, point TaggingPoint, database, measurement string, isEnergy bool, labels ...string) error {
+func WriteClientPoint(session neo4j.Session, point TaggingPoint, database, measurement string, labels ...string) error {
 
 	var brick string
 	var bldg string
-	if isEnergy {
+	if point.ClassType != "Class" {
 		brick = "elecbrick"
 		bldg = "elecbldg"
 	} else {
@@ -139,34 +139,27 @@ func WriteClientPoint(session neo4j.Session, point TaggingPoint, database, measu
 	}
 	newLabel := labelToString(labels...)
 	cypher := fmt.Sprintf(`
-			MERGE (a %s {BMS_id: "%s", EquipmentName: "%s", Interval: "%s", Level: "%s", database: "%s", measurement: "%s", name: "%s", unit: "%s"})
-			MERGE (b: %s {Level: "%s", database: "%s", measurement: "%s", name: "%s"})
-			MERGE (c: %s {database: "%s", measurement: "%s", name: "%s"})
-			MERGE (a)-[:isPointOf]->(c)
-			MERGE (c)-[:hasPoint]->(a)
-			MERGE (a)-[:isPartOf]->(b)
-			MERGE (b)-[:hasPart]->(a)
-			RETURN a
-			 `, newLabel, point.BMS_id, point.DeviceName, point.Interval, point.Level, database, measurement, point.PointName, point.Unit, 
-			 bldg, point.Level, database, measurement, point.DeviceName,
-			 brick, database, measurement, point.PointType)
-	cypher = fmt.Sprintf(`
-			MERGE (a %s {BMS_id: $BMS_id, EquipmentName: $DeviceName, Interval: $Interval, Level: $Level, database: $database, measurement: $measurement, name: $PointName, unit: $unit})
+			MERGE (a: %s %s {BMS_id: $BMS_id, EquipmentName: $DeviceName, Interval: $Interval, Level: $Level, database: $database, measurement: $measurement, name: $PointName, unit: $unit})
 			MERGE (b: %s {Level: $Level, database: $database, measurement: $measurement, name: $DeviceName})
 			MERGE (c: %s {database: $database, measurement: $measurement, name: $PointType})
+			MERGE (d: %s {database: $database, measurement: $measurement, name: $DeviceType})
 			MERGE (a)-[:isPointOf]->(c)
 			MERGE (c)-[:hasPoint]->(a)
 			MERGE (a)-[:isPartOf]->(b)
 			MERGE (b)-[:hasPart]->(a)
+			MERGE (c)-[:isPartOf]->(d)
+			MERGE (d)-[:hasPart]->(c)
+			MERGE (d)-[:hasPoint]->(b)
+			MERGE (b)-[:isPointOf]->(d)
 			RETURN a
-			`, newLabel, bldg, brick)
-	fmt.Println(cypher)
+			`, bldg, newLabel, bldg, brick, brick)
 	res, err := session.WriteTransaction(func(transaction neo4j.Transaction) (interface{}, error) {
 		result, err := transaction.Run(
 			cypher,
 			map[string]interface{}{
 				"BMS_id": point.BMS_id,
 				"DeviceName": point.DeviceName,
+				"DeviceType": point.DeviceType,
 				"Interval": point.Interval,
 				"PointName": point.PointName,
 				"PointType": point.PointType,
@@ -175,8 +168,6 @@ func WriteClientPoint(session neo4j.Session, point TaggingPoint, database, measu
 				"database": database,
 				"measurement": measurement,
 			})
-		fmt.Println(result)
-		fmt.Println(err)
 		if err != nil {
 			return nil, err
 		}

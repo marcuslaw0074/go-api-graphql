@@ -1,11 +1,12 @@
 package scheduler
 
 import (
+	"fmt"
 	"go-api-grapqhl/airflow"
 	"go-api-grapqhl/functions"
 )
 
-func Analytics() *airflow.Job {
+func Analytics_Utility_3() *airflow.Job {
 
 	k := functions.BaseFunction{
 		Database:    "WIIOT",
@@ -22,194 +23,591 @@ func Analytics() *airflow.Job {
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantChillerRunning",
-		Name:         "GetChillerPlantChillerRunning",
+		Name:         fmt.Sprintf("%s_GetChillerPlantChillerRunning", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantChillerEnergy",
-		Name:         "GetChillerPlantChillerEnergy",
+		Name:         fmt.Sprintf("%s_GetChillerPlantChillerEnergy", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantCoolingLoad",
-		Name:         "GetChillerPlantCoolingLoad",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCoolingLoad", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantCoP",
-		Name:         "GetChillerPlantCoP",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantDeltaT",
-		Name:         "GetChillerPlantDeltaT",
+		Name:         fmt.Sprintf("%s_GetChillerPlantDeltaT", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantWetBulb",
-		Name:         "GetChillerPlantWetBulb",
+		Name:         fmt.Sprintf("%s_GetChillerPlantWetBulb", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantCoP_kWPerTon",
-		Name:         "GetChillerPlantCoP_kWPerTon",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCoP_kWPerTon", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantCTRunning",
-		Name:         "GetChillerPlantCTRunning",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCTRunning", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantPCHWPRunning",
-		Name:         "GetChillerPlantPCHWPRunning",
+		Name:         fmt.Sprintf("%s_GetChillerPlantPCHWPRunning", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantSCHWPRunning",
-		Name:         "GetChillerPlantSCHWPRunning",
+		Name:         fmt.Sprintf("%s_GetChillerPlantSCHWPRunning", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantCTEnergy",
-		Name:         "GetChillerPlantCTEnergy",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCTEnergy", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantTotalEnergy",
-		Name:         "GetChillerPlantTotalEnergy",
+		Name:         fmt.Sprintf("%s_GetChillerPlantTotalEnergy", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantCoolingLoadTon",
-		Name:         "GetChillerPlantCoolingLoadTon",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCoolingLoadTon", k.Measurement),
 	})
-
-	j.SetDownstream(j.Task("GetChillerPlantChillerRunning"), j.Task("GetChillerPlantCTRunning"))
-	j.SetDownstream(j.Task("GetChillerPlantCTRunning"), j.Task("GetChillerPlantPCHWPRunning"))
-	j.SetDownstream(j.Task("GetChillerPlantPCHWPRunning"), j.Task("GetChillerPlantSCHWPRunning"))
-
-	j.SetDownstream(j.Task("GetChillerPlantChillerEnergy"), j.Task("GetChillerPlantCTEnergy"))
-	j.SetDownstream(j.Task("GetChillerPlantCTEnergy"), j.Task("GetChillerPlantTotalEnergy"))
-
-	j.SetDownstream(j.Task("GetChillerPlantDeltaT"), j.Task("GetChillerPlantCoolingLoad"))
-	j.SetDownstream(j.Task("GetChillerPlantCoolingLoad"), j.Task("GetChillerPlantCoolingLoadTon"))
-	j.SetDownstream(j.Task("GetChillerPlantCoolingLoadTon"), j.Task("GetChillerPlantCoP"))
-	j.SetDownstream(j.Task("GetChillerPlantCoP"), j.Task("GetChillerPlantCoP_kWPerTon"))
-
-	j.SetDownstream(j.Task("GetChillerPlantTotalEnergy"), j.Task("GetChillerPlantCoP"))
-
-	j.Run()
-	return j
-}
-
-func IndividualAnalytics() *airflow.Job {
-
-	k := functions.BaseFunction{
-		Database:    "WIIOT",
-		Measurement: "Utility_3",
-		Host:        "192.168.100.216",
-		Port:        18086,
-	}
-
-	j := &airflow.Job{
-		Name:     "test2",
-		Schedule: "* * * * *",
-	}
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerEnergy1Hour",
-		Name:         "GetChillerEnergy1Hour",
+		Name:         fmt.Sprintf("%s_GetChillerEnergy1Hour", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerEnergy1Day",
-		Name:         "GetChillerEnergy1Day",
+		Name:         fmt.Sprintf("%s_GetChillerEnergy1Day", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerEnergy1Month",
-		Name:         "GetChillerEnergy1Month",
+		Name:         fmt.Sprintf("%s_GetChillerEnergy1Month", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerDeltaT",
-		Name:         "GetChillerDeltaT",
+		Name:         fmt.Sprintf("%s_GetChillerDeltaT", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerCL",
-		Name:         "GetChillerCL",
+		Name:         fmt.Sprintf("%s_GetChillerCL", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerCoP",
-		Name:         "GetChillerCoP",
+		Name:         fmt.Sprintf("%s_GetChillerCoP", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantEnergy1Hour",
-		Name:         "GetChillerPlantEnergy1Hour",
+		Name:         fmt.Sprintf("%s_GetChillerPlantEnergy1Hour", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantEnergy1Day",
-		Name:         "GetChillerPlantEnergy1Day",
+		Name:         fmt.Sprintf("%s_GetChillerPlantEnergy1Day", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerPlantEnergy1Month",
-		Name:         "GetChillerPlantEnergy1Month",
+		Name:         fmt.Sprintf("%s_GetChillerPlantEnergy1Month", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetChillerCoPkWPerTon",
-		Name:         "GetChillerCoPkWPerTon",
+		Name:         fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement),
 	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "GetCTStatus",
-		Name:         "GetCTStatus",
+		Name:         fmt.Sprintf("%s_GetCTStatus", k.Measurement),
 	})
 
-	j.SetDownstream(j.Task("GetChillerEnergy1Hour"), j.Task("GetChillerEnergy1Day"))
-	j.SetDownstream(j.Task("GetChillerEnergy1Day"), j.Task("GetChillerEnergy1Month"))
-	j.SetDownstream(j.Task("GetChillerEnergy1Month"), j.Task("GetChillerCoPkWPerTon"))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantChillerRunning", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCTRunning", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCTRunning", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantPCHWPRunning", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantPCHWPRunning", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantSCHWPRunning", k.Measurement)))
 
-	j.SetDownstream(j.Task("GetChillerDeltaT"), j.Task("GetChillerCL"))
-	j.SetDownstream(j.Task("GetChillerCL"), j.Task("GetChillerCoP"))
-	j.SetDownstream(j.Task("GetChillerCoP"), j.Task("GetChillerCoPkWPerTon"))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantChillerEnergy", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCTEnergy", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCTEnergy", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantTotalEnergy", k.Measurement)))
 
-	j.SetDownstream(j.Task("GetChillerPlantEnergy1Hour"), j.Task("GetChillerPlantEnergy1Day"))
-	j.SetDownstream(j.Task("GetChillerPlantEnergy1Day"), j.Task("GetChillerPlantEnergy1Month"))
-	j.SetDownstream(j.Task("GetChillerPlantEnergy1Month"), j.Task("GetChillerCoPkWPerTon"))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantDeltaT", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoolingLoad", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoolingLoad", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoolingLoadTon", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoolingLoadTon", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoP_kWPerTon", k.Measurement)))
 
-	j.SetDownstream(j.Task("GetCTStatus"), j.Task("GetChillerCoPkWPerTon"))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantTotalEnergy", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerEnergy1Hour", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerDeltaT", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Hour", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerEnergy1Hour", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerEnergy1Day", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerEnergy1Day", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerEnergy1Month", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerEnergy1Month", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerDeltaT", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCL", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerCL", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoP", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Hour", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Day", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Day", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Month", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Month", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetCTStatus", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement)))
 
 	j.Run()
 	return j
 }
 
+func Analytics_Utility_2() *airflow.Job {
+
+	k := functions.BaseFunction{
+		Database:    "WIIOT",
+		Measurement: "Utility_2",
+		Host:        "192.168.100.216",
+		Port:        18086,
+	}
+
+	j := &airflow.Job{
+		Name:     "test",
+		Schedule: "* * * * *",
+	}
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantChillerRunning",
+		Name:         fmt.Sprintf("%s_GetChillerPlantChillerRunning", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantChillerEnergy",
+		Name:         fmt.Sprintf("%s_GetChillerPlantChillerEnergy", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantCoolingLoad",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCoolingLoad", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantCoP",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantDeltaT",
+		Name:         fmt.Sprintf("%s_GetChillerPlantDeltaT", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantWetBulb",
+		Name:         fmt.Sprintf("%s_GetChillerPlantWetBulb", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantCoP_kWPerTon",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCoP_kWPerTon", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantCTRunning",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCTRunning", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantPCHWPRunning",
+		Name:         fmt.Sprintf("%s_GetChillerPlantPCHWPRunning", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantSCHWPRunning",
+		Name:         fmt.Sprintf("%s_GetChillerPlantSCHWPRunning", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantCTEnergy",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCTEnergy", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantTotalEnergy",
+		Name:         fmt.Sprintf("%s_GetChillerPlantTotalEnergy", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantCoolingLoadTon",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCoolingLoadTon", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerEnergy1Hour",
+		Name:         fmt.Sprintf("%s_GetChillerEnergy1Hour", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerEnergy1Day",
+		Name:         fmt.Sprintf("%s_GetChillerEnergy1Day", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerEnergy1Month",
+		Name:         fmt.Sprintf("%s_GetChillerEnergy1Month", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerDeltaT",
+		Name:         fmt.Sprintf("%s_GetChillerDeltaT", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerCL",
+		Name:         fmt.Sprintf("%s_GetChillerCL", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerCoP",
+		Name:         fmt.Sprintf("%s_GetChillerCoP", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantEnergy1Hour",
+		Name:         fmt.Sprintf("%s_GetChillerPlantEnergy1Hour", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantEnergy1Day",
+		Name:         fmt.Sprintf("%s_GetChillerPlantEnergy1Day", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantEnergy1Month",
+		Name:         fmt.Sprintf("%s_GetChillerPlantEnergy1Month", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerCoPkWPerTon",
+		Name:         fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetCTStatus",
+		Name:         fmt.Sprintf("%s_GetCTStatus", k.Measurement),
+	})
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantChillerRunning", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCTRunning", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCTRunning", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantPCHWPRunning", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantPCHWPRunning", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantSCHWPRunning", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantChillerEnergy", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCTEnergy", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCTEnergy", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantTotalEnergy", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantDeltaT", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoolingLoad", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoolingLoad", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoolingLoadTon", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoolingLoadTon", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoP_kWPerTon", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantTotalEnergy", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerEnergy1Hour", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerDeltaT", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Hour", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerEnergy1Hour", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerEnergy1Day", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerEnergy1Day", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerEnergy1Month", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerEnergy1Month", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerDeltaT", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCL", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerCL", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoP", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Hour", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Day", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Day", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Month", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Month", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetCTStatus", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement)))
+
+	j.Run()
+	return j
+}
+
+func Analytics_Utility_1() *airflow.Job {
+
+	k := functions.BaseFunction{
+		Database:    "WIIOT",
+		Measurement: "Utility_1",
+		Host:        "192.168.100.216",
+		Port:        18086,
+	}
+
+	j := &airflow.Job{
+		Name:     "test",
+		Schedule: "* * * * *",
+	}
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantChillerRunning",
+		Name:         fmt.Sprintf("%s_GetChillerPlantChillerRunning", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantChillerEnergy",
+		Name:         fmt.Sprintf("%s_GetChillerPlantChillerEnergy", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantCoolingLoad",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCoolingLoad", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantCoP",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantDeltaT",
+		Name:         fmt.Sprintf("%s_GetChillerPlantDeltaT", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantWetBulb",
+		Name:         fmt.Sprintf("%s_GetChillerPlantWetBulb", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantCoP_kWPerTon",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCoP_kWPerTon", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantCTRunning",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCTRunning", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantPCHWPRunning",
+		Name:         fmt.Sprintf("%s_GetChillerPlantPCHWPRunning", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantSCHWPRunning",
+		Name:         fmt.Sprintf("%s_GetChillerPlantSCHWPRunning", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantCTEnergy",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCTEnergy", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantTotalEnergy",
+		Name:         fmt.Sprintf("%s_GetChillerPlantTotalEnergy", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantCoolingLoadTon",
+		Name:         fmt.Sprintf("%s_GetChillerPlantCoolingLoadTon", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerEnergy1Hour",
+		Name:         fmt.Sprintf("%s_GetChillerEnergy1Hour", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerEnergy1Day",
+		Name:         fmt.Sprintf("%s_GetChillerEnergy1Day", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerEnergy1Month",
+		Name:         fmt.Sprintf("%s_GetChillerEnergy1Month", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerDeltaT",
+		Name:         fmt.Sprintf("%s_GetChillerDeltaT", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerCL",
+		Name:         fmt.Sprintf("%s_GetChillerCL", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerCoP",
+		Name:         fmt.Sprintf("%s_GetChillerCoP", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantEnergy1Hour",
+		Name:         fmt.Sprintf("%s_GetChillerPlantEnergy1Hour", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantEnergy1Day",
+		Name:         fmt.Sprintf("%s_GetChillerPlantEnergy1Day", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerPlantEnergy1Month",
+		Name:         fmt.Sprintf("%s_GetChillerPlantEnergy1Month", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerCoPkWPerTon",
+		Name:         fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement),
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetCTStatus",
+		Name:         fmt.Sprintf("%s_GetCTStatus", k.Measurement),
+	})
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantChillerRunning", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCTRunning", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCTRunning", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantPCHWPRunning", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantPCHWPRunning", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantSCHWPRunning", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantChillerEnergy", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCTEnergy", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCTEnergy", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantTotalEnergy", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantDeltaT", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoolingLoad", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoolingLoad", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoolingLoadTon", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoolingLoadTon", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoP_kWPerTon", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantTotalEnergy", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerEnergy1Hour", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerDeltaT", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Hour", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerEnergy1Hour", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerEnergy1Day", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerEnergy1Day", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerEnergy1Month", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerEnergy1Month", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerDeltaT", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCL", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerCL", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoP", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerCoP", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Hour", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Day", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Day", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Month", k.Measurement)))
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetChillerPlantEnergy1Month", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement)))
+
+	j.SetDownstream(j.Task(fmt.Sprintf("%s_GetCTStatus", k.Measurement)), j.Task(fmt.Sprintf("%s_GetChillerCoPkWPerTon", k.Measurement)))
+
+	j.Run()
+	return j
+}
+
+func Test_Analytics() *airflow.Job {
+
+	k := functions.BaseFunction{
+		Database:    "WIIOT",
+		Measurement: "Utility_1",
+		Host:        "192.168.100.216",
+		Port:        18086,
+	}
+
+	j := &airflow.Job{
+		Name:     "test",
+		Schedule: "* * * * *",
+	}
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "GetChillerEnergy",
+		Name:         fmt.Sprintf("%s_GetChillerEnergy", k.Measurement),
+	})
+
+	j.Run()
+	return j
+}
