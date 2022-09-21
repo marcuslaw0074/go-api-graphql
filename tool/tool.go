@@ -261,7 +261,9 @@ func SumListStatus(f []float64) float64 {
 func SumList(f []float64) float64 {
 	ls := 0.0
 	for _, ele := range f {
-		ls = ls + ele
+		if ele > 0 {
+			ls = ls + ele
+		}
 	}
 	return ls
 }
