@@ -44,6 +44,15 @@ func IntContains(list []int, str int) (int, bool) {
 	return -1, false
 }
 
+func StrContains(list []string, str string) int {
+	for index, a := range list {
+		if a == str {
+			return index
+		}
+	}
+	return -1
+}
+
 func ApplyFunction(function func(...float64) float64, indCol ...int) func(series.Series) series.Series {
 	return func(s series.Series) series.Series {
 		floats := s.Float()

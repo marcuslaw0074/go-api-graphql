@@ -400,7 +400,8 @@ func Analytics_Utility_2() *airflow.Job {
 	// calculate hourly, daily, monthly energy consumption of individual chiller
 	j.SetDownstream(j.Task("Utility2_GetChillerEnergy1Hour"), j.Task("Utility2_GetChillerEnergy1Day"))
 	j.SetDownstream(j.Task("Utility2_GetChillerEnergy1Day"), j.Task("Utility2_GetChillerEnergy1Month"))
-	j.SetDownstream(j.Task("Utility2_GetChillerEnergy1Month"), j.Task("Utility2_GetChillerPlantEnergy1Hour"))
+
+	j.SetDownstream(j.Task("Utility2_GetChillerPlantChillerEnergy"), j.Task("Utility2_GetChillerPlantEnergy1Hour"))
 
 	// calculate delta T, CL, CoP of individual chiller
 	j.SetDownstream(j.Task("Utility2_GetChillerDeltaT"), j.Task("Utility2_GetChillerCL"))
@@ -596,6 +597,7 @@ func Analytics_Utility_1() *airflow.Job {
 	j.SetDownstream(j.Task("Utility1_GetChillerPlantPCHWPRunning"), j.Task("Utility1_GetChillerPlantSCHWPRunning"))
 
 	// calculate total energy of each equipment type
+	j.SetDownstream(j.Task("Utility1_GetChillerEnergy"), j.Task("Utility1_GetChillerPlantChillerEnergy"))
 	j.SetDownstream(j.Task("Utility1_GetChillerPlantChillerEnergy"), j.Task("Utility1_GetChillerPlantCTEnergy"))
 	j.SetDownstream(j.Task("Utility1_GetChillerPlantCTEnergy"), j.Task("Utility1_GetChillerPlantTotalEnergy"))
 
@@ -614,7 +616,7 @@ func Analytics_Utility_1() *airflow.Job {
 	j.SetDownstream(j.Task("Utility1_GetChillerEnergy"), j.Task("Utility1_GetChillerEnergy1Hour"))
 	j.SetDownstream(j.Task("Utility1_GetChillerEnergy1Hour"), j.Task("Utility1_GetChillerEnergy1Day"))
 	j.SetDownstream(j.Task("Utility1_GetChillerEnergy1Day"), j.Task("Utility1_GetChillerEnergy1Month"))
-	j.SetDownstream(j.Task("Utility1_GetChillerEnergy1Month"), j.Task("Utility1_GetChillerPlantChillerEnergy"))
+
 	j.SetDownstream(j.Task("Utility1_GetChillerPlantChillerEnergy"), j.Task("Utility1_GetChillerPlantEnergy1Hour"))
 
 	// calculate delta T, CL, CoP of individual chiller
@@ -651,7 +653,7 @@ func Test_Analytics() *airflow.Job {
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerCoP",
+		FunctionName: "Utility1_GetChillerPlantChillerRunning",
 		Name:         fmt.Sprintf("%s_GetChillerEnergy", k.Measurement),
 	})
 

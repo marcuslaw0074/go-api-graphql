@@ -1,0 +1,603 @@
+2022-09-22 18:17:52.294  LogInfo: START function Utility2_GetChillerPlantChillerEnergy
+2022-09-22 18:17:52.294  LogInfo: START function Utility2_GetCTStatus
+2022-09-22 18:17:52.294  LogInfo: START function Utility2_GetChillerPlantDeltaT
+2022-09-22 18:17:52.294  LogInfo: START function Utility2_GetChillerPlantChillerRunning
+2022-09-22 18:17:52.295  LogInfo: START function Utility2_GetChillerPlantWetBulb
+2022-09-22 18:17:52.308  LogInfo: function Utility2_GetChillerPlantChillerEnergy data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T09:00:00Z
+ 1: 1119.408106 2022-09-22T09:20:00Z
+ 2: NaN         2022-09-22T09:40:00Z
+ 3: NaN         2022-09-22T10:00:00Z
+    <float>     <string>
+
+2022-09-22 18:17:52.309  LogInfo: function Utility2_GetChillerPlantChillerRunning data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T09:00:00Z
+ 1: 3.000000 2022-09-22T09:20:00Z
+ 2: 0.000000 2022-09-22T09:40:00Z
+ 3: 0.000000 2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:52.311  LogInfo: function Utility2_GetChillerPlantWetBulb data: [4x2] DataFrame
+
+    Value     Time
+ 0: NaN       2022-09-22T09:00:00Z
+ 1: 24.635883 2022-09-22T09:20:00Z
+ 2: NaN       2022-09-22T09:40:00Z
+ 3: NaN       2022-09-22T10:00:00Z
+    <float>   <string>
+
+2022-09-22 18:17:52.312  LogInfo: function Utility2_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T09:00:00Z
+ 1: 4.000000 2022-09-22T09:20:00Z
+ 2: 0.000000 2022-09-22T09:40:00Z
+ 3: 0.000000 2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:52.312  LogInfo: function Utility2_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T09:00:00Z
+ 1: 0.000000 2022-09-22T09:20:00Z
+ 2: 0.000000 2022-09-22T09:40:00Z
+ 3: 0.000000 2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:52.312  LogInfo: function Utility2_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T09:00:00Z
+ 1: 4.000000 2022-09-22T09:20:00Z
+ 2: 0.000000 2022-09-22T09:40:00Z
+ 3: 0.000000 2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:52.313  LogInfo: function Utility2_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T09:00:00Z
+ 1: 4.000000 2022-09-22T09:20:00Z
+ 2: 0.000000 2022-09-22T09:40:00Z
+ 3: 0.000000 2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:52.313  LogInfo: function Utility2_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T09:00:00Z
+ 1: 4.000000 2022-09-22T09:20:00Z
+ 2: 0.000000 2022-09-22T09:40:00Z
+ 3: 0.000000 2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:52.313  LogInfo: function Utility2_GetChillerPlantDeltaT data: [4x2] DataFrame
+
+    Value     Time
+ 0: NaN       2022-09-22T09:00:00Z
+ 1: -0.211887 2022-09-22T09:20:00Z
+ 2: NaN       2022-09-22T09:40:00Z
+ 3: NaN       2022-09-22T10:00:00Z
+    <float>   <string>
+
+2022-09-22 18:17:52.430  LogInfo: END function Utility2_GetChillerPlantChillerEnergy
+2022-09-22 18:17:52.432  LogInfo: START function Utility2_GetChillerPlantEnergy1Hour
+2022-09-22 18:17:52.432  LogInfo: START function Utility2_GetChillerPlantCTEnergy
+2022-09-22 18:17:52.451  LogInfo: function Utility2_GetChillerPlantCTEnergy data: [4x2] DataFrame
+
+    Value      Time
+ 0: 0.000000   2022-09-22T09:00:00Z
+ 1: 176.000000 2022-09-22T09:20:00Z
+ 2: 0.000000   2022-09-22T09:40:00Z
+ 3: 0.000000   2022-09-22T10:00:00Z
+    <float>    <string>
+
+2022-09-22 18:17:52.451  LogInfo: function Utility2_GetChillerPlantEnergy1Hour data: [5x2] DataFrame
+
+    Value       Time
+ 0: 1094.993697 2022-09-22T06:00:00Z
+ 1: 1096.960475 2022-09-22T07:00:00Z
+ 2: 1100.965526 2022-09-22T08:00:00Z
+ 3: 1112.453947 2022-09-22T09:00:00Z
+ 4: NaN         2022-09-22T10:00:00Z
+    <float>     <string>
+
+2022-09-22 18:17:52.458  LogInfo: END function Utility2_GetChillerPlantChillerRunning
+2022-09-22 18:17:52.459  LogInfo: START function Utility2_GetChillerPlantCTRunning
+2022-09-22 18:17:52.462  LogInfo: END function Utility2_GetChillerPlantWetBulb
+2022-09-22 18:17:52.463  LogInfo: END function Utility2_GetChillerPlantDeltaT
+2022-09-22 18:17:52.465  LogInfo: END function Utility2_GetCTStatus
+2022-09-22 18:17:52.465  LogInfo: START function Utility2_GetChillerPlantCoolingLoad
+2022-09-22 18:17:52.472  LogInfo: function Utility2_GetChillerPlantCTRunning data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T09:00:00Z
+ 1: 4.000000 2022-09-22T09:20:00Z
+ 2: 0.000000 2022-09-22T09:40:00Z
+ 3: 0.000000 2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:52.480  LogInfo: function Utility2_GetChillerPlantCoolingLoad data: [4x2] DataFrame
+
+    Value        Time
+ 0: 0.000000     2022-09-22T09:00:00Z
+ 1: 14761.824568 2022-09-22T09:20:00Z
+ 2: 0.000000     2022-09-22T09:40:00Z
+ 3: 0.000000     2022-09-22T10:00:00Z
+    <float>      <string>
+
+2022-09-22 18:17:52.546  LogInfo: END function Utility2_GetChillerPlantCTEnergy
+2022-09-22 18:17:52.547  LogInfo: START function Utility2_GetChillerPlantTotalEnergy
+2022-09-22 18:17:52.562  LogInfo: function Utility2_GetChillerPlantTotalEnergy data: [4x2] DataFrame
+
+    Value       Time
+ 0: 0.000000    2022-09-22T09:00:00Z
+ 1: 1295.408106 2022-09-22T09:20:00Z
+ 2: 0.000000    2022-09-22T09:40:00Z
+ 3: 0.000000    2022-09-22T10:00:00Z
+    <float>     <string>
+
+2022-09-22 18:17:52.650  LogInfo: END function Utility2_GetChillerPlantEnergy1Hour
+2022-09-22 18:17:52.651  LogInfo: START function Utility2_GetChillerPlantEnergy1Day
+2022-09-22 18:17:52.672  LogInfo: END function Utility2_GetChillerPlantCTRunning
+2022-09-22 18:17:52.673  LogInfo: END function Utility2_GetChillerPlantCoolingLoad
+2022-09-22 18:17:52.673  LogInfo: START function Utility2_GetChillerPlantPCHWPRunning
+2022-09-22 18:17:52.673  LogInfo: START function Utility2_GetChillerPlantCoolingLoadTon
+2022-09-22 18:17:52.673  LogInfo: function Utility2_GetChillerPlantEnergy1Day data: [5x2] DataFrame
+
+    Value        Time
+ 0: 15714.434727 2022-09-18T00:00:00Z
+ 1: 27578.226273 2022-09-19T00:00:00Z
+ 2: 26720.754863 2022-09-20T00:00:00Z
+ 3: 26272.154470 2022-09-21T00:00:00Z
+ 4: 10566.000015 2022-09-22T00:00:00Z
+    <float>      <string>
+
+2022-09-22 18:17:52.684  LogInfo: function Utility2_GetChillerPlantPCHWPRunning data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T09:00:00Z
+ 1: 4.000000 2022-09-22T09:20:00Z
+ 2: 0.000000 2022-09-22T09:40:00Z
+ 3: 0.000000 2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:52.685  LogInfo: function Utility2_GetChillerPlantCoolingLoadTon data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T09:00:00Z
+ 1: 4197.396732 2022-09-22T09:20:00Z
+ 2: 0.000000    2022-09-22T09:40:00Z
+ 3: 0.000000    2022-09-22T10:00:00Z
+    <float>     <string>
+
+2022-09-22 18:17:52.815  LogInfo: END function Utility2_GetChillerPlantTotalEnergy
+2022-09-22 18:17:52.850  LogInfo: END function Utility2_GetChillerPlantEnergy1Day
+2022-09-22 18:17:52.850  LogInfo: START function Utility2_GetChillerPlantEnergy1Month
+2022-09-22 18:17:52.865  LogInfo: function Utility2_GetChillerPlantEnergy1Month data: [1x2] DataFrame
+
+    Value         Time
+ 0: 369374.466233 2022-09-01T00:00:00.000000001Z
+    <float>       <string>
+
+2022-09-22 18:17:52.869  LogInfo: END function Utility2_GetChillerPlantPCHWPRunning
+2022-09-22 18:17:52.869  LogInfo: END function Utility2_GetChillerPlantCoolingLoadTon
+2022-09-22 18:17:52.870  LogInfo: START function Utility2_GetChillerPlantSCHWPRunning
+2022-09-22 18:17:52.870  LogInfo: START function Utility2_GetChillerPlantCoP
+2022-09-22 18:17:52.883  LogInfo: function Utility2_GetChillerPlantSCHWPRunning data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T09:00:00Z
+ 1: 2.000000 2022-09-22T09:20:00Z
+ 2: 0.000000 2022-09-22T09:40:00Z
+ 3: 0.000000 2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:52.885  LogInfo: function Utility2_GetChillerPlantCoP data: [4x2] DataFrame
+
+    Value     Time
+ 0: NaN       2022-09-22T09:00:00Z
+ 1: 13.187170 2022-09-22T09:20:00Z
+ 2: NaN       2022-09-22T09:40:00Z
+ 3: NaN       2022-09-22T10:00:00Z
+    <float>   <string>
+
+2022-09-22 18:17:52.954  LogInfo: END function Utility2_GetChillerPlantEnergy1Month
+2022-09-22 18:17:53.025  LogInfo: END function Utility2_GetChillerPlantSCHWPRunning
+2022-09-22 18:17:53.083  LogInfo: END function Utility2_GetChillerPlantCoP
+2022-09-22 18:17:53.084  LogInfo: START function Utility2_GetChillerEnergy1Hour
+2022-09-22 18:17:53.085  LogInfo: START function Utility2_GetChillerPlantCoP_kWPerTon
+2022-09-22 18:17:53.086  LogInfo: START function Utility2_GetChillerDeltaT
+2022-09-22 18:17:53.097  LogInfo: function Utility2_GetChillerPlantCoP_kWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 0.266691 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.097  LogInfo: function Utility2_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: 381.000000 2022-09-22T04:00:00Z
+ 1: 383.066667 2022-09-22T05:00:00Z
+ 2: 382.400000 2022-09-22T06:00:00Z
+ 3: 383.200000 2022-09-22T07:00:00Z
+ 4: 382.400000 2022-09-22T08:00:00Z
+ 5: 387.400000 2022-09-22T09:00:00Z
+ 6: NaN        2022-09-22T10:00:00Z
+    <float>    <string>
+
+2022-09-22 18:17:53.097  LogInfo: function Utility2_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: 218.200000 2022-09-22T04:00:00Z
+ 1: 219.200000 2022-09-22T05:00:00Z
+ 2: 218.400000 2022-09-22T06:00:00Z
+ 3: 219.333333 2022-09-22T07:00:00Z
+ 4: 219.200000 2022-09-22T08:00:00Z
+ 5: 220.600000 2022-09-22T09:00:00Z
+ 6: NaN        2022-09-22T10:00:00Z
+    <float>    <string>
+
+2022-09-22 18:17:53.097  LogInfo: function Utility2_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value    Time
+ 0: 0.200000 2022-09-22T04:00:00Z
+ 1: 0.000000 2022-09-22T05:00:00Z
+ 2: 0.133333 2022-09-22T06:00:00Z
+ 3: 0.133333 2022-09-22T07:00:00Z
+ 4: 0.000000 2022-09-22T08:00:00Z
+ 5: 0.000000 2022-09-22T09:00:00Z
+ 6: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.097  LogInfo: function Utility2_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T04:00:00Z
+ 1: 0.000000 2022-09-22T05:00:00Z
+ 2: 0.000000 2022-09-22T06:00:00Z
+ 3: 0.000000 2022-09-22T07:00:00Z
+ 4: 0.000000 2022-09-22T08:00:00Z
+ 5: 0.000000 2022-09-22T09:00:00Z
+ 6: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.097  LogInfo: function Utility2_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: 491.599991 2022-09-22T04:00:00Z
+ 1: 496.566661 2022-09-22T05:00:00Z
+ 2: 494.066661 2022-09-22T06:00:00Z
+ 3: 493.800008 2022-09-22T07:00:00Z
+ 4: 498.866659 2022-09-22T08:00:00Z
+ 5: 503.949997 2022-09-22T09:00:00Z
+ 6: NaN        2022-09-22T10:00:00Z
+    <float>    <string>
+
+2022-09-22 18:17:53.101  LogInfo: function Utility2_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 4.086232 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.101  LogInfo: function Utility2_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 3.385475 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.101  LogInfo: function Utility2_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 4.188866 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.101  LogInfo: function Utility2_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 2.761208 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.101  LogInfo: function Utility2_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 5.077961 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.184  LogInfo: END function Utility2_GetChillerPlantCoP_kWPerTon
+2022-09-22 18:17:53.257  LogInfo: END function Utility2_GetChillerEnergy1Hour
+2022-09-22 18:17:53.258  LogInfo: START function Utility2_GetChillerEnergy1Day
+2022-09-22 18:17:53.279  LogInfo: function Utility2_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value       Time
+ 0: 5654.933333 2022-09-18T00:00:00Z
+ 1: 9957.466667 2022-09-19T00:00:00Z
+ 2: 9505.333333 2022-09-20T00:00:00Z
+ 3: 9257.066667 2022-09-21T00:00:00Z
+ 4: 3682.000000 2022-09-22T00:00:00Z
+    <float>     <string>
+
+2022-09-22 18:17:53.279  LogInfo: function Utility2_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value       Time
+ 0: 3150.000000 2022-09-18T00:00:00Z
+ 1: 5514.133333 2022-09-19T00:00:00Z
+ 2: 5345.866667 2022-09-20T00:00:00Z
+ 3: 5279.733333 2022-09-21T00:00:00Z
+ 4: 2111.600000 2022-09-22T00:00:00Z
+    <float>     <string>
+
+2022-09-22 18:17:53.279  LogInfo: function Utility2_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value    Time
+ 0: 1.200000 2022-09-18T00:00:00Z
+ 1: 1.600000 2022-09-19T00:00:00Z
+ 2: 2.800000 2022-09-20T00:00:00Z
+ 3: 2.533333 2022-09-21T00:00:00Z
+ 4: 0.933333 2022-09-22T00:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.279  LogInfo: function Utility2_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-18T00:00:00Z
+ 1: 0.000000 2022-09-19T00:00:00Z
+ 2: 0.000000 2022-09-20T00:00:00Z
+ 3: 0.000000 2022-09-21T00:00:00Z
+ 4: 0.000000 2022-09-22T00:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.279  LogInfo: function Utility2_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value        Time
+ 0: 20704.199982 2022-09-18T00:00:00Z
+ 1: 36278.800018 2022-09-19T00:00:00Z
+ 2: 35564.699890 2022-09-20T00:00:00Z
+ 3: 35163.300110 2022-09-21T00:00:00Z
+ 4: 14300.099945 2022-09-22T00:00:00Z
+    <float>      <string>
+
+2022-09-22 18:17:53.283  LogInfo: END function Utility2_GetChillerDeltaT
+2022-09-22 18:17:53.284  LogInfo: START function Utility2_GetChillerCL
+2022-09-22 18:17:53.295  LogInfo: function Utility2_GetChillerCL data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T09:00:00Z
+ 1: 2480.458505 2022-09-22T09:20:00Z
+ 2: NaN         2022-09-22T09:40:00Z
+ 3: NaN         2022-09-22T10:00:00Z
+    <float>     <string>
+
+2022-09-22 18:17:53.295  LogInfo: function Utility2_GetChillerCL data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T09:00:00Z
+ 1: 3523.825553 2022-09-22T09:20:00Z
+ 2: NaN         2022-09-22T09:40:00Z
+ 3: NaN         2022-09-22T10:00:00Z
+    <float>     <string>
+
+2022-09-22 18:17:53.295  LogInfo: function Utility2_GetChillerCL data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 0.000000 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.295  LogInfo: function Utility2_GetChillerCL data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 0.000000 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.295  LogInfo: function Utility2_GetChillerCL data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T09:00:00Z
+ 1: 8757.540510 2022-09-22T09:20:00Z
+ 2: NaN         2022-09-22T09:40:00Z
+ 3: NaN         2022-09-22T10:00:00Z
+    <float>     <string>
+
+2022-09-22 18:17:53.438  LogInfo: END function Utility2_GetChillerCL
+2022-09-22 18:17:53.439  LogInfo: START function Utility2_GetChillerCoP
+2022-09-22 18:17:53.460  LogInfo: END function Utility2_GetChillerEnergy1Day
+2022-09-22 18:17:53.460  LogInfo: START function Utility2_GetChillerEnergy1Month
+2022-09-22 18:17:53.471  LogInfo: function Utility2_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value         Time
+ 0: 215167.200000 2022-09-01T00:00:00.000000001Z
+    <float>       <string>
+
+2022-09-22 18:17:53.471  LogInfo: function Utility2_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value        Time
+ 0: 45204.400000 2022-09-01T00:00:00.000000001Z
+    <float>      <string>
+
+2022-09-22 18:17:53.471  LogInfo: function Utility2_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value         Time
+ 0: 108905.600000 2022-09-01T00:00:00.000000001Z
+    <float>       <string>
+
+2022-09-22 18:17:53.471  LogInfo: function Utility2_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-01T00:00:00.000000001Z
+    <float>  <string>
+
+2022-09-22 18:17:53.472  LogInfo: function Utility2_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value         Time
+ 0: 291798.700043 2022-09-01T00:00:00.000000001Z
+    <float>       <string>
+
+2022-09-22 18:17:53.473  LogInfo: function Utility2_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 6.366680 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.478  LogInfo: function Utility2_GetChillerCoP data: [4x2] DataFrame
+
+    Value     Time
+ 0: NaN       2022-09-22T09:00:00Z
+ 1: 15.930495 2022-09-22T09:20:00Z
+ 2: NaN       2022-09-22T09:40:00Z
+ 3: NaN       2022-09-22T10:00:00Z
+    <float>   <string>
+
+2022-09-22 18:17:53.482  LogInfo: function Utility2_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 0.000000 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.486  LogInfo: function Utility2_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 0.000000 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.489  LogInfo: function Utility2_GetChillerCoP data: [4x2] DataFrame
+
+    Value     Time
+ 0: NaN       2022-09-22T09:00:00Z
+ 1: 17.235860 2022-09-22T09:20:00Z
+ 2: NaN       2022-09-22T09:40:00Z
+ 3: NaN       2022-09-22T10:00:00Z
+    <float>   <string>
+
+2022-09-22 18:17:53.663  LogInfo: END function Utility2_GetChillerEnergy1Month
+2022-09-22 18:17:53.757  LogInfo: END function Utility2_GetChillerCoP
+2022-09-22 18:17:53.758  LogInfo: START function Utility2_GetChillerCLTon
+2022-09-22 18:17:53.775  LogInfo: function Utility2_GetChillerCLTon data: [4x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T09:00:00Z
+ 1: 705.296854 2022-09-22T09:20:00Z
+ 2: NaN        2022-09-22T09:40:00Z
+ 3: NaN        2022-09-22T10:00:00Z
+    <float>    <string>
+
+2022-09-22 18:17:53.775  LogInfo: function Utility2_GetChillerCLTon data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T09:00:00Z
+ 1: 1001.969221 2022-09-22T09:20:00Z
+ 2: NaN         2022-09-22T09:40:00Z
+ 3: NaN         2022-09-22T10:00:00Z
+    <float>     <string>
+
+2022-09-22 18:17:53.775  LogInfo: function Utility2_GetChillerCLTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 0.000000 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.775  LogInfo: function Utility2_GetChillerCLTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 0.000000 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.775  LogInfo: function Utility2_GetChillerCLTon data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T09:00:00Z
+ 1: 2490.130658 2022-09-22T09:20:00Z
+ 2: NaN         2022-09-22T09:40:00Z
+ 3: NaN         2022-09-22T10:00:00Z
+    <float>     <string>
+
+2022-09-22 18:17:53.914  LogInfo: END function Utility2_GetChillerCLTon
+2022-09-22 18:17:53.914  LogInfo: START function Utility2_GetChillerCoPkWPerTon
+2022-09-22 18:17:53.928  LogInfo: function Utility2_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 0.552392 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.928  LogInfo: function Utility2_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 0.220765 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.928  LogInfo: function Utility2_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 0.000000 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.928  LogInfo: function Utility2_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 0.000000 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:53.928  LogInfo: function Utility2_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T09:00:00Z
+ 1: 0.000204 2022-09-22T09:20:00Z
+ 2: NaN      2022-09-22T09:40:00Z
+ 3: NaN      2022-09-22T10:00:00Z
+    <float>  <string>
+
+2022-09-22 18:17:54.150  LogInfo: END function Utility2_GetChillerCoPkWPerTon
