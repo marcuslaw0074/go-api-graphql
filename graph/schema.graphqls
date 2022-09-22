@@ -22,13 +22,27 @@ type Labelvaluepair {
 
 type Query {
   todos: [Todo!]!
-  allId(
+  allid(
     host: String!
     port: Int!
     database: String!
     measurement: String!
-    energy: Boolean
-  ): Labelvaluepair
+  ): [Labelvaluepair]
+  allidbysys(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    system: String!
+  ): [Labelvaluepair]
+  allidbysysloc(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    system: String!
+    location: String!
+  ): [Labelvaluepair]
   allsys(
     host: String!
     port: Int!

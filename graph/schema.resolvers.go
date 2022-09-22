@@ -15,6 +15,7 @@ import (
 	"math/rand"
 	"time"
 
+	"github.com/go-redis/redis/v9"
 	"github.com/neo4j/neo4j-go-driver/v4/neo4j"
 )
 
@@ -33,6 +34,112 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 // Todos is the resolver for the todos field.
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 	return r.todos, nil
+}
+
+// Allid is the resolver for the allid field.
+func (r *queryResolver) Allid(ctx context.Context, host string, port int, database string, measurement string) ([]*model.Labelvaluepair, error) {
+	dbUri := fmt.Sprintf("neo4j://%s:%d", host, port)
+	driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
+	if err != nil {
+		panic(err)
+	}
+	session := driver.NewSession(neo4j.SessionConfig{})
+	defer session.Close()
+	defer driver.Close()
+	query := q.QueryAllClientPoint
+	result, err := session.ReadTransaction(client.QueryLabelValue(query, map[string]interface{}{
+		"database":    database,
+		"measurement": measurement,
+	}))
+	if err != nil {
+		panic(err)
+	}
+	res := result.([][]string)
+	ss := make([]*model.Labelvaluepair, 0)
+	for _, ele := range res {
+		d := model.Labelvaluepair{Value: ele[1], Label: ele[0]}
+		ss = append(ss, &d)
+	}
+	return ss, nil
+}
+
+// Allidbysys is the resolver for the allidbysys field.
+func (r *queryResolver) Allidbysys(ctx context.Context, host string, port int, database string, measurement string, system string) ([]*model.Labelvaluepair, error) {
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     "localhost:36379",
+		Password: "", // no password set
+		DB:       0,  // use default DB
+	})
+	redisKey := fmt.Sprintf("QueryAllClientPointBySystem_%s_%v_%s_%s_%s", host, port, database, measurement, system)
+	val, err := rdb.Get(ctx, redisKey).Result()
+	if err != nil {
+		dbUri := fmt.Sprintf("neo4j://%s:%d", host, port)
+		driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
+		if err != nil {
+			panic(err)
+		}
+		session := driver.NewSession(neo4j.SessionConfig{})
+		defer session.Close()
+		defer driver.Close()
+		query := q.QueryAllClientPointBySystem
+		result, err := session.ReadTransaction(client.QueryLabelValue(query, map[string]interface{}{
+			"database":    database,
+			"measurement": measurement,
+			"system":      system,
+		}))
+		if err != nil {
+			panic(err)
+		}
+		res := result.([][]string)
+		ss := make([]*model.Labelvaluepair, 0)
+		for _, ele := range res {
+			d := model.Labelvaluepair{Value: ele[1], Label: ele[0]}
+			ss = append(ss, &d)
+		}
+		b, err := json.Marshal(ss)
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			err = rdb.Set(ctx, redisKey, string(b), 0).Err()
+			if err != nil {
+				fmt.Println(err)
+			}
+		}
+		return ss, nil
+	} else {
+		data := make([]*model.Labelvaluepair, 0)
+		json.Unmarshal([]byte(val), &data)
+		return data, nil
+	}
+}
+
+// Allidbysysloc is the resolver for the allidbysysloc field.
+func (r *queryResolver) Allidbysysloc(ctx context.Context, host string, port int, database string, measurement string, system string, location string) ([]*model.Labelvaluepair, error) {
+	dbUri := fmt.Sprintf("neo4j://%s:%d", host, port)
+	driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
+	if err != nil {
+		panic(err)
+	}
+	session := driver.NewSession(neo4j.SessionConfig{})
+	defer session.Close()
+	defer driver.Close()
+	query := q.QueryAllClientPointBySystemLocation
+	result, err := session.ReadTransaction(client.QueryLabelValue(query, map[string]interface{}{
+		"database":    database,
+		"measurement": measurement,
+		"system":      system,
+		"location":    location,
+	}))
+	if err != nil {
+		panic(err)
+	}
+	res := result.([][]string)
+	ss := make([]*model.Labelvaluepair, 0)
+	for _, ele := range res {
+		d := model.Labelvaluepair{Value: ele[1], Label: ele[0]}
+		ss = append(ss, &d)
+	}
+	return ss, nil
 }
 
 // Allsys is the resolver for the allsys field.
@@ -186,3 +293,35 @@ func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
+
+// !!! WARNING !!!
+// The code below was going to be deleted when updating resolvers. It has been copied here so you have
+// one last chance to move it out of harms way if you want. There are two reasons this happens:
+//   - When renaming or deleting a resolver the old code will be put in here. You can safely delete
+//     it when you're done.
+//   - You have helper methods in this file. Move them out to keep these resolver files clean.
+func (r *queryResolver) AllID(ctx context.Context, host string, port int, database string, measurement string) ([]*model.Labelvaluepair, error) {
+	dbUri := fmt.Sprintf("neo4j://%s:%d", host, port)
+	driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
+	if err != nil {
+		panic(err)
+	}
+	session := driver.NewSession(neo4j.SessionConfig{})
+	defer session.Close()
+	defer driver.Close()
+	query := q.QueryAllClientPoint
+	result, err := session.ReadTransaction(client.QueryLabelValue(query, map[string]interface{}{
+		"database":    database,
+		"measurement": measurement,
+	}))
+	if err != nil {
+		panic(err)
+	}
+	res := result.([][]string)
+	ss := make([]*model.Labelvaluepair, 0)
+	for _, ele := range res {
+		d := model.Labelvaluepair{Value: ele[1], Label: ele[0]}
+		ss = append(ss, &d)
+	}
+	return ss, nil
+}
