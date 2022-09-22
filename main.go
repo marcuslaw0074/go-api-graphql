@@ -112,8 +112,9 @@ func main() {
 
 	cr := cron.New()
 	cr.Start()
-	// cr.AddFunc("*/1 * * * *", func() { scheduler.Analytics_Utility_3() })
-	// cr.AddFunc("*/1 * * * *", func() { scheduler.Analytics_Utility_2() })
+	cr.AddFunc("*/5 * * * *", func() { scheduler.Analytics_Utility_3() })
+	cr.AddFunc("*/5 * * * *", func() { scheduler.Analytics_Utility_2() })
+	cr.AddFunc("*/5 * * * *", func() { scheduler.Analytics_Utility_1() })
 
 	r.POST("/query", graphqlHandler())
 	r.GET("/", playgroundHandler())
