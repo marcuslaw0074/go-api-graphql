@@ -1374,4 +1374,59 @@ func (f BaseFunction) Utility3_GetCTStatus() error {
 	return nil
 }
 
+// NEW individual model uid 11
+func (f BaseFunction) Utility3_GetChillerCLTon() error {
+	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
+	name := "Utility3_GetChillerCL"
+	log.Printf("START function :%s", name)
+	newFunctionType := "Chiller_Cooling_Load(Ton)"
+	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
+			WHERE ("FunctionType"='Chiller_Cooling_Load') AND
+			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
+	dfGroup := client.QueryDfGroup(query, f.Database)
+	if len(dfGroup) == 0 {
+		log.Printf("function %s: No data", name)
+		return nil
+	}
+	wg := sync.WaitGroup{}
+	wg.Add(len(dfGroup))
+	for _, ele := range dfGroup {
+		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if len(f) < 1 {
+				return math.NaN()
+			}
+			return f[0] / 3.5169
+		}, []int{1}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
+		go func(query string, database string, measurement string,
+			EquipmentName string, FunctionType string, id string,
+			df dataframe.DataFrame, startIndex int) {
+			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
+			if err != nil {
+				fmt.Println(err)
+			}
+			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+				f.Database, f.Measurement, client.TaggingPoint{
+					BMS_id:     id,
+					PointName:  id,
+					System:     "HVAC_System",
+					SubSystem:  "Water_System",
+					DeviceType: "Chiller_Plant",
+					DeviceName: EquipmentName,
+					PointType:  newFunctionType,
+					Location:   "Building",
+					Level:      "UT3",
+					ClassType:  "Class",
+					Interval:   "20T",
+					Unit:       "Ton",
+				}, []string{Calculated}...)
+			if err != nil {
+				fmt.Println(err)
+			}
+			wg.Done()
+		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), df, 1)
+	}
+	wg.Wait()
+	log.Printf("END function :%s", name)
+	return nil
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////
