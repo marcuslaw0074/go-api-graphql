@@ -1,0 +1,4688 @@
+2022-09-23 01:14:14.931  LogInfo: START function Utility1_GetChillerPlantWetBulb
+2022-09-23 01:14:14.932  LogInfo: START function Utility1_GetCTStatus
+2022-09-23 01:14:14.934  LogInfo: START function Utility1_GetChillerPlantChillerRunning
+2022-09-23 01:14:14.936  LogInfo: START function Utility1_GetChillerPlantDeltaT
+2022-09-23 01:14:14.937  LogInfo: START function Utility1_GetChillerEnergy
+2022-09-23 01:14:15.057  LogInfo: function Utility1_GetChillerPlantWetBulb data: [{Chiller_Plant [4x3] DataFrame
+
+    Time                 Chiller_Plant_Outdoor_Dry_Bulb ...
+ 0: 2022-09-22T16:00:00Z NaN                            ...
+ 1: 2022-09-22T16:20:00Z 26.570000                      ...
+ 2: 2022-09-22T16:40:00Z 26.465000                      ...
+ 3: 2022-09-22T17:00:00Z 25.924999                      ...
+    <string>             <float>                        ...
+
+Not Showing: Chiller_Plant_Outdoor_Humidity <float>
+}]
+2022-09-23 01:14:15.058  LogInfo: function Utility1_GetChillerPlantWetBulb data: [4x2] DataFrame
+
+    Value     Time
+ 0: NaN       2022-09-22T16:00:00Z
+ 1: 21.713122 2022-09-22T16:20:00Z
+ 2: 21.712001 2022-09-22T16:40:00Z
+ 3: 20.939596 2022-09-22T17:00:00Z
+    <float>   <string>
+
+2022-09-23 01:14:15.122  LogInfo: function Utility1_GetChillerPlantDeltaT data: []
+2022-09-23 01:14:15.122  LogError: function Utility1_GetChillerPlantDeltaT: No data
+2022-09-23 01:14:15.124  LogInfo: function Utility1_GetChillerPlantChillerRunning data: [{CH01 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {CH02 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {CH03 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {CH04 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH05 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH06 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {CH07 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH08 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {CH09 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {CH10 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH11 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {CH12 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {CH13 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH14 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {CH15 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {CH16 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {CH17 [4x2] DataFrame
+
+    Time                 Chiller_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+}]
+2022-09-23 01:14:15.124  LogInfo: START function Utility1_GetChillerPlantCoolingLoad
+2022-09-23 01:14:15.125  LogInfo: function Utility1_GetChillerPlantChillerRunning data: [4x2] DataFrame
+
+    Value     Time
+ 0: 0.000000  2022-09-22T16:00:00Z
+ 1: 12.000000 2022-09-22T16:20:00Z
+ 2: 12.000000 2022-09-22T16:40:00Z
+ 3: 12.000000 2022-09-22T17:00:00Z
+    <float>   <string>
+
+2022-09-23 01:14:15.128  LogInfo: function Utility1_GetCTStatus data: [{CT0 [4x5] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 0.000000                0.000000                ...
+ 2: 2022-09-22T16:40:00Z 0.000000                0.000000                ...
+ 3: 2022-09-22T17:00:00Z 0.000000                0.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>, Cooling_Tower_Status_04 <float>
+} {CT1 [4x4] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000                ...
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000                ...
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>
+} {CT10 [4x4] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000                ...
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000                ...
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>
+} {CT11 [4x5] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000                ...
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000                ...
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>, Cooling_Tower_Status_04 <float>
+} {CT12 [4x5] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000                ...
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000                ...
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>, Cooling_Tower_Status_04 <float>
+} {CT13 [4x5] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000                ...
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000                ...
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>, Cooling_Tower_Status_04 <float>
+} {CT14 [4x5] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 1.000000                0.000000                ...
+ 2: 2022-09-22T16:40:00Z 1.000000                0.000000                ...
+ 3: 2022-09-22T17:00:00Z 1.000000                0.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>, Cooling_Tower_Status_04 <float>
+} {CT15 [4x5] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000                ...
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000                ...
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>, Cooling_Tower_Status_04 <float>
+} {CT16 [4x5] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000                ...
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000                ...
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>, Cooling_Tower_Status_04 <float>
+} {CT17 [4x5] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000                ...
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000                ...
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>, Cooling_Tower_Status_04 <float>
+} {CT2 [4x4] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000                ...
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000                ...
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>
+} {CT3 [4x4] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 0.000000                0.000000                ...
+ 2: 2022-09-22T16:40:00Z 0.000000                0.000000                ...
+ 3: 2022-09-22T17:00:00Z 0.000000                0.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>
+} {CT4 [4x4] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000                ...
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000                ...
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>
+} {CT5 [4x3] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02
+ 0: 2022-09-22T16:00:00Z NaN                     NaN
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000
+    <string>             <float>                 <float>
+} {CT6 [4x3] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02
+ 0: 2022-09-22T16:00:00Z NaN                     NaN
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000
+    <string>             <float>                 <float>
+} {CT7 [4x3] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02
+ 0: 2022-09-22T16:00:00Z NaN                     NaN
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000
+    <string>             <float>                 <float>
+} {CT8 [4x5] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 0.000000                0.000000                ...
+ 2: 2022-09-22T16:40:00Z 0.000000                0.000000                ...
+ 3: 2022-09-22T17:00:00Z 0.000000                0.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>, Cooling_Tower_Status_04 <float>
+} {CT9 [4x4] DataFrame
+
+    Time                 Cooling_Tower_Status_01 Cooling_Tower_Status_02 ...
+ 0: 2022-09-22T16:00:00Z NaN                     NaN                     ...
+ 1: 2022-09-22T16:20:00Z 1.000000                1.000000                ...
+ 2: 2022-09-22T16:40:00Z 1.000000                1.000000                ...
+ 3: 2022-09-22T17:00:00Z 1.000000                1.000000                ...
+    <string>             <float>                 <float>                 ...
+
+Not Showing: Cooling_Tower_Status_03 <float>
+}]
+2022-09-23 01:14:15.129  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.129  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 3.000000 2022-09-22T16:20:00Z
+ 2: 3.000000 2022-09-22T16:40:00Z
+ 3: 3.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.129  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 3.000000 2022-09-22T16:20:00Z
+ 2: 3.000000 2022-09-22T16:40:00Z
+ 3: 3.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.129  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 4.000000 2022-09-22T16:20:00Z
+ 2: 4.000000 2022-09-22T16:40:00Z
+ 3: 4.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.129  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 4.000000 2022-09-22T16:20:00Z
+ 2: 4.000000 2022-09-22T16:40:00Z
+ 3: 4.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.129  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 4.000000 2022-09-22T16:20:00Z
+ 2: 4.000000 2022-09-22T16:40:00Z
+ 3: 4.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.129  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 3.000000 2022-09-22T16:20:00Z
+ 2: 3.000000 2022-09-22T16:40:00Z
+ 3: 3.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.129  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 4.000000 2022-09-22T16:20:00Z
+ 2: 4.000000 2022-09-22T16:40:00Z
+ 3: 4.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.130  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 4.000000 2022-09-22T16:20:00Z
+ 2: 4.000000 2022-09-22T16:40:00Z
+ 3: 4.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.130  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 4.000000 2022-09-22T16:20:00Z
+ 2: 4.000000 2022-09-22T16:40:00Z
+ 3: 4.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.130  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 3.000000 2022-09-22T16:20:00Z
+ 2: 3.000000 2022-09-22T16:40:00Z
+ 3: 3.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.130  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.130  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 3.000000 2022-09-22T16:20:00Z
+ 2: 3.000000 2022-09-22T16:40:00Z
+ 3: 3.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.130  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 2.000000 2022-09-22T16:20:00Z
+ 2: 2.000000 2022-09-22T16:40:00Z
+ 3: 2.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.130  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 2.000000 2022-09-22T16:20:00Z
+ 2: 2.000000 2022-09-22T16:40:00Z
+ 3: 2.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.130  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 2.000000 2022-09-22T16:20:00Z
+ 2: 2.000000 2022-09-22T16:40:00Z
+ 3: 2.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.131  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.131  LogInfo: function Utility1_GetCTStatus data: [4x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T16:00:00Z
+ 1: 3.000000 2022-09-22T16:20:00Z
+ 2: 3.000000 2022-09-22T16:40:00Z
+ 3: 3.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:15.131  LogInfo: function Utility1_GetChillerEnergy data: [{CH01 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 380.000000                ...
+ 2: 2022-09-22T16:40:00Z 384.000000                ...
+ 3: 2022-09-22T17:00:00Z 377.000000                ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH02 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 350.000000                ...
+ 2: 2022-09-22T16:40:00Z 346.000000                ...
+ 3: 2022-09-22T17:00:00Z 329.000000                ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH03 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 403.000000                ...
+ 2: 2022-09-22T16:40:00Z 407.000000                ...
+ 3: 2022-09-22T17:00:00Z 403.000000                ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH04 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 0.000000                  ...
+ 2: 2022-09-22T16:40:00Z 0.000000                  ...
+ 3: 2022-09-22T17:00:00Z 0.000000                  ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH05 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 0.000000                  ...
+ 2: 2022-09-22T16:40:00Z 0.000000                  ...
+ 3: 2022-09-22T17:00:00Z 0.000000                  ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH06 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 439.000000                ...
+ 2: 2022-09-22T16:40:00Z 474.000000                ...
+ 3: 2022-09-22T17:00:00Z 451.000000                ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH07 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 0.000000                  ...
+ 2: 2022-09-22T16:40:00Z 0.000000                  ...
+ 3: 2022-09-22T17:00:00Z 0.000000                  ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH08 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 496.000000                ...
+ 2: 2022-09-22T16:40:00Z 495.000000                ...
+ 3: 2022-09-22T17:00:00Z 467.000000                ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH09 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 331.000000                ...
+ 2: 2022-09-22T16:40:00Z 363.000000                ...
+ 3: 2022-09-22T17:00:00Z 321.000000                ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH10 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 0.000000                  ...
+ 2: 2022-09-22T16:40:00Z 0.000000                  ...
+ 3: 2022-09-22T17:00:00Z 0.000000                  ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH11 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 603.000000                ...
+ 2: 2022-09-22T16:40:00Z 609.000000                ...
+ 3: 2022-09-22T17:00:00Z 590.000000                ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH12 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 572.000000                ...
+ 2: 2022-09-22T16:40:00Z 582.000000                ...
+ 3: 2022-09-22T17:00:00Z 574.000000                ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH13 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 0.000000                  ...
+ 2: 2022-09-22T16:40:00Z 0.000000                  ...
+ 3: 2022-09-22T17:00:00Z 0.000000                  ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH14 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 618.000000                ...
+ 2: 2022-09-22T16:40:00Z 620.000000                ...
+ 3: 2022-09-22T17:00:00Z 622.000000                ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH15 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 486.938660                ...
+ 2: 2022-09-22T16:40:00Z 489.839661                ...
+ 3: 2022-09-22T17:00:00Z 464.642944                ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH16 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 664.322754                ...
+ 2: 2022-09-22T16:40:00Z 657.894165                ...
+ 3: 2022-09-22T17:00:00Z 618.017700                ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+} {CH17 [4x7] DataFrame
+
+    Time                 Chiller_Current_Sensor_01 ...
+ 0: 2022-09-22T16:00:00Z NaN                       ...
+ 1: 2022-09-22T16:20:00Z 715.016541                ...
+ 2: 2022-09-22T16:40:00Z 718.986816                ...
+ 3: 2022-09-22T17:00:00Z 680.013184                ...
+    <string>             <float>                   ...
+
+Not Showing: Chiller_Current_Sensor_02 <float>, Chiller_Current_Sensor_03 <float>,
+Chiller_Voltage_Sensor_01 <float>, Chiller_Voltage_Sensor_02 <float>, Chiller_Voltage_Sensor_03 <float>
+}]
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH01
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH02
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH03
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH04
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH05
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH06
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH07
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH08
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH09
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH10
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH11
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH12
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH13
+2022-09-23 01:14:15.132  LogInfo: No need to run for Equipment: CH14
+2022-09-23 01:14:15.136  LogInfo: function Utility1_GetChillerEnergy data: [4x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T16:00:00Z
+ 1: 336.369837 2022-09-22T16:20:00Z
+ 2: 339.218119 2022-09-22T16:40:00Z
+ 3: 323.259449 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:15.140  LogInfo: function Utility1_GetChillerEnergy data: [4x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T16:00:00Z
+ 1: 450.432562 2022-09-22T16:20:00Z
+ 2: 455.447436 2022-09-22T16:40:00Z
+ 3: 424.701055 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:15.145  LogInfo: function Utility1_GetChillerEnergy data: [4x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T16:00:00Z
+ 1: 491.700859 2022-09-22T16:20:00Z
+ 2: 494.166739 2022-09-22T16:40:00Z
+ 3: 473.308326 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:15.265  LogInfo: function Utility1_GetChillerPlantCoolingLoad data: [{CH01 [4x2] DataFrame
+
+    CH01_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 1490.985131               2022-09-22T16:20:00Z
+ 2: 1493.744188               2022-09-22T16:40:00Z
+ 3: 1486.935972               2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH02 [4x2] DataFrame
+
+    CH02_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 1414.958814               2022-09-22T16:20:00Z
+ 2: 1369.501513               2022-09-22T16:40:00Z
+ 3: 1297.463521               2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH03 [4x2] DataFrame
+
+    CH03_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 1643.636588               2022-09-22T16:20:00Z
+ 2: 1731.383325               2022-09-22T16:40:00Z
+ 3: 1726.143196               2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH04 [4x2] DataFrame
+
+    CH04_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 21.139535                 2022-09-22T16:20:00Z
+ 2: 0.000000                  2022-09-22T16:40:00Z
+ 3: 20.985892                 2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH05 [4x2] DataFrame
+
+    CH05_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 132.759862                2022-09-22T16:20:00Z
+ 2: 133.798131                2022-09-22T16:40:00Z
+ 3: 145.246833                2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH06 [4x2] DataFrame
+
+    CH06_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 1921.638950               2022-09-22T16:20:00Z
+ 2: 1701.169527               2022-09-22T16:40:00Z
+ 3: 1710.813603               2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH07 [4x2] DataFrame
+
+    CH07_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 0.000000                  2022-09-22T16:20:00Z
+ 2: 0.000000                  2022-09-22T16:40:00Z
+ 3: 0.000000                  2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH08 [4x2] DataFrame
+
+    CH08_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 1302.182679               2022-09-22T16:20:00Z
+ 2: 1280.819529               2022-09-22T16:40:00Z
+ 3: 1245.149005               2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH09 [4x2] DataFrame
+
+    CH09_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 1104.215115               2022-09-22T16:20:00Z
+ 2: 1282.330047               2022-09-22T16:40:00Z
+ 3: 1078.585970               2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH10 [4x2] DataFrame
+
+    CH10_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 0.000000                  2022-09-22T16:20:00Z
+ 2: 0.000000                  2022-09-22T16:40:00Z
+ 3: 0.000000                  2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH11 [4x2] DataFrame
+
+    CH11_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 1523.115521               2022-09-22T16:20:00Z
+ 2: 1428.638784               2022-09-22T16:40:00Z
+ 3: 1436.997897               2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH12 [4x2] DataFrame
+
+    CH12_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 1753.111306               2022-09-22T16:20:00Z
+ 2: 1876.230308               2022-09-22T16:40:00Z
+ 3: 1897.717703               2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH13 [4x2] DataFrame
+
+    CH13_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 0.000000                  2022-09-22T16:20:00Z
+ 2: 0.000000                  2022-09-22T16:40:00Z
+ 3: 0.000000                  2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH14 [4x2] DataFrame
+
+    CH14_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 11330.971431              2022-09-22T16:20:00Z
+ 2: 11351.228780              2022-09-22T16:40:00Z
+ 3: 11283.864673              2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH15 [4x2] DataFrame
+
+    CH15_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 0.000000                  2022-09-22T16:20:00Z
+ 2: 0.000000                  2022-09-22T16:40:00Z
+ 3: 0.000000                  2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH16 [4x2] DataFrame
+
+    CH16_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: 0.000000                  2022-09-22T16:20:00Z
+ 2: 0.000000                  2022-09-22T16:40:00Z
+ 3: 0.000000                  2022-09-22T17:00:00Z
+    <float>                   <string>
+} {CH17 [4x2] DataFrame
+
+    CH17_Chiller_Cooling_Load Time
+ 0: NaN                       2022-09-22T16:00:00Z
+ 1: NaN                       2022-09-22T16:20:00Z
+ 2: NaN                       2022-09-22T16:40:00Z
+ 3: NaN                       2022-09-22T17:00:00Z
+    <float>                   <string>
+}]
+2022-09-23 01:14:15.265  LogInfo: function Utility1_GetChillerPlantCoolingLoad data: [4x2] DataFrame
+
+    Value        Time
+ 0: 0.000000     2022-09-22T16:00:00Z
+ 1: 23638.714932 2022-09-22T16:20:00Z
+ 2: 23648.844132 2022-09-22T16:40:00Z
+ 3: 23329.904265 2022-09-22T17:00:00Z
+    <float>      <string>
+
+2022-09-23 01:14:15.581  LogInfo: END function Utility1_GetChillerPlantWetBulb
+2022-09-23 01:14:15.902  LogInfo: END function Utility1_GetChillerEnergy
+2022-09-23 01:14:15.903  LogInfo: START function Utility1_GetChillerPlantChillerEnergy
+2022-09-23 01:14:15.944  LogInfo: END function Utility1_GetChillerPlantCoolingLoad
+2022-09-23 01:14:15.945  LogInfo: START function Utility1_GetChillerPlantCoolingLoadTon
+2022-09-23 01:14:15.981  LogInfo: END function Utility1_GetChillerPlantChillerRunning
+2022-09-23 01:14:15.984  LogInfo: START function Utility1_GetChillerPlantCTRunning
+2022-09-23 01:14:16.012  LogInfo: function Utility1_GetChillerPlantChillerEnergy data: [{CH01 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 248.000000
+ 2: 2022-09-22T16:40:00Z 247.000000
+ 3: 2022-09-22T17:00:00Z 244.000000
+    <string>             <float>
+} {CH02 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 227.000000
+ 2: 2022-09-22T16:40:00Z 221.000000
+ 3: 2022-09-22T17:00:00Z 211.000000
+    <string>             <float>
+} {CH03 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 271.000000
+ 2: 2022-09-22T16:40:00Z 272.000000
+ 3: 2022-09-22T17:00:00Z 270.000000
+    <string>             <float>
+} {CH04 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH05 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH06 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 278.000000
+ 2: 2022-09-22T16:40:00Z 302.000000
+ 3: 2022-09-22T17:00:00Z 283.000000
+    <string>             <float>
+} {CH07 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH08 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH09 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 196.000000
+ 2: 2022-09-22T16:40:00Z 220.000000
+ 3: 2022-09-22T17:00:00Z 191.000000
+    <string>             <float>
+} {CH10 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH11 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 378.000000
+ 2: 2022-09-22T16:40:00Z 380.000000
+ 3: 2022-09-22T17:00:00Z 369.000000
+    <string>             <float>
+} {CH12 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 359.000000
+ 2: 2022-09-22T16:40:00Z 360.000000
+ 3: 2022-09-22T17:00:00Z 355.000000
+    <string>             <float>
+} {CH13 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH14 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 400.000000
+ 2: 2022-09-22T16:40:00Z 400.000000
+ 3: 2022-09-22T17:00:00Z 403.000000
+    <string>             <float>
+} {CH15 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 336.369837
+ 2: 2022-09-22T16:40:00Z 339.218119
+ 3: 2022-09-22T17:00:00Z 323.259449
+    <string>             <float>
+} {CH16 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 450.432562
+ 2: 2022-09-22T16:40:00Z 455.447436
+ 3: 2022-09-22T17:00:00Z 424.701055
+    <string>             <float>
+} {CH17 [4x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 491.700859
+ 2: 2022-09-22T16:40:00Z 494.166739
+ 3: 2022-09-22T17:00:00Z 473.308326
+    <string>             <float>
+}]
+2022-09-23 01:14:16.012  LogInfo: function Utility1_GetChillerPlantChillerEnergy data: [4x2] DataFrame
+
+    Value       Time
+ 0: 0.000000    2022-09-22T16:00:00Z
+ 1: 3635.503258 2022-09-22T16:20:00Z
+ 2: 3690.832294 2022-09-22T16:40:00Z
+ 3: 3547.268830 2022-09-22T17:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:16.036  LogInfo: END function Utility1_GetCTStatus
+2022-09-23 01:14:16.055  LogInfo: function Utility1_GetChillerPlantCoolingLoadTon data: [{Chiller_Plant [4x2] DataFrame
+
+    Time                 Chiller_Plant_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 23638.714932
+ 2: 2022-09-22T16:40:00Z 23648.844132
+ 3: 2022-09-22T17:00:00Z 23329.904265
+    <string>             <float>
+}]
+2022-09-23 01:14:16.055  LogInfo: function Utility1_GetChillerPlantCoolingLoadTon data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T16:00:00Z
+ 1: 6721.463485 2022-09-22T16:20:00Z
+ 2: 6724.343636 2022-09-22T16:40:00Z
+ 3: 6633.655852 2022-09-22T17:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:16.140  LogInfo: function Utility1_GetChillerPlantCTRunning data: [{CT0 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CT1 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 3.000000
+ 2: 2022-09-22T16:40:00Z 3.000000
+ 3: 2022-09-22T17:00:00Z 3.000000
+    <string>             <float>
+} {CT10 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 3.000000
+ 2: 2022-09-22T16:40:00Z 3.000000
+ 3: 2022-09-22T17:00:00Z 3.000000
+    <string>             <float>
+} {CT11 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 4.000000
+ 2: 2022-09-22T16:40:00Z 4.000000
+ 3: 2022-09-22T17:00:00Z 4.000000
+    <string>             <float>
+} {CT12 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 4.000000
+ 2: 2022-09-22T16:40:00Z 4.000000
+ 3: 2022-09-22T17:00:00Z 4.000000
+    <string>             <float>
+} {CT13 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 4.000000
+ 2: 2022-09-22T16:40:00Z 4.000000
+ 3: 2022-09-22T17:00:00Z 4.000000
+    <string>             <float>
+} {CT14 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 3.000000
+ 2: 2022-09-22T16:40:00Z 3.000000
+ 3: 2022-09-22T17:00:00Z 3.000000
+    <string>             <float>
+} {CT15 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 4.000000
+ 2: 2022-09-22T16:40:00Z 4.000000
+ 3: 2022-09-22T17:00:00Z 4.000000
+    <string>             <float>
+} {CT16 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 4.000000
+ 2: 2022-09-22T16:40:00Z 4.000000
+ 3: 2022-09-22T17:00:00Z 4.000000
+    <string>             <float>
+} {CT17 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 4.000000
+ 2: 2022-09-22T16:40:00Z 4.000000
+ 3: 2022-09-22T17:00:00Z 4.000000
+    <string>             <float>
+} {CT2 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 3.000000
+ 2: 2022-09-22T16:40:00Z 3.000000
+ 3: 2022-09-22T17:00:00Z 3.000000
+    <string>             <float>
+} {CT3 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CT4 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 3.000000
+ 2: 2022-09-22T16:40:00Z 3.000000
+ 3: 2022-09-22T17:00:00Z 3.000000
+    <string>             <float>
+} {CT5 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 2.000000
+ 2: 2022-09-22T16:40:00Z 2.000000
+ 3: 2022-09-22T17:00:00Z 2.000000
+    <string>             <float>
+} {CT6 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 2.000000
+ 2: 2022-09-22T16:40:00Z 2.000000
+ 3: 2022-09-22T17:00:00Z 2.000000
+    <string>             <float>
+} {CT7 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 2.000000
+ 2: 2022-09-22T16:40:00Z 2.000000
+ 3: 2022-09-22T17:00:00Z 2.000000
+    <string>             <float>
+} {CT8 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CT9 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 3.000000
+ 2: 2022-09-22T16:40:00Z 3.000000
+ 3: 2022-09-22T17:00:00Z 3.000000
+    <string>             <float>
+}]
+2022-09-23 01:14:16.141  LogInfo: function Utility1_GetChillerPlantCTRunning data: [4x2] DataFrame
+
+    Value     Time
+ 0: 0.000000  2022-09-22T16:00:00Z
+ 1: 14.000000 2022-09-22T16:20:00Z
+ 2: 14.000000 2022-09-22T16:40:00Z
+ 3: 14.000000 2022-09-22T17:00:00Z
+    <float>   <string>
+
+2022-09-23 01:14:16.536  LogInfo: END function Utility1_GetChillerPlantChillerEnergy
+2022-09-23 01:14:16.537  LogInfo: START function Utility1_GetChillerPlantCTEnergy
+2022-09-23 01:14:16.538  LogInfo: START function Utility1_GetChillerPlantEnergy1Hour
+2022-09-23 01:14:16.566  LogInfo: END function Utility1_GetChillerPlantCoolingLoadTon
+2022-09-23 01:14:16.612  LogInfo: END function Utility1_GetChillerPlantCTRunning
+2022-09-23 01:14:16.613  LogInfo: START function Utility1_GetChillerPlantPCHWPRunning
+2022-09-23 01:14:16.625  LogInfo: function Utility1_GetChillerPlantCTEnergy data: [{CT0 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CT1 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 3.000000
+ 2: 2022-09-22T16:40:00Z 3.000000
+ 3: 2022-09-22T17:00:00Z 3.000000
+    <string>             <float>
+} {CT10 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 3.000000
+ 2: 2022-09-22T16:40:00Z 3.000000
+ 3: 2022-09-22T17:00:00Z 3.000000
+    <string>             <float>
+} {CT11 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 4.000000
+ 2: 2022-09-22T16:40:00Z 4.000000
+ 3: 2022-09-22T17:00:00Z 4.000000
+    <string>             <float>
+} {CT12 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 4.000000
+ 2: 2022-09-22T16:40:00Z 4.000000
+ 3: 2022-09-22T17:00:00Z 4.000000
+    <string>             <float>
+} {CT13 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 4.000000
+ 2: 2022-09-22T16:40:00Z 4.000000
+ 3: 2022-09-22T17:00:00Z 4.000000
+    <string>             <float>
+} {CT14 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 3.000000
+ 2: 2022-09-22T16:40:00Z 3.000000
+ 3: 2022-09-22T17:00:00Z 3.000000
+    <string>             <float>
+} {CT15 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 4.000000
+ 2: 2022-09-22T16:40:00Z 4.000000
+ 3: 2022-09-22T17:00:00Z 4.000000
+    <string>             <float>
+} {CT16 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 4.000000
+ 2: 2022-09-22T16:40:00Z 4.000000
+ 3: 2022-09-22T17:00:00Z 4.000000
+    <string>             <float>
+} {CT17 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 4.000000
+ 2: 2022-09-22T16:40:00Z 4.000000
+ 3: 2022-09-22T17:00:00Z 4.000000
+    <string>             <float>
+} {CT2 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 3.000000
+ 2: 2022-09-22T16:40:00Z 3.000000
+ 3: 2022-09-22T17:00:00Z 3.000000
+    <string>             <float>
+} {CT3 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CT4 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 3.000000
+ 2: 2022-09-22T16:40:00Z 3.000000
+ 3: 2022-09-22T17:00:00Z 3.000000
+    <string>             <float>
+} {CT5 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 2.000000
+ 2: 2022-09-22T16:40:00Z 2.000000
+ 3: 2022-09-22T17:00:00Z 2.000000
+    <string>             <float>
+} {CT6 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 2.000000
+ 2: 2022-09-22T16:40:00Z 2.000000
+ 3: 2022-09-22T17:00:00Z 2.000000
+    <string>             <float>
+} {CT7 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 2.000000
+ 2: 2022-09-22T16:40:00Z 2.000000
+ 3: 2022-09-22T17:00:00Z 2.000000
+    <string>             <float>
+} {CT8 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CT9 [4x2] DataFrame
+
+    Time                 Cooling_Tower_Total_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 3.000000
+ 2: 2022-09-22T16:40:00Z 3.000000
+ 3: 2022-09-22T17:00:00Z 3.000000
+    <string>             <float>
+}]
+2022-09-23 01:14:16.626  LogInfo: function Utility1_GetChillerPlantEnergy1Hour data: [{CH01 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 253.000000
+ 1: 2022-09-22T14:00:00Z 251.000000
+ 2: 2022-09-22T15:00:00Z 249.666667
+ 3: 2022-09-22T16:00:00Z 247.666667
+ 4: 2022-09-22T17:00:00Z 244.000000
+    <string>             <float>
+} {CH02 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 226.000000
+ 1: 2022-09-22T14:00:00Z 226.333333
+ 2: 2022-09-22T15:00:00Z 222.000000
+ 3: 2022-09-22T16:00:00Z 224.666667
+ 4: 2022-09-22T17:00:00Z 211.000000
+    <string>             <float>
+} {CH03 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 274.500000
+ 1: 2022-09-22T14:00:00Z 270.666667
+ 2: 2022-09-22T15:00:00Z 266.333333
+ 3: 2022-09-22T16:00:00Z 271.000000
+ 4: 2022-09-22T17:00:00Z 270.000000
+    <string>             <float>
+} {CH04 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 0.000000
+ 1: 2022-09-22T14:00:00Z 0.000000
+ 2: 2022-09-22T15:00:00Z 0.000000
+ 3: 2022-09-22T16:00:00Z 0.000000
+ 4: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH05 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 0.000000
+ 1: 2022-09-22T14:00:00Z 0.000000
+ 2: 2022-09-22T15:00:00Z 0.000000
+ 3: 2022-09-22T16:00:00Z 0.000000
+ 4: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH06 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 303.500000
+ 1: 2022-09-22T14:00:00Z 291.000000
+ 2: 2022-09-22T15:00:00Z 301.666667
+ 3: 2022-09-22T16:00:00Z 293.000000
+ 4: 2022-09-22T17:00:00Z 283.000000
+    <string>             <float>
+} {CH07 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 0.000000
+ 1: 2022-09-22T14:00:00Z 0.000000
+ 2: 2022-09-22T15:00:00Z 0.000000
+ 3: 2022-09-22T16:00:00Z 0.000000
+ 4: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH08 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 0.000000
+ 1: 2022-09-22T14:00:00Z 0.000000
+ 2: 2022-09-22T15:00:00Z 0.000000
+ 3: 2022-09-22T16:00:00Z 0.000000
+ 4: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH09 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 201.000000
+ 1: 2022-09-22T14:00:00Z 208.333333
+ 2: 2022-09-22T15:00:00Z 205.666667
+ 3: 2022-09-22T16:00:00Z 212.666667
+ 4: 2022-09-22T17:00:00Z 191.000000
+    <string>             <float>
+} {CH10 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 0.000000
+ 1: 2022-09-22T14:00:00Z 0.000000
+ 2: 2022-09-22T15:00:00Z 0.000000
+ 3: 2022-09-22T16:00:00Z 0.000000
+ 4: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH11 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 368.500000
+ 1: 2022-09-22T14:00:00Z 371.333333
+ 2: 2022-09-22T15:00:00Z 370.666667
+ 3: 2022-09-22T16:00:00Z 376.333333
+ 4: 2022-09-22T17:00:00Z 369.000000
+    <string>             <float>
+} {CH12 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 359.000000
+ 1: 2022-09-22T14:00:00Z 357.000000
+ 2: 2022-09-22T15:00:00Z 357.000000
+ 3: 2022-09-22T16:00:00Z 358.666667
+ 4: 2022-09-22T17:00:00Z 355.000000
+    <string>             <float>
+} {CH13 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 0.000000
+ 1: 2022-09-22T14:00:00Z 0.000000
+ 2: 2022-09-22T15:00:00Z 0.000000
+ 3: 2022-09-22T16:00:00Z 0.000000
+ 4: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH14 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z 399.000000
+ 1: 2022-09-22T14:00:00Z 400.333333
+ 2: 2022-09-22T15:00:00Z 399.000000
+ 3: 2022-09-22T16:00:00Z 400.000000
+ 4: 2022-09-22T17:00:00Z 403.000000
+    <string>             <float>
+} {CH15 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z NaN
+ 1: 2022-09-22T14:00:00Z NaN
+ 2: 2022-09-22T15:00:00Z NaN
+ 3: 2022-09-22T16:00:00Z 337.793978
+ 4: 2022-09-22T17:00:00Z 323.259449
+    <string>             <float>
+} {CH16 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z NaN
+ 1: 2022-09-22T14:00:00Z NaN
+ 2: 2022-09-22T15:00:00Z NaN
+ 3: 2022-09-22T16:00:00Z 452.939999
+ 4: 2022-09-22T17:00:00Z 424.701055
+    <string>             <float>
+} {CH17 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T13:00:00Z NaN
+ 1: 2022-09-22T14:00:00Z NaN
+ 2: 2022-09-22T15:00:00Z NaN
+ 3: 2022-09-22T16:00:00Z 492.933799
+ 4: 2022-09-22T17:00:00Z 473.308326
+    <string>             <float>
+}]
+2022-09-23 01:14:16.626  LogInfo: function Utility1_GetChillerPlantCTEnergy data: [4x2] DataFrame
+
+    Value      Time
+ 0: 0.000000   2022-09-22T16:00:00Z
+ 1: 528.000000 2022-09-22T16:20:00Z
+ 2: 528.000000 2022-09-22T16:40:00Z
+ 3: 528.000000 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:16.626  LogInfo: function Utility1_GetChillerPlantEnergy1Hour data: [5x2] DataFrame
+
+    Value       Time
+ 0: 2384.500000 2022-09-22T13:00:00Z
+ 1: 2375.999999 2022-09-22T14:00:00Z
+ 2: 2372.000001 2022-09-22T15:00:00Z
+ 3: 3667.667777 2022-09-22T16:00:00Z
+ 4: 3547.268830 2022-09-22T17:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:16.712  LogInfo: function Utility1_GetChillerPlantPCHWPRunning data: [{PCHP1 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {PCHP10 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {PCHP11 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {PCHP12 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {PCHP13 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {PCHP14 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {PCHP15 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {PCHP16 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {PCHP17 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {PCHP2 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {PCHP3 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {PCHP4 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {PCHP5 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {PCHP6 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {PCHP7 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {PCHP8 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {PCHP9 [4x2] DataFrame
+
+    Time                 Primary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+}]
+2022-09-23 01:14:16.713  LogInfo: function Utility1_GetChillerPlantPCHWPRunning data: [4x2] DataFrame
+
+    Value     Time
+ 0: 0.000000  2022-09-22T16:00:00Z
+ 1: 10.000000 2022-09-22T16:20:00Z
+ 2: 10.000000 2022-09-22T16:40:00Z
+ 3: 10.000000 2022-09-22T17:00:00Z
+    <float>   <string>
+
+2022-09-23 01:14:17.034  LogInfo: END function Utility1_GetChillerPlantCTEnergy
+2022-09-23 01:14:17.035  LogInfo: START function Utility1_GetChillerPlantTotalEnergy
+2022-09-23 01:14:17.081  LogInfo: END function Utility1_GetChillerPlantEnergy1Hour
+2022-09-23 01:14:17.082  LogInfo: START function Utility1_GetChillerPlantEnergy1Day
+2022-09-23 01:14:17.115  LogInfo: function Utility1_GetChillerPlantTotalEnergy data: [{Chiller_Plant [4x3] DataFrame
+
+    Time                 Chiller_Plant_Total_CT_Energy ...
+ 0: 2022-09-22T16:00:00Z NaN                           ...
+ 1: 2022-09-22T16:20:00Z 528.000000                    ...
+ 2: 2022-09-22T16:40:00Z 528.000000                    ...
+ 3: 2022-09-22T17:00:00Z 528.000000                    ...
+    <string>             <float>                       ...
+
+Not Showing: Chiller_Plant_Total_Chiller_Energy <float>
+}]
+2022-09-23 01:14:17.115  LogInfo: function Utility1_GetChillerPlantTotalEnergy data: [4x2] DataFrame
+
+    Value       Time
+ 0: 0.000000    2022-09-22T16:00:00Z
+ 1: 4163.503258 2022-09-22T16:20:00Z
+ 2: 4218.832294 2022-09-22T16:40:00Z
+ 3: 4075.268830 2022-09-22T17:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:17.172  LogInfo: function Utility1_GetChillerPlantEnergy1Day data: [{CH01 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 4582.000000
+ 1: 2022-09-19T00:00:00Z 17718.000000
+ 2: 2022-09-20T00:00:00Z 17411.000000
+ 3: 2022-09-21T00:00:00Z 17389.000000
+ 4: 2022-09-22T00:00:00Z 13257.000000
+    <string>             <float>
+} {CH02 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 4151.000000
+ 1: 2022-09-19T00:00:00Z 16482.000000
+ 2: 2022-09-20T00:00:00Z 16204.000000
+ 3: 2022-09-21T00:00:00Z 16494.000000
+ 4: 2022-09-22T00:00:00Z 12217.000000
+    <string>             <float>
+} {CH03 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 4861.000000
+ 1: 2022-09-19T00:00:00Z 19879.000000
+ 2: 2022-09-20T00:00:00Z 19371.000000
+ 3: 2022-09-21T00:00:00Z 19517.000000
+ 4: 2022-09-22T00:00:00Z 14699.000000
+    <string>             <float>
+} {CH04 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 0.000000
+ 1: 2022-09-19T00:00:00Z 0.000000
+ 2: 2022-09-20T00:00:00Z 0.000000
+ 3: 2022-09-21T00:00:00Z 0.000000
+ 4: 2022-09-22T00:00:00Z 0.000000
+    <string>             <float>
+} {CH05 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 0.000000
+ 1: 2022-09-19T00:00:00Z 0.000000
+ 2: 2022-09-20T00:00:00Z 0.000000
+ 3: 2022-09-21T00:00:00Z 0.000000
+ 4: 2022-09-22T00:00:00Z 0.000000
+    <string>             <float>
+} {CH06 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 5725.000000
+ 1: 2022-09-19T00:00:00Z 21669.000000
+ 2: 2022-09-20T00:00:00Z 21547.000000
+ 3: 2022-09-21T00:00:00Z 21860.000000
+ 4: 2022-09-22T00:00:00Z 15949.000000
+    <string>             <float>
+} {CH07 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 0.000000
+ 1: 2022-09-19T00:00:00Z 0.000000
+ 2: 2022-09-20T00:00:00Z 0.000000
+ 3: 2022-09-21T00:00:00Z 0.000000
+ 4: 2022-09-22T00:00:00Z 0.000000
+    <string>             <float>
+} {CH08 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 0.000000
+ 1: 2022-09-19T00:00:00Z 0.000000
+ 2: 2022-09-20T00:00:00Z 0.000000
+ 3: 2022-09-21T00:00:00Z 0.000000
+ 4: 2022-09-22T00:00:00Z 0.000000
+    <string>             <float>
+} {CH09 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 4079.000000
+ 1: 2022-09-19T00:00:00Z 15381.000000
+ 2: 2022-09-20T00:00:00Z 14879.000000
+ 3: 2022-09-21T00:00:00Z 14950.000000
+ 4: 2022-09-22T00:00:00Z 10922.000000
+    <string>             <float>
+} {CH10 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 0.000000
+ 1: 2022-09-19T00:00:00Z 0.000000
+ 2: 2022-09-20T00:00:00Z 0.000000
+ 3: 2022-09-21T00:00:00Z 0.000000
+ 4: 2022-09-22T00:00:00Z 0.000000
+    <string>             <float>
+} {CH11 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 6950.000000
+ 1: 2022-09-19T00:00:00Z 26311.000000
+ 2: 2022-09-20T00:00:00Z 26091.000000
+ 3: 2022-09-21T00:00:00Z 26963.000000
+ 4: 2022-09-22T00:00:00Z 19695.000000
+    <string>             <float>
+} {CH12 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 6716.000000
+ 1: 2022-09-19T00:00:00Z 25357.000000
+ 2: 2022-09-20T00:00:00Z 25307.000000
+ 3: 2022-09-21T00:00:00Z 25696.000000
+ 4: 2022-09-22T00:00:00Z 18846.000000
+    <string>             <float>
+} {CH13 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 0.000000
+ 1: 2022-09-19T00:00:00Z 0.000000
+ 2: 2022-09-20T00:00:00Z 0.000000
+ 3: 2022-09-21T00:00:00Z 0.000000
+ 4: 2022-09-22T00:00:00Z 0.000000
+    <string>             <float>
+} {CH14 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 7880.000000
+ 1: 2022-09-19T00:00:00Z 28751.000000
+ 2: 2022-09-20T00:00:00Z 28821.000000
+ 3: 2022-09-21T00:00:00Z 28901.000000
+ 4: 2022-09-22T00:00:00Z 20800.000000
+    <string>             <float>
+} {CH15 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z NaN
+ 1: 2022-09-19T00:00:00Z NaN
+ 2: 2022-09-20T00:00:00Z NaN
+ 3: 2022-09-21T00:00:00Z 1999.564560
+ 4: 2022-09-22T00:00:00Z 6348.849551
+    <string>             <float>
+} {CH16 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z NaN
+ 1: 2022-09-19T00:00:00Z NaN
+ 2: 2022-09-20T00:00:00Z NaN
+ 3: 2022-09-21T00:00:00Z 2714.468730
+ 4: 2022-09-22T00:00:00Z 7906.469569
+    <string>             <float>
+} {CH17 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z NaN
+ 1: 2022-09-19T00:00:00Z NaN
+ 2: 2022-09-20T00:00:00Z NaN
+ 3: 2022-09-21T00:00:00Z 2958.632390
+ 4: 2022-09-22T00:00:00Z 8602.512713
+    <string>             <float>
+}]
+2022-09-23 01:14:17.172  LogInfo: function Utility1_GetChillerPlantEnergy1Day data: [5x2] DataFrame
+
+    Value        Time
+ 0: 14981.333333 2022-09-18T00:00:00Z
+ 1: 57182.666667 2022-09-19T00:00:00Z
+ 2: 56543.666667 2022-09-20T00:00:00Z
+ 3: 59814.221893 2022-09-21T00:00:00Z
+ 4: 49747.610611 2022-09-22T00:00:00Z
+    <float>      <string>
+
+2022-09-23 01:14:17.187  LogInfo: END function Utility1_GetChillerPlantPCHWPRunning
+2022-09-23 01:14:17.189  LogInfo: START function Utility1_GetChillerPlantSCHWPRunning
+2022-09-23 01:14:17.284  LogInfo: function Utility1_GetChillerPlantSCHWPRunning data: [{SCHP1 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {SCHP10 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {SCHP11 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {SCHP12 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {SCHP13 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {SCHP14 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {SCHP15 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {SCHP16 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {SCHP17 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {SCHP2 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {SCHP3 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {SCHP4 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {SCHP5 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {SCHP6 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {SCHP7 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {SCHP8 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+} {SCHP9 [4x2] DataFrame
+
+    Time                 Secondary_Chilled_Water_Pump_Status
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1.000000
+ 2: 2022-09-22T16:40:00Z 1.000000
+ 3: 2022-09-22T17:00:00Z 1.000000
+    <string>             <float>
+}]
+2022-09-23 01:14:17.284  LogInfo: function Utility1_GetChillerPlantSCHWPRunning data: [4x2] DataFrame
+
+    Value     Time
+ 0: 0.000000  2022-09-22T16:00:00Z
+ 1: 14.000000 2022-09-22T16:20:00Z
+ 2: 14.000000 2022-09-22T16:40:00Z
+ 3: 14.000000 2022-09-22T17:00:00Z
+    <float>   <string>
+
+2022-09-23 01:14:17.494  LogInfo: END function Utility1_GetChillerPlantTotalEnergy
+2022-09-23 01:14:17.496  LogInfo: START function Utility1_GetChillerPlantCoP
+2022-09-23 01:14:17.599  LogInfo: function Utility1_GetChillerPlantCoP data: [{Chiller_Plant [4x3] DataFrame
+
+    Time                 Chiller_Plant_Cooling_Load ...
+ 0: 2022-09-22T16:00:00Z NaN                        ...
+ 1: 2022-09-22T16:20:00Z 23638.714932               ...
+ 2: 2022-09-22T16:40:00Z 23648.844132               ...
+ 3: 2022-09-22T17:00:00Z 23329.904265               ...
+    <string>             <float>                    ...
+
+Not Showing: Chiller_Plant_Total_Chiller_Energy <float>
+}]
+2022-09-23 01:14:17.599  LogInfo: function Utility1_GetChillerPlantCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 6.502185 2022-09-22T16:20:00Z
+ 2: 6.407456 2022-09-22T16:40:00Z
+ 3: 6.576864 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:17.606  LogInfo: END function Utility1_GetChillerPlantEnergy1Day
+2022-09-23 01:14:17.608  LogInfo: START function Utility1_GetChillerPlantEnergy1Month
+2022-09-23 01:14:17.693  LogInfo: END function Utility1_GetChillerPlantSCHWPRunning
+2022-09-23 01:14:17.693  LogInfo: function Utility1_GetChillerPlantEnergy1Month data: [{CH01 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 80244.000000
+    <string>                       <float>
+} {CH02 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 74685.000000
+    <string>                       <float>
+} {CH03 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 89387.000000
+    <string>                       <float>
+} {CH04 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 0.000000
+    <string>                       <float>
+} {CH05 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 0.000000
+    <string>                       <float>
+} {CH06 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 98861.000000
+    <string>                       <float>
+} {CH07 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 0.000000
+    <string>                       <float>
+} {CH08 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 0.000000
+    <string>                       <float>
+} {CH09 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 68872.000000
+    <string>                       <float>
+} {CH10 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 0.000000
+    <string>                       <float>
+} {CH11 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 120827.000000
+    <string>                       <float>
+} {CH12 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 115999.000000
+    <string>                       <float>
+} {CH13 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 0.000000
+    <string>                       <float>
+} {CH14 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 131140.000000
+    <string>                       <float>
+} {CH15 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 8348.414111
+    <string>                       <float>
+} {CH16 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 10620.938300
+    <string>                       <float>
+} {CH17 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 11561.145103
+    <string>                       <float>
+}]
+2022-09-23 01:14:17.693  LogInfo: function Utility1_GetChillerPlantEnergy1Month data: [1x2] DataFrame
+
+    Value         Time
+ 0: 270181.832505 2022-09-01T00:00:00.000000001Z
+    <float>       <string>
+
+2022-09-23 01:14:18.130  LogInfo: END function Utility1_GetChillerPlantCoP
+2022-09-23 01:14:18.131  LogInfo: START function Utility1_GetChillerEnergy1Hour
+2022-09-23 01:14:18.131  LogInfo: START function Utility1_GetChillerDeltaT
+2022-09-23 01:14:18.132  LogInfo: START function Utility1_GetChillerPlantCoP_kWPerTon
+2022-09-23 01:14:18.200  LogInfo: END function Utility1_GetChillerPlantEnergy1Month
+2022-09-23 01:14:18.214  LogInfo: function Utility1_GetChillerPlantCoP_kWPerTon data: [{Chiller_Plant [4x3] DataFrame
+
+    Time                 Chiller_Plant_Cooling_Load ...
+ 0: 2022-09-22T16:00:00Z NaN                        ...
+ 1: 2022-09-22T16:20:00Z 23638.714932               ...
+ 2: 2022-09-22T16:40:00Z 23648.844132               ...
+ 3: 2022-09-22T17:00:00Z 23329.904265               ...
+    <string>             <float>                    ...
+
+Not Showing: Chiller_Plant_Total_Chiller_Energy <float>
+}]
+2022-09-23 01:14:18.214  LogInfo: function Utility1_GetChillerPlantCoP_kWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.540880 2022-09-22T16:20:00Z
+ 2: 0.548876 2022-09-22T16:40:00Z
+ 3: 0.534738 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.214  LogInfo: function Utility1_GetChillerDeltaT data: [{CH01 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.055554                                       ...
+ 2: 2022-09-22T16:40:00Z 10.055554                                       ...
+ 3: 2022-09-22T17:00:00Z 9.944446                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH02 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.055554                                       ...
+ 2: 2022-09-22T16:40:00Z 10.055554                                       ...
+ 3: 2022-09-22T17:00:00Z 9.833334                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH03 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 9.944446                                        ...
+ 2: 2022-09-22T16:40:00Z 10.111112                                       ...
+ 3: 2022-09-22T17:00:00Z 9.944446                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH04 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.111112                                       ...
+ 2: 2022-09-22T16:40:00Z 10.111112                                       ...
+ 3: 2022-09-22T17:00:00Z 10.111112                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH05 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.388889                                       ...
+ 2: 2022-09-22T16:40:00Z 10.388889                                       ...
+ 3: 2022-09-22T17:00:00Z 10.277778                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH06 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.388889                                       ...
+ 2: 2022-09-22T16:40:00Z 10.388889                                       ...
+ 3: 2022-09-22T17:00:00Z 10.222223                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH07 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 0.000000                                        ...
+ 2: 2022-09-22T16:40:00Z 0.000000                                        ...
+ 3: 2022-09-22T17:00:00Z 0.000000                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH08 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.277778                                       ...
+ 2: 2022-09-22T16:40:00Z 10.277778                                       ...
+ 3: 2022-09-22T17:00:00Z 10.000000                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH09 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 9.555556                                        ...
+ 2: 2022-09-22T16:40:00Z 10.000000                                       ...
+ 3: 2022-09-22T17:00:00Z 9.611111                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH10 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 26.833336                                       ...
+ 2: 2022-09-22T16:40:00Z 26.833336                                       ...
+ 3: 2022-09-22T17:00:00Z 26.833336                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH11 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 11.444444                                       ...
+ 2: 2022-09-22T16:40:00Z 11.444444                                       ...
+ 3: 2022-09-22T17:00:00Z 11.333334                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH12 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 11.500000                                       ...
+ 2: 2022-09-22T16:40:00Z 11.500000                                       ...
+ 3: 2022-09-22T17:00:00Z 11.500000                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH13 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 12.722223                                       ...
+ 2: 2022-09-22T16:40:00Z 12.722223                                       ...
+ 3: 2022-09-22T17:00:00Z 12.722223                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH14 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 11.444444                                       ...
+ 2: 2022-09-22T16:40:00Z 11.444444                                       ...
+ 3: 2022-09-22T17:00:00Z 11.333334                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>
+} {CH15 [4x2] DataFrame
+
+    Time                 Chiller_Chilled_Water_Supply_Temperature_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 6.981110
+ 2: 2022-09-22T16:40:00Z 6.981110
+ 3: 2022-09-22T17:00:00Z 6.981110
+    <string>             <float>
+} {CH16 [4x2] DataFrame
+
+    Time                 Chiller_Chilled_Water_Supply_Temperature_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 6.949122
+ 2: 2022-09-22T16:40:00Z 6.849256
+ 3: 2022-09-22T17:00:00Z 6.951887
+    <string>             <float>
+} {CH17 [4x2] DataFrame
+
+    Time                 Chiller_Chilled_Water_Supply_Temperature_Sensor
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 7.214053
+ 2: 2022-09-22T16:40:00Z 7.214053
+ 3: 2022-09-22T17:00:00Z 7.214053
+    <string>             <float>
+}]
+2022-09-23 01:14:18.214  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 3.111109 2022-09-22T16:20:00Z
+ 2: 3.111109 2022-09-22T16:40:00Z
+ 3: 3.111113 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 3.055555 2022-09-22T16:20:00Z
+ 2: 2.944443 2022-09-22T16:40:00Z
+ 3: 2.833335 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 2.944447 2022-09-22T16:20:00Z
+ 2: 3.111113 2022-09-22T16:40:00Z
+ 3: 3.111113 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [{CH01 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 256.000000
+ 1: 2022-09-22T12:00:00Z 253.666667
+ 2: 2022-09-22T13:00:00Z 253.666667
+ 3: 2022-09-22T14:00:00Z 251.000000
+ 4: 2022-09-22T15:00:00Z 249.666667
+ 5: 2022-09-22T16:00:00Z 247.666667
+ 6: 2022-09-22T17:00:00Z 244.000000
+    <string>             <float>
+} {CH02 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 219.500000
+ 1: 2022-09-22T12:00:00Z 221.333333
+ 2: 2022-09-22T13:00:00Z 227.000000
+ 3: 2022-09-22T14:00:00Z 226.333333
+ 4: 2022-09-22T15:00:00Z 222.000000
+ 5: 2022-09-22T16:00:00Z 224.666667
+ 6: 2022-09-22T17:00:00Z 211.000000
+    <string>             <float>
+} {CH03 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 270.500000
+ 1: 2022-09-22T12:00:00Z 266.666667
+ 2: 2022-09-22T13:00:00Z 272.333333
+ 3: 2022-09-22T14:00:00Z 270.666667
+ 4: 2022-09-22T15:00:00Z 266.333333
+ 5: 2022-09-22T16:00:00Z 271.000000
+ 6: 2022-09-22T17:00:00Z 270.000000
+    <string>             <float>
+} {CH04 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 0.000000
+ 1: 2022-09-22T12:00:00Z 0.000000
+ 2: 2022-09-22T13:00:00Z 0.000000
+ 3: 2022-09-22T14:00:00Z 0.000000
+ 4: 2022-09-22T15:00:00Z 0.000000
+ 5: 2022-09-22T16:00:00Z 0.000000
+ 6: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH05 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 0.000000
+ 1: 2022-09-22T12:00:00Z 0.000000
+ 2: 2022-09-22T13:00:00Z 0.000000
+ 3: 2022-09-22T14:00:00Z 0.000000
+ 4: 2022-09-22T15:00:00Z 0.000000
+ 5: 2022-09-22T16:00:00Z 0.000000
+ 6: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH06 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 322.500000
+ 1: 2022-09-22T12:00:00Z 301.000000
+ 2: 2022-09-22T13:00:00Z 303.333333
+ 3: 2022-09-22T14:00:00Z 291.000000
+ 4: 2022-09-22T15:00:00Z 301.666667
+ 5: 2022-09-22T16:00:00Z 293.000000
+ 6: 2022-09-22T17:00:00Z 283.000000
+    <string>             <float>
+} {CH07 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 0.000000
+ 1: 2022-09-22T12:00:00Z 0.000000
+ 2: 2022-09-22T13:00:00Z 0.000000
+ 3: 2022-09-22T14:00:00Z 0.000000
+ 4: 2022-09-22T15:00:00Z 0.000000
+ 5: 2022-09-22T16:00:00Z 0.000000
+ 6: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH08 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 0.000000
+ 1: 2022-09-22T12:00:00Z 0.000000
+ 2: 2022-09-22T13:00:00Z 0.000000
+ 3: 2022-09-22T14:00:00Z 0.000000
+ 4: 2022-09-22T15:00:00Z 0.000000
+ 5: 2022-09-22T16:00:00Z 0.000000
+ 6: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH09 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 206.000000
+ 1: 2022-09-22T12:00:00Z 203.333333
+ 2: 2022-09-22T13:00:00Z 206.666667
+ 3: 2022-09-22T14:00:00Z 208.333333
+ 4: 2022-09-22T15:00:00Z 205.666667
+ 5: 2022-09-22T16:00:00Z 212.666667
+ 6: 2022-09-22T17:00:00Z 191.000000
+    <string>             <float>
+} {CH10 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 0.000000
+ 1: 2022-09-22T12:00:00Z 0.000000
+ 2: 2022-09-22T13:00:00Z 0.000000
+ 3: 2022-09-22T14:00:00Z 0.000000
+ 4: 2022-09-22T15:00:00Z 0.000000
+ 5: 2022-09-22T16:00:00Z 0.000000
+ 6: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH11 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 368.000000
+ 1: 2022-09-22T12:00:00Z 363.000000
+ 2: 2022-09-22T13:00:00Z 369.333333
+ 3: 2022-09-22T14:00:00Z 371.333333
+ 4: 2022-09-22T15:00:00Z 370.666667
+ 5: 2022-09-22T16:00:00Z 376.333333
+ 6: 2022-09-22T17:00:00Z 369.000000
+    <string>             <float>
+} {CH12 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 357.000000
+ 1: 2022-09-22T12:00:00Z 350.666667
+ 2: 2022-09-22T13:00:00Z 359.000000
+ 3: 2022-09-22T14:00:00Z 357.000000
+ 4: 2022-09-22T15:00:00Z 357.000000
+ 5: 2022-09-22T16:00:00Z 358.666667
+ 6: 2022-09-22T17:00:00Z 355.000000
+    <string>             <float>
+} {CH13 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 0.000000
+ 1: 2022-09-22T12:00:00Z 0.000000
+ 2: 2022-09-22T13:00:00Z 0.000000
+ 3: 2022-09-22T14:00:00Z 0.000000
+ 4: 2022-09-22T15:00:00Z 0.000000
+ 5: 2022-09-22T16:00:00Z 0.000000
+ 6: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH14 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z 399.000000
+ 1: 2022-09-22T12:00:00Z 398.333333
+ 2: 2022-09-22T13:00:00Z 399.000000
+ 3: 2022-09-22T14:00:00Z 400.333333
+ 4: 2022-09-22T15:00:00Z 399.000000
+ 5: 2022-09-22T16:00:00Z 400.000000
+ 6: 2022-09-22T17:00:00Z 403.000000
+    <string>             <float>
+} {CH15 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z NaN
+ 1: 2022-09-22T12:00:00Z NaN
+ 2: 2022-09-22T13:00:00Z NaN
+ 3: 2022-09-22T14:00:00Z NaN
+ 4: 2022-09-22T15:00:00Z NaN
+ 5: 2022-09-22T16:00:00Z 337.793978
+ 6: 2022-09-22T17:00:00Z 323.259449
+    <string>             <float>
+} {CH16 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z NaN
+ 1: 2022-09-22T12:00:00Z NaN
+ 2: 2022-09-22T13:00:00Z NaN
+ 3: 2022-09-22T14:00:00Z NaN
+ 4: 2022-09-22T15:00:00Z NaN
+ 5: 2022-09-22T16:00:00Z 452.939999
+ 6: 2022-09-22T17:00:00Z 424.701055
+    <string>             <float>
+} {CH17 [7x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-22T11:00:00Z NaN
+ 1: 2022-09-22T12:00:00Z NaN
+ 2: 2022-09-22T13:00:00Z NaN
+ 3: 2022-09-22T14:00:00Z NaN
+ 4: 2022-09-22T15:00:00Z NaN
+ 5: 2022-09-22T16:00:00Z 492.933799
+ 6: 2022-09-22T17:00:00Z 473.308326
+    <string>             <float>
+}]
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value     Time
+ 0: NaN       2022-09-22T16:00:00Z
+ 1: 0.055558  2022-09-22T16:20:00Z
+ 2: -0.055554 2022-09-22T16:40:00Z
+ 3: 0.055558  2022-09-22T17:00:00Z
+    <float>   <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.500001 2022-09-22T16:20:00Z
+ 2: 0.500001 2022-09-22T16:40:00Z
+ 3: 0.555556 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 3.333333 2022-09-22T16:20:00Z
+ 2: 2.888889 2022-09-22T16:40:00Z
+ 3: 2.944446 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: 256.000000 2022-09-22T11:00:00Z
+ 1: 253.666667 2022-09-22T12:00:00Z
+ 2: 253.666667 2022-09-22T13:00:00Z
+ 3: 251.000000 2022-09-22T14:00:00Z
+ 4: 249.666667 2022-09-22T15:00:00Z
+ 5: 247.666667 2022-09-22T16:00:00Z
+ 6: 244.000000 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 3.166667 2022-09-22T16:20:00Z
+ 2: 3.111111 2022-09-22T16:40:00Z
+ 3: 3.000001 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 2.500000 2022-09-22T16:20:00Z
+ 2: 2.833333 2022-09-22T16:40:00Z
+ 3: 2.444444 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: 219.500000 2022-09-22T11:00:00Z
+ 1: 221.333333 2022-09-22T12:00:00Z
+ 2: 227.000000 2022-09-22T13:00:00Z
+ 3: 226.333333 2022-09-22T14:00:00Z
+ 4: 222.000000 2022-09-22T15:00:00Z
+ 5: 224.666667 2022-09-22T16:00:00Z
+ 6: 211.000000 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value     Time
+ 0: NaN       2022-09-22T16:00:00Z
+ 1: -0.666664 2022-09-22T16:20:00Z
+ 2: -0.666664 2022-09-22T16:40:00Z
+ 3: -0.666664 2022-09-22T17:00:00Z
+    <float>   <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 4.166667 2022-09-22T16:20:00Z
+ 2: 4.166667 2022-09-22T16:40:00Z
+ 3: 4.166667 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: 270.500000 2022-09-22T11:00:00Z
+ 1: 266.666667 2022-09-22T12:00:00Z
+ 2: 272.333333 2022-09-22T13:00:00Z
+ 3: 270.666667 2022-09-22T14:00:00Z
+ 4: 266.333333 2022-09-22T15:00:00Z
+ 5: 271.000000 2022-09-22T16:00:00Z
+ 6: 270.000000 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 4.166666 2022-09-22T16:20:00Z
+ 2: 4.166666 2022-09-22T16:40:00Z
+ 3: 4.500001 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T11:00:00Z
+ 1: 0.000000 2022-09-22T12:00:00Z
+ 2: 0.000000 2022-09-22T13:00:00Z
+ 3: 0.000000 2022-09-22T14:00:00Z
+ 4: 0.000000 2022-09-22T15:00:00Z
+ 5: 0.000000 2022-09-22T16:00:00Z
+ 6: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T11:00:00Z
+ 1: 0.000000 2022-09-22T12:00:00Z
+ 2: 0.000000 2022-09-22T13:00:00Z
+ 3: 0.000000 2022-09-22T14:00:00Z
+ 4: 0.000000 2022-09-22T15:00:00Z
+ 5: 0.000000 2022-09-22T16:00:00Z
+ 6: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: 322.500000 2022-09-22T11:00:00Z
+ 1: 301.000000 2022-09-22T12:00:00Z
+ 2: 303.333333 2022-09-22T13:00:00Z
+ 3: 291.000000 2022-09-22T14:00:00Z
+ 4: 301.666667 2022-09-22T15:00:00Z
+ 5: 293.000000 2022-09-22T16:00:00Z
+ 6: 283.000000 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T11:00:00Z
+ 1: 0.000000 2022-09-22T12:00:00Z
+ 2: 0.000000 2022-09-22T13:00:00Z
+ 3: 0.000000 2022-09-22T14:00:00Z
+ 4: 0.000000 2022-09-22T15:00:00Z
+ 5: 0.000000 2022-09-22T16:00:00Z
+ 6: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T11:00:00Z
+ 1: 0.000000 2022-09-22T12:00:00Z
+ 2: 0.000000 2022-09-22T13:00:00Z
+ 3: 0.000000 2022-09-22T14:00:00Z
+ 4: 0.000000 2022-09-22T15:00:00Z
+ 5: 0.000000 2022-09-22T16:00:00Z
+ 6: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: 206.000000 2022-09-22T11:00:00Z
+ 1: 203.333333 2022-09-22T12:00:00Z
+ 2: 206.666667 2022-09-22T13:00:00Z
+ 3: 208.333333 2022-09-22T14:00:00Z
+ 4: 205.666667 2022-09-22T15:00:00Z
+ 5: 212.666667 2022-09-22T16:00:00Z
+ 6: 191.000000 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T11:00:00Z
+ 1: 0.000000 2022-09-22T12:00:00Z
+ 2: 0.000000 2022-09-22T13:00:00Z
+ 3: 0.000000 2022-09-22T14:00:00Z
+ 4: 0.000000 2022-09-22T15:00:00Z
+ 5: 0.000000 2022-09-22T16:00:00Z
+ 6: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 2.166668 2022-09-22T16:20:00Z
+ 2: 2.166668 2022-09-22T16:40:00Z
+ 3: 2.166668 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: 368.000000 2022-09-22T11:00:00Z
+ 1: 363.000000 2022-09-22T12:00:00Z
+ 2: 369.333333 2022-09-22T13:00:00Z
+ 3: 371.333333 2022-09-22T14:00:00Z
+ 4: 370.666667 2022-09-22T15:00:00Z
+ 5: 376.333333 2022-09-22T16:00:00Z
+ 6: 369.000000 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 4.222222 2022-09-22T16:20:00Z
+ 2: 4.222222 2022-09-22T16:40:00Z
+ 3: 4.222223 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: 357.000000 2022-09-22T11:00:00Z
+ 1: 350.666667 2022-09-22T12:00:00Z
+ 2: 359.000000 2022-09-22T13:00:00Z
+ 3: 357.000000 2022-09-22T14:00:00Z
+ 4: 357.000000 2022-09-22T15:00:00Z
+ 5: 358.666667 2022-09-22T16:00:00Z
+ 6: 355.000000 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-22T11:00:00Z
+ 1: 0.000000 2022-09-22T12:00:00Z
+ 2: 0.000000 2022-09-22T13:00:00Z
+ 3: 0.000000 2022-09-22T14:00:00Z
+ 4: 0.000000 2022-09-22T15:00:00Z
+ 5: 0.000000 2022-09-22T16:00:00Z
+ 6: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value   Time
+ 0: NaN     2022-09-22T16:00:00Z
+ 1: NaN     2022-09-22T16:20:00Z
+ 2: NaN     2022-09-22T16:40:00Z
+ 3: NaN     2022-09-22T17:00:00Z
+    <float> <string>
+
+2022-09-23 01:14:18.215  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: 399.000000 2022-09-22T11:00:00Z
+ 1: 398.333333 2022-09-22T12:00:00Z
+ 2: 399.000000 2022-09-22T13:00:00Z
+ 3: 400.333333 2022-09-22T14:00:00Z
+ 4: 399.000000 2022-09-22T15:00:00Z
+ 5: 400.000000 2022-09-22T16:00:00Z
+ 6: 403.000000 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:18.216  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value   Time
+ 0: NaN     2022-09-22T16:00:00Z
+ 1: NaN     2022-09-22T16:20:00Z
+ 2: NaN     2022-09-22T16:40:00Z
+ 3: NaN     2022-09-22T17:00:00Z
+    <float> <string>
+
+2022-09-23 01:14:18.216  LogInfo: function Utility1_GetChillerDeltaT data: [4x2] DataFrame
+
+    Value   Time
+ 0: NaN     2022-09-22T16:00:00Z
+ 1: NaN     2022-09-22T16:20:00Z
+ 2: NaN     2022-09-22T16:40:00Z
+ 3: NaN     2022-09-22T17:00:00Z
+    <float> <string>
+
+2022-09-23 01:14:18.216  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T11:00:00Z
+ 1: NaN        2022-09-22T12:00:00Z
+ 2: NaN        2022-09-22T13:00:00Z
+ 3: NaN        2022-09-22T14:00:00Z
+ 4: NaN        2022-09-22T15:00:00Z
+ 5: 337.793978 2022-09-22T16:00:00Z
+ 6: 323.259449 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:18.216  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T11:00:00Z
+ 1: NaN        2022-09-22T12:00:00Z
+ 2: NaN        2022-09-22T13:00:00Z
+ 3: NaN        2022-09-22T14:00:00Z
+ 4: NaN        2022-09-22T15:00:00Z
+ 5: 452.939999 2022-09-22T16:00:00Z
+ 6: 424.701055 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:18.216  LogInfo: function Utility1_GetChillerEnergy1Hour data: [7x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T11:00:00Z
+ 1: NaN        2022-09-22T12:00:00Z
+ 2: NaN        2022-09-22T13:00:00Z
+ 3: NaN        2022-09-22T14:00:00Z
+ 4: NaN        2022-09-22T15:00:00Z
+ 5: 492.933799 2022-09-22T16:00:00Z
+ 6: 473.308326 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:18.681  LogInfo: END function Utility1_GetChillerPlantCoP_kWPerTon
+2022-09-23 01:14:18.864  LogInfo: END function Utility1_GetChillerEnergy1Hour
+2022-09-23 01:14:18.865  LogInfo: START function Utility1_GetChillerEnergy1Day
+2022-09-23 01:14:18.874  LogInfo: END function Utility1_GetChillerDeltaT
+2022-09-23 01:14:18.875  LogInfo: START function Utility1_GetChillerCL
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [{CH01 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 4582.000000
+ 1: 2022-09-19T00:00:00Z 17718.000000
+ 2: 2022-09-20T00:00:00Z 17411.000000
+ 3: 2022-09-21T00:00:00Z 17389.000000
+ 4: 2022-09-22T00:00:00Z 13257.000000
+    <string>             <float>
+} {CH02 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 4151.000000
+ 1: 2022-09-19T00:00:00Z 16482.000000
+ 2: 2022-09-20T00:00:00Z 16204.000000
+ 3: 2022-09-21T00:00:00Z 16494.000000
+ 4: 2022-09-22T00:00:00Z 12217.000000
+    <string>             <float>
+} {CH03 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 4861.000000
+ 1: 2022-09-19T00:00:00Z 19879.000000
+ 2: 2022-09-20T00:00:00Z 19371.000000
+ 3: 2022-09-21T00:00:00Z 19517.000000
+ 4: 2022-09-22T00:00:00Z 14699.000000
+    <string>             <float>
+} {CH04 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 0.000000
+ 1: 2022-09-19T00:00:00Z 0.000000
+ 2: 2022-09-20T00:00:00Z 0.000000
+ 3: 2022-09-21T00:00:00Z 0.000000
+ 4: 2022-09-22T00:00:00Z 0.000000
+    <string>             <float>
+} {CH05 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 0.000000
+ 1: 2022-09-19T00:00:00Z 0.000000
+ 2: 2022-09-20T00:00:00Z 0.000000
+ 3: 2022-09-21T00:00:00Z 0.000000
+ 4: 2022-09-22T00:00:00Z 0.000000
+    <string>             <float>
+} {CH06 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 5725.000000
+ 1: 2022-09-19T00:00:00Z 21669.000000
+ 2: 2022-09-20T00:00:00Z 21547.000000
+ 3: 2022-09-21T00:00:00Z 21860.000000
+ 4: 2022-09-22T00:00:00Z 15949.000000
+    <string>             <float>
+} {CH07 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 0.000000
+ 1: 2022-09-19T00:00:00Z 0.000000
+ 2: 2022-09-20T00:00:00Z 0.000000
+ 3: 2022-09-21T00:00:00Z 0.000000
+ 4: 2022-09-22T00:00:00Z 0.000000
+    <string>             <float>
+} {CH08 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 0.000000
+ 1: 2022-09-19T00:00:00Z 0.000000
+ 2: 2022-09-20T00:00:00Z 0.000000
+ 3: 2022-09-21T00:00:00Z 0.000000
+ 4: 2022-09-22T00:00:00Z 0.000000
+    <string>             <float>
+} {CH09 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 4079.000000
+ 1: 2022-09-19T00:00:00Z 15381.000000
+ 2: 2022-09-20T00:00:00Z 14879.000000
+ 3: 2022-09-21T00:00:00Z 14950.000000
+ 4: 2022-09-22T00:00:00Z 10922.000000
+    <string>             <float>
+} {CH10 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 0.000000
+ 1: 2022-09-19T00:00:00Z 0.000000
+ 2: 2022-09-20T00:00:00Z 0.000000
+ 3: 2022-09-21T00:00:00Z 0.000000
+ 4: 2022-09-22T00:00:00Z 0.000000
+    <string>             <float>
+} {CH11 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 6950.000000
+ 1: 2022-09-19T00:00:00Z 26311.000000
+ 2: 2022-09-20T00:00:00Z 26091.000000
+ 3: 2022-09-21T00:00:00Z 26963.000000
+ 4: 2022-09-22T00:00:00Z 19695.000000
+    <string>             <float>
+} {CH12 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 6716.000000
+ 1: 2022-09-19T00:00:00Z 25357.000000
+ 2: 2022-09-20T00:00:00Z 25307.000000
+ 3: 2022-09-21T00:00:00Z 25696.000000
+ 4: 2022-09-22T00:00:00Z 18846.000000
+    <string>             <float>
+} {CH13 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 0.000000
+ 1: 2022-09-19T00:00:00Z 0.000000
+ 2: 2022-09-20T00:00:00Z 0.000000
+ 3: 2022-09-21T00:00:00Z 0.000000
+ 4: 2022-09-22T00:00:00Z 0.000000
+    <string>             <float>
+} {CH14 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z 7880.000000
+ 1: 2022-09-19T00:00:00Z 28751.000000
+ 2: 2022-09-20T00:00:00Z 28821.000000
+ 3: 2022-09-21T00:00:00Z 28901.000000
+ 4: 2022-09-22T00:00:00Z 20800.000000
+    <string>             <float>
+} {CH15 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z NaN
+ 1: 2022-09-19T00:00:00Z NaN
+ 2: 2022-09-20T00:00:00Z NaN
+ 3: 2022-09-21T00:00:00Z 1999.564560
+ 4: 2022-09-22T00:00:00Z 6348.849551
+    <string>             <float>
+} {CH16 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z NaN
+ 1: 2022-09-19T00:00:00Z NaN
+ 2: 2022-09-20T00:00:00Z NaN
+ 3: 2022-09-21T00:00:00Z 2714.468730
+ 4: 2022-09-22T00:00:00Z 7906.469569
+    <string>             <float>
+} {CH17 [5x2] DataFrame
+
+    Time                 Chiller_Power_Sensor
+ 0: 2022-09-18T00:00:00Z NaN
+ 1: 2022-09-19T00:00:00Z NaN
+ 2: 2022-09-20T00:00:00Z NaN
+ 3: 2022-09-21T00:00:00Z 2958.632390
+ 4: 2022-09-22T00:00:00Z 8602.512713
+    <string>             <float>
+}]
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value       Time
+ 0: 1527.333333 2022-09-18T00:00:00Z
+ 1: 5906.000000 2022-09-19T00:00:00Z
+ 2: 5803.666667 2022-09-20T00:00:00Z
+ 3: 5796.333333 2022-09-21T00:00:00Z
+ 4: 4419.000000 2022-09-22T00:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value       Time
+ 0: 1383.666667 2022-09-18T00:00:00Z
+ 1: 5494.000000 2022-09-19T00:00:00Z
+ 2: 5401.333333 2022-09-20T00:00:00Z
+ 3: 5498.000000 2022-09-21T00:00:00Z
+ 4: 4072.333333 2022-09-22T00:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value       Time
+ 0: 1620.333333 2022-09-18T00:00:00Z
+ 1: 6626.333333 2022-09-19T00:00:00Z
+ 2: 6457.000000 2022-09-20T00:00:00Z
+ 3: 6505.666667 2022-09-21T00:00:00Z
+ 4: 4899.666667 2022-09-22T00:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-18T00:00:00Z
+ 1: 0.000000 2022-09-19T00:00:00Z
+ 2: 0.000000 2022-09-20T00:00:00Z
+ 3: 0.000000 2022-09-21T00:00:00Z
+ 4: 0.000000 2022-09-22T00:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-18T00:00:00Z
+ 1: 0.000000 2022-09-19T00:00:00Z
+ 2: 0.000000 2022-09-20T00:00:00Z
+ 3: 0.000000 2022-09-21T00:00:00Z
+ 4: 0.000000 2022-09-22T00:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value       Time
+ 0: 1908.333333 2022-09-18T00:00:00Z
+ 1: 7223.000000 2022-09-19T00:00:00Z
+ 2: 7182.333333 2022-09-20T00:00:00Z
+ 3: 7286.666667 2022-09-21T00:00:00Z
+ 4: 5316.333333 2022-09-22T00:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-18T00:00:00Z
+ 1: 0.000000 2022-09-19T00:00:00Z
+ 2: 0.000000 2022-09-20T00:00:00Z
+ 3: 0.000000 2022-09-21T00:00:00Z
+ 4: 0.000000 2022-09-22T00:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-18T00:00:00Z
+ 1: 0.000000 2022-09-19T00:00:00Z
+ 2: 0.000000 2022-09-20T00:00:00Z
+ 3: 0.000000 2022-09-21T00:00:00Z
+ 4: 0.000000 2022-09-22T00:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value       Time
+ 0: 1359.666667 2022-09-18T00:00:00Z
+ 1: 5127.000000 2022-09-19T00:00:00Z
+ 2: 4959.666667 2022-09-20T00:00:00Z
+ 3: 4983.333333 2022-09-21T00:00:00Z
+ 4: 3640.666667 2022-09-22T00:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-18T00:00:00Z
+ 1: 0.000000 2022-09-19T00:00:00Z
+ 2: 0.000000 2022-09-20T00:00:00Z
+ 3: 0.000000 2022-09-21T00:00:00Z
+ 4: 0.000000 2022-09-22T00:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value       Time
+ 0: 2316.666667 2022-09-18T00:00:00Z
+ 1: 8770.333333 2022-09-19T00:00:00Z
+ 2: 8697.000000 2022-09-20T00:00:00Z
+ 3: 8987.666667 2022-09-21T00:00:00Z
+ 4: 6565.000000 2022-09-22T00:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value       Time
+ 0: 2238.666667 2022-09-18T00:00:00Z
+ 1: 8452.333333 2022-09-19T00:00:00Z
+ 2: 8435.666667 2022-09-20T00:00:00Z
+ 3: 8565.333333 2022-09-21T00:00:00Z
+ 4: 6282.000000 2022-09-22T00:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-18T00:00:00Z
+ 1: 0.000000 2022-09-19T00:00:00Z
+ 2: 0.000000 2022-09-20T00:00:00Z
+ 3: 0.000000 2022-09-21T00:00:00Z
+ 4: 0.000000 2022-09-22T00:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value       Time
+ 0: 2626.666667 2022-09-18T00:00:00Z
+ 1: 9583.666667 2022-09-19T00:00:00Z
+ 2: 9607.000000 2022-09-20T00:00:00Z
+ 3: 9633.666667 2022-09-21T00:00:00Z
+ 4: 6933.333333 2022-09-22T00:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-18T00:00:00Z
+ 1: NaN         2022-09-19T00:00:00Z
+ 2: NaN         2022-09-20T00:00:00Z
+ 3: 666.521520  2022-09-21T00:00:00Z
+ 4: 2116.283184 2022-09-22T00:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-18T00:00:00Z
+ 1: NaN         2022-09-19T00:00:00Z
+ 2: NaN         2022-09-20T00:00:00Z
+ 3: 904.822910  2022-09-21T00:00:00Z
+ 4: 2635.489856 2022-09-22T00:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerEnergy1Day data: [5x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-18T00:00:00Z
+ 1: NaN         2022-09-19T00:00:00Z
+ 2: NaN         2022-09-20T00:00:00Z
+ 3: 986.210797  2022-09-21T00:00:00Z
+ 4: 2867.504238 2022-09-22T00:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerCL data: [{CH01 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.055554                                       ...
+ 2: 2022-09-22T16:40:00Z 10.055554                                       ...
+ 3: 2022-09-22T17:00:00Z 9.944446                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH02 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.055554                                       ...
+ 2: 2022-09-22T16:40:00Z 10.055554                                       ...
+ 3: 2022-09-22T17:00:00Z 9.833334                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH03 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 9.944446                                        ...
+ 2: 2022-09-22T16:40:00Z 10.111112                                       ...
+ 3: 2022-09-22T17:00:00Z 9.944446                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH04 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.111112                                       ...
+ 2: 2022-09-22T16:40:00Z 10.111112                                       ...
+ 3: 2022-09-22T17:00:00Z 10.111112                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH05 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.388889                                       ...
+ 2: 2022-09-22T16:40:00Z 10.388889                                       ...
+ 3: 2022-09-22T17:00:00Z 10.277778                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH06 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.388889                                       ...
+ 2: 2022-09-22T16:40:00Z 10.388889                                       ...
+ 3: 2022-09-22T17:00:00Z 10.222223                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH07 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 0.000000                                        ...
+ 2: 2022-09-22T16:40:00Z 0.000000                                        ...
+ 3: 2022-09-22T17:00:00Z 0.000000                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH08 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.277778                                       ...
+ 2: 2022-09-22T16:40:00Z 10.277778                                       ...
+ 3: 2022-09-22T17:00:00Z 10.000000                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH09 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 9.555556                                        ...
+ 2: 2022-09-22T16:40:00Z 10.000000                                       ...
+ 3: 2022-09-22T17:00:00Z 9.611111                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH10 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 26.833336                                       ...
+ 2: 2022-09-22T16:40:00Z 26.833336                                       ...
+ 3: 2022-09-22T17:00:00Z 26.833336                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH11 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 11.444444                                       ...
+ 2: 2022-09-22T16:40:00Z 11.444444                                       ...
+ 3: 2022-09-22T17:00:00Z 11.333334                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH12 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 11.500000                                       ...
+ 2: 2022-09-22T16:40:00Z 11.500000                                       ...
+ 3: 2022-09-22T17:00:00Z 11.500000                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH13 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 12.722223                                       ...
+ 2: 2022-09-22T16:40:00Z 12.722223                                       ...
+ 3: 2022-09-22T17:00:00Z 12.722223                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH14 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 11.444444                                       ...
+ 2: 2022-09-22T16:40:00Z 11.444444                                       ...
+ 3: 2022-09-22T17:00:00Z 11.333334                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Water_Flowrate <float>
+} {CH15 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Supply_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 6.981110                                        ...
+ 2: 2022-09-22T16:40:00Z 6.981110                                        ...
+ 3: 2022-09-22T17:00:00Z 6.981110                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Water_Flowrate_0 <float>, Chiller_Water_Flowrate_1 <float>
+} {CH16 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Supply_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 6.949122                                        ...
+ 2: 2022-09-22T16:40:00Z 6.849256                                        ...
+ 3: 2022-09-22T17:00:00Z 6.951887                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Water_Flowrate_0 <float>, Chiller_Water_Flowrate_1 <float>
+} {CH17 [4x3] DataFrame
+
+    Time                 Chiller_Chilled_Water_Supply_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 7.214053                                        ...
+ 2: 2022-09-22T16:40:00Z 7.214053                                        ...
+ 3: 2022-09-22T17:00:00Z 7.214053                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Water_Flowrate <float>
+}]
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T16:00:00Z
+ 1: 1490.985131 2022-09-22T16:20:00Z
+ 2: 1493.744188 2022-09-22T16:40:00Z
+ 3: 1486.935972 2022-09-22T17:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T16:00:00Z
+ 1: 1414.958814 2022-09-22T16:20:00Z
+ 2: 1369.501513 2022-09-22T16:40:00Z
+ 3: 1297.463521 2022-09-22T17:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T16:00:00Z
+ 1: 1643.636588 2022-09-22T16:20:00Z
+ 2: 1731.383325 2022-09-22T16:40:00Z
+ 3: 1726.143196 2022-09-22T17:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.986  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value     Time
+ 0: NaN       2022-09-22T16:00:00Z
+ 1: 21.139535 2022-09-22T16:20:00Z
+ 2: 0.000000  2022-09-22T16:40:00Z
+ 3: 20.985892 2022-09-22T17:00:00Z
+    <float>   <string>
+
+2022-09-23 01:14:18.987  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T16:00:00Z
+ 1: 132.759862 2022-09-22T16:20:00Z
+ 2: 133.798131 2022-09-22T16:40:00Z
+ 3: 145.246833 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:18.987  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T16:00:00Z
+ 1: 1921.638950 2022-09-22T16:20:00Z
+ 2: 1701.169527 2022-09-22T16:40:00Z
+ 3: 1710.813603 2022-09-22T17:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.987  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.987  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T16:00:00Z
+ 1: 1302.182679 2022-09-22T16:20:00Z
+ 2: 1280.819529 2022-09-22T16:40:00Z
+ 3: 1245.149005 2022-09-22T17:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.987  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T16:00:00Z
+ 1: 1104.215115 2022-09-22T16:20:00Z
+ 2: 1282.330047 2022-09-22T16:40:00Z
+ 3: 1078.585970 2022-09-22T17:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.987  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.987  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T16:00:00Z
+ 1: 1523.115521 2022-09-22T16:20:00Z
+ 2: 1428.638784 2022-09-22T16:40:00Z
+ 3: 1436.997897 2022-09-22T17:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.987  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T16:00:00Z
+ 1: 1753.111306 2022-09-22T16:20:00Z
+ 2: 1876.230308 2022-09-22T16:40:00Z
+ 3: 1897.717703 2022-09-22T17:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:18.987  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.987  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value        Time
+ 0: NaN          2022-09-22T16:00:00Z
+ 1: 11330.971431 2022-09-22T16:20:00Z
+ 2: 11351.228780 2022-09-22T16:40:00Z
+ 3: 11283.864673 2022-09-22T17:00:00Z
+    <float>      <string>
+
+2022-09-23 01:14:18.987  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.987  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:18.987  LogInfo: function Utility1_GetChillerCL data: [4x2] DataFrame
+
+    Value   Time
+ 0: NaN     2022-09-22T16:00:00Z
+ 1: NaN     2022-09-22T16:20:00Z
+ 2: NaN     2022-09-22T16:40:00Z
+ 3: NaN     2022-09-22T17:00:00Z
+    <float> <string>
+
+2022-09-23 01:14:19.563  LogInfo: END function Utility1_GetChillerCL
+2022-09-23 01:14:19.564  LogInfo: START function Utility1_GetChillerCoP
+2022-09-23 01:14:19.644  LogInfo: END function Utility1_GetChillerEnergy1Day
+2022-09-23 01:14:19.645  LogInfo: START function Utility1_GetChillerEnergy1Month
+2022-09-23 01:14:19.662  LogInfo: function Utility1_GetChillerCoP data: [{CH01 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.055554                                       ...
+ 2: 2022-09-22T16:40:00Z 10.055554                                       ...
+ 3: 2022-09-22T17:00:00Z 9.944446                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH02 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.055554                                       ...
+ 2: 2022-09-22T16:40:00Z 10.055554                                       ...
+ 3: 2022-09-22T17:00:00Z 9.833334                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH03 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 9.944446                                        ...
+ 2: 2022-09-22T16:40:00Z 10.111112                                       ...
+ 3: 2022-09-22T17:00:00Z 9.944446                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH04 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.111112                                       ...
+ 2: 2022-09-22T16:40:00Z 10.111112                                       ...
+ 3: 2022-09-22T17:00:00Z 10.111112                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH05 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.388889                                       ...
+ 2: 2022-09-22T16:40:00Z 10.388889                                       ...
+ 3: 2022-09-22T17:00:00Z 10.277778                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH06 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.388889                                       ...
+ 2: 2022-09-22T16:40:00Z 10.388889                                       ...
+ 3: 2022-09-22T17:00:00Z 10.222223                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH07 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 0.000000                                        ...
+ 2: 2022-09-22T16:40:00Z 0.000000                                        ...
+ 3: 2022-09-22T17:00:00Z 0.000000                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH08 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.277778                                       ...
+ 2: 2022-09-22T16:40:00Z 10.277778                                       ...
+ 3: 2022-09-22T17:00:00Z 10.000000                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH09 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 9.555556                                        ...
+ 2: 2022-09-22T16:40:00Z 10.000000                                       ...
+ 3: 2022-09-22T17:00:00Z 9.611111                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH10 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 26.833336                                       ...
+ 2: 2022-09-22T16:40:00Z 26.833336                                       ...
+ 3: 2022-09-22T17:00:00Z 26.833336                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH11 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 11.444444                                       ...
+ 2: 2022-09-22T16:40:00Z 11.444444                                       ...
+ 3: 2022-09-22T17:00:00Z 11.333334                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH12 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 11.500000                                       ...
+ 2: 2022-09-22T16:40:00Z 11.500000                                       ...
+ 3: 2022-09-22T17:00:00Z 11.500000                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH13 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 12.722223                                       ...
+ 2: 2022-09-22T16:40:00Z 12.722223                                       ...
+ 3: 2022-09-22T17:00:00Z 12.722223                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH14 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 11.444444                                       ...
+ 2: 2022-09-22T16:40:00Z 11.444444                                       ...
+ 3: 2022-09-22T17:00:00Z 11.333334                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH15 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Supply_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 6.981110                                        ...
+ 2: 2022-09-22T16:40:00Z 6.981110                                        ...
+ 3: 2022-09-22T17:00:00Z 6.981110                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Power_Sensor <float>, Chiller_Water_Flowrate_0 <float>,
+Chiller_Water_Flowrate_1 <float>
+} {CH16 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Supply_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 6.949122                                        ...
+ 2: 2022-09-22T16:40:00Z 6.849256                                        ...
+ 3: 2022-09-22T17:00:00Z 6.951887                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Power_Sensor <float>, Chiller_Water_Flowrate_0 <float>,
+Chiller_Water_Flowrate_1 <float>
+} {CH17 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Supply_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 7.214053                                        ...
+ 2: 2022-09-22T16:40:00Z 7.214053                                        ...
+ 3: 2022-09-22T17:00:00Z 7.214053                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+}]
+2022-09-23 01:14:19.664  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 6.012037 2022-09-22T16:20:00Z
+ 2: 6.047547 2022-09-22T16:40:00Z
+ 3: 6.094000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.666  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 6.233299 2022-09-22T16:20:00Z
+ 2: 6.196839 2022-09-22T16:40:00Z
+ 3: 6.149116 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.668  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 6.065080 2022-09-22T16:20:00Z
+ 2: 6.365380 2022-09-22T16:40:00Z
+ 3: 6.393123 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.670  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.672  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.675  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 6.912370 2022-09-22T16:20:00Z
+ 2: 5.633012 2022-09-22T16:40:00Z
+ 3: 6.045278 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.677  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.682  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.684  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 5.633751 2022-09-22T16:20:00Z
+ 2: 5.828773 2022-09-22T16:40:00Z
+ 3: 5.647047 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.685  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.687  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 4.029406 2022-09-22T16:20:00Z
+ 2: 3.759576 2022-09-22T16:40:00Z
+ 3: 3.894303 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.689  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 4.883318 2022-09-22T16:20:00Z
+ 2: 5.211751 2022-09-22T16:40:00Z
+ 3: 5.345684 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.691  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.693  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value     Time
+ 0: NaN       2022-09-22T16:00:00Z
+ 1: 28.327429 2022-09-22T16:20:00Z
+ 2: 28.378072 2022-09-22T16:40:00Z
+ 3: 27.999664 2022-09-22T17:00:00Z
+    <float>   <string>
+
+2022-09-23 01:14:19.695  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.697  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:19.700  LogInfo: function Utility1_GetChillerCoP data: [4x2] DataFrame
+
+    Value   Time
+ 0: NaN     2022-09-22T16:00:00Z
+ 1: NaN     2022-09-22T16:20:00Z
+ 2: NaN     2022-09-22T16:40:00Z
+ 3: NaN     2022-09-22T17:00:00Z
+    <float> <string>
+
+2022-09-23 01:14:19.771  LogInfo: function Utility1_GetChillerEnergy1Month data: [{CH01 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 80244.000000
+    <string>                       <float>
+} {CH02 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 74685.000000
+    <string>                       <float>
+} {CH03 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 89387.000000
+    <string>                       <float>
+} {CH04 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 0.000000
+    <string>                       <float>
+} {CH05 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 0.000000
+    <string>                       <float>
+} {CH06 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 98861.000000
+    <string>                       <float>
+} {CH07 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 0.000000
+    <string>                       <float>
+} {CH08 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 0.000000
+    <string>                       <float>
+} {CH09 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 68872.000000
+    <string>                       <float>
+} {CH10 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 0.000000
+    <string>                       <float>
+} {CH11 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 120827.000000
+    <string>                       <float>
+} {CH12 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 115999.000000
+    <string>                       <float>
+} {CH13 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 0.000000
+    <string>                       <float>
+} {CH14 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 131140.000000
+    <string>                       <float>
+} {CH15 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 8348.414111
+    <string>                       <float>
+} {CH16 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 10620.938300
+    <string>                       <float>
+} {CH17 [1x2] DataFrame
+
+    Time                           Chiller_Power_Sensor
+ 0: 2022-09-01T00:00:00.000000001Z 11561.145103
+    <string>                       <float>
+}]
+2022-09-23 01:14:19.771  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value        Time
+ 0: 26748.000000 2022-09-01T00:00:00.000000001Z
+    <float>      <string>
+
+2022-09-23 01:14:19.771  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value        Time
+ 0: 24895.000000 2022-09-01T00:00:00.000000001Z
+    <float>      <string>
+
+2022-09-23 01:14:19.771  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value        Time
+ 0: 29795.666667 2022-09-01T00:00:00.000000001Z
+    <float>      <string>
+
+2022-09-23 01:14:19.771  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-01T00:00:00.000000001Z
+    <float>  <string>
+
+2022-09-23 01:14:19.771  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-01T00:00:00.000000001Z
+    <float>  <string>
+
+2022-09-23 01:14:19.771  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value        Time
+ 0: 32953.666667 2022-09-01T00:00:00.000000001Z
+    <float>      <string>
+
+2022-09-23 01:14:19.771  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-01T00:00:00.000000001Z
+    <float>  <string>
+
+2022-09-23 01:14:19.771  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-01T00:00:00.000000001Z
+    <float>  <string>
+
+2022-09-23 01:14:19.772  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value        Time
+ 0: 22957.333333 2022-09-01T00:00:00.000000001Z
+    <float>      <string>
+
+2022-09-23 01:14:19.772  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-01T00:00:00.000000001Z
+    <float>  <string>
+
+2022-09-23 01:14:19.772  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value        Time
+ 0: 40275.666667 2022-09-01T00:00:00.000000001Z
+    <float>      <string>
+
+2022-09-23 01:14:19.772  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value        Time
+ 0: 38666.333333 2022-09-01T00:00:00.000000001Z
+    <float>      <string>
+
+2022-09-23 01:14:19.772  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2022-09-01T00:00:00.000000001Z
+    <float>  <string>
+
+2022-09-23 01:14:19.772  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value        Time
+ 0: 43713.333333 2022-09-01T00:00:00.000000001Z
+    <float>      <string>
+
+2022-09-23 01:14:19.772  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value       Time
+ 0: 2782.804704 2022-09-01T00:00:00.000000001Z
+    <float>     <string>
+
+2022-09-23 01:14:19.772  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value       Time
+ 0: 3540.312767 2022-09-01T00:00:00.000000001Z
+    <float>     <string>
+
+2022-09-23 01:14:19.772  LogInfo: function Utility1_GetChillerEnergy1Month data: [1x2] DataFrame
+
+    Value       Time
+ 0: 3853.715034 2022-09-01T00:00:00.000000001Z
+    <float>     <string>
+
+2022-09-23 01:14:20.373  LogInfo: END function Utility1_GetChillerEnergy1Month
+2022-09-23 01:14:20.374  LogInfo: END function Utility1_GetChillerCoP
+2022-09-23 01:14:20.374  LogInfo: START function Utility1_GetChillerCLTon
+2022-09-23 01:14:20.475  LogInfo: function Utility1_GetChillerCLTon data: [{CH01 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1490.985131
+ 2: 2022-09-22T16:40:00Z 1493.744188
+ 3: 2022-09-22T17:00:00Z 1486.935972
+    <string>             <float>
+} {CH02 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1414.958814
+ 2: 2022-09-22T16:40:00Z 1369.501513
+ 3: 2022-09-22T17:00:00Z 1297.463521
+    <string>             <float>
+} {CH03 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1643.636588
+ 2: 2022-09-22T16:40:00Z 1731.383325
+ 3: 2022-09-22T17:00:00Z 1726.143196
+    <string>             <float>
+} {CH04 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 21.139535
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 20.985892
+    <string>             <float>
+} {CH05 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 132.759862
+ 2: 2022-09-22T16:40:00Z 133.798131
+ 3: 2022-09-22T17:00:00Z 145.246833
+    <string>             <float>
+} {CH06 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1921.638950
+ 2: 2022-09-22T16:40:00Z 1701.169527
+ 3: 2022-09-22T17:00:00Z 1710.813603
+    <string>             <float>
+} {CH07 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH08 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1302.182679
+ 2: 2022-09-22T16:40:00Z 1280.819529
+ 3: 2022-09-22T17:00:00Z 1245.149005
+    <string>             <float>
+} {CH09 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1104.215115
+ 2: 2022-09-22T16:40:00Z 1282.330047
+ 3: 2022-09-22T17:00:00Z 1078.585970
+    <string>             <float>
+} {CH10 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH11 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1523.115521
+ 2: 2022-09-22T16:40:00Z 1428.638784
+ 3: 2022-09-22T17:00:00Z 1436.997897
+    <string>             <float>
+} {CH12 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 1753.111306
+ 2: 2022-09-22T16:40:00Z 1876.230308
+ 3: 2022-09-22T17:00:00Z 1897.717703
+    <string>             <float>
+} {CH13 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH14 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 11330.971431
+ 2: 2022-09-22T16:40:00Z 11351.228780
+ 3: 2022-09-22T17:00:00Z 11283.864673
+    <string>             <float>
+} {CH15 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+} {CH16 [4x2] DataFrame
+
+    Time                 Chiller_Cooling_Load
+ 0: 2022-09-22T16:00:00Z NaN
+ 1: 2022-09-22T16:20:00Z 0.000000
+ 2: 2022-09-22T16:40:00Z 0.000000
+ 3: 2022-09-22T17:00:00Z 0.000000
+    <string>             <float>
+}]
+2022-09-23 01:14:20.475  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T16:00:00Z
+ 1: 423.948685 2022-09-22T16:20:00Z
+ 2: 424.733199 2022-09-22T16:40:00Z
+ 3: 422.797342 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T16:00:00Z
+ 1: 402.331262 2022-09-22T16:20:00Z
+ 2: 389.405873 2022-09-22T16:40:00Z
+ 3: 368.922495 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T16:00:00Z
+ 1: 467.353802 2022-09-22T16:20:00Z
+ 2: 492.303826 2022-09-22T16:40:00Z
+ 3: 490.813841 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 6.010843 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 5.967156 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value     Time
+ 0: NaN       2022-09-22T16:00:00Z
+ 1: 37.749115 2022-09-22T16:20:00Z
+ 2: 38.044338 2022-09-22T16:40:00Z
+ 3: 41.299677 2022-09-22T17:00:00Z
+    <float>   <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T16:00:00Z
+ 1: 546.401362 2022-09-22T16:20:00Z
+ 2: 483.712795 2022-09-22T16:40:00Z
+ 3: 486.455004 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T16:00:00Z
+ 1: 370.264346 2022-09-22T16:20:00Z
+ 2: 364.189920 2022-09-22T16:40:00Z
+ 3: 354.047316 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T16:00:00Z
+ 1: 313.973987 2022-09-22T16:20:00Z
+ 2: 364.619423 2022-09-22T16:40:00Z
+ 3: 306.686562 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T16:00:00Z
+ 1: 433.084683 2022-09-22T16:20:00Z
+ 2: 406.221042 2022-09-22T16:40:00Z
+ 3: 408.597884 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value      Time
+ 0: NaN        2022-09-22T16:00:00Z
+ 1: 498.481989 2022-09-22T16:20:00Z
+ 2: 533.489809 2022-09-22T16:40:00Z
+ 3: 539.599563 2022-09-22T17:00:00Z
+    <float>    <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value       Time
+ 0: NaN         2022-09-22T16:00:00Z
+ 1: 3221.863411 2022-09-22T16:20:00Z
+ 2: 3227.623413 2022-09-22T16:40:00Z
+ 3: 3208.469013 2022-09-22T17:00:00Z
+    <float>     <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:20.476  LogInfo: function Utility1_GetChillerCLTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.027  LogInfo: END function Utility1_GetChillerCLTon
+2022-09-23 01:14:21.028  LogInfo: START function Utility1_GetChillerCoPkWPerTon
+2022-09-23 01:14:21.164  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [{CH01 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.055554                                       ...
+ 2: 2022-09-22T16:40:00Z 10.055554                                       ...
+ 3: 2022-09-22T17:00:00Z 9.944446                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH02 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.055554                                       ...
+ 2: 2022-09-22T16:40:00Z 10.055554                                       ...
+ 3: 2022-09-22T17:00:00Z 9.833334                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH03 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 9.944446                                        ...
+ 2: 2022-09-22T16:40:00Z 10.111112                                       ...
+ 3: 2022-09-22T17:00:00Z 9.944446                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH04 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.111112                                       ...
+ 2: 2022-09-22T16:40:00Z 10.111112                                       ...
+ 3: 2022-09-22T17:00:00Z 10.111112                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH05 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.388889                                       ...
+ 2: 2022-09-22T16:40:00Z 10.388889                                       ...
+ 3: 2022-09-22T17:00:00Z 10.277778                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH06 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.388889                                       ...
+ 2: 2022-09-22T16:40:00Z 10.388889                                       ...
+ 3: 2022-09-22T17:00:00Z 10.222223                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH07 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 0.000000                                        ...
+ 2: 2022-09-22T16:40:00Z 0.000000                                        ...
+ 3: 2022-09-22T17:00:00Z 0.000000                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH08 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 10.277778                                       ...
+ 2: 2022-09-22T16:40:00Z 10.277778                                       ...
+ 3: 2022-09-22T17:00:00Z 10.000000                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH09 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 9.555556                                        ...
+ 2: 2022-09-22T16:40:00Z 10.000000                                       ...
+ 3: 2022-09-22T17:00:00Z 9.611111                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH10 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 26.833336                                       ...
+ 2: 2022-09-22T16:40:00Z 26.833336                                       ...
+ 3: 2022-09-22T17:00:00Z 26.833336                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH11 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 11.444444                                       ...
+ 2: 2022-09-22T16:40:00Z 11.444444                                       ...
+ 3: 2022-09-22T17:00:00Z 11.333334                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH12 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 11.500000                                       ...
+ 2: 2022-09-22T16:40:00Z 11.500000                                       ...
+ 3: 2022-09-22T17:00:00Z 11.500000                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH13 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 12.722223                                       ...
+ 2: 2022-09-22T16:40:00Z 12.722223                                       ...
+ 3: 2022-09-22T17:00:00Z 12.722223                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH14 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Return_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 11.444444                                       ...
+ 2: 2022-09-22T16:40:00Z 11.444444                                       ...
+ 3: 2022-09-22T17:00:00Z 11.333334                                       ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Chilled_Water_Supply_Temperature_Sensor <float>,
+Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+} {CH15 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Supply_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 6.981110                                        ...
+ 2: 2022-09-22T16:40:00Z 6.981110                                        ...
+ 3: 2022-09-22T17:00:00Z 6.981110                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Power_Sensor <float>, Chiller_Water_Flowrate_0 <float>,
+Chiller_Water_Flowrate_1 <float>
+} {CH16 [4x5] DataFrame
+
+    Time                 Chiller_Chilled_Water_Supply_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 6.949122                                        ...
+ 2: 2022-09-22T16:40:00Z 6.849256                                        ...
+ 3: 2022-09-22T17:00:00Z 6.951887                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Power_Sensor <float>, Chiller_Water_Flowrate_0 <float>,
+Chiller_Water_Flowrate_1 <float>
+} {CH17 [4x4] DataFrame
+
+    Time                 Chiller_Chilled_Water_Supply_Temperature_Sensor ...
+ 0: 2022-09-22T16:00:00Z NaN                                             ...
+ 1: 2022-09-22T16:20:00Z 7.214053                                        ...
+ 2: 2022-09-22T16:40:00Z 7.214053                                        ...
+ 3: 2022-09-22T17:00:00Z 7.214053                                        ...
+    <string>             <float>                                         ...
+
+Not Showing: Chiller_Power_Sensor <float>, Chiller_Water_Flowrate <float>
+}]
+2022-09-23 01:14:21.166  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.584976 2022-09-22T16:20:00Z
+ 2: 0.581542 2022-09-22T16:40:00Z
+ 3: 0.577109 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.166  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.564212 2022-09-22T16:20:00Z
+ 2: 0.567531 2022-09-22T16:40:00Z
+ 3: 0.571936 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.166  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.579860 2022-09-22T16:20:00Z
+ 2: 0.552504 2022-09-22T16:40:00Z
+ 3: 0.550107 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.166  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.166  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.166  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.508784 2022-09-22T16:20:00Z
+ 2: 0.624337 2022-09-22T16:40:00Z
+ 3: 0.581760 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.166  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.166  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.166  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.624256 2022-09-22T16:20:00Z
+ 2: 0.603369 2022-09-22T16:40:00Z
+ 3: 0.622786 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.166  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.166  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.872809 2022-09-22T16:20:00Z
+ 2: 0.935451 2022-09-22T16:40:00Z
+ 3: 0.903088 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.167  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.720187 2022-09-22T16:20:00Z
+ 2: 0.674802 2022-09-22T16:40:00Z
+ 3: 0.657895 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.167  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.167  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.124152 2022-09-22T16:20:00Z
+ 2: 0.123930 2022-09-22T16:40:00Z
+ 3: 0.125605 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.167  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.167  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value    Time
+ 0: NaN      2022-09-22T16:00:00Z
+ 1: 0.000000 2022-09-22T16:20:00Z
+ 2: 0.000000 2022-09-22T16:40:00Z
+ 3: 0.000000 2022-09-22T17:00:00Z
+    <float>  <string>
+
+2022-09-23 01:14:21.167  LogInfo: function Utility1_GetChillerCoPkWPerTon data: [4x2] DataFrame
+
+    Value   Time
+ 0: NaN     2022-09-22T16:00:00Z
+ 1: NaN     2022-09-22T16:20:00Z
+ 2: NaN     2022-09-22T16:40:00Z
+ 3: NaN     2022-09-22T17:00:00Z
+    <float> <string>
+
+2022-09-23 01:14:21.739  LogInfo: END function Utility1_GetChillerCoPkWPerTon

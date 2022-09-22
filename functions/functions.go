@@ -1,9 +1,5 @@
 package functions
 
-import (
-	logging "go-api-grapqhl/log"
-)
-
 type BaseFunction struct {
 	Host        string
 	Port        int
@@ -14,6 +10,4 @@ type BaseFunction struct {
 const (
 	Calculated string = "Calculated__test"
 )
-
-var Logger = logging.StartLogger("LogFile.log")
 

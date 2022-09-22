@@ -12,12 +12,13 @@ import (
 
 var Utility_1_Chiller = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17}
 var Utility_1_CT = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18}
+var Utility_1_Logger = logging.StartLogger("log/Utility_1_LogFile.log")
 
 // == model uid 0 OK
 func (f BaseFunction) Utility1_GetChillerPlantChillerRunning() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantChillerRunning"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_Total_Chiller_Running"
 	newId := "Total_Chiller_Running"
 	newEquipmentName := "Chiller_Plant"
@@ -25,9 +26,10 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerRunning() error {
 			WHERE "FunctionType"='Chiller_Status' AND 
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	df, err := tool.ConcatDataframe(dfGroup)
 	if df.Nrow() == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	} else if err != nil {
 		return err
@@ -35,7 +37,7 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerRunning() error {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumListStatus(tool.GetNonNan(f))
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -59,7 +61,7 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerRunning() error {
 			return err
 		}
 	}
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -67,7 +69,7 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerRunning() error {
 func (f BaseFunction) Utility1_GetChillerPlantChillerEnergy() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantChillerEnergy"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_Total_Chiller_Energy"
 	newEquipmentName := "Chiller_Plant"
 	newId := "Total_Chiller_Energy"
@@ -75,9 +77,10 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerEnergy() error {
 			WHERE "FunctionType"='Chiller_Power_Sensor' AND 
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	df, err := tool.ConcatDataframe(dfGroup)
 	if df.Nrow() == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	} else if err != nil {
 		return err
@@ -85,7 +88,7 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerEnergy() error {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumList(tool.GetNonNan(f))
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -109,7 +112,7 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerEnergy() error {
 			return err
 		}
 	}
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -117,7 +120,7 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerEnergy() error {
 func (f BaseFunction) Utility1_GetChillerPlantCoolingLoad() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantCoolingLoad"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_Cooling_Load"
 	newId := "Total_Chiller_Plant_Cooling_Load"
 	newEquipmentName := "Chiller_Plant"
@@ -138,9 +141,10 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoad() error {
 			return 0
 		}
 	}, "Chiller_Cooling_Load", []int{1, 2, 3}...)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	df, err := tool.ConcatDataframe(dfGroup)
 	if df.Nrow() == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	} else if err != nil {
 		return err
@@ -148,7 +152,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoad() error {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumList(tool.GetNonNan(f))
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -172,7 +176,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoad() error {
 			return err
 		}
 	}
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -180,7 +184,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoad() error {
 func (f BaseFunction) Utility1_GetChillerPlantCoP() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantCoP"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_CoP"
 	newId := "Overall_Chiller_Plant_CoP"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
@@ -188,8 +192,9 @@ func (f BaseFunction) Utility1_GetChillerPlantCoP() error {
 			"FunctionType"='Chiller_Plant_Total_Chiller_Energy') AND
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	wg := sync.WaitGroup{}
@@ -207,13 +212,13 @@ func (f BaseFunction) Utility1_GetChillerPlantCoP() error {
 				return 0
 			}
 		}, []int{1, 2}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -234,7 +239,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCoP() error {
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -242,7 +247,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCoP() error {
 func (f BaseFunction) Utility1_GetChillerPlantDeltaT() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantDeltaT"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_Delta_T"
 	newId := "Overall_Chiller_Plant_Delta_T"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
@@ -250,8 +255,9 @@ func (f BaseFunction) Utility1_GetChillerPlantDeltaT() error {
 			"FunctionType"='Chiller_Plant_Chilled_Water_Supply_Temperature_Sensor') AND 
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	wg := sync.WaitGroup{}
@@ -263,13 +269,13 @@ func (f BaseFunction) Utility1_GetChillerPlantDeltaT() error {
 			}
 			return f[0] - f[1]
 		}, []int{1, 2}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -287,13 +293,13 @@ func (f BaseFunction) Utility1_GetChillerPlantDeltaT() error {
 					Unit:       "°C",
 				}, []string{Calculated}...)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -301,7 +307,7 @@ func (f BaseFunction) Utility1_GetChillerPlantDeltaT() error {
 func (f BaseFunction) Utility1_GetChillerPlantWetBulb() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantWetBulb"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newEquipmentName := "Chiller_Plant"
 	newFunctionType := "Chiller_Plant_Outdoor_Wet_Bulb"
 	newId := "Chiller_Plant_Outdoor_Wet_Bulb"
@@ -310,8 +316,9 @@ func (f BaseFunction) Utility1_GetChillerPlantWetBulb() error {
 			"FunctionType"='Chiller_Plant_Outdoor_Humidity') AND
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	for _, ele := range dfGroup {
@@ -328,7 +335,7 @@ func (f BaseFunction) Utility1_GetChillerPlantWetBulb() error {
 					4.686035)
 			}
 		}, []int{1, 2}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -352,7 +359,7 @@ func (f BaseFunction) Utility1_GetChillerPlantWetBulb() error {
 			return err
 		}
 	}
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -360,7 +367,7 @@ func (f BaseFunction) Utility1_GetChillerPlantWetBulb() error {
 func (f BaseFunction) Utility1_GetChillerPlantCoP_kWPerTon() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantCoP_kWPerTon"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_CoP(kW/Ton)"
 	newId := "Overall_Chiller_Plant_CoP(kW/Ton)"
 	newEquipmentName := "Chiller_Plant"
@@ -369,8 +376,9 @@ func (f BaseFunction) Utility1_GetChillerPlantCoP_kWPerTon() error {
 			"FunctionType"='Chiller_Plant_Total_Chiller_Energy') AND
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	for _, ele := range dfGroup {
@@ -386,7 +394,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCoP_kWPerTon() error {
 				return 0
 			}
 		}, []int{1, 2}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -410,7 +418,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCoP_kWPerTon() error {
 			return err
 		}
 	}
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -418,7 +426,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCoP_kWPerTon() error {
 func (f BaseFunction) Utility1_GetChillerPlantCTRunning() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantCTRunning"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_Total_Cooling_Tower_Running"
 	newId := "Total_Cooling_Tower_Running"
 	newEquipmentName := "Chiller_Plant"
@@ -426,8 +434,9 @@ func (f BaseFunction) Utility1_GetChillerPlantCTRunning() error {
 			WHERE "FunctionType"='Cooling_Tower_Total_Status' AND 
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	df, err := tool.ConcatDataframe(dfGroup)
@@ -437,7 +446,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCTRunning() error {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumListStatus(tool.GetNonNan(f))
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -461,7 +470,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCTRunning() error {
 			return err
 		}
 	}
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -469,7 +478,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCTRunning() error {
 func (f BaseFunction) Utility1_GetChillerPlantPCHWPRunning() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantPCHWPRunning"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newId := "Total_PCHWP_Running"
 	newFunctionType := "Chiller_Plant_Total_PCHWP_Running"
 	newEquipmentName := "Chiller_Plant"
@@ -477,8 +486,9 @@ func (f BaseFunction) Utility1_GetChillerPlantPCHWPRunning() error {
 			WHERE "FunctionType"='Primary_Chilled_Water_Pump_Status' AND 
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	df, err := tool.ConcatDataframe(dfGroup)
@@ -488,7 +498,7 @@ func (f BaseFunction) Utility1_GetChillerPlantPCHWPRunning() error {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumListStatus(tool.GetNonNan(f))
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -512,7 +522,7 @@ func (f BaseFunction) Utility1_GetChillerPlantPCHWPRunning() error {
 			return err
 		}
 	}
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -520,7 +530,7 @@ func (f BaseFunction) Utility1_GetChillerPlantPCHWPRunning() error {
 func (f BaseFunction) Utility1_GetChillerPlantSCHWPRunning() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantSCHWPRunning"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_Total_SCHWP_Running"
 	newId := "Total_SCHWP_Running"
 	newEquipmentName := "Chiller_Plant"
@@ -528,8 +538,9 @@ func (f BaseFunction) Utility1_GetChillerPlantSCHWPRunning() error {
 			WHERE "FunctionType"='Secondary_Chilled_Water_Pump_Status' AND 
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	df, err := tool.ConcatDataframe(dfGroup)
@@ -539,7 +550,7 @@ func (f BaseFunction) Utility1_GetChillerPlantSCHWPRunning() error {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumListStatus(tool.GetNonNan(f))
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -563,7 +574,7 @@ func (f BaseFunction) Utility1_GetChillerPlantSCHWPRunning() error {
 			return err
 		}
 	}
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -571,7 +582,7 @@ func (f BaseFunction) Utility1_GetChillerPlantSCHWPRunning() error {
 func (f BaseFunction) Utility1_GetChillerPlantCTEnergy() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantCTEnergy"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_Total_CT_Energy"
 	newId := "Total_CT_Energy"
 	newEquipmentName := "Chiller_Plant"
@@ -579,13 +590,14 @@ func (f BaseFunction) Utility1_GetChillerPlantCTEnergy() error {
 			WHERE "FunctionType"='Cooling_Tower_Total_Status' AND 
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	df, err := tool.ConcatDataframe(dfGroup)
 	if df.Nrow() == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	} else if err != nil {
 		return err
@@ -593,7 +605,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCTEnergy() error {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumList(tool.GetNonNan(f)) * 11
 		}, Utility_1_CT...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -617,7 +629,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCTEnergy() error {
 			return err
 		}
 	}
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -625,7 +637,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCTEnergy() error {
 func (f BaseFunction) Utility1_GetChillerPlantTotalEnergy() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantTotalEnergy"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_Total_Energy"
 	newId := "Total_Energy"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
@@ -633,8 +645,9 @@ func (f BaseFunction) Utility1_GetChillerPlantTotalEnergy() error {
 			"FunctionType"='Chiller_Plant_Total_Chiller_Energy') AND 
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	wg := sync.WaitGroup{}
@@ -643,13 +656,13 @@ func (f BaseFunction) Utility1_GetChillerPlantTotalEnergy() error {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumList(tool.GetNonNan(f))
 		}, []int{1, 2}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -667,13 +680,13 @@ func (f BaseFunction) Utility1_GetChillerPlantTotalEnergy() error {
 					Unit:       "kW",
 				}, []string{Calculated}...)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -681,7 +694,7 @@ func (f BaseFunction) Utility1_GetChillerPlantTotalEnergy() error {
 func (f BaseFunction) Utility1_GetChillerPlantCoolingLoadTon() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantCoolingLoadTon"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newEquipmentName := "Chiller_Plant"
 	newFunctionType := "Chiller_Plant_Cooling_Load_Ton"
 	newId := "Total_Chiller_Plant_Cooling_Load(Ton)"
@@ -689,8 +702,9 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoadTon() error {
 			WHERE ("FunctionType"='Chiller_Plant_Cooling_Load') AND 
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	wg := sync.WaitGroup{}
@@ -702,13 +716,13 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoadTon() error {
 			}
 			return f[0] / 3.5169
 		}, []int{1}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -726,13 +740,13 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoadTon() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -743,14 +757,15 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoadTon() error {
 func (f BaseFunction) Utility1_GetChillerEnergy1Hour() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerEnergy1Hour"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Power_Sensor(Calculated)(60m)"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE "FunctionType"='Chiller_Power_Sensor' AND 
 			time>now()-360m GROUP BY EquipmentName, FunctionType, id, time(60m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	wg := sync.WaitGroup{}
@@ -762,13 +777,13 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Hour() error {
 			}
 			return f[0]
 		}, []int{1}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -786,13 +801,13 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Hour() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s_%s", ele.EquipmentName, newFunctionType, "(60T)"), df, 1)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -800,14 +815,15 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Hour() error {
 func (f BaseFunction) Utility1_GetChillerEnergy1Day() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerEnergy1Day"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Power_Sensor(Calculated)(1d)"
 	query := fmt.Sprintf(`SELECT SUM(value) FROM %s 
 			WHERE "FunctionType"='Chiller_Power_Sensor' AND 
 			time>now()-4d GROUP BY EquipmentName, FunctionType, id, time(1d)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	wg := sync.WaitGroup{}
@@ -819,13 +835,13 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Day() error {
 			}
 			return f[0] / 3
 		}, []int{1}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -843,13 +859,13 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Day() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s_%s", ele.EquipmentName, newFunctionType, "(1d)"), df, 1)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -857,15 +873,16 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Day() error {
 func (f BaseFunction) Utility1_GetChillerEnergy1Month() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerEnergy1Month"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Power_Sensor(Calculated)(1M)"
 	query := fmt.Sprintf(`SELECT SUM(value) FROM %s 
 			WHERE "FunctionType"='Chiller_Power_Sensor' AND 
 			( time>'%s' AND time<now() ) 
 			GROUP BY EquipmentName, FunctionType, id`, f.Measurement, tool.GetCurrenttimeString())
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	wg := sync.WaitGroup{}
@@ -877,13 +894,13 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Month() error {
 			}
 			return f[0] / 3
 		}, []int{1}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -901,13 +918,13 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Month() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s_%s", ele.EquipmentName, newFunctionType, "(1M)"), df, 0)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -915,7 +932,7 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Month() error {
 func (f BaseFunction) Utility1_GetChillerCL() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerCL"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Cooling_Load"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE ("FunctionType"='Chiller_Chilled_Water_Return_Temperature_Sensor' OR
@@ -923,8 +940,9 @@ func (f BaseFunction) Utility1_GetChillerCL() error {
 			"FunctionType"='Chiller_Water_Flowrate') AND
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	wg := sync.WaitGroup{}
@@ -942,13 +960,13 @@ func (f BaseFunction) Utility1_GetChillerCL() error {
 				return 0
 			}
 		}, []int{1, 2, 3}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -966,13 +984,13 @@ func (f BaseFunction) Utility1_GetChillerCL() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), df, 1)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -980,7 +998,7 @@ func (f BaseFunction) Utility1_GetChillerCL() error {
 func (f BaseFunction) Utility1_GetChillerCoP() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerCoP"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_CoP"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE ("FunctionType"='Chiller_Chilled_Water_Return_Temperature_Sensor' OR
@@ -989,8 +1007,9 @@ func (f BaseFunction) Utility1_GetChillerCoP() error {
 			"FunctionType"='Chiller_Water_Flowrate') AND
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	wg := sync.WaitGroup{}
@@ -1011,13 +1030,13 @@ func (f BaseFunction) Utility1_GetChillerCoP() error {
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		fmt.Println(df)
 		fmt.Println(ele.EquipmentName)
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -1035,13 +1054,13 @@ func (f BaseFunction) Utility1_GetChillerCoP() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), df, 1)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -1049,15 +1068,16 @@ func (f BaseFunction) Utility1_GetChillerCoP() error {
 func (f BaseFunction) Utility1_GetChillerDeltaT() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerDeltaT"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_delta_T"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE ("FunctionType"='Chiller_Chilled_Water_Return_Temperature_Sensor' OR
 			"FunctionType"='Chiller_Chilled_Water_Supply_Temperature_Sensor') AND 
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	wg := sync.WaitGroup{}
@@ -1069,13 +1089,13 @@ func (f BaseFunction) Utility1_GetChillerDeltaT() error {
 			}
 			return f[0] - f[1]
 		}, []int{1, 2}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -1093,13 +1113,13 @@ func (f BaseFunction) Utility1_GetChillerDeltaT() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), df, 1)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -1107,7 +1127,7 @@ func (f BaseFunction) Utility1_GetChillerDeltaT() error {
 func (f BaseFunction) Utility1_GetChillerPlantEnergy1Hour() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantEnergy1Hour"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_Total_Chiller_Energy(Calculated)(60m)"
 	newId := "Chiller_Plant_Chiller_Plant_Total_Chiller_Energy(Calculated)(60m)_(60T)"
 	newEquipmentName := "Chiller_Plant"
@@ -1115,8 +1135,9 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Hour() error {
 			WHERE "FunctionType"='Chiller_Power_Sensor' AND 
 			time>now()-240m GROUP BY EquipmentName, FunctionType, id, time(60m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	df, err := tool.ConcatDataframe(dfGroup)
@@ -1126,7 +1147,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Hour() error {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumList(tool.GetNonNan(f))
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -1150,7 +1171,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Hour() error {
 			return err
 		}
 	}
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -1158,7 +1179,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Hour() error {
 func (f BaseFunction) Utility1_GetChillerPlantEnergy1Day() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantEnergy1Day"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_Total_Chiller_Energy(Calculated)(1d)"
 	newId := "Chiller_Plant_Chiller_Plant_Total_Chiller_Energy(Calculated)(1d)_(1d)"
 	newEquipmentName := "Chiller_Plant"
@@ -1166,9 +1187,10 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Day() error {
 			WHERE "FunctionType"='Chiller_Power_Sensor' AND 
 			time>now()-4d GROUP BY EquipmentName, FunctionType, id, time(1d)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	df, err := tool.ConcatDataframe(dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	if err != nil {
@@ -1180,7 +1202,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Day() error {
 			}
 			return tool.SumList(tool.GetNonNan(f)) / 3
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -1204,7 +1226,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Day() error {
 			return err
 		}
 	}
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -1212,7 +1234,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Day() error {
 func (f BaseFunction) Utility1_GetChillerPlantEnergy1Month() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantEnergy1Month"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_Total_Chiller_Energy(Calculated)(1M)"
 	newId := "Chiller_Plant_Chiller_Plant_Total_Chiller_Energy(Calculated)(1M)_(1M)"
 	newEquipmentName := "Chiller_Plant"
@@ -1221,8 +1243,9 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Month() error {
 			( time>'%s' AND time<now() ) 
 			GROUP BY EquipmentName, FunctionType, id`, f.Measurement, tool.GetCurrenttimeString())
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	df, err := tool.ConcatDataframe(dfGroup)
@@ -1235,7 +1258,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Month() error {
 			}
 			return tool.SumList(tool.GetNonNan(f)) / 3
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 0)
 		if err != nil {
 			return err
@@ -1259,7 +1282,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Month() error {
 			return err
 		}
 	}
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -1267,7 +1290,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Month() error {
 func (f BaseFunction) Utility1_GetChillerCoPkWPerTon() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerCoPkWPerTon"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_CoP(kW/ton)"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE ("FunctionType"='Chiller_Chilled_Water_Return_Temperature_Sensor' OR
@@ -1276,8 +1299,9 @@ func (f BaseFunction) Utility1_GetChillerCoPkWPerTon() error {
 			"FunctionType"='Chiller_Water_Flowrate') AND
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	wg := sync.WaitGroup{}
@@ -1295,13 +1319,13 @@ func (f BaseFunction) Utility1_GetChillerCoPkWPerTon() error {
 				return 0
 			}
 		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -1319,13 +1343,13 @@ func (f BaseFunction) Utility1_GetChillerCoPkWPerTon() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), df, 1)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -1333,7 +1357,7 @@ func (f BaseFunction) Utility1_GetChillerCoPkWPerTon() error {
 func (f BaseFunction) Utility1_GetCTStatus() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetCTStatus"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Cooling_Tower_Total_Status"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE ("FunctionType"='Cooling_Tower_Status_01' OR
@@ -1342,8 +1366,9 @@ func (f BaseFunction) Utility1_GetCTStatus() error {
 			"FunctionType"='Cooling_Tower_Status_04') AND
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	wg := sync.WaitGroup{}
@@ -1352,13 +1377,13 @@ func (f BaseFunction) Utility1_GetCTStatus() error {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumListStatus(tool.GetNonNan(f))
 		}, Utility_1_CT...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -1376,13 +1401,13 @@ func (f BaseFunction) Utility1_GetCTStatus() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), df, 1)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -1392,7 +1417,7 @@ func (f BaseFunction) Utility1_GetCTStatus() error {
 func (f BaseFunction) Utility1_GetChillerEnergy() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerEnergy"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Power_Sensor"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE ("FunctionType"='Chiller_Current_Sensor_01' OR
@@ -1403,8 +1428,9 @@ func (f BaseFunction) Utility1_GetChillerEnergy() error {
 			"FunctionType"='Chiller_Voltage_Sensor_03') AND
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	mappingId := map[string]string{"CH15": "UT1_CH15_Input_Power", "CH16": "UT1_CH16_Input_Power", "CH17": "UT1_CH17_Input_Power"}
@@ -1412,7 +1438,7 @@ func (f BaseFunction) Utility1_GetChillerEnergy() error {
 	wg.Add(len(mappingId))
 	for _, ele := range dfGroup {
 		if ele.Dataframe.Nrow() == 0 || (ele.EquipmentName != "CH15" && ele.EquipmentName != "CH16" && ele.EquipmentName != "CH17") {
-			Logger.Log(logging.LogInfo, "No need to run for Equipment: %s", ele.EquipmentName)
+			Utility_1_Logger.Log(logging.LogInfo, "No need to run for Equipment: %s", ele.EquipmentName)
 			continue
 		}
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
@@ -1425,13 +1451,13 @@ func (f BaseFunction) Utility1_GetChillerEnergy() error {
 			}
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		fmt.Println(df)
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -1449,13 +1475,13 @@ func (f BaseFunction) Utility1_GetChillerEnergy() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, mappingId[ele.EquipmentName], df, 1)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -1463,14 +1489,15 @@ func (f BaseFunction) Utility1_GetChillerEnergy() error {
 func (f BaseFunction) Utility1_GetChillerCLTon() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerCLTon"
-	Logger.Log(logging.LogInfo, "START function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Cooling_Load(Ton)"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE ("FunctionType"='Chiller_Cooling_Load') AND
 			time>now()-60m GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement)
 	dfGroup := client.QueryDfGroup(query, f.Database)
+	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
-		Logger.Log(logging.LogError, "function %s: No data", name)
+		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
 		return nil
 	}
 	wg := sync.WaitGroup{}
@@ -1482,13 +1509,13 @@ func (f BaseFunction) Utility1_GetChillerCLTon() error {
 			}
 			return f[0] / 3.5169
 		}, []int{1}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -1506,12 +1533,12 @@ func (f BaseFunction) Utility1_GetChillerCLTon() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), df, 1)
 	}
 	wg.Wait()
-	Logger.Log(logging.LogInfo, "END function %s", name)
+	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }

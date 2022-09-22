@@ -105,7 +105,9 @@ func main() {
 	// 	}, []string{}...)
 	r := gin.Default()
 
-	// scheduler.Analytics_Utility_2()
+	scheduler.Analytics_Utility_3()
+	scheduler.Analytics_Utility_2()
+	scheduler.Analytics_Utility_1()
 	scheduler.Example()
 
 	cr := cron.New()
