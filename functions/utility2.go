@@ -11,6 +11,7 @@ import (
 )
 
 var Utility_2_Chiller = []int{1, 2, 3, 4, 5}
+var Utility_2_CT = []int{1, 2, 3, 4, 5}
 
 // == model uid 0 tested
 func (f BaseFunction) Utility2_GetChillerPlantChillerRunning() error {
@@ -596,7 +597,7 @@ func (f BaseFunction) Utility2_GetChillerPlantCTEnergy() error {
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumList(tool.GetNonNan(f)) * 11
-		}, []int{1, 2, 3, 4, 5, 6}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+		}, Utility_2_CT...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
@@ -1373,7 +1374,7 @@ func (f BaseFunction) Utility2_GetCTStatus() error {
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumListStatus(tool.GetNonNan(f))
-		}, []int{1, 2, 3, 4, 5, 6}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
+		}, Utility_2_CT...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,

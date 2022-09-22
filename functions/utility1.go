@@ -11,8 +11,9 @@ import (
 )
 
 var Utility_1_Chiller = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17}
+var Utility_1_CT = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18}
 
-// == model uid 0 tested
+// == model uid 0 OK
 func (f BaseFunction) Utility1_GetChillerPlantChillerRunning() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantChillerRunning"
@@ -62,7 +63,7 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerRunning() error {
 	return nil
 }
 
-// == model uid 1 tested, NONONO
+// == model uid 1 OK
 func (f BaseFunction) Utility1_GetChillerPlantChillerEnergy() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantChillerEnergy"
@@ -112,7 +113,7 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerEnergy() error {
 	return nil
 }
 
-// == model uid 2
+// == model uid 2 OK
 func (f BaseFunction) Utility1_GetChillerPlantCoolingLoad() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantCoolingLoad"
@@ -175,7 +176,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoad() error {
 	return nil
 }
 
-// == model uid 3, NONONO
+// == model uid 3 OK
 func (f BaseFunction) Utility1_GetChillerPlantCoP() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantCoP"
@@ -296,7 +297,7 @@ func (f BaseFunction) Utility1_GetChillerPlantDeltaT() error {
 	return nil
 }
 
-// == model uid 5
+// == model uid 5 OK
 func (f BaseFunction) Utility1_GetChillerPlantWetBulb() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantWetBulb"
@@ -355,7 +356,7 @@ func (f BaseFunction) Utility1_GetChillerPlantWetBulb() error {
 	return nil
 }
 
-// == model uid 6, NONONO
+// == model uid 6 OK
 func (f BaseFunction) Utility1_GetChillerPlantCoP_kWPerTon() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantCoP_kWPerTon"
@@ -413,7 +414,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCoP_kWPerTon() error {
 	return nil
 }
 
-// == model uid 7
+// == model uid 7 OK
 func (f BaseFunction) Utility1_GetChillerPlantCTRunning() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantCTRunning"
@@ -464,7 +465,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCTRunning() error {
 	return nil
 }
 
-// == model uid 8, not yet tested coz wrong tagging file
+// == model uid 8 OK
 func (f BaseFunction) Utility1_GetChillerPlantPCHWPRunning() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantPCHWPRunning"
@@ -515,7 +516,7 @@ func (f BaseFunction) Utility1_GetChillerPlantPCHWPRunning() error {
 	return nil
 }
 
-// == model uid 9
+// == model uid 9 OK
 func (f BaseFunction) Utility1_GetChillerPlantSCHWPRunning() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantSCHWPRunning"
@@ -566,7 +567,7 @@ func (f BaseFunction) Utility1_GetChillerPlantSCHWPRunning() error {
 	return nil
 }
 
-// == model uid 10, NONONO
+// == model uid 10 OK
 func (f BaseFunction) Utility1_GetChillerPlantCTEnergy() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantCTEnergy"
@@ -591,7 +592,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCTEnergy() error {
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumList(tool.GetNonNan(f)) * 11
-		}, []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+		}, Utility_1_CT...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
@@ -620,7 +621,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCTEnergy() error {
 	return nil
 }
 
-// == model uid 11, NONONO
+// == model uid 11 OK
 func (f BaseFunction) Utility1_GetChillerPlantTotalEnergy() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantTotalEnergy"
@@ -676,7 +677,7 @@ func (f BaseFunction) Utility1_GetChillerPlantTotalEnergy() error {
 	return nil
 }
 
-// == model uid 12
+// == model uid 12 OK
 func (f BaseFunction) Utility1_GetChillerPlantCoolingLoadTon() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantCoolingLoadTon"
@@ -738,7 +739,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoadTon() error {
 // tested model functions
 ///////////////////////////////////////////////////////////////////////////////
 
-// individual model uid 0
+// individual model uid 0 OK
 func (f BaseFunction) Utility1_GetChillerEnergy1Hour() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerEnergy1Hour"
@@ -795,7 +796,7 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Hour() error {
 	return nil
 }
 
-// individual model uid 1, NONONO
+// individual model uid 1 OK
 func (f BaseFunction) Utility1_GetChillerEnergy1Day() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerEnergy1Day"
@@ -1350,7 +1351,7 @@ func (f BaseFunction) Utility1_GetCTStatus() error {
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumListStatus(tool.GetNonNan(f))
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
+		}, Utility_1_CT...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
@@ -1422,7 +1423,7 @@ func (f BaseFunction) Utility1_GetChillerEnergy() error {
 			} else {
 				return (f[0]*f[3] + f[1]*f[4] + f[2]*f[5]) / 3 * math.Sqrt(3) / 1000
 			}
-		}, []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
+		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		fmt.Println(df)
 		Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,

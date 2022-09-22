@@ -660,3 +660,7 @@ func Test_Analytics() *airflow.Job {
 	j.Run()
 	return j
 }
+
+func Example() {
+	
+}

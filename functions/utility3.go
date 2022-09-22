@@ -10,6 +10,9 @@ import (
 	"sync"
 )
 
+var Utility_3_Chiller = []int{1, 2, 3, 4}
+var Utility_3_CT = []int{1, 2, 3, 4}
+
 // == model uid 0
 func (f BaseFunction) Utility3_GetChillerPlantChillerRunning() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
@@ -31,7 +34,7 @@ func (f BaseFunction) Utility3_GetChillerPlantChillerRunning() error {
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumListStatus(tool.GetNonNan(f))
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+		}, Utility_3_CT...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -80,7 +83,7 @@ func (f BaseFunction) Utility3_GetChillerPlantChillerEnergy() error {
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumList(tool.GetNonNan(f)) / 1000
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+		}, Utility_3_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -432,7 +435,7 @@ func (f BaseFunction) Utility3_GetChillerPlantCTRunning() error {
 				}
 			}
 			return float64(val)
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+		}, Utility_3_CT...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -488,7 +491,7 @@ func (f BaseFunction) Utility3_GetChillerPlantPCHWPRunning() error {
 				}
 			}
 			return float64(val)
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+		}, Utility_3_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -538,7 +541,7 @@ func (f BaseFunction) Utility3_GetChillerPlantSCHWPRunning() error {
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumListStatus(tool.GetNonNan(f))
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+		}, Utility_3_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -591,7 +594,7 @@ func (f BaseFunction) Utility3_GetChillerPlantCTEnergy() error {
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumList(tool.GetNonNan(f)) * 11
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+		}, Utility_3_CT...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -1002,7 +1005,7 @@ func (f BaseFunction) Utility3_GetChillerCoP() error {
 			} else {
 				return 0
 			}
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
+		}, Utility_3_Chiller...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
@@ -1118,7 +1121,7 @@ func (f BaseFunction) Utility3_GetChillerPlantEnergy1Hour() error {
 				return math.NaN()
 			}
 			return (f[0] + f[1] + f[2] + f[3]) / 1000
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+		}, Utility_3_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -1171,7 +1174,7 @@ func (f BaseFunction) Utility3_GetChillerPlantEnergy1Day() error {
 				return math.NaN()
 			}
 			return (f[0] + f[1] + f[2] + f[3]) / 1000 / 3
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+		}, Utility_3_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
 			return err
@@ -1225,7 +1228,7 @@ func (f BaseFunction) Utility3_GetChillerPlantEnergy1Month() error {
 				return math.NaN()
 			}
 			return (f[0] + f[1] + f[2] + f[3]) / 1000 / 3
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+		}, Utility_3_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 0)
 		if err != nil {
 			return err
@@ -1340,7 +1343,7 @@ func (f BaseFunction) Utility3_GetCTStatus() error {
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			return tool.SumListStatus(tool.GetNonNan(f))
-		}, []int{1, 2, 3, 4}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
+		}, Utility_1_CT...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
 			df dataframe.DataFrame, startIndex int) {
