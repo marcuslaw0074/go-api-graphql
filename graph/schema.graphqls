@@ -7,6 +7,7 @@ type Todo {
   text: String!
   done: Boolean!
   user: User!
+  userId: String!
 }
 
 type User {
@@ -14,13 +15,102 @@ type User {
   name: String!
 }
 
+type Labelvaluepair {
+  value: String!
+  label: String!
+}
+
 type Query {
   todos: [Todo!]!
+  allid(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+  ): [Labelvaluepair]
+  allidbysys(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    system: String!
+  ): [Labelvaluepair]
+  allidbysysloc(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    system: String!
+    location: String!
+  ): [Labelvaluepair]
+  allsys(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    energy: Boolean
+  ): String
+  alllocbysys(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    system: String!
+    energy: Boolean
+  ): String
+  allequipbysysloc(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    system: String!
+    location: String!
+    energy: Boolean
+  ): [Labelvaluepair]
+  allparambyequip(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    equips: String!
+    energy: Boolean
+  ): [Labelvaluepair]
+  timeseriesbyid(
+    aggrnum: Int
+    limit: Int
+    startTime: String
+    endTime: String
+    database: String!
+    measurement: String!
+    pointName: String!
+    aggreTpye: AggregationsType!
+  ): [Timeseries]
 }
 
 input NewTodo {
   text: String!
   userId: String!
+}
+
+type Timeseries {
+    time: String
+    Block: String
+    BuildingName: String
+    EquipmentName: String
+    FunctionType: String
+    prefername: String
+    id: String
+    value: String
+}
+
+enum AggregationsType {
+  count
+  sum
+  mean
+  max
+  min
+  first
+  last
 }
 
 type Mutation {

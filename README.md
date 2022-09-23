@@ -1,17 +1,20 @@
-# Celler example
+# Golang Graphql Server & DAG Scheduler
 
 Gen doc
 
-```console
-$ go get -u github.com/swaggo/swag/cmd/swag
-$ $HOME/go/bin/swag init
-```
+`swag init`
 
 Run app
 
-```console
-$ go run main.go
-```
+`go run .`
 
 [open swagger](http://localhost:8080/swagger/index.html)
 
+Run as Docker
+
+`docker build -t gin .`
+`docker-compose -f docker-compose.yaml up`
+
+Update Graphql Server
+
+`go run github.com/99designs/gqlgen`

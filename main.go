@@ -2,18 +2,25 @@ package main
 
 import (
 	"errors"
-	"net/http"
-
+	"fmt"
 	"go-api-grapqhl/controller"
 	_ "go-api-grapqhl/docs"
 	"go-api-grapqhl/graph"
+	"go-api-grapqhl/scheduler"
+	"time"
+
+	// "go-api-grapqhl/graph/client"
+	// "go-api-grapqhl/graph/client"
 	"go-api-grapqhl/graph/generated"
 	"go-api-grapqhl/httputil"
+	logging "go-api-grapqhl/log"
+	"net/http"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/gin-gonic/gin"
-
+	"github.com/joho/godotenv"
+	"github.com/robfig/cron/v3"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -62,30 +69,51 @@ import (
 // @scope.admin                            Grants read and write access to administrative information
 
 func graphqlHandler() gin.HandlerFunc {
-    // NewExecutableSchema and Config are in the generated.go file
-    // Resolver is in the resolver.go file    
+	// NewExecutableSchema and Config are in the generated.go file
+	// Resolver is in the resolver.go file
 	h := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
 
-    return func(c *gin.Context) {
-        h.ServeHTTP(c.Writer, c.Request)
-    }
+	return func(c *gin.Context) {
+		h.ServeHTTP(c.Writer, c.Request)
+	}
 }
 
 // Defining the Playground handler
 func playgroundHandler() gin.HandlerFunc {
-    h := playground.Handler("GraphQL", "/query")
+	h := playground.Handler("GraphQL", "/query")
 
-    return func(c *gin.Context) {
-        h.ServeHTTP(c.Writer, c.Request)
+	return func(c *gin.Context) {
+		h.ServeHTTP(c.Writer, c.Request)
 	}
 }
 
-
 func main() {
+
+	fmt.Println("Waiting until Neo4j ready")
+	time.Sleep(time.Duration(1000000000 * 20))
+
+	var Logger = logging.StartLogger("log/Utility_1_LogFile.log")
+	fmt.Println("Start API server!!!!!")
+
+	err := godotenv.Load(".env")
+	if err != nil {
+		Logger.Log(logging.LogError, "Error loading .env file")
+	}
 	r := gin.Default()
 
+	scheduler.Analytics_Utility_3()
+	scheduler.Analytics_Utility_2()
+	scheduler.Analytics_Utility_1()
+	scheduler.Example()
+
+	cr := cron.New()
+	cr.Start()
+	cr.AddFunc("*/5 * * * *", func() { scheduler.Analytics_Utility_3() })
+	cr.AddFunc("*/5 * * * *", func() { scheduler.Analytics_Utility_2() })
+	cr.AddFunc("*/5 * * * *", func() { scheduler.Analytics_Utility_1() })
+
 	r.POST("/query", graphqlHandler())
-    r.GET("/", playgroundHandler())
+	r.GET("/", playgroundHandler())
 
 	c := controller.NewController()
 
@@ -118,6 +146,15 @@ func main() {
 			examples.GET("header", c.HeaderExample)
 			examples.GET("securities", c.SecuritiesExample)
 			examples.GET("attribute", c.AttributeExample)
+		}
+		neo4j := v1.Group("/neo4j")
+		{
+			neo4j.GET("/findnode/:database/:measurement/:label/:name", c.ShowNodeByName)
+			neo4j.GET("/findadjnodes/:database/:measurement/:label/:name", c.ShowAdjNodesByName)
+		}
+		influxdb := v1.Group("/influxdb")
+		{
+			influxdb.POST("/query", c.QueryInfluxDB)
 		}
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

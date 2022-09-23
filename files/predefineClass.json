@@ -1,0 +1,168 @@
+{
+  "type": "origin",
+  "name": "System",
+  "value": [
+    {
+      "type": "system",
+      "name": "HVAC_System",
+      "value": [
+        {
+          "type": "subsystem",
+          "name": "Water_System",
+          "value": [
+            {
+              "type": "equipment",
+              "name": "Primary_Chilled_Water_Pump",
+              "value": [
+                {
+                  "type": "sensor",
+                  "name": "Primary_Chilled_Water_Pump_Status"
+                }
+              ]
+            },
+            {
+              "type": "equipment",
+              "name": "Condenser_Water_Pump",
+              "value": [
+                { "type": "sensor", "name": "Condensing_Water_Pump_Status" }
+              ]
+            },
+            {
+              "type": "equipment",
+              "name": "Cooling_Tower",
+              "value": [
+                { "type": "sensor", "name": "Cooling_Tower_Status_01" },
+                { "type": "sensor", "name": "Cooling_Tower_Status_02" },
+                { "type": "sensor", "name": "Cooling_Tower_Status_03" },
+                { "type": "sensor", "name": "Cooling_Tower_Status_04" },
+                {
+                  "type": "sensor",
+                  "name": "Cooling_Tower_Condensing_Water_Supply_Valve_Position"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Cooling_Tower_Condensing_Water_Return_Valve_Position"
+                }
+              ]
+            },
+            {
+              "type": "equipment",
+              "name": "Chiller_Plant",
+              "value": [
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Plant_Chilled_Water_Supply_Flow_Sensor"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Plant_Supply_Condenser_Water_Pressure"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Plant_Return_Condenser_Water_Pressure"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Plant_Chilled_Water_Return_Temperature_Sensor"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Plant_Chilled_Water_Return_Pressure"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Plant_Return_Condenser_Water_Temperature_Sensor"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Plant_Supply_Condenser_Water_Temperature_Sensor"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Plant_Return_Condenser_Water_Flow_Sensor"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Plant_Chilled_Water_Return_Flow_Sensor"
+                },
+                { "type": "sensor", "name": "Chiller_Plant_Outdoor_Dry_Bulb" },
+                { "type": "sensor", "name": "Chiller_Plant_Outdoor_Humidity" },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Plant_Chilled_Water_Supply_Temperature_Sensor"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Plant_Chilled_Water_Supply_Pressure"
+                }
+              ]
+            },
+            {
+              "type": "equipment",
+              "name": "Chiller",
+              "value": [
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Chilled_Water_Return_Temperature_Sensor"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Chilled_Water_Supply_Temperature_Sensor"
+                },
+                { "type": "sensor", "name": "Chiller_Capacity_Sensor" },
+                { "type": "sensor", "name": "Chiller_Water_Flowrate" },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Return_Condenser_Water_Temperature_Sensor"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Supply_Condenser_Water_Temperature_Sensor"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Communication_Loss_Alarm"
+                },
+                { "type": "sensor", "name": "Chiller_Overload_Alarm" },
+                { "type": "sensor", "name": "Chiller_Water_Setpoint" },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Supply_Condenser_Water_Flow_Sensor"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Chilled_Water_Returning_Flow_Sensor"
+                },
+                { "type": "sensor", "name": "Chiller_Motor_Current_Sensor" },
+                { "type": "sensor", "name": "Chiller_Setpoint" },
+                { "type": "sensor", "name": "Chiller_Status" },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Condensing_Water_Supply_Valve_Position"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Chiller_Chilled_Water_Return_Valve_Position "
+                }
+              ]
+            },
+            {
+              "type": "equipment",
+              "name": "Secondary_Chilled_Water_Pump",
+              "value": [
+                {
+                  "type": "sensor",
+                  "name": "Secondary_Chilled_Water_Pump_Status_01"
+                },
+                {
+                  "type": "sensor",
+                  "name": "Secondary_Chilled_Water_Pump_Status_02"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
