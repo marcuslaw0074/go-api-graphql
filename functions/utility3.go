@@ -43,7 +43,7 @@ func (f BaseFunction) Utility3_GetChillerPlantChillerRunning() error {
 		if err != nil {
 			return err
 		}
-		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+		err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 			f.Database, f.Measurement, client.TaggingPoint{
 				BMS_id:     newId,
 				PointName:  newId,
@@ -94,7 +94,7 @@ func (f BaseFunction) Utility3_GetChillerPlantChillerEnergy() error {
 		if err != nil {
 			return err
 		}
-		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+		err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 			f.Database, f.Measurement, client.TaggingPoint{
 				BMS_id:     newId,
 				PointName:  newId,
@@ -158,7 +158,7 @@ func (f BaseFunction) Utility3_GetChillerPlantCoolingLoad() error {
 		if err != nil {
 			return err
 		}
-		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+		err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 			f.Database, f.Measurement, client.TaggingPoint{
 				BMS_id:     newId,
 				PointName:  newId,
@@ -221,7 +221,7 @@ func (f BaseFunction) Utility3_GetChillerPlantCoP() error {
 			if err != nil {
 				fmt.Println(err)
 			}
-			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
 					BMS_id:     id,
 					PointName:  id,
@@ -278,7 +278,7 @@ func (f BaseFunction) Utility3_GetChillerPlantDeltaT() error {
 			if err != nil {
 				fmt.Println(err)
 			}
-			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
 					BMS_id:     id,
 					PointName:  id,
@@ -341,7 +341,7 @@ func (f BaseFunction) Utility3_GetChillerPlantWetBulb() error {
 		if err != nil {
 			return err
 		}
-		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+		err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 			f.Database, f.Measurement, client.TaggingPoint{
 				BMS_id:     newId,
 				PointName:  newId,
@@ -400,7 +400,7 @@ func (f BaseFunction) Utility3_GetChillerPlantCoP_kWPerTon() error {
 		if err != nil {
 			return err
 		}
-		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+		err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 			f.Database, f.Measurement, client.TaggingPoint{
 				BMS_id:     newId,
 				PointName:  newId,
@@ -452,7 +452,7 @@ func (f BaseFunction) Utility3_GetChillerPlantCTRunning() error {
 		if err != nil {
 			return err
 		}
-		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+		err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 			f.Database, f.Measurement, client.TaggingPoint{
 				BMS_id:     newId,
 				PointName:  newId,
@@ -504,7 +504,7 @@ func (f BaseFunction) Utility3_GetChillerPlantPCHWPRunning() error {
 		if err != nil {
 			return err
 		}
-		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+		err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 			f.Database, f.Measurement, client.TaggingPoint{
 				BMS_id:     newId,
 				PointName:  newId,
@@ -556,7 +556,7 @@ func (f BaseFunction) Utility3_GetChillerPlantSCHWPRunning() error {
 		if err != nil {
 			return err
 		}
-		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+		err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 			f.Database, f.Measurement, client.TaggingPoint{
 				BMS_id:     newId,
 				PointName:  newId,
@@ -611,7 +611,7 @@ func (f BaseFunction) Utility3_GetChillerPlantCTEnergy() error {
 		if err != nil {
 			return err
 		}
-		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+		err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 			f.Database, f.Measurement, client.TaggingPoint{
 				BMS_id:     newId,
 				PointName:  newId,
@@ -668,7 +668,7 @@ func (f BaseFunction) Utility3_GetChillerPlantTotalEnergy() error {
 			if err != nil {
 				fmt.Println(err)
 			}
-			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
 					BMS_id:     id,
 					PointName:  id,
@@ -728,7 +728,7 @@ func (f BaseFunction) Utility3_GetChillerPlantCoolingLoadTon() error {
 			if err != nil {
 				fmt.Println(err)
 			}
-			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
 					BMS_id:     newId,
 					PointName:  newId,
@@ -788,7 +788,7 @@ func (f BaseFunction) Utility3_GetChillerEnergy1Hour() error {
 			if err != nil {
 				fmt.Println(err)
 			}
-			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
 					BMS_id:     id,
 					PointName:  id,
@@ -846,7 +846,7 @@ func (f BaseFunction) Utility3_GetChillerEnergy1Day() error {
 			if err != nil {
 				fmt.Println(err)
 			}
-			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
 					BMS_id:     id,
 					PointName:  id,
@@ -906,7 +906,7 @@ func (f BaseFunction) Utility3_GetChillerEnergy1Month() error {
 			if err != nil {
 				fmt.Println(err)
 			}
-			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
 					BMS_id:     id,
 					PointName:  id,
@@ -972,7 +972,7 @@ func (f BaseFunction) Utility3_GetChillerCL() error {
 			if err != nil {
 				fmt.Println(err)
 			}
-			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
 					BMS_id:     id,
 					PointName:  id,
@@ -1039,7 +1039,7 @@ func (f BaseFunction) Utility3_GetChillerCoP() error {
 			if err != nil {
 				fmt.Println(err)
 			}
-			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
 					BMS_id:     id,
 					PointName:  id,
@@ -1098,7 +1098,7 @@ func (f BaseFunction) Utility3_GetChillerDeltaT() error {
 			if err != nil {
 				fmt.Println(err)
 			}
-			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
 					BMS_id:     id,
 					PointName:  id,
@@ -1153,7 +1153,7 @@ func (f BaseFunction) Utility3_GetChillerPlantEnergy1Hour() error {
 		if err != nil {
 			return err
 		}
-		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+		err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 			f.Database, f.Measurement, client.TaggingPoint{
 				BMS_id:     newId,
 				PointName:  newId,
@@ -1205,7 +1205,7 @@ func (f BaseFunction) Utility3_GetChillerPlantEnergy1Day() error {
 		if err != nil {
 			return err
 		}
-		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+		err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 			f.Database, f.Measurement, client.TaggingPoint{
 				BMS_id:     newId,
 				PointName:  newId,
@@ -1258,7 +1258,7 @@ func (f BaseFunction) Utility3_GetChillerPlantEnergy1Month() error {
 		if err != nil {
 			return err
 		}
-		err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+		err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 			f.Database, f.Measurement, client.TaggingPoint{
 				BMS_id:     newId,
 				PointName:  newId,
@@ -1322,7 +1322,7 @@ func (f BaseFunction) Utility3_GetChillerCoPkWPerTon() error {
 			if err != nil {
 				fmt.Println(err)
 			}
-			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
 					BMS_id:     id,
 					PointName:  id,
@@ -1380,7 +1380,7 @@ func (f BaseFunction) Utility3_GetCTStatus() error {
 			if err != nil {
 				fmt.Println(err)
 			}
-			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
 					BMS_id:     id,
 					PointName:  id,
@@ -1438,7 +1438,7 @@ func (f BaseFunction) Utility3_GetChillerCLTon() error {
 			if err != nil {
 				fmt.Println(err)
 			}
-			err = client.AddClientPoint("neo4j://192.168.100.214:27687", "neo4j", "test",
+			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
 					BMS_id:     id,
 					PointName:  id,

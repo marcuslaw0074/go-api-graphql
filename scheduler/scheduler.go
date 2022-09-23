@@ -4,15 +4,32 @@ import (
 	"fmt"
 	"go-api-grapqhl/airflow"
 	"go-api-grapqhl/functions"
+	"os"
+	"strconv"
 )
 
 func Analytics_Utility_3() *airflow.Job {
 
+	port, err := strconv.Atoi(os.Getenv("INFLUX_PORT"))
+	if err != nil {
+		fmt.Println("Port Error")
+	}
+
+	neo4jport, err2 := strconv.Atoi(os.Getenv("NEO4J_PORT"))
+	if err2 != nil {
+		fmt.Println("Port Error")
+	}
+
 	k := functions.BaseFunction{
-		Database:    "WIIOT",
-		Measurement: "Utility_3",
-		Host:        "192.168.100.216",
-		Port:        18086,
+		Database:       os.Getenv("INFLUX_DATABASE"),
+		Measurement:    os.Getenv("INFLUX_MEASUREMENT_3"),
+		Host:           os.Getenv("INFLUX_HOST"),
+		Port:           port,
+		Neo4j_Host:     os.Getenv("NEO4J_HOST"),
+		Neo4j_Port:     neo4jport,
+		Neo4j_Database: os.Getenv("NEO4J_DATABASE"),
+		Neo4j_Username: os.Getenv("NEO4J_USERNAME"),
+		Neo4j_Password: os.Getenv("NEO4J_PASSWORD"),
 	}
 
 	j := &airflow.Job{
@@ -186,7 +203,7 @@ func Analytics_Utility_3() *airflow.Job {
 	j.SetDownstream(j.Task("Utility3_GetChillerPlantCoP"), j.Task("Utility3_GetChillerPlantCoP_kWPerTon"))
 	j.SetDownstream(j.Task("Utility3_GetChillerPlantTotalEnergy"), j.Task("Utility3_GetChillerPlantCoP"))
 
-	// set children node 
+	// set children node
 	j.SetDownstream(j.Task("Utility3_GetChillerPlantCoP"), j.Task("Utility3_GetChillerEnergy1Hour"))
 	j.SetDownstream(j.Task("Utility3_GetChillerPlantCoP"), j.Task("Utility3_GetChillerDeltaT"))
 
@@ -215,11 +232,24 @@ func Analytics_Utility_3() *airflow.Job {
 
 func Analytics_Utility_2() *airflow.Job {
 
+	port, err := strconv.Atoi(os.Getenv("INFLUX_PORT"))
+	if err != nil {
+		fmt.Println("Port Error")
+	}
+	neo4jport, err2 := strconv.Atoi(os.Getenv("NEO4J_PORT"))
+	if err2 != nil {
+		fmt.Println("Port Error")
+	}
 	k := functions.BaseFunction{
-		Database:    "WIIOT",
-		Measurement: "Utility_2",
-		Host:        "192.168.100.216",
-		Port:        18086,
+		Database:       os.Getenv("INFLUX_DATABASE"),
+		Measurement:    os.Getenv("INFLUX_MEASUREMENT_2"),
+		Host:           os.Getenv("INFLUX_HOST"),
+		Port:           port,
+		Neo4j_Host:     os.Getenv("NEO4J_HOST"),
+		Neo4j_Port:     neo4jport,
+		Neo4j_Database: os.Getenv("NEO4J_DATABASE"),
+		Neo4j_Username: os.Getenv("NEO4J_USERNAME"),
+		Neo4j_Password: os.Getenv("NEO4J_PASSWORD"),
 	}
 
 	j := &airflow.Job{
@@ -393,7 +423,7 @@ func Analytics_Utility_2() *airflow.Job {
 	j.SetDownstream(j.Task("Utility2_GetChillerPlantCoP"), j.Task("Utility2_GetChillerPlantCoP_kWPerTon"))
 	j.SetDownstream(j.Task("Utility2_GetChillerPlantTotalEnergy"), j.Task("Utility2_GetChillerPlantCoP"))
 
-	// set children node 
+	// set children node
 	j.SetDownstream(j.Task("Utility2_GetChillerPlantCoP"), j.Task("Utility2_GetChillerEnergy1Hour"))
 	j.SetDownstream(j.Task("Utility2_GetChillerPlantCoP"), j.Task("Utility2_GetChillerDeltaT"))
 
@@ -423,11 +453,24 @@ func Analytics_Utility_2() *airflow.Job {
 
 func Analytics_Utility_1() *airflow.Job {
 
+	port, err := strconv.Atoi(os.Getenv("INFLUX_PORT"))
+	if err != nil {
+		fmt.Println("Port Error")
+	}
+	neo4jport, err2 := strconv.Atoi(os.Getenv("NEO4J_PORT"))
+	if err2 != nil {
+		fmt.Println("Port Error")
+	}
 	k := functions.BaseFunction{
-		Database:    "WIIOT",
-		Measurement: "Utility_1",
-		Host:        "192.168.100.216",
-		Port:        18086,
+		Database:       os.Getenv("INFLUX_DATABASE"),
+		Measurement:    os.Getenv("INFLUX_MEASUREMENT_1"),
+		Host:           os.Getenv("INFLUX_HOST"),
+		Port:           port,
+		Neo4j_Host:     os.Getenv("NEO4J_HOST"),
+		Neo4j_Port:     neo4jport,
+		Neo4j_Database: os.Getenv("NEO4J_DATABASE"),
+		Neo4j_Username: os.Getenv("NEO4J_USERNAME"),
+		Neo4j_Password: os.Getenv("NEO4J_PASSWORD"),
 	}
 
 	j := &airflow.Job{
@@ -608,7 +651,7 @@ func Analytics_Utility_1() *airflow.Job {
 	j.SetDownstream(j.Task("Utility1_GetChillerPlantCoP"), j.Task("Utility1_GetChillerPlantCoP_kWPerTon"))
 	j.SetDownstream(j.Task("Utility1_GetChillerPlantTotalEnergy"), j.Task("Utility1_GetChillerPlantCoP"))
 
-	// set children node 
+	// set children node
 	j.SetDownstream(j.Task("Utility1_GetChillerPlantCoP"), j.Task("Utility1_GetChillerEnergy1Hour"))
 	j.SetDownstream(j.Task("Utility1_GetChillerPlantCoP"), j.Task("Utility1_GetChillerDeltaT"))
 
@@ -662,5 +705,5 @@ func Test_Analytics() *airflow.Job {
 }
 
 func Example() {
-	
+
 }

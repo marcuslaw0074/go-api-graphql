@@ -7,16 +7,19 @@ import (
 	_ "go-api-grapqhl/docs"
 	"go-api-grapqhl/graph"
 	"go-api-grapqhl/scheduler"
+	"time"
 
 	// "go-api-grapqhl/graph/client"
 	// "go-api-grapqhl/graph/client"
 	"go-api-grapqhl/graph/generated"
 	"go-api-grapqhl/httputil"
+	logging "go-api-grapqhl/log"
 	"net/http"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"github.com/robfig/cron/v3"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -86,23 +89,16 @@ func playgroundHandler() gin.HandlerFunc {
 
 func main() {
 
+	fmt.Println("Waiting until Neo4j ready")
+	time.Sleep(time.Duration(1000000000 * 20))
+
+	var Logger = logging.StartLogger("log/Utility_1_LogFile.log")
 	fmt.Println("Start API server!!!!!")
 
-	// client.AddClientPoint("neo4j://localhost:7687", "neo4j", "test",
-	// 	"WIIOT", "Utility_3", client.TaggingPoint{
-	// 		BMS_id:     "UT3_CH01_Indi_Flow",
-	// 		PointName:  "UT3_CH01_Indi_Flow",
-	// 		System:     "HVAC_System",
-	// 		SubSystem:  "Water_System",
-	// 		DeviceType: "Chiller",
-	// 		DeviceName: "CH01",
-	// 		PointType:  "Chiller_Water_Flowrate",
-	// 		Location:   "Building",
-	// 		Level:      "UT3",
-	// 		ClassType:  "Class",
-	// 		Interval:   "20T",
-	// 		Unit:       "°C",
-	// 	}, []string{}...)
+	err := godotenv.Load(".env")
+	if err != nil {
+		Logger.Log(logging.LogError, "Error loading .env file")
+	}
 	r := gin.Default()
 
 	scheduler.Analytics_Utility_3()
