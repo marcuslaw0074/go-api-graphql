@@ -219,7 +219,7 @@ func (f BaseFunction) Utility3_GetChillerPlantCoP() error {
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -276,7 +276,7 @@ func (f BaseFunction) Utility3_GetChillerPlantDeltaT() error {
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -294,7 +294,7 @@ func (f BaseFunction) Utility3_GetChillerPlantDeltaT() error {
 					Unit:       "°C",
 				}, []string{Calculated}...)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
@@ -666,7 +666,7 @@ func (f BaseFunction) Utility3_GetChillerPlantTotalEnergy() error {
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -684,7 +684,7 @@ func (f BaseFunction) Utility3_GetChillerPlantTotalEnergy() error {
 					Unit:       "kW",
 				}, []string{Calculated}...)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
@@ -726,7 +726,7 @@ func (f BaseFunction) Utility3_GetChillerPlantCoolingLoadTon() error {
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -744,7 +744,7 @@ func (f BaseFunction) Utility3_GetChillerPlantCoolingLoadTon() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, newId, df, 1)
@@ -786,7 +786,7 @@ func (f BaseFunction) Utility3_GetChillerEnergy1Hour() error {
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -804,7 +804,7 @@ func (f BaseFunction) Utility3_GetChillerEnergy1Hour() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s_%s", ele.EquipmentName, newFunctionType, "(60T)"), df, 1)
@@ -844,7 +844,7 @@ func (f BaseFunction) Utility3_GetChillerEnergy1Day() error {
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -862,7 +862,7 @@ func (f BaseFunction) Utility3_GetChillerEnergy1Day() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s_%s", ele.EquipmentName, newFunctionType, "(1d)"), df, 1)
@@ -904,7 +904,7 @@ func (f BaseFunction) Utility3_GetChillerEnergy1Month() error {
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -922,7 +922,7 @@ func (f BaseFunction) Utility3_GetChillerEnergy1Month() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s_%s", ele.EquipmentName, newFunctionType, "(1M)"), df, 0)
@@ -970,7 +970,7 @@ func (f BaseFunction) Utility3_GetChillerCL() error {
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -988,7 +988,7 @@ func (f BaseFunction) Utility3_GetChillerCL() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), df, 1)
@@ -1037,7 +1037,7 @@ func (f BaseFunction) Utility3_GetChillerCoP() error {
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -1055,7 +1055,7 @@ func (f BaseFunction) Utility3_GetChillerCoP() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), df, 1)
@@ -1096,7 +1096,7 @@ func (f BaseFunction) Utility3_GetChillerDeltaT() error {
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -1114,7 +1114,7 @@ func (f BaseFunction) Utility3_GetChillerDeltaT() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), df, 1)
@@ -1320,7 +1320,7 @@ func (f BaseFunction) Utility3_GetChillerCoPkWPerTon() error {
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -1338,7 +1338,7 @@ func (f BaseFunction) Utility3_GetChillerCoPkWPerTon() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), df, 1)
@@ -1378,7 +1378,7 @@ func (f BaseFunction) Utility3_GetCTStatus() error {
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -1396,7 +1396,7 @@ func (f BaseFunction) Utility3_GetCTStatus() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), df, 1)
@@ -1436,7 +1436,7 @@ func (f BaseFunction) Utility3_GetChillerCLTon() error {
 			df dataframe.DataFrame, startIndex int) {
 			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
 				f.Database, f.Measurement, client.TaggingPoint{
@@ -1454,7 +1454,7 @@ func (f BaseFunction) Utility3_GetChillerCLTon() error {
 					Unit:       "Ton",
 				}, []string{Calculated}...)
 			if err != nil {
-				fmt.Println(err)
+				Utility_3_Logger.Log(logging.LogError, "function %s error: %v", name, err)
 			}
 			wg.Done()
 		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s", ele.EquipmentName, newFunctionType), df, 1)

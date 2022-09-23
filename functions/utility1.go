@@ -1016,7 +1016,6 @@ func (f BaseFunction) Utility1_GetChillerCoP() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			fmt.Println(f)
 			if len(f) < 4 {
 				return math.NaN()
 			}
@@ -1028,8 +1027,6 @@ func (f BaseFunction) Utility1_GetChillerCoP() error {
 				return 0
 			}
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		fmt.Println(df)
-		fmt.Println(ele.EquipmentName)
 		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
@@ -1450,7 +1447,6 @@ func (f BaseFunction) Utility1_GetChillerEnergy() error {
 				return (f[0]*f[3] + f[1]*f[4] + f[2]*f[5]) / 3 * math.Sqrt(3) / 1000
 			}
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		fmt.Println(df)
 		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,

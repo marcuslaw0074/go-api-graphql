@@ -266,7 +266,6 @@ func (f BaseFunction) Utility2_GetChillerPlantDeltaT() error {
 	wg := sync.WaitGroup{}
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
-		fmt.Println(ele.Dataframe)
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
 			if len(f) < 2 {
 				return math.NaN()
@@ -1029,7 +1028,6 @@ func (f BaseFunction) Utility2_GetChillerCoP() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			fmt.Println(f)
 			if len(f) < 4 {
 				return math.NaN()
 			}
@@ -1044,8 +1042,6 @@ func (f BaseFunction) Utility2_GetChillerCoP() error {
 				return 0
 			}
 		}, Utility_2_Chiller...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		fmt.Println(df)
-		fmt.Println(ele.EquipmentName)
 		Utility_2_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
 			EquipmentName string, FunctionType string, id string,
