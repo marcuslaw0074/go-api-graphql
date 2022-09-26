@@ -548,6 +548,103 @@ func Analytics_Utility_1() *airflow.Job {
 	return j
 }
 
+func Analytics_HCity1() *airflow.Job {
+
+	port, err := strconv.Atoi(os.Getenv("INFLUX_PORT"))
+	if err != nil {
+		fmt.Println("Port Error")
+	}
+	neo4jport, err2 := strconv.Atoi(os.Getenv("NEO4J_PORT"))
+	if err2 != nil {
+		fmt.Println("Port Error")
+	}
+	k := functions.BaseFunction{
+		Database:       os.Getenv("INFLUX_DATABASE"),
+		Measurement:    os.Getenv("INFLUX_MEASUREMENT_1"),
+		Host:           os.Getenv("INFLUX_HOST"),
+		Port:           port,
+		Neo4j_Host:     os.Getenv("NEO4J_HOST"),
+		Neo4j_Port:     neo4jport,
+		Neo4j_Database: os.Getenv("NEO4J_DATABASE"),
+		Neo4j_Username: os.Getenv("NEO4J_USERNAME"),
+		Neo4j_Password: os.Getenv("NEO4J_PASSWORD"),
+	}
+
+	j := &airflow.Job{
+		Name:     "test",
+		Schedule: "* * * * *",
+	}
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "HCity1_GetChillerPlantChillerRunning",
+		Name:         "HCity1_GetChillerPlantChillerRunning",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "HCity1_GetChillerPlantCoolingLoad",
+		Name:         "HCity1_GetChillerPlantCoolingLoad",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "HCity1_GetChillerPlantWetBulb",
+		Name:         "HCity1_GetChillerPlantWetBulb",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "HCity1_GetChillerEnergy1Hour",
+		Name:         "HCity1_GetChillerEnergy1Hour",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "HCity1_GetChillerEnergy1Day",
+		Name:         "HCity1_GetChillerEnergy1Day",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "HCity1_GetChillerEnergy1Month",
+		Name:         "HCity1_GetChillerEnergy1Month",
+	})
+	
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "HCity1_GetChillerCL",
+		Name:         "HCity1_GetChillerCL",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "HCity1_GetChillerDeltaT",
+		Name:         "HCity1_GetChillerDeltaT",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "HCity1_GetChillerCoP",
+		Name:         "HCity1_GetChillerCoP",
+	})
+
+
+	// calculate delta T, CL, CoP of whole chiller plant
+	j.SetDownstream(j.Task("HCity1_GetChillerPlantChillerRunning"), j.Task("HCity1_GetChillerPlantCoolingLoad"))
+
+	// calculate delta T, CL, CoP of individual chiller
+	j.SetDownstream(j.Task("HCity1_GetChillerDeltaT"), j.Task("HCity1_GetChillerCL"))
+	j.SetDownstream(j.Task("HCity1_GetChillerCL"), j.Task("HCity1_GetChillerCoP"))
+
+	// calculate hourly, daily, monthly energy consumption of individual chiller
+	j.SetDownstream(j.Task("HCity1_GetChillerEnergy1Hour"), j.Task("HCity1_GetChillerEnergy1Day"))
+	j.SetDownstream(j.Task("HCity1_GetChillerEnergy1Day"), j.Task("HCity1_GetChillerEnergy1Month"))
+
+	j.Run()
+	return j
+}
+
 func Test_Analytics() *airflow.Job {
 
 	k := functions.BaseFunction{
@@ -564,7 +661,7 @@ func Test_Analytics() *airflow.Job {
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerCoP",
+		FunctionName: "HCity1_GetChillerCL",
 		Name:         fmt.Sprintf("%s_GetChillerEnergy", k.Measurement),
 	})
 

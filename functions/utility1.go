@@ -17,11 +17,6 @@ var Utility_1_Logger = logging.StartLogger("log/Utility_1_LogFile.log")
 
 var timeClause string = "time>'2021-07-31T00:00:00Z' and time<'2021-10-31T00:00:00Z'"
 
-type Interval struct {
-	starttime string
-	endTime   string
-}
-
 var timeClauseMonth []Interval = []Interval{
 	{"2021-08-01T00:00:00Z", "2021-08-31T00:00:00Z"},
 	{"2021-09-01T00:00:00Z", "2021-09-30T00:00:00Z"},
