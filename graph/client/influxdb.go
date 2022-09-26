@@ -26,9 +26,9 @@ type Timeseries struct {
 	Value float64 `json:"value" format:"float64"`
 }
 
-func InfluxdbQuery(query, database string) (influx.Result, error) {
+func InfluxdbQuery(query, database, host string, port int) (influx.Result, error) {
 	c, err := influx.NewHTTPClient(influx.HTTPConfig{
-		Addr: "http://192.168.100.216:18086",
+		Addr: fmt.Sprintf("http://%s:%v", host, port),
 	})
 	if err != nil {
 		fmt.Println("Error creating InfluxDB Client: ", err.Error())
@@ -88,9 +88,9 @@ func InfluxdbWritePoints(url, database string, points []InfluxWriteSchema) error
 	return c.Write(bp)
 }
 
-func QueryDfGroup(query, database string) []tool.GroupDataframe {
+func QueryDfGroup(query, database, host string, port int) []tool.GroupDataframe {
 	fmt.Println(query)
-	res, _ := InfluxdbQuery(query, database)
+	res, _ := InfluxdbQuery(query, database, host, port)
 	dfGroup := make([]tool.GroupDataframe, 0)
 	equipmentList := make([]string, 0)
 	for _, series := range res.Series {
@@ -143,9 +143,9 @@ func QueryDfGroup(query, database string) []tool.GroupDataframe {
 	return dfGroup
 }
 
-func QueryDfGroupBy(query, database string, groupBy ...string) []tool.AllGroupDataframe {
+func QueryDfGroupBy(query, database, host string, port int, groupBy ...string) []tool.AllGroupDataframe {
 	groupBy = tool.FindGroupByList(groupBy...)
-	res, _ := InfluxdbQuery(query, database)
+	res, _ := InfluxdbQuery(query, database, host, port)
 	dfGroup := make([]tool.AllGroupDataframe, 0)
 	equipmentList := make([]string, 0)
 	for _, series := range res.Series {
