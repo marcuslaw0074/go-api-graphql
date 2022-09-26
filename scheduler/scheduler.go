@@ -480,20 +480,8 @@ func Analytics_Utility_1() *airflow.Job {
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerEnergy",
-		Name:         "Utility1_GetChillerEnergy",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
 		FunctionName: "Utility1_GetChillerPlantChillerRunning",
 		Name:         "Utility1_GetChillerPlantChillerRunning",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantChillerEnergy",
-		Name:         "Utility1_GetChillerPlantChillerEnergy",
 	})
 
 	j.Add(&airflow.Task{
@@ -504,62 +492,8 @@ func Analytics_Utility_1() *airflow.Job {
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantCoP",
-		Name:         "Utility1_GetChillerPlantCoP",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantDeltaT",
-		Name:         "Utility1_GetChillerPlantDeltaT",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
 		FunctionName: "Utility1_GetChillerPlantWetBulb",
 		Name:         "Utility1_GetChillerPlantWetBulb",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantCoP_kWPerTon",
-		Name:         "Utility1_GetChillerPlantCoP_kWPerTon",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantCTRunning",
-		Name:         "Utility1_GetChillerPlantCTRunning",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantPCHWPRunning",
-		Name:         "Utility1_GetChillerPlantPCHWPRunning",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantSCHWPRunning",
-		Name:         "Utility1_GetChillerPlantSCHWPRunning",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantCTEnergy",
-		Name:         "Utility1_GetChillerPlantCTEnergy",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantTotalEnergy",
-		Name:         "Utility1_GetChillerPlantTotalEnergy",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantCoolingLoadTon",
-		Name:         "Utility1_GetChillerPlantCoolingLoadTon",
 	})
 
 	j.Add(&airflow.Task{
@@ -598,83 +532,18 @@ func Analytics_Utility_1() *airflow.Job {
 		Name:         "Utility1_GetChillerCoP",
 	})
 
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantEnergy1Hour",
-		Name:         "Utility1_GetChillerPlantEnergy1Hour",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantEnergy1Day",
-		Name:         "Utility1_GetChillerPlantEnergy1Day",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantEnergy1Month",
-		Name:         "Utility1_GetChillerPlantEnergy1Month",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerCoPkWPerTon",
-		Name:         "Utility1_GetChillerCoPkWPerTon",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetCTStatus",
-		Name:         "Utility1_GetCTStatus",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerCLTon",
-		Name:         "Utility1_GetChillerCLTon",
-	})
-
-	// calculate total running status of each equipment type
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantChillerRunning"), j.Task("Utility1_GetChillerPlantCTRunning"))
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantCTRunning"), j.Task("Utility1_GetChillerPlantPCHWPRunning"))
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantPCHWPRunning"), j.Task("Utility1_GetChillerPlantSCHWPRunning"))
-
-	// calculate total energy of each equipment type
-	j.SetDownstream(j.Task("Utility1_GetChillerEnergy"), j.Task("Utility1_GetChillerPlantChillerEnergy"))
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantChillerEnergy"), j.Task("Utility1_GetChillerPlantCTEnergy"))
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantCTEnergy"), j.Task("Utility1_GetChillerPlantTotalEnergy"))
 
 	// calculate delta T, CL, CoP of whole chiller plant
 	j.SetDownstream(j.Task("Utility1_GetChillerPlantDeltaT"), j.Task("Utility1_GetChillerPlantCoolingLoad"))
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantCoolingLoad"), j.Task("Utility1_GetChillerPlantCoolingLoadTon"))
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantCoolingLoadTon"), j.Task("Utility1_GetChillerPlantCoP"))
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantCoP"), j.Task("Utility1_GetChillerPlantCoP_kWPerTon"))
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantTotalEnergy"), j.Task("Utility1_GetChillerPlantCoP"))
 
 	// set children node
 	j.SetDownstream(j.Task("Utility1_GetChillerPlantCoP"), j.Task("Utility1_GetChillerEnergy1Hour"))
 	j.SetDownstream(j.Task("Utility1_GetChillerPlantCoP"), j.Task("Utility1_GetChillerDeltaT"))
 
-	// calculate hourly, daily, monthly energy consumption of individual chiller
-	j.SetDownstream(j.Task("Utility1_GetChillerEnergy"), j.Task("Utility1_GetChillerEnergy1Hour"))
-	j.SetDownstream(j.Task("Utility1_GetChillerEnergy1Hour"), j.Task("Utility1_GetChillerEnergy1Day"))
-	j.SetDownstream(j.Task("Utility1_GetChillerEnergy1Day"), j.Task("Utility1_GetChillerEnergy1Month"))
-
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantChillerEnergy"), j.Task("Utility1_GetChillerPlantEnergy1Hour"))
 
 	// calculate delta T, CL, CoP of individual chiller
 	j.SetDownstream(j.Task("Utility1_GetChillerDeltaT"), j.Task("Utility1_GetChillerCL"))
-	j.SetDownstream(j.Task("Utility1_GetChillerCL"), j.Task("Utility1_GetChillerCoP"))
-	j.SetDownstream(j.Task("Utility1_GetChillerCoP"), j.Task("Utility1_GetChillerCLTon"))
-	j.SetDownstream(j.Task("Utility1_GetChillerCLTon"), j.Task("Utility1_GetChillerCoPkWPerTon"))
 
-	// calculate hourly, daily, monthly energy consumption of whole chiller plant
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantEnergy1Hour"), j.Task("Utility1_GetChillerPlantEnergy1Day"))
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantEnergy1Day"), j.Task("Utility1_GetChillerPlantEnergy1Month"))
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantEnergy1Month"), j.Task("Utility1_GetChillerCoPkWPerTon"))
-
-	// calculate status of individual cooling tower
-	j.SetDownstream(j.Task("Utility1_GetCTStatus"), j.Task("Utility1_GetChillerCoPkWPerTon"))
 
 	j.Run()
 	return j
@@ -683,10 +552,10 @@ func Analytics_Utility_1() *airflow.Job {
 func Test_Analytics() *airflow.Job {
 
 	k := functions.BaseFunction{
-		Database:    "WIIOT",
-		Measurement: "Utility_1",
-		Host:        "192.168.100.216",
-		Port:        18086,
+		Database:    "HabourCity",
+		Measurement: "HabourCity",
+		Host:        "192.168.100.214",
+		Port:        8086,
 	}
 
 	j := &airflow.Job{

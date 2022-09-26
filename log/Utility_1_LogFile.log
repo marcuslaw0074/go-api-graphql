@@ -1,0 +1,112 @@
+2022-09-26 10:14:38.539  LogInfo: START function Utility1_GetChillerPlantChillerRunning
+2022-09-26 10:14:38.614  LogInfo: function Utility1_GetChillerPlantChillerRunning data: []
+2022-09-26 10:14:38.614  LogError: function Utility1_GetChillerPlantChillerRunning: No data
+2022-09-26 10:15:28.112  LogInfo: START function Utility1_GetChillerPlantChillerRunning
+2022-09-26 10:15:28.155  LogInfo: function Utility1_GetChillerPlantChillerRunning data: []
+2022-09-26 10:15:28.155  LogError: function Utility1_GetChillerPlantChillerRunning: No data
+2022-09-26 10:16:05.767  LogInfo: START function Utility1_GetChillerPlantChillerRunning
+2022-09-26 10:16:05.801  LogInfo: function Utility1_GetChillerPlantChillerRunning data: []
+2022-09-26 10:16:05.801  LogError: function Utility1_GetChillerPlantChillerRunning: No data
+2022-09-26 10:17:57.316  LogInfo: START function Utility1_GetChillerPlantChillerRunning
+2022-09-26 10:17:57.346  LogInfo: function Utility1_GetChillerPlantChillerRunning data: []
+2022-09-26 10:17:57.346  LogError: function Utility1_GetChillerPlantChillerRunning: No data
+2022-09-26 10:20:08.989  LogInfo: START function Utility1_GetChillerPlantChillerRunning
+2022-09-26 10:20:09.023  LogInfo: function Utility1_GetChillerPlantChillerRunning data: []
+2022-09-26 10:20:09.023  LogError: function Utility1_GetChillerPlantChillerRunning: No data
+2022-09-26 10:21:30.082  LogInfo: START function Utility1_GetChillerPlantChillerRunning
+2022-09-26 10:21:30.119  LogInfo: function Utility1_GetChillerPlantChillerRunning data: []
+2022-09-26 10:21:30.119  LogError: function Utility1_GetChillerPlantChillerRunning: No data
+2022-09-26 10:22:07.267  LogInfo: START function Utility1_GetChillerPlantChillerRunning
+2022-09-26 10:22:07.302  LogInfo: function Utility1_GetChillerPlantChillerRunning data: []
+2022-09-26 10:22:07.302  LogError: function Utility1_GetChillerPlantChillerRunning: No data
+2022-09-26 10:22:29.255  LogInfo: START function Utility1_GetChillerPlantChillerRunning
+2022-09-26 10:22:29.295  LogInfo: function Utility1_GetChillerPlantChillerRunning data: []
+2022-09-26 10:22:29.295  LogError: function Utility1_GetChillerPlantChillerRunning: No data
+2022-09-26 10:26:54.483  LogInfo: START function Utility1_GetChillerPlantChillerRunning
+2022-09-26 10:26:54.628  LogInfo: function Utility1_GetChillerPlantChillerRunning data: [{CH01 [10x2] DataFrame
+
+    Time                 Chiller_Capacity_Sensor
+ 0: 2021-07-31T00:00:00Z NaN
+ 1: 2021-07-31T00:15:00Z NaN
+ 2: 2021-07-31T00:30:00Z NaN
+ 3: 2021-07-31T00:45:00Z NaN
+ 4: 2021-07-31T01:00:00Z NaN
+ 5: 2021-07-31T01:15:00Z NaN
+ 6: 2021-07-31T01:30:00Z NaN
+ 7: 2021-07-31T01:45:00Z NaN
+ 8: 2021-07-31T02:00:00Z NaN
+ 9: 2021-07-31T02:15:00Z NaN
+    <string>             <float>
+} {CH02 [10x2] DataFrame
+
+    Time                 Chiller_Capacity_Sensor
+ 0: 2021-07-31T00:00:00Z NaN
+ 1: 2021-07-31T00:15:00Z NaN
+ 2: 2021-07-31T00:30:00Z NaN
+ 3: 2021-07-31T00:45:00Z NaN
+ 4: 2021-07-31T01:00:00Z NaN
+ 5: 2021-07-31T01:15:00Z NaN
+ 6: 2021-07-31T01:30:00Z NaN
+ 7: 2021-07-31T01:45:00Z NaN
+ 8: 2021-07-31T02:00:00Z NaN
+ 9: 2021-07-31T02:15:00Z NaN
+    <string>             <float>
+} {CH03 [10x2] DataFrame
+
+    Time                 Chiller_Capacity_Sensor
+ 0: 2021-07-31T00:00:00Z NaN
+ 1: 2021-07-31T00:15:00Z NaN
+ 2: 2021-07-31T00:30:00Z NaN
+ 3: 2021-07-31T00:45:00Z NaN
+ 4: 2021-07-31T01:00:00Z NaN
+ 5: 2021-07-31T01:15:00Z NaN
+ 6: 2021-07-31T01:30:00Z NaN
+ 7: 2021-07-31T01:45:00Z NaN
+ 8: 2021-07-31T02:00:00Z NaN
+ 9: 2021-07-31T02:15:00Z NaN
+    <string>             <float>
+} {CH04 [10x2] DataFrame
+
+    Time                 Chiller_Capacity_Sensor
+ 0: 2021-07-31T00:00:00Z NaN
+ 1: 2021-07-31T00:15:00Z NaN
+ 2: 2021-07-31T00:30:00Z NaN
+ 3: 2021-07-31T00:45:00Z NaN
+ 4: 2021-07-31T01:00:00Z NaN
+ 5: 2021-07-31T01:15:00Z NaN
+ 6: 2021-07-31T01:30:00Z NaN
+ 7: 2021-07-31T01:45:00Z NaN
+ 8: 2021-07-31T02:00:00Z NaN
+ 9: 2021-07-31T02:15:00Z NaN
+    <string>             <float>
+} {CH05 [10x2] DataFrame
+
+    Time                 Chiller_Capacity_Sensor
+ 0: 2021-07-31T00:00:00Z NaN
+ 1: 2021-07-31T00:15:00Z NaN
+ 2: 2021-07-31T00:30:00Z NaN
+ 3: 2021-07-31T00:45:00Z NaN
+ 4: 2021-07-31T01:00:00Z NaN
+ 5: 2021-07-31T01:15:00Z NaN
+ 6: 2021-07-31T01:30:00Z NaN
+ 7: 2021-07-31T01:45:00Z NaN
+ 8: 2021-07-31T02:00:00Z NaN
+ 9: 2021-07-31T02:15:00Z NaN
+    <string>             <float>
+}]
+2022-09-26 10:26:54.634  LogInfo: function Utility1_GetChillerPlantChillerRunning data: [10x2] DataFrame
+
+    Value    Time
+ 0: 0.000000 2021-07-31T00:00:00Z
+ 1: 0.000000 2021-07-31T00:15:00Z
+ 2: 0.000000 2021-07-31T00:30:00Z
+ 3: 0.000000 2021-07-31T00:45:00Z
+ 4: 0.000000 2021-07-31T01:00:00Z
+ 5: 0.000000 2021-07-31T01:15:00Z
+ 6: 0.000000 2021-07-31T01:30:00Z
+ 7: 0.000000 2021-07-31T01:45:00Z
+ 8: 0.000000 2021-07-31T02:00:00Z
+ 9: 0.000000 2021-07-31T02:15:00Z
+    <float>  <string>
+
+2022-09-26 10:26:54.674  LogInfo: END function Utility1_GetChillerPlantChillerRunning

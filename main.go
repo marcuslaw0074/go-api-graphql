@@ -7,7 +7,7 @@ import (
 	_ "go-api-grapqhl/docs"
 	"go-api-grapqhl/graph"
 	"go-api-grapqhl/scheduler"
-	"time"
+	// "time"
 
 	// "go-api-grapqhl/graph/client"
 	// "go-api-grapqhl/graph/client"
@@ -90,7 +90,7 @@ func playgroundHandler() gin.HandlerFunc {
 func main() {
 
 	fmt.Println("Waiting until Neo4j ready")
-	time.Sleep(time.Duration(1000000000 * 20))
+	// time.Sleep(time.Duration(1000000000 * 20))
 
 	var Logger = logging.StartLogger("log/Utility_1_LogFile.log")
 	fmt.Println("Start API server!!!!!")
@@ -101,16 +101,16 @@ func main() {
 	}
 	r := gin.Default()
 
-	scheduler.Analytics_Utility_3()
-	scheduler.Analytics_Utility_2()
-	scheduler.Analytics_Utility_1()
+	// scheduler.Analytics_Utility_3()
+	// scheduler.Analytics_Utility_2()
+	scheduler.Test_Analytics()
 	scheduler.Example()
 
 	cr := cron.New()
 	cr.Start()
-	cr.AddFunc("*/5 * * * *", func() { scheduler.Analytics_Utility_3() })
-	cr.AddFunc("*/5 * * * *", func() { scheduler.Analytics_Utility_2() })
-	cr.AddFunc("*/5 * * * *", func() { scheduler.Analytics_Utility_1() })
+	// cr.AddFunc("*/5 * * * *", func() { scheduler.Analytics_Utility_3() })
+	// cr.AddFunc("*/5 * * * *", func() { scheduler.Analytics_Utility_2() })
+	// cr.AddFunc("*/5 * * * *", func() { scheduler.Analytics_Utility_1() })
 
 	r.POST("/query", graphqlHandler())
 	r.GET("/", playgroundHandler())
