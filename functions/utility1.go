@@ -856,7 +856,7 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Day() error {
 					Level:      "UT1",
 					ClassType:  "Electrical_Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -915,7 +915,7 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Month() error {
 					Level:      "UT1",
 					ClassType:  "Electrical_Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -981,7 +981,7 @@ func (f BaseFunction) Utility1_GetChillerCL() error {
 					Level:      "UT1",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1048,7 +1048,7 @@ func (f BaseFunction) Utility1_GetChillerCoP() error {
 					Level:      "UT1",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "None",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1107,7 +1107,7 @@ func (f BaseFunction) Utility1_GetChillerDeltaT() error {
 					Level:      "UT1",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "°C",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1162,7 +1162,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Hour() error {
 				Level:      "UT1",
 				ClassType:  "Electrical_Class",
 				Interval:   "20T",
-				Unit:       "Ton",
+				Unit:       "kW",
 			}, []string{Calculated}...)
 		if err != nil {
 			return err
@@ -1217,7 +1217,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Day() error {
 				Level:      "UT1",
 				ClassType:  "Electrical_Class",
 				Interval:   "20T",
-				Unit:       "Ton",
+				Unit:       "kW",
 			}, []string{Calculated}...)
 		if err != nil {
 			return err
@@ -1273,7 +1273,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Month() error {
 				Level:      "UT1",
 				ClassType:  "Electrical_Class",
 				Interval:   "20T",
-				Unit:       "Ton",
+				Unit:       "kW",
 			}, []string{Calculated}...)
 		if err != nil {
 			return err
@@ -1337,7 +1337,7 @@ func (f BaseFunction) Utility1_GetChillerCoPkWPerTon() error {
 					Level:      "UT1",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW/Ton",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1395,7 +1395,7 @@ func (f BaseFunction) Utility1_GetCTStatus() error {
 					Level:      "UT1",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "None",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1468,7 +1468,7 @@ func (f BaseFunction) Utility1_GetChillerEnergy() error {
 					Level:      "UT1",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1523,7 +1523,7 @@ func (f BaseFunction) Utility1_GetChillerCLTon() error {
 					DeviceName: EquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",
-					Level:      "UT3",
+					Level:      "UT1",
 					ClassType:  "Class",
 					Interval:   "20T",
 					Unit:       "Ton",

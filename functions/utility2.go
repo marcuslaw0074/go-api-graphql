@@ -52,7 +52,7 @@ func (f BaseFunction) Utility2_GetChillerPlantChillerRunning() error {
 				DeviceName: newEquipmentName,
 				PointType:  newFunctionType,
 				Location:   "Building",
-				Level:      "UT1",
+				Level:      "UT2",
 				ClassType:  "Class",
 				Interval:   "20T",
 				Unit:       "None",
@@ -106,7 +106,7 @@ func (f BaseFunction) Utility2_GetChillerPlantChillerEnergy() error {
 				DeviceName: newEquipmentName,
 				PointType:  newFunctionType,
 				Location:   "Building",
-				Level:      "UT1",
+				Level:      "UT2",
 				ClassType:  "Electrical_Class",
 				Interval:   "20T",
 				Unit:       "kW",
@@ -170,7 +170,7 @@ func (f BaseFunction) Utility2_GetChillerPlantCoolingLoad() error {
 				DeviceName: newEquipmentName,
 				PointType:  newFunctionType,
 				Location:   "Building",
-				Level:      "UT1",
+				Level:      "UT2",
 				ClassType:  "Class",
 				Interval:   "20T",
 				Unit:       "kW",
@@ -233,7 +233,7 @@ func (f BaseFunction) Utility2_GetChillerPlantCoP() error {
 					DeviceName: EquipmentName,
 					PointType:  FunctionType,
 					Location:   "Building",
-					Level:      "UT1",
+					Level:      "UT2",
 					ClassType:  "Class",
 					Interval:   "20T",
 					Unit:       "None",
@@ -246,7 +246,7 @@ func (f BaseFunction) Utility2_GetChillerPlantCoP() error {
 	return nil
 }
 
-// == model uid 4, no data in ut1 coz no functiontype, warning!!!, wrong output
+// == model uid 4, no data in UT2 coz no functiontype, warning!!!, wrong output
 func (f BaseFunction) Utility2_GetChillerPlantDeltaT() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility2_GetChillerPlantDeltaT"
@@ -290,7 +290,7 @@ func (f BaseFunction) Utility2_GetChillerPlantDeltaT() error {
 					DeviceName: EquipmentName,
 					PointType:  FunctionType,
 					Location:   "Building",
-					Level:      "UT1",
+					Level:      "UT2",
 					ClassType:  "Class",
 					Interval:   "20T",
 					Unit:       "°C",
@@ -353,7 +353,7 @@ func (f BaseFunction) Utility2_GetChillerPlantWetBulb() error {
 				DeviceName: newEquipmentName,
 				PointType:  newFunctionType,
 				Location:   "Building",
-				Level:      "UT1",
+				Level:      "UT2",
 				ClassType:  "Class",
 				Interval:   "20T",
 				Unit:       "°C",
@@ -412,7 +412,7 @@ func (f BaseFunction) Utility2_GetChillerPlantCoP_kWPerTon() error {
 				DeviceName: newEquipmentName,
 				PointType:  newFunctionType,
 				Location:   "Building",
-				Level:      "UT1",
+				Level:      "UT2",
 				ClassType:  "Class",
 				Interval:   "20T",
 				Unit:       "kW/Ton",
@@ -464,7 +464,7 @@ func (f BaseFunction) Utility2_GetChillerPlantCTRunning() error {
 				DeviceName: newEquipmentName,
 				PointType:  newFunctionType,
 				Location:   "Building",
-				Level:      "UT1",
+				Level:      "UT2",
 				ClassType:  "Class",
 				Interval:   "20T",
 				Unit:       "None",
@@ -516,7 +516,7 @@ func (f BaseFunction) Utility2_GetChillerPlantPCHWPRunning() error {
 				DeviceName: newEquipmentName,
 				PointType:  newFunctionType,
 				Location:   "Building",
-				Level:      "UT1",
+				Level:      "UT2",
 				ClassType:  "Class",
 				Interval:   "20T",
 				Unit:       "None",
@@ -568,7 +568,7 @@ func (f BaseFunction) Utility2_GetChillerPlantSCHWPRunning() error {
 				DeviceName: newEquipmentName,
 				PointType:  newFunctionType,
 				Location:   "Building",
-				Level:      "UT1",
+				Level:      "UT2",
 				ClassType:  "Class",
 				Interval:   "20T",
 				Unit:       "None",
@@ -623,7 +623,7 @@ func (f BaseFunction) Utility2_GetChillerPlantCTEnergy() error {
 				DeviceName: newEquipmentName,
 				PointType:  newFunctionType,
 				Location:   "Building",
-				Level:      "UT1",
+				Level:      "UT2",
 				ClassType:  "Electrical_Class",
 				Interval:   "20T",
 				Unit:       "kW",
@@ -677,7 +677,7 @@ func (f BaseFunction) Utility2_GetChillerPlantTotalEnergy() error {
 					DeviceName: EquipmentName,
 					PointType:  FunctionType,
 					Location:   "Building",
-					Level:      "UT1",
+					Level:      "UT2",
 					ClassType:  "Electrical_Class",
 					Interval:   "20T",
 					Unit:       "kW",
@@ -737,7 +737,7 @@ func (f BaseFunction) Utility2_GetChillerPlantCoolingLoadTon() error {
 					DeviceName: newEquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",
-					Level:      "UT1",
+					Level:      "UT2",
 					ClassType:  "Class",
 					Interval:   "20T",
 					Unit:       "Ton",
@@ -801,7 +801,7 @@ func (f BaseFunction) Utility2_GetChillerEnergy1Hour() error {
 					DeviceName: EquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",
-					Level:      "UT1",
+					Level:      "UT2",
 					ClassType:  "Electrical_Class",
 					Interval:   "20T",
 					Unit:       "Ton",
@@ -862,10 +862,10 @@ func (f BaseFunction) Utility2_GetChillerEnergy1Day() error {
 					DeviceName: EquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",
-					Level:      "UT1",
+					Level:      "UT2",
 					ClassType:  "Electrical_Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_2_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -924,10 +924,10 @@ func (f BaseFunction) Utility2_GetChillerEnergy1Month() error {
 					DeviceName: EquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",
-					Level:      "UT1",
+					Level:      "UT2",
 					ClassType:  "Electrical_Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_2_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -990,10 +990,10 @@ func (f BaseFunction) Utility2_GetChillerCL() error {
 					DeviceName: EquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",
-					Level:      "UT1",
+					Level:      "UT2",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_2_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1060,10 +1060,10 @@ func (f BaseFunction) Utility2_GetChillerCoP() error {
 					DeviceName: EquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",
-					Level:      "UT1",
+					Level:      "UT2",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "None",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_2_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1119,10 +1119,10 @@ func (f BaseFunction) Utility2_GetChillerDeltaT() error {
 					DeviceName: EquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",
-					Level:      "UT1",
+					Level:      "UT2",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "°C",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_2_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1177,10 +1177,10 @@ func (f BaseFunction) Utility2_GetChillerPlantEnergy1Hour() error {
 				DeviceName: newEquipmentName,
 				PointType:  newFunctionType,
 				Location:   "Building",
-				Level:      "UT1",
+				Level:      "UT2",
 				ClassType:  "Electrical_Class",
 				Interval:   "20T",
-				Unit:       "Ton",
+				Unit:       "kW",
 			}, []string{Calculated}...)
 		if err != nil {
 			return err
@@ -1235,10 +1235,10 @@ func (f BaseFunction) Utility2_GetChillerPlantEnergy1Day() error {
 				DeviceName: newEquipmentName,
 				PointType:  newFunctionType,
 				Location:   "Building",
-				Level:      "UT1",
+				Level:      "UT2",
 				ClassType:  "Electrical_Class",
 				Interval:   "20T",
-				Unit:       "Ton",
+				Unit:       "kW",
 			}, []string{Calculated}...)
 		if err != nil {
 			return err
@@ -1291,10 +1291,10 @@ func (f BaseFunction) Utility2_GetChillerPlantEnergy1Month() error {
 				DeviceName: newEquipmentName,
 				PointType:  newFunctionType,
 				Location:   "Building",
-				Level:      "UT1",
+				Level:      "UT2",
 				ClassType:  "Electrical_Class",
 				Interval:   "20T",
-				Unit:       "Ton",
+				Unit:       "kW",
 			}, []string{Calculated}...)
 		if err != nil {
 			return err
@@ -1355,10 +1355,10 @@ func (f BaseFunction) Utility2_GetChillerCoPkWPerTon() error {
 					DeviceName: EquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",
-					Level:      "UT1",
+					Level:      "UT2",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW/Ton",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_2_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1413,10 +1413,10 @@ func (f BaseFunction) Utility2_GetCTStatus() error {
 					DeviceName: EquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",
-					Level:      "UT1",
+					Level:      "UT2",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "None",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_2_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1473,7 +1473,7 @@ func (f BaseFunction) Utility2_GetChillerCLTon() error {
 					DeviceName: EquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",
-					Level:      "UT3",
+					Level:      "UT2",
 					ClassType:  "Class",
 					Interval:   "20T",
 					Unit:       "Ton",
