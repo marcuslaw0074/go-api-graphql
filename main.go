@@ -103,7 +103,8 @@ func main() {
 
 	// scheduler.Analytics_Utility_3()
 	// scheduler.Analytics_Utility_2()
-	scheduler.Test_Analytics()
+	scheduler.Analytics_Utility_1()
+	fmt.Println("DONEEEE!!!")
 	scheduler.Example()
 
 	cr := cron.New()

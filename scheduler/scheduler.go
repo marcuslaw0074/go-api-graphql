@@ -513,17 +513,17 @@ func Analytics_Utility_1() *airflow.Job {
 		FunctionName: "Utility1_GetChillerEnergy1Month",
 		Name:         "Utility1_GetChillerEnergy1Month",
 	})
+	
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Utility1_GetChillerCL",
+		Name:         "Utility1_GetChillerCL",
+	})
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
 		FunctionName: "Utility1_GetChillerDeltaT",
 		Name:         "Utility1_GetChillerDeltaT",
-	})
-
-	j.Add(&airflow.Task{
-		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerCL",
-		Name:         "Utility1_GetChillerCL",
 	})
 
 	j.Add(&airflow.Task{
@@ -534,16 +534,15 @@ func Analytics_Utility_1() *airflow.Job {
 
 
 	// calculate delta T, CL, CoP of whole chiller plant
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantDeltaT"), j.Task("Utility1_GetChillerPlantCoolingLoad"))
-
-	// set children node
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantCoP"), j.Task("Utility1_GetChillerEnergy1Hour"))
-	j.SetDownstream(j.Task("Utility1_GetChillerPlantCoP"), j.Task("Utility1_GetChillerDeltaT"))
-
+	j.SetDownstream(j.Task("Utility1_GetChillerPlantChillerRunning"), j.Task("Utility1_GetChillerPlantCoolingLoad"))
 
 	// calculate delta T, CL, CoP of individual chiller
 	j.SetDownstream(j.Task("Utility1_GetChillerDeltaT"), j.Task("Utility1_GetChillerCL"))
+	j.SetDownstream(j.Task("Utility1_GetChillerCL"), j.Task("Utility1_GetChillerCoP"))
 
+	// calculate hourly, daily, monthly energy consumption of individual chiller
+	j.SetDownstream(j.Task("Utility1_GetChillerEnergy1Hour"), j.Task("Utility1_GetChillerEnergy1Day"))
+	j.SetDownstream(j.Task("Utility1_GetChillerEnergy1Day"), j.Task("Utility1_GetChillerEnergy1Month"))
 
 	j.Run()
 	return j
@@ -565,7 +564,7 @@ func Test_Analytics() *airflow.Job {
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
-		FunctionName: "Utility1_GetChillerPlantChillerRunning",
+		FunctionName: "Utility1_GetChillerCoP",
 		Name:         fmt.Sprintf("%s_GetChillerEnergy", k.Measurement),
 	})
 

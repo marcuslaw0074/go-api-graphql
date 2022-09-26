@@ -2,12 +2,13 @@ package functions
 
 import (
 	"fmt"
-	"github.com/go-gota/gota/dataframe"
 	"go-api-grapqhl/graph/client"
 	logging "go-api-grapqhl/log"
 	"go-api-grapqhl/tool"
 	"math"
 	"sync"
+
+	"github.com/go-gota/gota/dataframe"
 )
 
 var Utility_1_Chiller = []int{1, 2, 3, 4, 5}
@@ -16,10 +17,19 @@ var Utility_1_Logger = logging.StartLogger("log/Utility_1_LogFile.log")
 
 var timeClause string = "time>'2021-07-31T00:00:00Z' and time<'2021-10-31T00:00:00Z'"
 
+type Interval struct {
+	starttime string
+	endTime   string
+}
+
+var timeClauseMonth []Interval = []Interval{
+	{"2021-08-01T00:00:00Z", "2021-08-31T00:00:00Z"},
+	{"2021-09-01T00:00:00Z", "2021-09-30T00:00:00Z"},
+}
+
 // == model uid 0 OK use
 func (f BaseFunction) Utility1_GetChillerPlantChillerRunning() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
-	fmt.Println(url, f.Database, f.Measurement)
 	name := "Utility1_GetChillerPlantChillerRunning"
 	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_Plant_Total_Chiller_Running"
@@ -27,7 +37,7 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerRunning() error {
 	newEquipmentName := "Chiller_Plant"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE "FunctionType"='Chiller_Capacity_Sensor' AND 
-			%s GROUP BY EquipmentName, FunctionType, id, time(15m) LIMIT 10`, f.Measurement, timeClause)
+			%s GROUP BY EquipmentName, FunctionType, id, time(15m) `, f.Measurement, timeClause)
 	dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
 	fmt.Println(dfGroup)
 	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
@@ -46,24 +56,24 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerRunning() error {
 		if err != nil {
 			return err
 		}
-		// err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
-		// 	f.Database, f.Measurement, client.TaggingPoint{
-		// 		BMS_id:     newId,
-		// 		PointName:  newId,
-		// 		System:     "HVAC_System",
-		// 		SubSystem:  "Water_System",
-		// 		DeviceType: "Chiller_Plant",
-		// 		DeviceName: newEquipmentName,
-		// 		PointType:  newFunctionType,
-		// 		Location:   "Building",
-		// 		Level:      "UT1",
-		// 		ClassType:  "Class",
-		// 		Interval:   "20T",
-		// 		Unit:       "None",
-		// 	}, []string{Calculated}...)
-		// if err != nil {
-		// 	return err
-		// }
+		err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
+			f.Database, f.Measurement, client.TaggingPoint{
+				BMS_id:     newId,
+				PointName:  newId,
+				System:     "HVAC_System",
+				SubSystem:  "Water_System",
+				DeviceType: "Chiller_Plant",
+				DeviceName: newEquipmentName,
+				PointType:  newFunctionType,
+				Location:   "Building",
+				Level:      "UT1",
+				ClassType:  "Class",
+				Interval:   "20T",
+				Unit:       "None",
+			}, []string{Calculated}...)
+		if err != nil {
+			return err
+		}
 	}
 	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
@@ -122,6 +132,7 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerEnergy() error {
 
 // == model uid 2 OK use
 func (f BaseFunction) Utility1_GetChillerPlantCoolingLoad() error {
+	// timeClause = "time>'2021-08-01T18:00:00Z' and time<'2021-08-08T00:00:00Z'"
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerPlantCoolingLoad"
 	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
@@ -137,8 +148,8 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoad() error {
 	dfGroup = client.ApplyFunctionDfGroup(dfGroup, func(f ...float64) float64 {
 		if len(f) < 3 {
 			return math.NaN()
-		} else if f[2] > 500 && (f[0]-f[1]) > 0 {
-			return (f[0] - f[1]) * 4.2 * 0.0631 * f[2]
+		} else if f[2] > 50 && (f[0]-f[1]) > 0 {
+			return (f[0] - f[1]) * 4.2 * f[2]
 		} else if tool.ContainNaN(f) {
 			return math.NaN()
 		} else {
@@ -757,7 +768,7 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoadTon() error {
 // tested model functions
 ///////////////////////////////////////////////////////////////////////////////
 
-// individual model uid 0 OK
+// individual model uid 0 OK use
 func (f BaseFunction) Utility1_GetChillerEnergy1Hour() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerEnergy1Hour"
@@ -815,7 +826,7 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Hour() error {
 	return nil
 }
 
-// individual model uid 1 OK
+// individual model uid 1 OK use
 func (f BaseFunction) Utility1_GetChillerEnergy1Day() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerEnergy1Day"
@@ -837,7 +848,7 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Day() error {
 			if len(f) < 1 {
 				return math.NaN()
 			}
-			return f[0] / 3
+			return f[0] / 4
 		}, []int{1}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		go func(query string, database string, measurement string,
@@ -873,62 +884,65 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Day() error {
 	return nil
 }
 
-// individual model uid 2, NONONO
+// individual model uid 2, use
 func (f BaseFunction) Utility1_GetChillerEnergy1Month() error {
-	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
-	name := "Utility1_GetChillerEnergy1Month"
-	Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
-	newFunctionType := "Chiller_Power_Sensor(Calculated)(1M)"
-	query := fmt.Sprintf(`SELECT SUM(value) FROM %s 
+	for _, ele := range timeClauseMonth {
+		timeClause = fmt.Sprintf("time>'%s' and time<'%s'", ele.starttime, ele.endTime)
+		url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
+		name := "Utility1_GetChillerEnergy1Month"
+		Utility_1_Logger.Log(logging.LogInfo, "START function %s", name)
+		newFunctionType := "Chiller_Power_Sensor(Calculated)(1M)"
+		query := fmt.Sprintf(`SELECT SUM(value) FROM %s 
 			WHERE "FunctionType"='Chiller_Power_Sensor' AND 
 			( %s ) 
 			GROUP BY EquipmentName, FunctionType, id`, f.Measurement, timeClause)
-	dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
-	Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
-	if len(dfGroup) == 0 {
-		Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
-		return nil
+		dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
+		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
+		if len(dfGroup) == 0 {
+			Utility_1_Logger.Log(logging.LogError, "function %s: No data", name)
+			return nil
+		}
+		wg := sync.WaitGroup{}
+		wg.Add(len(dfGroup))
+		for _, ele := range dfGroup {
+			df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+				if len(f) < 1 {
+					return math.NaN()
+				}
+				return f[0] / 4
+			}, []int{1}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
+			Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
+			go func(query string, database string, measurement string,
+				EquipmentName string, FunctionType string, id string,
+				df dataframe.DataFrame, startIndex int) {
+				err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
+				if err != nil {
+					Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				}
+				err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
+					f.Database, f.Measurement, client.TaggingPoint{
+						BMS_id:     id,
+						PointName:  id,
+						System:     "HVAC_System",
+						SubSystem:  "Water_System",
+						DeviceType: "Chiller_Plant",
+						DeviceName: EquipmentName,
+						PointType:  newFunctionType,
+						Location:   "Building",
+						Level:      "UT1",
+						ClassType:  "Electrical_Class",
+						Interval:   "20T",
+						Unit:       "Ton",
+					}, []string{Calculated}...)
+				if err != nil {
+					Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
+				}
+				wg.Done()
+			}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s_%s", ele.EquipmentName, newFunctionType, "(1M)"), df, 0)
+		}
+		wg.Wait()
+		Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	}
-	wg := sync.WaitGroup{}
-	wg.Add(len(dfGroup))
-	for _, ele := range dfGroup {
-		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
-			if len(f) < 1 {
-				return math.NaN()
-			}
-			return f[0] / 3
-		}, []int{1}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
-		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
-		go func(query string, database string, measurement string,
-			EquipmentName string, FunctionType string, id string,
-			df dataframe.DataFrame, startIndex int) {
-			err := client.UploadDfGroup(url, query, database, measurement, EquipmentName, FunctionType, id, df, startIndex)
-			if err != nil {
-				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
-			}
-			err = client.AddClientPoint(fmt.Sprintf("neo4j://%s:%v", f.Neo4j_Host, f.Neo4j_Port), f.Neo4j_Username, f.Neo4j_Password,
-				f.Database, f.Measurement, client.TaggingPoint{
-					BMS_id:     id,
-					PointName:  id,
-					System:     "HVAC_System",
-					SubSystem:  "Water_System",
-					DeviceType: "Chiller_Plant",
-					DeviceName: EquipmentName,
-					PointType:  newFunctionType,
-					Location:   "Building",
-					Level:      "UT1",
-					ClassType:  "Electrical_Class",
-					Interval:   "20T",
-					Unit:       "Ton",
-				}, []string{Calculated}...)
-			if err != nil {
-				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
-			}
-			wg.Done()
-		}(query, f.Database, f.Measurement, ele.EquipmentName, newFunctionType, fmt.Sprintf("%s_%s_%s", ele.EquipmentName, newFunctionType, "(1M)"), df, 0)
-	}
-	wg.Wait()
-	Utility_1_Logger.Log(logging.LogInfo, "END function %s", name)
 	return nil
 }
 
@@ -978,7 +992,7 @@ func (f BaseFunction) Utility1_GetChillerCL() error {
 					PointName:  id,
 					System:     "HVAC_System",
 					SubSystem:  "Water_System",
-					DeviceType: "Chiller_Plant",
+					DeviceType: "Chiller",
 					DeviceName: EquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",
@@ -998,7 +1012,7 @@ func (f BaseFunction) Utility1_GetChillerCL() error {
 	return nil
 }
 
-// individual model uid 4
+// individual model uid 4 use
 func (f BaseFunction) Utility1_GetChillerCoP() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "Utility1_GetChillerCoP"
@@ -1023,8 +1037,8 @@ func (f BaseFunction) Utility1_GetChillerCoP() error {
 			if len(f) < 4 {
 				return math.NaN()
 			}
-			if f[2] > 50 && f[3] > 100 && (f[0]-f[1]) > 0 {
-				return (f[0] - f[1]) * 4.2 * 0.0631 * f[3] / f[2]
+			if f[2] > 50 && f[3] > 50 && (f[0]-f[1]) > 0 {
+				return (f[0] - f[1]) * 4.2 * f[3] / f[2]
 			} else if tool.ContainNaN(f) {
 				return math.NaN()
 			} else {
@@ -1045,7 +1059,7 @@ func (f BaseFunction) Utility1_GetChillerCoP() error {
 					PointName:  id,
 					System:     "HVAC_System",
 					SubSystem:  "Water_System",
-					DeviceType: "Chiller_Plant",
+					DeviceType: "Chiller",
 					DeviceName: EquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",
@@ -1104,7 +1118,7 @@ func (f BaseFunction) Utility1_GetChillerDeltaT() error {
 					PointName:  id,
 					System:     "HVAC_System",
 					SubSystem:  "Water_System",
-					DeviceType: "Chiller_Plant",
+					DeviceType: "Chiller",
 					DeviceName: EquipmentName,
 					PointType:  newFunctionType,
 					Location:   "Building",

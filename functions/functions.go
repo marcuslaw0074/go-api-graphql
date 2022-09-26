@@ -13,5 +13,5 @@ type BaseFunction struct {
 }
 
 const (
-	Calculated string = "Calculated__test"
+	Calculated string = "Calculated"
 )

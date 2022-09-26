@@ -65,7 +65,6 @@ func InfluxdbWritePoints(url, database string, points []InfluxWriteSchema) error
 		return nil
 	}
 	c, err := influx.NewHTTPClient(influx.HTTPConfig{
-		// Addr: "http://192.168.100.216:18086",
 		Addr: url,
 	})
 	if err != nil {
@@ -91,7 +90,6 @@ func InfluxdbWritePoints(url, database string, points []InfluxWriteSchema) error
 func QueryDfGroup(query, database, host string, port int) []tool.GroupDataframe {
 	fmt.Println(query)
 	res, _ := InfluxdbQuery(query, database, host, port)
-	fmt.Println(res)
 	dfGroup := make([]tool.GroupDataframe, 0)
 	equipmentList := make([]string, 0)
 	for _, series := range res.Series {

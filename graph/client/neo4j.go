@@ -153,6 +153,7 @@ func WriteClientPoint(session neo4j.Session, point TaggingPoint, database, measu
 			MERGE (b)-[:isPointOf]->(d)
 			RETURN a
 			`, bldg, newLabel, bldg, brick, brick)
+	fmt.Println(cypher)
 	res, err := session.WriteTransaction(func(transaction neo4j.Transaction) (interface{}, error) {
 		result, err := transaction.Run(
 			cypher,
