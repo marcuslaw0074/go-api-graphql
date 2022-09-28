@@ -143,6 +143,7 @@ func WriteClientPoint(session neo4j.Session, point TaggingPoint, database, measu
 			MERGE (b: %s {Level: $Level, database: $database, measurement: $measurement, name: $DeviceName})
 			MERGE (c: %s {database: $database, measurement: $measurement, name: $PointType})
 			MERGE (d: %s {database: $database, measurement: $measurement, name: $DeviceType})
+			MERGE (e: %s {database: $database, measurement: $measurement, name: $Level})
 			MERGE (a)-[:isPointOf]->(c)
 			MERGE (c)-[:hasPoint]->(a)
 			MERGE (a)-[:isPartOf]->(b)
@@ -151,8 +152,10 @@ func WriteClientPoint(session neo4j.Session, point TaggingPoint, database, measu
 			MERGE (d)-[:hasPart]->(c)
 			MERGE (d)-[:hasPoint]->(b)
 			MERGE (b)-[:isPointOf]->(d)
+			MERGE (b)-[:hasLocation]->(e)
+			MERGE (e)-[:isLocationOf]->(b)
 			RETURN a
-			`, bldg, newLabel, bldg, brick, brick)
+			`, bldg, newLabel, bldg, brick, brick, bldg)
 	fmt.Println(cypher)
 	res, err := session.WriteTransaction(func(transaction neo4j.Transaction) (interface{}, error) {
 		result, err := transaction.Run(

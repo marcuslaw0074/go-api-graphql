@@ -15,16 +15,16 @@ var HCity_1_Chiller = []int{1, 2, 3, 4, 5}
 var HCity_1_CT = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18}
 var HCity_1_Logger = logging.StartLogger("log/HCity_1_LogFile.log")
 
-var TimeClause string = "time>'2021-07-31T00:00:00Z' and time<'2021-10-31T00:00:00Z'"
+var TimeClause_HCity string = "time>'2021-07-31T00:00:00Z' and time<'2021-10-31T00:00:00Z'"
 
 type Interval struct {
 	starttime string
 	endTime   string
 }
 
-var TimeClauseMonth []Interval = []Interval{
-	{"2021-08-01T00:00:00Z", "2021-08-31T00:00:00Z"},
-	{"2021-09-01T00:00:00Z", "2021-09-30T00:00:00Z"},
+var TimeClauseMonth_HCity []Interval = []Interval{
+	{"2021-08-01T00:00:00Z", "2021-09-01T00:00:00Z"},
+	{"2021-09-01T00:00:00Z", "2021-10-01T00:00:00Z"},
 }
 
 func (f BaseFunction) HCity1_GetChillerPlantChillerRunning() error {
@@ -36,7 +36,7 @@ func (f BaseFunction) HCity1_GetChillerPlantChillerRunning() error {
 	newEquipmentName := "Chiller_Plant"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE "FunctionType"='Chiller_Capacity_Sensor' AND 
-			%s GROUP BY EquipmentName, FunctionType, id, time(15m) `, f.Measurement, TimeClause)
+			%s GROUP BY EquipmentName, FunctionType, id, time(15m) `, f.Measurement, TimeClause_HCity)
 	dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
 	fmt.Println(dfGroup)
 	HCity_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
@@ -79,7 +79,7 @@ func (f BaseFunction) HCity1_GetChillerPlantChillerRunning() error {
 }
 
 func (f BaseFunction) HCity1_GetChillerPlantCoolingLoad() error {
-	// TimeClause = "time>'2021-08-01T18:00:00Z' and time<'2021-08-08T00:00:00Z'"
+	// TimeClause_HCity = "time>'2021-08-01T18:00:00Z' and time<'2021-08-08T00:00:00Z'"
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "HCity1_GetChillerPlantCoolingLoad"
 	HCity_1_Logger.Log(logging.LogInfo, "START function %s", name)
@@ -90,7 +90,7 @@ func (f BaseFunction) HCity1_GetChillerPlantCoolingLoad() error {
 			WHERE ("FunctionType"='Chiller_Chilled_Water_Return_Temperature_Sensor' OR
 			"FunctionType"='Chiller_Chilled_Water_Supply_Temperature_Sensor' OR 
 			"FunctionType"='Chiller_Water_Flowrate') AND
-			%s GROUP BY EquipmentName, FunctionType, id, time(15m)`, f.Measurement, TimeClause)
+			%s GROUP BY EquipmentName, FunctionType, id, time(15m)`, f.Measurement, TimeClause_HCity)
 	dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
 	dfGroup = client.ApplyFunctionDfGroup(dfGroup, func(f ...float64) float64 {
 		if len(f) < 3 {
@@ -152,7 +152,7 @@ func (f BaseFunction) HCity1_GetChillerPlantWetBulb() error {
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE ("FunctionType"='Chiller_Plant_Outdoor_Dry_Bulb' OR
 			"FunctionType"='Chiller_Plant_Outdoor_Humidity') AND
-			%s GROUP BY EquipmentName, FunctionType, id, time(15m)`, f.Measurement, TimeClause)
+			%s GROUP BY EquipmentName, FunctionType, id, time(15m)`, f.Measurement, TimeClause_HCity)
 	dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
 	HCity_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
@@ -208,7 +208,7 @@ func (f BaseFunction) HCity1_GetChillerEnergy1Hour() error {
 	newFunctionType := "Chiller_Power_Sensor(Calculated)(60m)"
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE "FunctionType"='Chiller_Power_Sensor' AND 
-			%s GROUP BY EquipmentName, FunctionType, id, time(60m)`, f.Measurement, TimeClause)
+			%s GROUP BY EquipmentName, FunctionType, id, time(60m)`, f.Measurement, TimeClause_HCity)
 	dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
 	HCity_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
@@ -265,7 +265,7 @@ func (f BaseFunction) HCity1_GetChillerEnergy1Day() error {
 	newFunctionType := "Chiller_Power_Sensor(Calculated)(1d)"
 	query := fmt.Sprintf(`SELECT SUM(value) FROM %s 
 			WHERE "FunctionType"='Chiller_Power_Sensor' AND 
-			%s GROUP BY EquipmentName, FunctionType, id, time(1d)`, f.Measurement, TimeClause)
+			%s GROUP BY EquipmentName, FunctionType, id, time(1d)`, f.Measurement, TimeClause_HCity)
 	dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
 	HCity_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
@@ -385,7 +385,7 @@ func (f BaseFunction) HCity1_GetChillerCL() error {
 			WHERE ("FunctionType"='Chiller_Chilled_Water_Return_Temperature_Sensor' OR
 			"FunctionType"='Chiller_Chilled_Water_Supply_Temperature_Sensor' OR 
 			"FunctionType"='Chiller_Water_Flowrate') AND
-			%s GROUP BY EquipmentName, FunctionType, id, time(15m)`, f.Measurement, TimeClause)
+			%s GROUP BY EquipmentName, FunctionType, id, time(15m)`, f.Measurement, TimeClause_HCity)
 	dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
 	HCity_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
@@ -451,7 +451,7 @@ func (f BaseFunction) HCity1_GetChillerCoP() error {
 			"FunctionType"='Chiller_Chilled_Water_Supply_Temperature_Sensor' OR 
 			"FunctionType"='Chiller_Power_Sensor' OR
 			"FunctionType"='Chiller_Water_Flowrate') AND
-			%s GROUP BY EquipmentName, FunctionType, id, time(15m)`, f.Measurement, TimeClause)
+			%s GROUP BY EquipmentName, FunctionType, id, time(15m)`, f.Measurement, TimeClause_HCity)
 	dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
 	HCity_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {
@@ -515,7 +515,7 @@ func (f BaseFunction) HCity1_GetChillerDeltaT() error {
 	query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE ("FunctionType"='Chiller_Chilled_Water_Return_Temperature_Sensor' OR
 			"FunctionType"='Chiller_Chilled_Water_Supply_Temperature_Sensor') AND 
-			%s GROUP BY EquipmentName, FunctionType, id, time(15m)`, f.Measurement, TimeClause)
+			%s GROUP BY EquipmentName, FunctionType, id, time(15m)`, f.Measurement, TimeClause_HCity)
 	dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
 	HCity_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 	if len(dfGroup) == 0 {

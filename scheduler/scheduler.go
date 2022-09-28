@@ -645,13 +645,26 @@ func Analytics_HCity1() *airflow.Job {
 	return j
 }
 
-func Test_Analytics() *airflow.Job {
+func Analytics_Sands() *airflow.Job {
 
+	port, err := strconv.Atoi(os.Getenv("INFLUX_PORT"))
+	if err != nil {
+		fmt.Println("Port Error")
+	}
+	neo4jport, err2 := strconv.Atoi(os.Getenv("NEO4J_PORT"))
+	if err2 != nil {
+		fmt.Println("Port Error")
+	}
 	k := functions.BaseFunction{
-		Database:    "HabourCity",
-		Measurement: "HabourCity",
-		Host:        "192.168.100.214",
-		Port:        8086,
+		Database:       os.Getenv("INFLUX_DATABASE"),
+		Measurement:    os.Getenv("INFLUX_MEASUREMENT"),
+		Host:           os.Getenv("INFLUX_HOST"),
+		Port:           port,
+		Neo4j_Host:     os.Getenv("NEO4J_HOST"),
+		Neo4j_Port:     neo4jport,
+		Neo4j_Database: os.Getenv("NEO4J_DATABASE"),
+		Neo4j_Username: os.Getenv("NEO4J_USERNAME"),
+		Neo4j_Password: os.Getenv("NEO4J_PASSWORD"),
 	}
 
 	j := &airflow.Job{
@@ -661,7 +674,203 @@ func Test_Analytics() *airflow.Job {
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
-		FunctionName: "HCity1_GetChillerCL",
+		FunctionName: "Sands_GetChillerPlantChillerRunning",
+		Name:         "Sands_GetChillerPlantChillerRunning",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantChillerEnergy",
+		Name:         "Sands_GetChillerPlantChillerEnergy",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantCoolingLoad",
+		Name:         "Sands_GetChillerPlantCoolingLoad",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantCoP",
+		Name:         "Sands_GetChillerPlantCoP",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantWetBulb",
+		Name:         "Sands_GetChillerPlantWetBulb",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantCTRunning",
+		Name:         "Sands_GetChillerPlantCTRunning",
+	})
+	
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantCHWPRunning",
+		Name:         "Sands_GetChillerPlantCHWPRunning",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantCDWPRunning",
+		Name:         "Sands_GetChillerPlantCDWPRunning",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantCTEnergy",
+		Name:         "Sands_GetChillerPlantCTEnergy",
+	})
+	
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantCHWPEnergy",
+		Name:         "Sands_GetChillerPlantCHWPEnergy",
+	})
+	
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantCDWPEnergy",
+		Name:         "Sands_GetChillerPlantCDWPEnergy",
+	})
+	
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantTotalEnergy",
+		Name:         "Sands_GetChillerPlantTotalEnergy",
+	})
+	
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerEnergy1Hour",
+		Name:         "Sands_GetChillerEnergy1Hour",
+	})
+	
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerEnergy1Day",
+		Name:         "Sands_GetChillerEnergy1Day",
+	})
+	
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerEnergy1Month",
+		Name:         "Sands_GetChillerEnergy1Month",
+	})
+	
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerDeltaT",
+		Name:         "Sands_GetChillerDeltaT",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerCL",
+		Name:         "Sands_GetChillerCL",
+	})
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerCoP",
+		Name:         "Sands_GetChillerCoP",
+	})
+		
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantEnergy1Hour",
+		Name:         "Sands_GetChillerPlantEnergy1Hour",
+	})
+		
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantEnergy1Day",
+		Name:         "Sands_GetChillerPlantEnergy1Day",
+	})
+		
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerPlantEnergy1Month",
+		Name:         "Sands_GetChillerPlantEnergy1Month",
+	})
+		
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetCTStatus",
+		Name:         "Sands_GetCTStatus",
+	})
+
+
+	// calculate running status of each equipment type
+	j.SetDownstream(j.Task("Sands_GetChillerPlantChillerRunning"), j.Task("Sands_GetChillerPlantCTRunning"))
+	j.SetDownstream(j.Task("Sands_GetChillerPlantCTRunning"), j.Task("Sands_GetChillerPlantCHWPRunning"))
+	j.SetDownstream(j.Task("Sands_GetChillerPlantCHWPRunning"), j.Task("Sands_GetChillerPlantCDWPRunning"))
+	
+	// calculate total energy of each equipment type
+	j.SetDownstream(j.Task("Sands_GetChillerPlantChillerEnergy"), j.Task("Sands_GetChillerPlantCTEnergy"))
+	j.SetDownstream(j.Task("Sands_GetChillerPlantCTEnergy"), j.Task("Sands_GetChillerPlantCHWPEnergy"))
+	j.SetDownstream(j.Task("Sands_GetChillerPlantCHWPEnergy"), j.Task("Sands_GetChillerPlantCDWPEnergy"))
+	j.SetDownstream(j.Task("Sands_GetChillerPlantCDWPEnergy"), j.Task("Sands_GetChillerPlantTotalEnergy"))
+
+	// calculate delta T, CL, CoP of individual chiller
+	j.SetDownstream(j.Task("Sands_GetChillerDeltaT"), j.Task("Sands_GetChillerCL"))
+	j.SetDownstream(j.Task("Sands_GetChillerCL"), j.Task("Sands_GetChillerCoP"))
+
+	// calculate plant CL, CoP
+	j.SetDownstream(j.Task("Sands_GetChillerPlantCoolingLoad"), j.Task("Sands_GetChillerPlantCoP"))
+
+	// calculate hourly, daily, monthly energy consumption of individual chiller
+	j.SetDownstream(j.Task("Sands_GetChillerEnergy1Hour"), j.Task("Sands_GetChillerEnergy1Day"))
+	j.SetDownstream(j.Task("Sands_GetChillerEnergy1Day"), j.Task("Sands_GetChillerEnergy1Month"))
+
+	// calculate hourly, daily, monthly energy consumption of plant
+	j.SetDownstream(j.Task("Sands_GetChillerPlantEnergy1Hour"), j.Task("Sands_GetChillerPlantEnergy1Day"))
+	j.SetDownstream(j.Task("Sands_GetChillerPlantEnergy1Day"), j.Task("Sands_GetChillerPlantEnergy1Month"))
+
+	// set down stream
+	j.SetDownstream(j.Task("Sands_GetChillerPlantTotalEnergy"), j.Task("Sands_GetChillerPlantCoolingLoad"))
+	j.SetDownstream(j.Task("Sands_GetChillerPlantCDWPRunning"), j.Task("Sands_GetChillerPlantChillerEnergy"))
+	j.SetDownstream(j.Task("Sands_GetChillerPlantTotalEnergy"), j.Task("Sands_GetChillerPlantCoP"))
+	j.SetDownstream(j.Task("Sands_GetChillerEnergy1Month"), j.Task("Sands_GetChillerPlantEnergy1Hour"))
+
+	j.Run()
+	return j
+}
+
+func Test_Analytics() *airflow.Job {
+
+	port, err := strconv.Atoi(os.Getenv("INFLUX_PORT"))
+	if err != nil {
+		fmt.Println("Port Error")
+	}
+	neo4jport, err2 := strconv.Atoi(os.Getenv("NEO4J_PORT"))
+	if err2 != nil {
+		fmt.Println("Port Error")
+	}
+	k := functions.BaseFunction{
+		Database:       os.Getenv("INFLUX_DATABASE"),
+		Measurement:    os.Getenv("INFLUX_MEASUREMENT"),
+		Host:           os.Getenv("INFLUX_HOST"),
+		Port:           port,
+		Neo4j_Host:     os.Getenv("NEO4J_HOST"),
+		Neo4j_Port:     neo4jport,
+		Neo4j_Database: os.Getenv("NEO4J_DATABASE"),
+		Neo4j_Username: os.Getenv("NEO4J_USERNAME"),
+		Neo4j_Password: os.Getenv("NEO4J_PASSWORD"),
+	}
+
+	j := &airflow.Job{
+		Name:     "test",
+		Schedule: "* * * * *",
+	}
+
+	j.Add(&airflow.Task{
+		BaseFunction: k,
+		FunctionName: "Sands_GetChillerCoP",
 		Name:         fmt.Sprintf("%s_GetChillerEnergy", k.Measurement),
 	})
 
