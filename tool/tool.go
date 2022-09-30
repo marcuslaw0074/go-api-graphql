@@ -44,6 +44,15 @@ func IntContains(list []int, str int) (int, bool) {
 	return -1, false
 }
 
+func AllNan(f []float64) bool {
+	for _, ele := range f {
+		if !math.IsNaN(ele) {
+			return false
+		}
+	}
+	return true
+}
+
 func StrContains(list []string, str string) int {
 	for index, a := range list {
 		if a == str {

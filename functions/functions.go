@@ -12,6 +12,11 @@ type BaseFunction struct {
 	Neo4j_Password string
 }
 
+type Interval struct {
+	starttime string
+	endTime   string
+}
+
 const (
 	Calculated string = "Calculated"
 )

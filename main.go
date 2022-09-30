@@ -104,7 +104,8 @@ func main() {
 	// scheduler.Analytics_Utility_3()
 	// scheduler.Analytics_Utility_2()
 	// scheduler.Analytics_HCity1()
-	scheduler.Analytics_Sands()
+	// scheduler.Analytics_Sands()
+	scheduler.Test_Analytics()
 	fmt.Println("DONEEEE!!!")
 	scheduler.Example()
 

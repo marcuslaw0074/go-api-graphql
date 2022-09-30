@@ -1011,7 +1011,7 @@ func (f BaseFunction) Sands_GetChillerCoP() error {
 			} else {
 				return 0
 			}
-		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
+		}, Sands_Casino_Chiller...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		Sands_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		wg.Add(1)
 		go func(query string, database string, measurement string,
@@ -1130,7 +1130,7 @@ func (f BaseFunction) Sands_GetChillerPlantEnergy1Day() error {
 				return math.NaN()
 			}
 			return tool.SumList(tool.GetNonNan(f))
-		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+		}, Sands_Casino_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		Sands_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 		err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 1)
 		if err != nil {
@@ -1190,7 +1190,7 @@ func (f BaseFunction) Sands_GetChillerPlantEnergy1Month() error {
 					return math.NaN()
 				}
 				return tool.SumList(tool.GetNonNan(f))
-			}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
+			}, Sands_Casino_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 			Sands_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
 			err := client.UploadDfGroup(url, query, f.Database, f.Measurement, newEquipmentName, newFunctionType, newId, df, 0)
 			if err != nil {

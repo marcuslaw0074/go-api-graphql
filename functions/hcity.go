@@ -17,11 +17,6 @@ var HCity_1_Logger = logging.StartLogger("log/HCity_1_LogFile.log")
 
 var TimeClause_HCity string = "time>'2021-07-31T00:00:00Z' and time<'2021-10-31T00:00:00Z'"
 
-type Interval struct {
-	starttime string
-	endTime   string
-}
-
 var TimeClauseMonth_HCity []Interval = []Interval{
 	{"2021-08-01T00:00:00Z", "2021-09-01T00:00:00Z"},
 	{"2021-09-01T00:00:00Z", "2021-10-01T00:00:00Z"},

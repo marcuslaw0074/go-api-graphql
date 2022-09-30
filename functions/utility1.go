@@ -11,7 +11,7 @@ import (
 	"github.com/go-gota/gota/dataframe"
 )
 
-var Utility_1_Chiller = []int{1, 2, 3, 4, 5}
+var Utility_1_Chiller = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17}
 var Utility_1_CT = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18}
 var Utility_1_Logger = logging.StartLogger("log/Utility_1_LogFile.log")
 
@@ -44,6 +44,9 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerRunning() error {
 		return err
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			return tool.SumListStatusNew(tool.GetNonNan(f), 20.0)
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
@@ -95,6 +98,9 @@ func (f BaseFunction) Utility1_GetChillerPlantChillerEnergy() error {
 		return err
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			return tool.SumList(tool.GetNonNan(f))
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
@@ -141,6 +147,9 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoad() error {
 			%s GROUP BY EquipmentName, FunctionType, id, time(20m)`, f.Measurement, timeClause)
 	dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
 	dfGroup = client.ApplyFunctionDfGroup(dfGroup, func(f ...float64) float64 {
+		if tool.AllNan(f) {
+			return math.NaN()
+		}
 		if len(f) < 3 {
 			return math.NaN()
 		} else if f[2] > 50 && (f[0]-f[1]) > 0 {
@@ -160,6 +169,9 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoad() error {
 		return err
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			return tool.SumList(tool.GetNonNan(f))
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
@@ -211,6 +223,9 @@ func (f BaseFunction) Utility1_GetChillerPlantCoP() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 2 {
 				return math.NaN()
 			}
@@ -274,6 +289,9 @@ func (f BaseFunction) Utility1_GetChillerPlantDeltaT() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 2 {
 				return math.NaN()
 			}
@@ -333,6 +351,9 @@ func (f BaseFunction) Utility1_GetChillerPlantWetBulb() error {
 	}
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 2 {
 				return math.NaN()
 			}
@@ -393,6 +414,9 @@ func (f BaseFunction) Utility1_GetChillerPlantCoP_kWPerTon() error {
 	}
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 2 {
 				return math.NaN()
 			}
@@ -454,6 +478,9 @@ func (f BaseFunction) Utility1_GetChillerPlantCTRunning() error {
 		return err
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			return tool.SumListStatus(tool.GetNonNan(f))
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
@@ -506,6 +533,9 @@ func (f BaseFunction) Utility1_GetChillerPlantPCHWPRunning() error {
 		return err
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			return tool.SumListStatus(tool.GetNonNan(f))
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
@@ -558,6 +588,9 @@ func (f BaseFunction) Utility1_GetChillerPlantSCHWPRunning() error {
 		return err
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			return tool.SumListStatus(tool.GetNonNan(f))
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
@@ -613,6 +646,9 @@ func (f BaseFunction) Utility1_GetChillerPlantCTEnergy() error {
 		return err
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			return tool.SumList(tool.GetNonNan(f)) * 11
 		}, Utility_1_CT...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
@@ -664,6 +700,9 @@ func (f BaseFunction) Utility1_GetChillerPlantTotalEnergy() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			return tool.SumList(tool.GetNonNan(f))
 		}, []int{1, 2}...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
@@ -721,6 +760,9 @@ func (f BaseFunction) Utility1_GetChillerPlantCoolingLoadTon() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 1 {
 				return math.NaN()
 			}
@@ -782,6 +824,9 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Hour() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 1 {
 				return math.NaN()
 			}
@@ -808,7 +853,7 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Hour() error {
 					Level:      "UT1",
 					ClassType:  "Electrical_Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -840,6 +885,9 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Day() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 1 {
 				return math.NaN()
 			}
@@ -866,7 +914,7 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Day() error {
 					Level:      "UT1",
 					ClassType:  "Electrical_Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -901,6 +949,9 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Month() error {
 		wg.Add(len(dfGroup))
 		for _, ele := range dfGroup {
 			df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+				if tool.AllNan(f) {
+					return math.NaN()
+				}
 				if len(f) < 1 {
 					return math.NaN()
 				}
@@ -927,7 +978,7 @@ func (f BaseFunction) Utility1_GetChillerEnergy1Month() error {
 						Level:      "UT1",
 						ClassType:  "Electrical_Class",
 						Interval:   "20T",
-						Unit:       "Ton",
+						Unit:       "kW",
 					}, []string{Calculated}...)
 				if err != nil {
 					Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -962,6 +1013,9 @@ func (f BaseFunction) Utility1_GetChillerCL() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 3 {
 				return math.NaN()
 			}
@@ -994,7 +1048,7 @@ func (f BaseFunction) Utility1_GetChillerCL() error {
 					Level:      "UT1",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1029,6 +1083,9 @@ func (f BaseFunction) Utility1_GetChillerCoP() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 4 {
 				return math.NaN()
 			}
@@ -1061,7 +1118,7 @@ func (f BaseFunction) Utility1_GetChillerCoP() error {
 					Level:      "UT1",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "None",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1094,6 +1151,9 @@ func (f BaseFunction) Utility1_GetChillerDeltaT() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 2 {
 				return math.NaN()
 			}
@@ -1120,7 +1180,7 @@ func (f BaseFunction) Utility1_GetChillerDeltaT() error {
 					Level:      "UT1",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "°C",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1155,6 +1215,9 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Hour() error {
 		return err
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			return tool.SumList(tool.GetNonNan(f))
 		}, Utility_1_Chiller...)).Rename("Value", "X0").Mutate(df.Col("Time"))
 		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
@@ -1175,7 +1238,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Hour() error {
 				Level:      "UT1",
 				ClassType:  "Electrical_Class",
 				Interval:   "20T",
-				Unit:       "Ton",
+				Unit:       "kW",
 			}, []string{Calculated}...)
 		if err != nil {
 			return err
@@ -1207,6 +1270,9 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Day() error {
 		return err
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 4 {
 				return math.NaN()
 			}
@@ -1230,7 +1296,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Day() error {
 				Level:      "UT1",
 				ClassType:  "Electrical_Class",
 				Interval:   "20T",
-				Unit:       "Ton",
+				Unit:       "kW",
 			}, []string{Calculated}...)
 		if err != nil {
 			return err
@@ -1263,6 +1329,9 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Month() error {
 		return err
 	} else {
 		df = df.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 4 {
 				return math.NaN()
 			}
@@ -1286,7 +1355,7 @@ func (f BaseFunction) Utility1_GetChillerPlantEnergy1Month() error {
 				Level:      "UT1",
 				ClassType:  "Electrical_Class",
 				Interval:   "20T",
-				Unit:       "Ton",
+				Unit:       "kW",
 			}, []string{Calculated}...)
 		if err != nil {
 			return err
@@ -1318,6 +1387,9 @@ func (f BaseFunction) Utility1_GetChillerCoPkWPerTon() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 4 {
 				return math.NaN()
 			}
@@ -1350,7 +1422,7 @@ func (f BaseFunction) Utility1_GetChillerCoPkWPerTon() error {
 					Level:      "UT1",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW/Ton",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1385,6 +1457,9 @@ func (f BaseFunction) Utility1_GetCTStatus() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			return tool.SumListStatus(tool.GetNonNan(f))
 		}, Utility_1_CT...)).Rename("Value", "X0").Mutate(ele.Dataframe.Col("Time"))
 		Utility_1_Logger.Log(logging.LogInfo, "function %s data: %v", name, df)
@@ -1408,7 +1483,7 @@ func (f BaseFunction) Utility1_GetCTStatus() error {
 					Level:      "UT1",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "None",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1452,6 +1527,9 @@ func (f BaseFunction) Utility1_GetChillerEnergy() error {
 			continue
 		}
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 6 {
 				return math.NaN()
 			} else if tool.ContainNaN(f) {
@@ -1481,7 +1559,7 @@ func (f BaseFunction) Utility1_GetChillerEnergy() error {
 					Level:      "UT1",
 					ClassType:  "Class",
 					Interval:   "20T",
-					Unit:       "Ton",
+					Unit:       "kW",
 				}, []string{Calculated}...)
 			if err != nil {
 				Utility_1_Logger.Log(logging.LogError, "function %s error: %v", name, err)
@@ -1513,6 +1591,9 @@ func (f BaseFunction) Utility1_GetChillerCLTon() error {
 	wg.Add(len(dfGroup))
 	for _, ele := range dfGroup {
 		df := ele.Dataframe.Rapply(tool.ApplyFunction(func(f ...float64) float64 {
+			if tool.AllNan(f) {
+				return math.NaN()
+			}
 			if len(f) < 1 {
 				return math.NaN()
 			}
