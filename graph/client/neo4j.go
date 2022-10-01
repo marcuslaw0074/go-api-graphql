@@ -268,3 +268,23 @@ func QueryLabelValue(query string, params map[string]interface{}) func (neo4j.Tr
 		return s2, nil
 	}
 }
+
+func QueryData(query string, params map[string]interface{}, database string, host string, port int) ([]string, error){
+	dbUri := fmt.Sprintf("neo4j://%s:%d", host, port)
+	driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
+	if err != nil {
+		return make([]string, 0), err
+	}
+	session := driver.NewSession(neo4j.SessionConfig{})
+	defer session.Close()
+	defer driver.Close()
+	fmt.Println(query, params)
+	result, err := session.ReadTransaction(QueryLabel(query, params))
+	fmt.Println(query, params, result)
+	if err != nil {
+		return make([]string, 0), err
+	} else {
+		return result.([]string), nil
+	}
+
+}

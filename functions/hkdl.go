@@ -514,15 +514,31 @@ func (f BaseFunction) HKDL_GetChillerCoP() error {
 func (f BaseFunction) HKDL_GetChillerDeltaT() error {
 	url := fmt.Sprintf("http://%s:%v", f.Host, f.Port)
 	name := "HKDL_GetChillerDeltaT"
+	EquipType := "Chiller"
 	HKDL_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_delta_T"
+	var TimeClauseMonth_HKDL []Interval = []Interval{
+		{"2018-01-21T00:00:00Z", "2019-01-01T00:00:00Z"},
+	}
+	// dd, _ := client.QueryData(`MATCH (n)-[:hasPart]->(p) WHERE n.name=$name AND 
+	// 					n.database=$database AND n.measurement=$measurement 
+	// 					RETURN DISTINCT(p.name) AS name ORDER BY p.name`, map[string]interface{}{
+	// 	"database":    f.Database,
+	// 	"measurement": f.Measurement,
+	// 	"name":        EquipType,
+	// }, "neo4j", "18.163.30.4", 7691)
+	// fmt.Println(dd)
 	for _, ele := range TimeClauseMonth_HKDL {
 		timeClause := fmt.Sprintf("time>='%s' and time<'%s'", ele.starttime, ele.endTime)
 		query := fmt.Sprintf(`SELECT MEAN(value) FROM %s 
 			WHERE ("FunctionType"='Chiller_Chilled_Water_Return_Temperature_Sensor' OR
 			"FunctionType"='Chiller_Chilled_Water_Supply_Temperature_Sensor') AND 
 			%s GROUP BY EquipmentName, FunctionType, id, time(15m)`, f.Measurement, timeClause)
+		ts := *client.QueryTimeseriesNew(query, f.Database, f.Host, f.Port)
+		ts.GroupByEquipment()
+		fmt.Println("end")
 		dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
+		fmt.Println(dfGroup)
 		HKDL_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
 		if len(dfGroup) == 0 {
 			HKDL_Logger.Log(logging.LogError, "function %s: No data", name)
@@ -554,7 +570,7 @@ func (f BaseFunction) HKDL_GetChillerDeltaT() error {
 						PointName:  id,
 						System:     "HVAC_System",
 						SubSystem:  "Water_System",
-						DeviceType: "Chiller",
+						DeviceType: EquipType,
 						DeviceName: EquipmentName,
 						PointType:  newFunctionType,
 						Location:   "Building",
