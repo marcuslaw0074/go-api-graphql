@@ -7,6 +7,8 @@ import (
 	_ "go-api-grapqhl/docs"
 	"go-api-grapqhl/graph"
 	"go-api-grapqhl/scheduler"
+	"sort"
+
 	// "time"
 
 	// "go-api-grapqhl/graph/client"
@@ -88,6 +90,9 @@ func playgroundHandler() gin.HandlerFunc {
 }
 
 func main() {
+	f := &[][]string{{"b", "a"}}
+	sort.Strings((*f)[0])
+	fmt.Println(f)
 
 	fmt.Println("Waiting until Neo4j ready")
 	// time.Sleep(time.Duration(1000000000 * 20))

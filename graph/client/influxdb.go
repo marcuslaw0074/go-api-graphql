@@ -102,10 +102,21 @@ type TimeseriesSchemaNew struct {
 	value         []float64
 }
 
+type TimeseriesSchemaNewNew struct {
+	GroupBy map[string]string
+	Series  [][]interface{}
+}
+
 type InfluxDBSchemaNew struct {
 	TimeseriesAll   []TimeseriesSchemaNew
 	TimeseriesGroup []TimeseriesGroupBy
 	Time            []string
+	mu              sync.Mutex
+}
+
+type InfluxDBSchemaNewNew struct {
+	TimeseriesAll   []TimeseriesSchemaNewNew
+	TimeseriesGroup []TimeseriesGroupByNew
 	mu              sync.Mutex
 }
 
@@ -169,6 +180,12 @@ func (i *InfluxDBSchemaNew) UpdateTimeseriesGroup(t TimeseriesSchemaNew) {
 	i.mu.Unlock()
 }
 
+func (i *InfluxDBSchemaNewNew) UpdateTimeseriesGroup(t TimeseriesSchemaNewNew) {
+	i.mu.Lock()
+	i.TimeseriesAll = append(i.TimeseriesAll, t)
+	i.mu.Unlock()
+}
+
 func QueryTimeseries(query, database, host string, port int) *InfluxDBSchema {
 	fmt.Println(query)
 	influx := &InfluxDBSchema{}
@@ -212,25 +229,196 @@ func (i *InfluxDBSchemaNew) findUniFunctionType() []string {
 	return ls
 }
 
-func (i *InfluxDBSchemaNew) GroupByEquipment() {
-	funcTypes := i.findUniFunctionType()
-	equip := i.findUniEquipment()
-	for _, ele := range equip {
-		e := TimeseriesGroupBy{
-			GroupBy: "Equipment",
-			EquipmentName: ele,
-			values: make([][]float64, 0),
-		}
-		for _, el := range funcTypes {
-			for _, series := range i.TimeseriesAll {
-				if series.EquipmentName==ele && series.FunctionType==el {
-					e.values = append(e.values, series.value)
+func (i *InfluxDBSchemaNew) GroupByEquipmentName() {
+	if len(i.TimeseriesAll) > 0 {
+		funcTypes := i.findUniFunctionType()
+		equip := i.findUniEquipment()
+		for _, ele := range equip {
+			e := TimeseriesGroupBy{
+				GroupBy:        "EquipmentName",
+				EquipmentNames: []string{ele},
+				FunctionTypes:  funcTypes,
+				values:         make([][]float64, 0),
+			}
+			for _, el := range funcTypes {
+				for _, series := range i.TimeseriesAll {
+					if series.EquipmentName == ele && series.FunctionType == el {
+						e.values = append(e.values, series.value)
+					}
 				}
 			}
+			i.TimeseriesGroup = append(i.TimeseriesGroup, e)
 		}
-		i.TimeseriesGroup = append(i.TimeseriesGroup, e)
+		i.TimeseriesAll = []TimeseriesSchemaNew{}
+	} else if len(i.TimeseriesGroup) > 0 {
+
 	}
-	i.TimeseriesAll = []TimeseriesSchemaNew{}
+}
+
+func (i *InfluxDBSchemaNew) GroupByFunctionType() {
+	if len(i.TimeseriesAll) > 0 {
+		funcTypes := i.findUniFunctionType()
+		equip := i.findUniEquipment()
+		for _, ele := range funcTypes {
+			e := TimeseriesGroupBy{
+				GroupBy:        "FunctionType",
+				EquipmentNames: equip,
+				FunctionTypes:  []string{ele},
+				values:         make([][]float64, 0),
+			}
+			for _, el := range equip {
+				for _, series := range i.TimeseriesAll {
+					if series.FunctionType == ele && series.EquipmentName == el {
+						e.values = append(e.values, series.value)
+					}
+				}
+			}
+			i.TimeseriesGroup = append(i.TimeseriesGroup, e)
+		}
+		i.TimeseriesAll = []TimeseriesSchemaNew{}
+	} else if len(i.TimeseriesGroup) > 0 {
+
+	}
+}
+
+// func
+
+// func (i *InfluxDBSchemaNew) ApplyFunctionGroupByEquipmentName(function func(...float64) float64, newFunctionType string) {
+// 	if len(i.TimeseriesGroup) > 0 {
+// 		for _, ele := range i.TimeseriesGroup {
+// 			l := len(ele.values)
+// 			for ind := range ele.values {
+// 				for i :=
+// 			}
+// 		}
+// 	}
+// }
+
+func (i *InfluxDBSchemaNewNew) findUniqueGroupByValues(key string, sortSlice bool) []string {
+	ls := make([]string, 0)
+	for _, ele := range i.TimeseriesAll {
+		value, exists := ele.GroupBy[key]
+		if !exists {
+			return ls
+		} else if tool.StrContains(ls, ele.GroupBy[key]) < 0 {
+			ls = append(ls, value)
+		}
+	}
+	if sortSlice {
+		sort.Strings(ls)
+	}
+	return ls
+}
+
+func QueryTimeseriesNewNew(query, database, host string, port int) *InfluxDBSchemaNewNew {
+	fmt.Println(query)
+	influx := &InfluxDBSchemaNewNew{}
+	res, _ := InfluxdbQuery(query, database, host, port)
+	for _, series := range res.Series {
+		influx.UpdateTimeseriesGroup(TimeseriesSchemaNewNew{
+			GroupBy: series.Tags,
+			Series:  series.Values,
+		})
+	}
+	fmt.Println("finish query")
+	return influx
+}
+
+func (i *InfluxDBSchemaNewNew) GroupTimeseries(key string, remove bool) {
+	unique := i.findUniqueGroupByValues(key, true)
+	l := make([]TimeseriesGroupByNew, 0)
+	for _, unq := range unique {
+		ls := TimeseriesGroupByNew{
+			GroupByKey: map[string]string{key: unq},
+		}
+		for _, ele := range i.TimeseriesAll {
+			val, exists := ele.GroupBy[key]
+			if exists && val == unq {
+				delete(ele.GroupBy, key)
+				ls.GroupByValue = append(ls.GroupByValue, ele.GroupBy)
+				ls.Series = append(ls.Series, ele.Series)
+			}
+		}
+		l = append(l, ls)
+	}
+	i.TimeseriesGroup = l
+	if remove {
+		i.TimeseriesAll = []TimeseriesSchemaNewNew{}
+	}
+}
+
+func (i *InfluxDBSchemaNewNew) SortTimeseries(key string) {
+	ct := 0
+	for ct < len(i.TimeseriesGroup) {
+		sort.Slice(i.TimeseriesGroup[ct].Series, func(k, j int) bool {
+			return i.TimeseriesGroup[ct].GroupByValue[k][key] < i.TimeseriesGroup[ct].GroupByValue[j][key]
+		})
+		sort.Slice(i.TimeseriesGroup[ct].GroupByValue, func(k, j int) bool {
+			return i.TimeseriesGroup[ct].GroupByValue[k][key] < i.TimeseriesGroup[ct].GroupByValue[j][key]
+		})
+		ct++
+	}
+}
+
+type ApplySchema struct {
+	Func         func(...float64) float64
+	GroupByValue map[string]string
+}
+
+func (i *InfluxDBSchemaNewNew) ApplyFunction(f func(...float64) float64, GroupByValue map[string]string, toSeries bool) {
+	for ind, ele := range i.TimeseriesGroup {
+		l := make([][]interface{}, 0)
+		for ind := range ele.Series[0] {
+			ls := []float64{}
+			time := ""
+			for index := range ele.Series {
+				val := ele.Series[index][ind]
+				time = val[0].(string)
+				if val[1] != nil {
+					value, err := val[1].(json.Number).Float64()
+					if err != nil {
+						value = math.NaN()
+					}
+					ls = append(ls, value)
+				} else {
+					ls = append(ls, math.NaN())
+				}
+			}
+			l = append(l, []interface{}{time, f(ls...)})
+		}
+		i.TimeseriesGroup[ind].Series = [][][]interface{}{l}
+		i.TimeseriesGroup[ind].GroupByValue = []map[string]string{GroupByValue}
+	}
+}
+
+func (i *InfluxDBSchemaNewNew) ApplyFunctions(apply ...ApplySchema) {
+	for ind, ele := range i.TimeseriesGroup {
+		i.TimeseriesGroup[ind].Series = [][][]interface{}{}
+		i.TimeseriesGroup[ind].GroupByValue = []map[string]string{}
+		for _, app := range apply {
+			l := make([][]interface{}, 0)
+			for ind := range ele.Series[0] {
+				ls := []float64{}
+				time := ""
+				for index := range ele.Series {
+					val := ele.Series[index][ind]
+					time = val[0].(string)
+					if val[1] != nil {
+						value, err := val[1].(json.Number).Float64()
+						if err != nil {
+							value = math.NaN()
+						}
+						ls = append(ls, value)
+					} else {
+						ls = append(ls, math.NaN())
+					}
+				}
+				l = append(l, []interface{}{time, app.Func(ls...)})
+			}
+			i.TimeseriesGroup[ind].Series = append(i.TimeseriesGroup[ind].Series, l)
+			i.TimeseriesGroup[ind].GroupByValue = append(i.TimeseriesGroup[ind].GroupByValue, app.GroupByValue)
+		}
+	}
 }
 
 func QueryTimeseriesNew(query, database, host string, port int) *InfluxDBSchemaNew {
@@ -259,10 +447,16 @@ func QueryTimeseriesNew(query, database, host string, port int) *InfluxDBSchemaN
 }
 
 type TimeseriesGroupBy struct {
-	GroupBy       string
-	values        [][]float64
-	EquipmentName string
-	FunctionType  string
+	GroupBy        string
+	values         [][]float64
+	EquipmentNames []string
+	FunctionTypes  []string
+}
+
+type TimeseriesGroupByNew struct {
+	Series       [][][]interface{}
+	GroupByKey   map[string]string
+	GroupByValue []map[string]string
 }
 
 func findUniEquipment(t []TimeseriesSchema) []string {
@@ -309,7 +503,6 @@ func QueryDfGroup(query, database, host string, port int) []tool.GroupDataframe 
 	dfGroup := make([]tool.GroupDataframe, 0)
 	equipmentList := make([]string, 0)
 	for ind, series := range res.Series {
-		fmt.Println(ind, "test")
 		timeseries := make([]Timeseries, 0)
 		var equipmentName string = series.Tags["EquipmentName"]
 		var functionType string = series.Tags["FunctionType"]
@@ -359,6 +552,7 @@ func QueryDfGroup(query, database, host string, port int) []tool.GroupDataframe 
 		}
 		equipmentList = append(equipmentList, equipmentName)
 	}
+	fmt.Println("finish query")
 	return dfGroup
 }
 

@@ -518,10 +518,10 @@ func (f BaseFunction) HKDL_GetChillerDeltaT() error {
 	HKDL_Logger.Log(logging.LogInfo, "START function %s", name)
 	newFunctionType := "Chiller_delta_T"
 	var TimeClauseMonth_HKDL []Interval = []Interval{
-		{"2018-01-21T00:00:00Z", "2019-01-01T00:00:00Z"},
+		{"2018-12-31T23:00:00Z", "2019-01-01T00:00:00Z"},
 	}
-	// dd, _ := client.QueryData(`MATCH (n)-[:hasPart]->(p) WHERE n.name=$name AND 
-	// 					n.database=$database AND n.measurement=$measurement 
+	// dd, _ := client.QueryData(`MATCH (n)-[:hasPart]->(p) WHERE n.name=$name AND
+	// 					n.database=$database AND n.measurement=$measurement
 	// 					RETURN DISTINCT(p.name) AS name ORDER BY p.name`, map[string]interface{}{
 	// 	"database":    f.Database,
 	// 	"measurement": f.Measurement,
@@ -534,9 +534,25 @@ func (f BaseFunction) HKDL_GetChillerDeltaT() error {
 			WHERE ("FunctionType"='Chiller_Chilled_Water_Return_Temperature_Sensor' OR
 			"FunctionType"='Chiller_Chilled_Water_Supply_Temperature_Sensor') AND 
 			%s GROUP BY EquipmentName, FunctionType, id, time(15m)`, f.Measurement, timeClause)
-		ts := *client.QueryTimeseriesNew(query, f.Database, f.Host, f.Port)
-		ts.GroupByEquipment()
-		fmt.Println("end")
+		ts := *client.QueryTimeseriesNewNew(query, f.Database, f.Host, f.Port)
+		ts.GroupTimeseries("EquipmentName", true)
+		ts.SortTimeseries("FunctionType")
+		ts.ApplyFunctions([]client.ApplySchema{{
+			Func: func(f ...float64) float64 {
+			if len(f) < 2 {
+				return math.NaN()
+			}
+			return f[0] - f[1]
+		}, GroupByValue: map[string]string{}},
+		{
+			Func: func(f ...float64) float64 {
+			if len(f) < 2 {
+				return math.NaN()
+			}
+			return f[0] - f[1]
+		}, GroupByValue: map[string]string{}}}...)
+		fmt.Println(ts)
+		fmt.Println("endd")
 		dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)
 		fmt.Println(dfGroup)
 		HKDL_Logger.Log(logging.LogInfo, "function %s data: %v", name, dfGroup)
