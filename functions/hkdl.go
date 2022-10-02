@@ -536,21 +536,28 @@ func (f BaseFunction) HKDL_GetChillerDeltaT() error {
 			%s GROUP BY EquipmentName, FunctionType, id, time(15m)`, f.Measurement, timeClause)
 		ts := *client.QueryTimeseriesNewNew(query, f.Database, f.Host, f.Port)
 		ts.GroupTimeseries("EquipmentName", true)
+		fmt.Println(ts)
 		ts.SortTimeseries("FunctionType")
 		ts.ApplyFunctions([]client.ApplySchema{{
 			Func: func(f ...float64) float64 {
-			if len(f) < 2 {
-				return math.NaN()
-			}
-			return f[0] - f[1]
-		}, GroupByValue: map[string]string{}},
-		{
+				if len(f) < 2 {
+					return math.NaN()
+				}
+				return f[0] - f[1]
+			}, GroupByValue: map[string]string{"FunctionType": "Chiller_Chilled_Delta_T"},
+			NewGroupByKey: "id"}}...)
+		ts.UnGroupTimeseries(true)
+		ts.GroupTimeseries("FunctionType", true)
+		ts.SortTimeseries("EquipmentName")
+		ts.ApplyFunctions([]client.ApplySchema{{
 			Func: func(f ...float64) float64 {
-			if len(f) < 2 {
-				return math.NaN()
-			}
-			return f[0] - f[1]
-		}, GroupByValue: map[string]string{}}}...)
+				fmt.Println(f, ":ds")
+				if len(f) < 2 {
+					return math.NaN()
+				}
+				return f[0] - f[1]
+			}, GroupByValue: map[string]string{"EquipmentName": "Chiller_Plant"},
+			NewGroupByKey: "id"}}...)
 		fmt.Println(ts)
 		fmt.Println("endd")
 		dfGroup := client.QueryDfGroup(query, f.Database, f.Host, f.Port)

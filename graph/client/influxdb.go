@@ -347,6 +347,29 @@ func (i *InfluxDBSchemaNewNew) GroupTimeseries(key string, remove bool) {
 	}
 }
 
+func MergeMap(old, new map[string]string) map[string]string {
+	for key, val := range new {
+		old[key] = val
+	}
+	return old
+}
+
+func (i *InfluxDBSchemaNewNew) UnGroupTimeseries(remove bool) {
+	l := make([]TimeseriesSchemaNewNew, 0)
+	for _, ele := range i.TimeseriesGroup {
+		for in, el := range ele.GroupByValue {
+			l = append(l, TimeseriesSchemaNewNew{
+				GroupBy: MergeMap(ele.GroupByKey, el),
+				Series:  ele.Series[in],
+			})
+		}
+	}
+	i.TimeseriesAll = l
+	if remove {
+		i.TimeseriesGroup = []TimeseriesGroupByNew{}
+	}
+}
+
 func (i *InfluxDBSchemaNewNew) SortTimeseries(key string) {
 	ct := 0
 	for ct < len(i.TimeseriesGroup) {
@@ -361,8 +384,9 @@ func (i *InfluxDBSchemaNewNew) SortTimeseries(key string) {
 }
 
 type ApplySchema struct {
-	Func         func(...float64) float64
-	GroupByValue map[string]string
+	Func          func(...float64) float64
+	GroupByValue  map[string]string
+	NewGroupByKey string
 }
 
 func (i *InfluxDBSchemaNewNew) ApplyFunction(f func(...float64) float64, GroupByValue map[string]string, toSeries bool) {
@@ -391,6 +415,32 @@ func (i *InfluxDBSchemaNewNew) ApplyFunction(f func(...float64) float64, GroupBy
 	}
 }
 
+func CopyMap(old map[string]string) map[string]string {
+	l := map[string]string{}
+	for key, val := range old {
+		l[key] = val
+	}
+	return l
+}
+
+func AddGroupByValue(originGroupByKey, newGroupByValue map[string]string, newGroupByValueKey string) map[string]string {
+	x := ""
+	_, exists := newGroupByValue[newGroupByValueKey]
+	if !exists {
+		for _, val := range originGroupByKey {
+			x = x + val + "_"
+		}
+		for _, val := range newGroupByValue {
+			x = x + val + "_"
+		}
+		x = x[:len(x)-1]
+		copiedMap := CopyMap(newGroupByValue)
+		copiedMap[newGroupByValueKey] = x
+		return copiedMap
+	}
+	return newGroupByValue
+}
+
 func (i *InfluxDBSchemaNewNew) ApplyFunctions(apply ...ApplySchema) {
 	for ind, ele := range i.TimeseriesGroup {
 		i.TimeseriesGroup[ind].Series = [][][]interface{}{}
@@ -404,19 +454,27 @@ func (i *InfluxDBSchemaNewNew) ApplyFunctions(apply ...ApplySchema) {
 					val := ele.Series[index][ind]
 					time = val[0].(string)
 					if val[1] != nil {
-						value, err := val[1].(json.Number).Float64()
-						if err != nil {
-							value = math.NaN()
+						switch i := val[1].(type) {
+						case json.Number:
+							value, err := i.Float64()
+							if err != nil {
+								value = math.NaN()
+							}
+							ls = append(ls, value)
+						case float64:
+							ls = append(ls, float64(i))
+						default:
+							ls = append(ls, math.NaN())
 						}
-						ls = append(ls, value)
 					} else {
 						ls = append(ls, math.NaN())
 					}
 				}
 				l = append(l, []interface{}{time, app.Func(ls...)})
 			}
+			newGroupByValue := AddGroupByValue(i.TimeseriesGroup[ind].GroupByKey, app.GroupByValue, app.NewGroupByKey)
 			i.TimeseriesGroup[ind].Series = append(i.TimeseriesGroup[ind].Series, l)
-			i.TimeseriesGroup[ind].GroupByValue = append(i.TimeseriesGroup[ind].GroupByValue, app.GroupByValue)
+			i.TimeseriesGroup[ind].GroupByValue = append(i.TimeseriesGroup[ind].GroupByValue, newGroupByValue)
 		}
 	}
 }
