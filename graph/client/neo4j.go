@@ -126,6 +126,7 @@ func labelToString(label ...string) string {
 	return a
 }
 
+
 func WriteClientPoint(session neo4j.Session, point TaggingPoint, database, measurement string, labels ...string) error {
 
 	var brick string

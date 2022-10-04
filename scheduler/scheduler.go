@@ -862,6 +862,17 @@ func Test_Analytics() *airflow.Job {
 		Neo4j_Username: os.Getenv("NEO4J_USERNAME"),
 		Neo4j_Password: os.Getenv("NEO4J_PASSWORD"),
 	}
+	k = functions.BaseFunction{
+		Database:       "ArupDemo",
+		Measurement:    "OTP_RealTime",
+		Host:           "192.168.100.214",
+		Port:           8086,
+		Neo4j_Host:     os.Getenv("NEO4J_HOST"),
+		Neo4j_Port:     neo4jport,
+		Neo4j_Database: os.Getenv("NEO4J_DATABASE"),
+		Neo4j_Username: os.Getenv("NEO4J_USERNAME"),
+		Neo4j_Password: os.Getenv("NEO4J_PASSWORD"),
+	}
 
 	j := &airflow.Job{
 		Name:     "test",
@@ -870,7 +881,7 @@ func Test_Analytics() *airflow.Job {
 
 	j.Add(&airflow.Task{
 		BaseFunction: k,
-		FunctionName: "HKDL_GetChillerDeltaT",
+		FunctionName: "OTP_GetChillerPlantCTRunning",
 		Name:         fmt.Sprintf("%s_GetChillerEnergy", k.Measurement),
 	})
 
