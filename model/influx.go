@@ -50,6 +50,20 @@ type RuleEngine struct {
 	ConstMap    string `json:"constmap" example:"{\"c\":4.2}"`
 }
 
+// EtlEngine example
+type EtlEngine struct {
+	EndTime     string `json:"endTime" example:"'2018-04-02T15:04:05.000Z'"`
+	StartTime   string `json:"startTime" example:"'2018-04-01T15:04:05.000Z'"`
+	Expression  string `json:"expression" example:"(c<b-a)"`
+	Name        string `json:"name" example:"Rule_1"`
+	Database    string `json:"database" example:"Disney"`
+	Measurement string `json:"measurement" example:"hkdl"`
+	Host        string `json:"host" example:"18.163.30.4"`
+	Port        int    `json:"port" example:"8086" format:"int64"`
+	Mapping     string `json:"mapping" example:"{\"a\":\"CCP1 CH2 Supply Temp.(Deg C)\",\"b\":\"CCP1 CH2 Return Temp.(Deg C)\"}"`
+	ConstMap    string `json:"constmap" example:"{\"c\":1}"`
+}
+
 type RuleEngineResultTemp struct {
 	Ids     []string     `json:"ids" example:"[]"`
 	Results []models.Row `json:"results" example:"[]"`
@@ -109,6 +123,58 @@ func (r RuleEngine) ValidationTime() error {
 }
 
 func (r RuleEngine) ValidationName() error {
+	res, _ := regexp.MatchString(`^[_a-zA-Z]\w*`, r.Name)
+	switch {
+	case len(r.Name) == 0:
+		return ErrNameInvalid
+	case !res:
+		return ErrVariableNameInvalid
+	default:
+		return nil
+	}
+}
+
+// Validation example
+func (r EtlEngine) ValidationTime() error {
+	layout := "2006-01-02T15:04:05.000Z"
+	start := r.StartTime
+	if strings.Contains(start, "'") {
+		start = strings.Replace(start, "'", "", -1)
+		_, err := time.Parse(layout, start)
+		if err != nil {
+			return err
+		}
+	} else {
+		res, err := regexp.MatchString(`now\([\d]+(m|d)\)`, strings.ToLower(start))
+		if err != nil {
+			return err
+		} else if res {
+			return nil
+		} else {
+			return errors.New("time string doesnt match 'now'")
+		}
+	}
+	end := r.EndTime
+	if strings.Contains(end, "'") {
+		end = strings.Replace(end, "'", "", -1)
+		_, err := time.Parse(layout, end)
+		if err != nil {
+			return err
+		}
+	} else {
+		res, err := regexp.MatchString(`now\([\d]+(m|d)\)`, strings.ToLower(end))
+		if err != nil {
+			return err
+		} else if res {
+			return nil
+		} else {
+			return errors.New("time string doesnt match 'now'")
+		}
+	}
+	return nil
+}
+
+func (r EtlEngine) ValidationName() error {
 	res, _ := regexp.MatchString(`^[_a-zA-Z]\w*`, r.Name)
 	switch {
 	case len(r.Name) == 0:

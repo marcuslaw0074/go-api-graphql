@@ -1336,7 +1336,7 @@ func GenerateIneq(m map[string]string) *InEquaExpressions {
 }
 
 func (e *Express) CallFunctionByMap(f map[string]float64) bool {
-	return e.FunctionMap(f)
+	return e.Function(GenerateFloatSlice(e.Mapping, f)...)
 }
 
 func InputExpression(s string) (*Express, error) {

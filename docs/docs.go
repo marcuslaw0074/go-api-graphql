@@ -891,6 +891,58 @@ const docTemplate = `{
                 }
             }
         },
+        "/influxdb/etlengine": {
+            "post": {
+                "description": "query influxDB",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "influxdb"
+                ],
+                "summary": "query influxDB",
+                "parameters": [
+                    {
+                        "description": "etl_engine",
+                        "name": "query",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.EtlEngine"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.NewRow"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
         "/influxdb/query": {
             "post": {
                 "description": "query influxDB",
@@ -1334,6 +1386,52 @@ const docTemplate = `{
                 "name": {
                     "type": "string",
                     "example": "bottle_name"
+                }
+            }
+        },
+        "model.EtlEngine": {
+            "type": "object",
+            "properties": {
+                "constmap": {
+                    "type": "string",
+                    "example": "{\"c\":1}"
+                },
+                "database": {
+                    "type": "string",
+                    "example": "Disney"
+                },
+                "endTime": {
+                    "type": "string",
+                    "example": "'2018-04-02T15:04:05.000Z'"
+                },
+                "expression": {
+                    "type": "string",
+                    "example": "(c\u003cb-a)"
+                },
+                "host": {
+                    "type": "string",
+                    "example": "18.163.30.4"
+                },
+                "mapping": {
+                    "type": "string",
+                    "example": "{\"a\":\"CCP1 CH2 Supply Temp.(Deg C)\",\"b\":\"CCP1 CH2 Return Temp.(Deg C)\"}"
+                },
+                "measurement": {
+                    "type": "string",
+                    "example": "hkdl"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Rule_1"
+                },
+                "port": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 8086
+                },
+                "startTime": {
+                    "type": "string",
+                    "example": "'2018-04-01T15:04:05.000Z'"
                 }
             }
         },

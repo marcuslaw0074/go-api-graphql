@@ -166,6 +166,7 @@ func main() {
 		{
 			influxdb.POST("/query", c.QueryInfluxDB)
 			influxdb.POST("/ruleengine", c.QueryRuleEngine)
+			influxdb.POST("/etlengine", c.QueryEtlEngine)
 		}
 		redis := v1.Group("/redis")
 		{

@@ -55,6 +55,41 @@ definitions:
         example: bottle_name
         type: string
     type: object
+  model.EtlEngine:
+    properties:
+      constmap:
+        example: '{"c":1}'
+        type: string
+      database:
+        example: Disney
+        type: string
+      endTime:
+        example: '''2018-04-02T15:04:05.000Z'''
+        type: string
+      expression:
+        example: (c<b-a)
+        type: string
+      host:
+        example: 18.163.30.4
+        type: string
+      mapping:
+        example: '{"a":"CCP1 CH2 Supply Temp.(Deg C)","b":"CCP1 CH2 Return Temp.(Deg
+          C)"}'
+        type: string
+      measurement:
+        example: hkdl
+        type: string
+      name:
+        example: Rule_1
+        type: string
+      port:
+        example: 8086
+        format: int64
+        type: integer
+      startTime:
+        example: '''2018-04-01T15:04:05.000Z'''
+        type: string
+    type: object
   model.GetRuleTable:
     properties:
       host:
@@ -782,6 +817,40 @@ paths:
       summary: custome header example
       tags:
       - example
+  /influxdb/etlengine:
+    post:
+      consumes:
+      - application/json
+      description: query influxDB
+      parameters:
+      - description: etl_engine
+        in: body
+        name: query
+        required: true
+        schema:
+          $ref: '#/definitions/model.EtlEngine'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.NewRow'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: query influxDB
+      tags:
+      - influxdb
   /influxdb/query:
     post:
       consumes:
