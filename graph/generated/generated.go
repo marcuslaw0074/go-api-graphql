@@ -54,15 +54,21 @@ type ComplexityRoot struct {
 	}
 
 	Query struct {
-		Allequipbysysloc func(childComplexity int, host string, port int, database string, measurement string, system string, location string, energy *bool) int
-		Allid            func(childComplexity int, host string, port int, database string, measurement string) int
-		Allidbysys       func(childComplexity int, host string, port int, database string, measurement string, system string) int
-		Allidbysysloc    func(childComplexity int, host string, port int, database string, measurement string, system string, location string) int
-		Alllocbysys      func(childComplexity int, host string, port int, database string, measurement string, system string, energy *bool) int
-		Allparambyequip  func(childComplexity int, host string, port int, database string, measurement string, equips string, energy *bool) int
-		Allsys           func(childComplexity int, host string, port int, database string, measurement string, energy *bool) int
-		Timeseriesbyid   func(childComplexity int, aggrnum *int, limit *int, startTime *string, endTime *string, database string, measurement string, pointName string, aggreTpye model.AggregationsType) int
-		Todos            func(childComplexity int) int
+		Allequipbysysloc      func(childComplexity int, host string, port int, database string, measurement string, system string, location string, energy *bool) int
+		Allequipnamebyequip   func(childComplexity int, host string, port int, database string, measurement string, equip []string) int
+		Allequiptypewatersys  func(childComplexity int, host string, port int, database string, measurement string) int
+		Allfunctypebyequip    func(childComplexity int, host string, port int, database string, measurement string, equip []string) int
+		Allfunctypebywatersys func(childComplexity int, host string, port int, database string, measurement string) int
+		Allid                 func(childComplexity int, host string, port int, database string, measurement string) int
+		Allidbyfunctype       func(childComplexity int, host string, port int, database string, measurement string, functype []string) int
+		Allidbysys            func(childComplexity int, host string, port int, database string, measurement string, system string) int
+		Allidbysysloc         func(childComplexity int, host string, port int, database string, measurement string, system string, location string) int
+		Allidbywatersys       func(childComplexity int, host string, port int, database string, measurement string) int
+		Alllocbysys           func(childComplexity int, host string, port int, database string, measurement string, system string, energy *bool) int
+		Allparambyequip       func(childComplexity int, host string, port int, database string, measurement string, equips string, energy *bool) int
+		Allsys                func(childComplexity int, host string, port int, database string, measurement string, energy *bool) int
+		Timeseriesbyid        func(childComplexity int, aggrnum *int, limit *int, startTime *string, endTime *string, database string, measurement string, pointName string, aggreTpye model.AggregationsType) int
+		Todos                 func(childComplexity int) int
 	}
 
 	Timeseries struct {
@@ -103,6 +109,12 @@ type QueryResolver interface {
 	Allequipbysysloc(ctx context.Context, host string, port int, database string, measurement string, system string, location string, energy *bool) ([]*model.Labelvaluepair, error)
 	Allparambyequip(ctx context.Context, host string, port int, database string, measurement string, equips string, energy *bool) ([]*model.Labelvaluepair, error)
 	Timeseriesbyid(ctx context.Context, aggrnum *int, limit *int, startTime *string, endTime *string, database string, measurement string, pointName string, aggreTpye model.AggregationsType) ([]*model.Timeseries, error)
+	Allequiptypewatersys(ctx context.Context, host string, port int, database string, measurement string) ([]*model.Labelvaluepair, error)
+	Allidbywatersys(ctx context.Context, host string, port int, database string, measurement string) ([]*model.Labelvaluepair, error)
+	Allfunctypebywatersys(ctx context.Context, host string, port int, database string, measurement string) ([]*model.Labelvaluepair, error)
+	Allfunctypebyequip(ctx context.Context, host string, port int, database string, measurement string, equip []string) ([]*model.Labelvaluepair, error)
+	Allequipnamebyequip(ctx context.Context, host string, port int, database string, measurement string, equip []string) ([]*model.Labelvaluepair, error)
+	Allidbyfunctype(ctx context.Context, host string, port int, database string, measurement string, functype []string) ([]*model.Labelvaluepair, error)
 }
 
 type executableSchema struct {
@@ -158,6 +170,54 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Query.Allequipbysysloc(childComplexity, args["host"].(string), args["port"].(int), args["database"].(string), args["measurement"].(string), args["system"].(string), args["location"].(string), args["energy"].(*bool)), true
 
+	case "Query.allequipnamebyequip":
+		if e.complexity.Query.Allequipnamebyequip == nil {
+			break
+		}
+
+		args, err := ec.field_Query_allequipnamebyequip_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Allequipnamebyequip(childComplexity, args["host"].(string), args["port"].(int), args["database"].(string), args["measurement"].(string), args["equip"].([]string)), true
+
+	case "Query.allequiptypewatersys":
+		if e.complexity.Query.Allequiptypewatersys == nil {
+			break
+		}
+
+		args, err := ec.field_Query_allequiptypewatersys_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Allequiptypewatersys(childComplexity, args["host"].(string), args["port"].(int), args["database"].(string), args["measurement"].(string)), true
+
+	case "Query.allfunctypebyequip":
+		if e.complexity.Query.Allfunctypebyequip == nil {
+			break
+		}
+
+		args, err := ec.field_Query_allfunctypebyequip_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Allfunctypebyequip(childComplexity, args["host"].(string), args["port"].(int), args["database"].(string), args["measurement"].(string), args["equip"].([]string)), true
+
+	case "Query.allfunctypebywatersys":
+		if e.complexity.Query.Allfunctypebywatersys == nil {
+			break
+		}
+
+		args, err := ec.field_Query_allfunctypebywatersys_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Allfunctypebywatersys(childComplexity, args["host"].(string), args["port"].(int), args["database"].(string), args["measurement"].(string)), true
+
 	case "Query.allid":
 		if e.complexity.Query.Allid == nil {
 			break
@@ -169,6 +229,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Query.Allid(childComplexity, args["host"].(string), args["port"].(int), args["database"].(string), args["measurement"].(string)), true
+
+	case "Query.allidbyfunctype":
+		if e.complexity.Query.Allidbyfunctype == nil {
+			break
+		}
+
+		args, err := ec.field_Query_allidbyfunctype_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Allidbyfunctype(childComplexity, args["host"].(string), args["port"].(int), args["database"].(string), args["measurement"].(string), args["functype"].([]string)), true
 
 	case "Query.allidbysys":
 		if e.complexity.Query.Allidbysys == nil {
@@ -193,6 +265,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Query.Allidbysysloc(childComplexity, args["host"].(string), args["port"].(int), args["database"].(string), args["measurement"].(string), args["system"].(string), args["location"].(string)), true
+
+	case "Query.allidbywatersys":
+		if e.complexity.Query.Allidbywatersys == nil {
+			break
+		}
+
+		args, err := ec.field_Query_allidbywatersys_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Allidbywatersys(childComplexity, args["host"].(string), args["port"].(int), args["database"].(string), args["measurement"].(string)), true
 
 	case "Query.alllocbysys":
 		if e.complexity.Query.Alllocbysys == nil {
@@ -510,6 +594,45 @@ type Query {
     pointName: String!
     aggreTpye: AggregationsType!
   ): [Timeseries]
+  allequiptypewatersys(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+  ): [Labelvaluepair]
+  allidbywatersys(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+  ): [Labelvaluepair]
+  allfunctypebywatersys(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+  ): [Labelvaluepair]
+  allfunctypebyequip(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    equip: [String!]
+  ): [Labelvaluepair]
+  allequipnamebyequip(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    equip: [String!]
+  ): [Labelvaluepair]
+  allidbyfunctype(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    functype: [String!]
+  ): [Labelvaluepair]
 }
 
 input NewTodo {
@@ -648,6 +771,192 @@ func (ec *executionContext) field_Query_allequipbysysloc_args(ctx context.Contex
 	return args, nil
 }
 
+func (ec *executionContext) field_Query_allequipnamebyequip_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["host"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("host"))
+		arg0, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["host"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["port"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("port"))
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["port"] = arg1
+	var arg2 string
+	if tmp, ok := rawArgs["database"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("database"))
+		arg2, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["database"] = arg2
+	var arg3 string
+	if tmp, ok := rawArgs["measurement"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("measurement"))
+		arg3, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["measurement"] = arg3
+	var arg4 []string
+	if tmp, ok := rawArgs["equip"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("equip"))
+		arg4, err = ec.unmarshalOString2ᚕstringᚄ(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["equip"] = arg4
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_allequiptypewatersys_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["host"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("host"))
+		arg0, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["host"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["port"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("port"))
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["port"] = arg1
+	var arg2 string
+	if tmp, ok := rawArgs["database"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("database"))
+		arg2, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["database"] = arg2
+	var arg3 string
+	if tmp, ok := rawArgs["measurement"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("measurement"))
+		arg3, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["measurement"] = arg3
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_allfunctypebyequip_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["host"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("host"))
+		arg0, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["host"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["port"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("port"))
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["port"] = arg1
+	var arg2 string
+	if tmp, ok := rawArgs["database"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("database"))
+		arg2, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["database"] = arg2
+	var arg3 string
+	if tmp, ok := rawArgs["measurement"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("measurement"))
+		arg3, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["measurement"] = arg3
+	var arg4 []string
+	if tmp, ok := rawArgs["equip"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("equip"))
+		arg4, err = ec.unmarshalOString2ᚕstringᚄ(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["equip"] = arg4
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_allfunctypebywatersys_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["host"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("host"))
+		arg0, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["host"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["port"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("port"))
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["port"] = arg1
+	var arg2 string
+	if tmp, ok := rawArgs["database"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("database"))
+		arg2, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["database"] = arg2
+	var arg3 string
+	if tmp, ok := rawArgs["measurement"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("measurement"))
+		arg3, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["measurement"] = arg3
+	return args, nil
+}
+
 func (ec *executionContext) field_Query_allid_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -687,6 +996,57 @@ func (ec *executionContext) field_Query_allid_args(ctx context.Context, rawArgs 
 		}
 	}
 	args["measurement"] = arg3
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_allidbyfunctype_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["host"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("host"))
+		arg0, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["host"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["port"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("port"))
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["port"] = arg1
+	var arg2 string
+	if tmp, ok := rawArgs["database"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("database"))
+		arg2, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["database"] = arg2
+	var arg3 string
+	if tmp, ok := rawArgs["measurement"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("measurement"))
+		arg3, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["measurement"] = arg3
+	var arg4 []string
+	if tmp, ok := rawArgs["functype"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("functype"))
+		arg4, err = ec.unmarshalOString2ᚕstringᚄ(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["functype"] = arg4
 	return args, nil
 }
 
@@ -798,6 +1158,48 @@ func (ec *executionContext) field_Query_allidbysysloc_args(ctx context.Context, 
 		}
 	}
 	args["location"] = arg5
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_allidbywatersys_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["host"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("host"))
+		arg0, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["host"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["port"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("port"))
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["port"] = arg1
+	var arg2 string
+	if tmp, ok := rawArgs["database"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("database"))
+		arg2, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["database"] = arg2
+	var arg3 string
+	if tmp, ok := rawArgs["measurement"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("measurement"))
+		arg3, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["measurement"] = arg3
 	return args, nil
 }
 
@@ -1757,6 +2159,354 @@ func (ec *executionContext) fieldContext_Query_timeseriesbyid(ctx context.Contex
 	}()
 	ctx = graphql.WithFieldContext(ctx, fc)
 	if fc.Args, err = ec.field_Query_timeseriesbyid_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Query_allequiptypewatersys(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_allequiptypewatersys(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().Allequiptypewatersys(rctx, fc.Args["host"].(string), fc.Args["port"].(int), fc.Args["database"].(string), fc.Args["measurement"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*model.Labelvaluepair)
+	fc.Result = res
+	return ec.marshalOLabelvaluepair2ᚕᚖgoᚑapiᚑgrapqhlᚋgraphᚋmodelᚐLabelvaluepair(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Query_allequiptypewatersys(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Query",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "value":
+				return ec.fieldContext_Labelvaluepair_value(ctx, field)
+			case "label":
+				return ec.fieldContext_Labelvaluepair_label(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Labelvaluepair", field.Name)
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Query_allequiptypewatersys_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Query_allidbywatersys(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_allidbywatersys(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().Allidbywatersys(rctx, fc.Args["host"].(string), fc.Args["port"].(int), fc.Args["database"].(string), fc.Args["measurement"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*model.Labelvaluepair)
+	fc.Result = res
+	return ec.marshalOLabelvaluepair2ᚕᚖgoᚑapiᚑgrapqhlᚋgraphᚋmodelᚐLabelvaluepair(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Query_allidbywatersys(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Query",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "value":
+				return ec.fieldContext_Labelvaluepair_value(ctx, field)
+			case "label":
+				return ec.fieldContext_Labelvaluepair_label(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Labelvaluepair", field.Name)
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Query_allidbywatersys_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Query_allfunctypebywatersys(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_allfunctypebywatersys(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().Allfunctypebywatersys(rctx, fc.Args["host"].(string), fc.Args["port"].(int), fc.Args["database"].(string), fc.Args["measurement"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*model.Labelvaluepair)
+	fc.Result = res
+	return ec.marshalOLabelvaluepair2ᚕᚖgoᚑapiᚑgrapqhlᚋgraphᚋmodelᚐLabelvaluepair(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Query_allfunctypebywatersys(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Query",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "value":
+				return ec.fieldContext_Labelvaluepair_value(ctx, field)
+			case "label":
+				return ec.fieldContext_Labelvaluepair_label(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Labelvaluepair", field.Name)
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Query_allfunctypebywatersys_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Query_allfunctypebyequip(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_allfunctypebyequip(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().Allfunctypebyequip(rctx, fc.Args["host"].(string), fc.Args["port"].(int), fc.Args["database"].(string), fc.Args["measurement"].(string), fc.Args["equip"].([]string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*model.Labelvaluepair)
+	fc.Result = res
+	return ec.marshalOLabelvaluepair2ᚕᚖgoᚑapiᚑgrapqhlᚋgraphᚋmodelᚐLabelvaluepair(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Query_allfunctypebyequip(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Query",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "value":
+				return ec.fieldContext_Labelvaluepair_value(ctx, field)
+			case "label":
+				return ec.fieldContext_Labelvaluepair_label(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Labelvaluepair", field.Name)
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Query_allfunctypebyequip_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Query_allequipnamebyequip(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_allequipnamebyequip(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().Allequipnamebyequip(rctx, fc.Args["host"].(string), fc.Args["port"].(int), fc.Args["database"].(string), fc.Args["measurement"].(string), fc.Args["equip"].([]string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*model.Labelvaluepair)
+	fc.Result = res
+	return ec.marshalOLabelvaluepair2ᚕᚖgoᚑapiᚑgrapqhlᚋgraphᚋmodelᚐLabelvaluepair(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Query_allequipnamebyequip(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Query",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "value":
+				return ec.fieldContext_Labelvaluepair_value(ctx, field)
+			case "label":
+				return ec.fieldContext_Labelvaluepair_label(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Labelvaluepair", field.Name)
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Query_allequipnamebyequip_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Query_allidbyfunctype(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_allidbyfunctype(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().Allidbyfunctype(rctx, fc.Args["host"].(string), fc.Args["port"].(int), fc.Args["database"].(string), fc.Args["measurement"].(string), fc.Args["functype"].([]string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*model.Labelvaluepair)
+	fc.Result = res
+	return ec.marshalOLabelvaluepair2ᚕᚖgoᚑapiᚑgrapqhlᚋgraphᚋmodelᚐLabelvaluepair(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Query_allidbyfunctype(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Query",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "value":
+				return ec.fieldContext_Labelvaluepair_value(ctx, field)
+			case "label":
+				return ec.fieldContext_Labelvaluepair_label(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Labelvaluepair", field.Name)
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Query_allidbyfunctype_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
 		ec.Error(ctx, err)
 		return
 	}
@@ -4627,6 +5377,126 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 			out.Concurrently(i, func() graphql.Marshaler {
 				return rrm(innerCtx)
 			})
+		case "allequiptypewatersys":
+			field := field
+
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_allequiptypewatersys(ctx, field)
+				return res
+			}
+
+			rrm := func(ctx context.Context) graphql.Marshaler {
+				return ec.OperationContext.RootResolverMiddleware(ctx, innerFunc)
+			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return rrm(innerCtx)
+			})
+		case "allidbywatersys":
+			field := field
+
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_allidbywatersys(ctx, field)
+				return res
+			}
+
+			rrm := func(ctx context.Context) graphql.Marshaler {
+				return ec.OperationContext.RootResolverMiddleware(ctx, innerFunc)
+			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return rrm(innerCtx)
+			})
+		case "allfunctypebywatersys":
+			field := field
+
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_allfunctypebywatersys(ctx, field)
+				return res
+			}
+
+			rrm := func(ctx context.Context) graphql.Marshaler {
+				return ec.OperationContext.RootResolverMiddleware(ctx, innerFunc)
+			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return rrm(innerCtx)
+			})
+		case "allfunctypebyequip":
+			field := field
+
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_allfunctypebyequip(ctx, field)
+				return res
+			}
+
+			rrm := func(ctx context.Context) graphql.Marshaler {
+				return ec.OperationContext.RootResolverMiddleware(ctx, innerFunc)
+			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return rrm(innerCtx)
+			})
+		case "allequipnamebyequip":
+			field := field
+
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_allequipnamebyequip(ctx, field)
+				return res
+			}
+
+			rrm := func(ctx context.Context) graphql.Marshaler {
+				return ec.OperationContext.RootResolverMiddleware(ctx, innerFunc)
+			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return rrm(innerCtx)
+			})
+		case "allidbyfunctype":
+			field := field
+
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_allidbyfunctype(ctx, field)
+				return res
+			}
+
+			rrm := func(ctx context.Context) graphql.Marshaler {
+				return ec.OperationContext.RootResolverMiddleware(ctx, innerFunc)
+			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return rrm(innerCtx)
+			})
 		case "__type":
 
 			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
@@ -5596,6 +6466,44 @@ func (ec *executionContext) marshalOLabelvaluepair2ᚖgoᚑapiᚑgrapqhlᚋgraph
 		return graphql.Null
 	}
 	return ec._Labelvaluepair(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalOString2ᚕstringᚄ(ctx context.Context, v interface{}) ([]string, error) {
+	if v == nil {
+		return nil, nil
+	}
+	var vSlice []interface{}
+	if v != nil {
+		vSlice = graphql.CoerceList(v)
+	}
+	var err error
+	res := make([]string, len(vSlice))
+	for i := range vSlice {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithIndex(i))
+		res[i], err = ec.unmarshalNString2string(ctx, vSlice[i])
+		if err != nil {
+			return nil, err
+		}
+	}
+	return res, nil
+}
+
+func (ec *executionContext) marshalOString2ᚕstringᚄ(ctx context.Context, sel ast.SelectionSet, v []string) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	ret := make(graphql.Array, len(v))
+	for i := range v {
+		ret[i] = ec.marshalNString2string(ctx, sel, v[i])
+	}
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
 }
 
 func (ec *executionContext) unmarshalOString2ᚖstring(ctx context.Context, v interface{}) (*string, error) {

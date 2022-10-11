@@ -157,7 +157,6 @@ func WriteClientPoint(session neo4j.Session, point TaggingPoint, database, measu
 			MERGE (e)-[:isLocationOf]->(b)
 			RETURN a
 			`, bldg, newLabel, bldg, brick, brick, bldg)
-	fmt.Println(cypher)
 	res, err := session.WriteTransaction(func(transaction neo4j.Transaction) (interface{}, error) {
 		result, err := transaction.Run(
 			cypher,
@@ -279,9 +278,7 @@ func QueryData(query string, params map[string]interface{}, database string, hos
 	session := driver.NewSession(neo4j.SessionConfig{})
 	defer session.Close()
 	defer driver.Close()
-	fmt.Println(query, params)
 	result, err := session.ReadTransaction(QueryLabel(query, params))
-	fmt.Println(query, params, result)
 	if err != nil {
 		return make([]string, 0), err
 	} else {

@@ -7,7 +7,7 @@ import (
 	_ "go-api-grapqhl/docs"
 	"go-api-grapqhl/graph"
 	"go-api-grapqhl/scheduler"
-	"sort"
+	// "sort"
 
 	// "time"
 
@@ -15,7 +15,7 @@ import (
 	// "go-api-grapqhl/graph/client"
 	"go-api-grapqhl/graph/generated"
 	"go-api-grapqhl/httputil"
-	logging "go-api-grapqhl/log"
+	// logging "go-api-grapqhl/log"
 	"net/http"
 
 	"github.com/99designs/gqlgen/graphql/handler"
@@ -89,28 +89,30 @@ func playgroundHandler() gin.HandlerFunc {
 	}
 }
 
+func CORSMiddleware() gin.HandlerFunc {
+    return func(c *gin.Context) {
+
+        c.Header("Access-Control-Allow-Origin", "*")
+        c.Header("Access-Control-Allow-Credentials", "true")
+        c.Header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+        c.Header("Access-Control-Allow-Methods", "POST,HEAD,PATCH, OPTIONS, GET, PUT")
+
+        if c.Request.Method == "OPTIONS" {
+            c.AbortWithStatus(204)
+            return
+        }
+
+        c.Next()
+    }
+}
+
 func main() {
-	f := &[][]string{{"b", "a"}}
-	sort.Strings((*f)[0])
-	fmt.Println(f)
 
-	fmt.Println("Waiting until Neo4j ready")
-	// time.Sleep(time.Duration(1000000000 * 20))
-
-	var Logger = logging.StartLogger("log/Utility_1_LogFile.log")
-	fmt.Println("Start API server!!!!!")
-
-	err := godotenv.Load(".env")
-	if err != nil {
-		Logger.Log(logging.LogError, "Error loading .env file")
-	}
+	godotenv.Load(".env")
 	r := gin.Default()
 
-	// scheduler.Analytics_Utility_3()
-	// scheduler.Analytics_Utility_2()
-	// scheduler.Analytics_HCity1()
-	// scheduler.Analytics_Sands()
-	scheduler.Test_Analytics()
+	r.Use(CORSMiddleware())
+
 	fmt.Println("DONEEEE!!!")
 	scheduler.Example()
 
@@ -163,6 +165,12 @@ func main() {
 		influxdb := v1.Group("/influxdb")
 		{
 			influxdb.POST("/query", c.QueryInfluxDB)
+			influxdb.POST("/ruleengine", c.QueryRuleEngine)
+		}
+		redis := v1.Group("/redis")
+		{
+			redis.POST("/set", c.SetRuleTable)
+			redis.POST("/get", c.GetRuleTable)
 		}
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

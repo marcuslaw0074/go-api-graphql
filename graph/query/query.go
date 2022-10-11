@@ -100,4 +100,18 @@ const (
 	AND (p: brick or p: elecbrick) AND p.name=$system AND m.name=$location
 	WITH DISTINCT n.name AS label, n.BMS_id AS value
 	RETURN label, value`
+
+	QueryAllEquipTypeWaterSys string = `MATCH (n)-[:isPartOf]->(p) WHERE 
+	p.database=$database AND p.measurement=$measurement and p.name=$system
+	RETURN DISTINCT n.name AS name`
+
+	QueryAllIdByWaterSys string = `MATCH (n) WHERE NOT n.BMS_id IS NULL AND
+	n.database=$database AND n.measurement=$measurement
+	WITH DISTINCT n.BMS_id AS name
+	RETURN name`
+
+	QueryAllFuncTypeByWaterSys string = `MATCH (n)-[:isPointOf]->(p) WHERE NOT n.BMS_id IS NULL AND
+	n.database=$database AND n.measurement=$measurement
+	WITH DISTINCT p.name AS name
+	RETURN name`
 )

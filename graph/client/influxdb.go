@@ -60,6 +60,22 @@ func InfluxdbQuerySeries(host string, port int, database, query string) (models.
 	return influx.Result{}.Series[0], err
 }
 
+func InfluxdbQuerySeriess(host string, port int, database, query string) ([]models.Row, error) {
+	c, err := influx.NewHTTPClient(influx.HTTPConfig{
+		Addr: fmt.Sprintf("http://%s:%v", host, port),
+	})
+	if err != nil {
+		fmt.Println("Error creating InfluxDB Client: ", err.Error())
+		return []models.Row{}, err
+	}
+	defer c.Close()
+	q := influx.NewQuery(query, database, "")
+	if response, err := c.Query(q); err == nil && response.Error() == nil {
+		return response.Results[0].Series, nil
+	}
+	return influx.Result{}.Series, err
+}
+
 func InfluxdbWritePoints(url, database string, points []InfluxWriteSchema) error {
 	lenn := len(points)
 	log.Printf("Start Writing %v into influxDB \n", lenn)

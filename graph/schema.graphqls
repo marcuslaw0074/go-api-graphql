@@ -85,6 +85,45 @@ type Query {
     pointName: String!
     aggreTpye: AggregationsType!
   ): [Timeseries]
+  allequiptypewatersys(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+  ): [Labelvaluepair]
+  allidbywatersys(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+  ): [Labelvaluepair]
+  allfunctypebywatersys(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+  ): [Labelvaluepair]
+  allfunctypebyequip(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    equip: [String!]
+  ): [Labelvaluepair]
+  allequipnamebyequip(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    equip: [String!]
+  ): [Labelvaluepair]
+  allidbyfunctype(
+    host: String!
+    port: Int!
+    database: String!
+    measurement: String!
+    functype: [String!]
+  ): [Labelvaluepair]
 }
 
 input NewTodo {

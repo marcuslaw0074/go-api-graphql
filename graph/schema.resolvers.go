@@ -15,7 +15,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/go-redis/redis/v9"
+	redis "github.com/go-redis/redis/v9"
 	"github.com/neo4j/neo4j-go-driver/v4/neo4j"
 )
 
@@ -282,6 +282,190 @@ func (r *queryResolver) Timeseriesbyid(ctx context.Context, aggrnum *int, limit 
 	}
 	fmt.Print(query)
 	ss := make([]*model.Timeseries, 0)
+	return ss, nil
+}
+
+// Allequiptypewatersys is the resolver for the allequiptypewatersys field.
+func (r *queryResolver) Allequiptypewatersys(ctx context.Context, host string, port int, database string, measurement string) ([]*model.Labelvaluepair, error) {
+	dbUri := fmt.Sprintf("neo4j://%s:%d", host, port)
+	driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
+	if err != nil {
+		panic(err)
+	}
+	session := driver.NewSession(neo4j.SessionConfig{})
+	defer session.Close()
+	defer driver.Close()
+	query := q.QueryAllEquipTypeWaterSys
+	result, err := session.ReadTransaction(client.QueryLabel(query, map[string]interface{}{
+		"database":    database,
+		"measurement": measurement,
+		"system":      "Water_System",
+	}))
+	if err != nil {
+		panic(err)
+	}
+	res := result.([]string)
+	ss := make([]*model.Labelvaluepair, 0)
+	for _, ele := range res {
+		d := model.Labelvaluepair{Value: ele, Label: ele}
+		ss = append(ss, &d)
+	}
+	return ss, nil
+}
+
+// Allidbywatersys is the resolver for the allidbywatersys field.
+func (r *queryResolver) Allidbywatersys(ctx context.Context, host string, port int, database string, measurement string) ([]*model.Labelvaluepair, error) {
+	dbUri := fmt.Sprintf("neo4j://%s:%d", host, port)
+	driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
+	if err != nil {
+		panic(err)
+	}
+	session := driver.NewSession(neo4j.SessionConfig{})
+	defer session.Close()
+	defer driver.Close()
+	query := q.QueryAllIdByWaterSys
+	result, err := session.ReadTransaction(client.QueryLabel(query, map[string]interface{}{
+		"database":    database,
+		"measurement": measurement,
+	}))
+	if err != nil {
+		panic(err)
+	}
+	res := result.([]string)
+	ss := make([]*model.Labelvaluepair, 0)
+	for _, ele := range res {
+		d := model.Labelvaluepair{Value: ele, Label: ele}
+		ss = append(ss, &d)
+	}
+	return ss, nil
+}
+
+// Allfunctypebywatersys is the resolver for the allfunctypebywatersys field.
+func (r *queryResolver) Allfunctypebywatersys(ctx context.Context, host string, port int, database string, measurement string) ([]*model.Labelvaluepair, error) {
+	dbUri := fmt.Sprintf("neo4j://%s:%d", host, port)
+	driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
+	if err != nil {
+		panic(err)
+	}
+	session := driver.NewSession(neo4j.SessionConfig{})
+	defer session.Close()
+	defer driver.Close()
+	query := q.QueryAllFuncTypeByWaterSys
+	result, err := session.ReadTransaction(client.QueryLabel(query, map[string]interface{}{
+		"database":    database,
+		"measurement": measurement,
+	}))
+	if err != nil {
+		panic(err)
+	}
+	res := result.([]string)
+	ss := make([]*model.Labelvaluepair, 0)
+	for _, ele := range res {
+		d := model.Labelvaluepair{Value: ele, Label: ele}
+		ss = append(ss, &d)
+	}
+	return ss, nil
+}
+
+// Allfunctypebyequip is the resolver for the allfunctypebyequip field.
+func (r *queryResolver) Allfunctypebyequip(ctx context.Context, host string, port int, database string, measurement string, equip []string) ([]*model.Labelvaluepair, error) {
+	dbUri := fmt.Sprintf("neo4j://%s:%d", host, port)
+	driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
+	if err != nil {
+		panic(err)
+	}
+	session := driver.NewSession(neo4j.SessionConfig{})
+	defer session.Close()
+	defer driver.Close()
+	query := `MATCH (n)-[:hasPart]->(p) WHERE `
+	equipFilter := "("
+	for _, ele := range equip {
+		equipFilter = equipFilter + fmt.Sprintf("n.name=\"%s\" OR ", ele)
+	}
+	equipFilter = equipFilter[:len(equipFilter)-3] + ")"
+	query = query + equipFilter + ` AND n.database=$database AND n.measurement=$measurement
+	RETURN DISTINCT p.name AS name ORDER BY name`
+	result, err := session.ReadTransaction(client.QueryLabel(query, map[string]interface{}{
+		"database":    database,
+		"measurement": measurement,
+	}))
+	if err != nil {
+		panic(err)
+	}
+	res := result.([]string)
+	ss := make([]*model.Labelvaluepair, 0)
+	for _, ele := range res {
+		d := model.Labelvaluepair{Value: ele, Label: ele}
+		ss = append(ss, &d)
+	}
+	return ss, nil
+}
+
+// Allequipnamebyequip is the resolver for the allequipnamebyequip field.
+func (r *queryResolver) Allequipnamebyequip(ctx context.Context, host string, port int, database string, measurement string, equip []string) ([]*model.Labelvaluepair, error) {
+	dbUri := fmt.Sprintf("neo4j://%s:%d", host, port)
+	driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
+	if err != nil {
+		panic(err)
+	}
+	session := driver.NewSession(neo4j.SessionConfig{})
+	defer session.Close()
+	defer driver.Close()
+	query := `MATCH (n)-[:hasPoint]->(p) WHERE `
+	equipFilter := "("
+	for _, ele := range equip {
+		equipFilter = equipFilter + fmt.Sprintf("n.name=\"%s\" OR ", ele)
+	}
+	equipFilter = equipFilter[:len(equipFilter)-3] + ")"
+	query = query + equipFilter + ` AND n.database=$database AND n.measurement=$measurement
+	RETURN DISTINCT p.name AS name ORDER BY name`
+	result, err := session.ReadTransaction(client.QueryLabel(query, map[string]interface{}{
+		"database":    database,
+		"measurement": measurement,
+	}))
+	if err != nil {
+		panic(err)
+	}
+	res := result.([]string)
+	ss := make([]*model.Labelvaluepair, 0)
+	for _, ele := range res {
+		d := model.Labelvaluepair{Value: ele, Label: ele}
+		ss = append(ss, &d)
+	}
+	return ss, nil
+}
+
+// Allidbyfunctype is the resolver for the allidbyfunctype field.
+func (r *queryResolver) Allidbyfunctype(ctx context.Context, host string, port int, database string, measurement string, functype []string) ([]*model.Labelvaluepair, error) {
+	dbUri := fmt.Sprintf("neo4j://%s:%d", host, port)
+	driver, err := neo4j.NewDriver(dbUri, neo4j.BasicAuth("neo4j", "test", ""))
+	if err != nil {
+		panic(err)
+	}
+	session := driver.NewSession(neo4j.SessionConfig{})
+	defer session.Close()
+	defer driver.Close()
+	query := `MATCH (n)-[:hasPoint]->(p) WHERE `
+	equipFilter := "("
+	for _, ele := range functype {
+		equipFilter = equipFilter + fmt.Sprintf("n.name=\"%s\" OR ", ele)
+	}
+	equipFilter = equipFilter[:len(equipFilter)-3] + ")"
+	query = query + equipFilter + ` AND n.database=$database AND n.measurement=$measurement
+	RETURN DISTINCT p.name AS name ORDER BY name`
+	result, err := session.ReadTransaction(client.QueryLabel(query, map[string]interface{}{
+		"database":    database,
+		"measurement": measurement,
+	}))
+	if err != nil {
+		panic(err)
+	}
+	res := result.([]string)
+	ss := make([]*model.Labelvaluepair, 0)
+	for _, ele := range res {
+		d := model.Labelvaluepair{Value: ele, Label: ele}
+		ss = append(ss, &d)
+	}
 	return ss, nil
 }
 

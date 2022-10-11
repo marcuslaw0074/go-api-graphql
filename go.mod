@@ -1,11 +1,12 @@
 module go-api-grapqhl
 
-go 1.17
+go 1.18
 
 require (
 	github.com/99designs/gqlgen v0.17.16
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-gota/gota v0.12.0
+	github.com/go-redis/redis/v9 v9.0.0-beta.2
 	github.com/gofrs/uuid v4.2.0+incompatible
 	github.com/influxdata/influxdb1-client v0.0.0-20220302092344-a9ab5670611c
 	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2
@@ -17,7 +18,6 @@ require (
 require (
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/go-redis/redis/v9 v9.0.0-beta.2 // indirect
 	gonum.org/v1/gonum v0.9.1 // indirect
 )
 
@@ -34,6 +34,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
 	github.com/goccy/go-json v0.9.7 // indirect
+	github.com/google/uuid v1.3.0
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/joho/godotenv v1.4.0

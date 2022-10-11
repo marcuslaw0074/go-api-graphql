@@ -912,7 +912,62 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Row"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Row"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/influxdb/ruleengine": {
+            "post": {
+                "description": "query influxDB",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "influxdb"
+                ],
+                "summary": "query influxDB",
+                "parameters": [
+                    {
+                        "description": "rule_engine",
+                        "name": "query",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.RuleEngine"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.NewRow"
                         }
                     },
                     "400": {
@@ -1089,6 +1144,110 @@
                     }
                 }
             }
+        },
+        "/redis/get": {
+            "post": {
+                "description": "query influxDB",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "redis"
+                ],
+                "summary": "query influxDB",
+                "parameters": [
+                    {
+                        "description": "query",
+                        "name": "query",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.GetRuleTable"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.IsSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/redis/set": {
+            "post": {
+                "description": "query influxDB",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "redis"
+                ],
+                "summary": "query influxDB",
+                "parameters": [
+                    {
+                        "description": "query",
+                        "name": "query",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.SetRuleTable"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.IsSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -1171,6 +1330,72 @@
                 }
             }
         },
+        "model.GetRuleTable": {
+            "type": "object",
+            "properties": {
+                "host": {
+                    "type": "string",
+                    "example": "192.168.100.214"
+                },
+                "key": {
+                    "type": "string",
+                    "example": "ruleTable"
+                },
+                "port": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 36379
+                }
+            }
+        },
+        "model.IsSuccess": {
+            "type": "object",
+            "properties": {
+                "result": {
+                    "type": "string",
+                    "example": "example"
+                },
+                "success": {
+                    "type": "boolean",
+                    "format": "bool",
+                    "example": true
+                },
+                "time": {
+                    "type": "string",
+                    "example": "2022-10-04T00:00:00Z"
+                }
+            }
+        },
+        "model.NewRow": {
+            "type": "object",
+            "properties": {
+                "columns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "partial": {
+                    "type": "boolean"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {}
+                    }
+                }
+            }
+        },
         "model.Query": {
             "type": "object",
             "properties": {
@@ -1220,6 +1445,74 @@
                         "type": "array",
                         "items": {}
                     }
+                }
+            }
+        },
+        "model.RuleEngine": {
+            "type": "object",
+            "properties": {
+                "constmap": {
+                    "type": "string",
+                    "example": "{\"c\":4.2}"
+                },
+                "database": {
+                    "type": "string",
+                    "example": "Disney"
+                },
+                "endTime": {
+                    "type": "string",
+                    "example": "'2018-04-02T15:04:05.000Z'"
+                },
+                "expression": {
+                    "type": "string",
+                    "example": "a+b"
+                },
+                "host": {
+                    "type": "string",
+                    "example": "18.163.30.4"
+                },
+                "mapping": {
+                    "type": "string",
+                    "example": "{\"a\":\"CCP1 CH2 Supply Temp.(Deg C)\",\"b\":\"CCP1 CH2 Return Temp.(Deg C)\"}"
+                },
+                "measurement": {
+                    "type": "string",
+                    "example": "hkdl"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Rule_1"
+                },
+                "port": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 8086
+                },
+                "startTime": {
+                    "type": "string",
+                    "example": "'2018-04-01T15:04:05.000Z'"
+                }
+            }
+        },
+        "model.SetRuleTable": {
+            "type": "object",
+            "properties": {
+                "host": {
+                    "type": "string",
+                    "example": "192.168.100.214"
+                },
+                "key": {
+                    "type": "string",
+                    "example": "ruleTable"
+                },
+                "port": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 36379
+                },
+                "value": {
+                    "type": "string",
+                    "example": "[]"
                 }
             }
         },
